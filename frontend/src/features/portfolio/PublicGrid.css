@@ -1,0 +1,195 @@
+/* src/features/portfolio/PublicGrid.css */
+
+.portfolio-section {
+    padding: 96px 0;
+    background-color: var(--color-bg, #ffffff);
+  }
+  
+  .portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  /* Шапка секции */
+  .portfolio-header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+  
+  .portfolio-title-wrapper {
+    max-width: 600px;
+  }
+  
+  .portfolio-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 16px;
+    color: var(--color-text, #111);
+    line-height: 1.1;
+  }
+  
+  .portfolio-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted, #666);
+    line-height: 1.6;
+  }
+  
+  /* Кнопка в шапке (скрыта на мобильных) */
+  .portfolio-header-btn {
+    display: none;
+  }
+  
+  .portfolio-header-btn svg {
+    margin-left: 8px;
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+  }
+  
+  .portfolio-header-btn:hover svg {
+    transform: translate(2px, -2px); /* Эффект отлетающей стрелки */
+  }
+  
+  /* Сетка карточек */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 64px;
+    column-gap: 32px;
+  }
+  
+  /* Карточка */
+  .portfolio-card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Обложка проекта */
+  .portfolio-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: var(--color-surface, #f5f5f5);
+    aspect-ratio: 4 / 3;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.5s ease;
+  }
+  
+  .portfolio-card:hover .portfolio-img-wrapper {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .portfolio-card:hover .portfolio-img {
+    transform: scale(1.05); /* Легкий зум при наведении */
+  }
+  
+  .portfolio-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.5s ease;
+  }
+  
+  .portfolio-card:hover .portfolio-overlay {
+    background-color: rgba(0, 0, 0, 0.05); /* Легкое затемнение */
+  }
+  
+  /* Текстовая часть карточки */
+  .portfolio-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .portfolio-tag {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-primary, #007bff);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .portfolio-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text, #111);
+    margin-bottom: 12px;
+  }
+  
+  /* Ссылка внутри карточки */
+  .portfolio-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted, #666);
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .portfolio-card:hover .portfolio-link {
+    color: var(--color-primary, #007bff);
+  }
+  
+  .portfolio-link-icon {
+    margin-left: 4px;
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+  
+  .portfolio-card:hover .portfolio-link-icon {
+    opacity: 1;
+    transform: translateX(0); /* Стрелка выезжает справа */
+  }
+  
+  /* Мобильная кнопка "Смотреть всё" */
+  .portfolio-mobile-btn {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* --- Адаптивность (Медиа-запросы) --- */
+  @media (min-width: 768px) {
+    .portfolio-section {
+      padding: 128px 0;
+    }
+    .portfolio-container {
+      padding: 0 48px;
+    }
+    .portfolio-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+    .portfolio-title {
+      font-size: 3rem;
+    }
+    .portfolio-header-btn {
+      display: flex; /* Показываем на десктопе */
+    }
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 колонки */
+    }
+    .portfolio-mobile-btn {
+      display: none; /* Прячем на десктопе */
+    }
+  }

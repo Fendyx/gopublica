@@ -1,0 +1,31 @@
+{
+    "nav": {
+        "home": "Inicio",
+        "calculator": "Calculadora",
+        "contact": "Contacto",
+        "login": "Iniciar sesión"
+      },
+    "hero": {
+      "title": "Hazte notar. Tu república digital empieza aquí.",
+      "subtitle": "Diseño web para negocios que quieren conectar con su público.",
+      "calculate": "Calcular presupuesto",
+      "contact": "Contactar"
+    },
+    "contact": {
+        "title": "Contáctanos",
+        "subtitle": "Deja tu solicitud y un gerente te contactará en menos de una hora.",
+        "successTitle": "¡Solicitud enviada!",
+        "successDesc": "Nos pondremos en contacto contigo en breve.",
+        "form": {
+          "name": "Nombre",
+          "namePlaceholder": "Juan Pérez",
+          "phone": "Teléfono",
+          "phonePlaceholder": "+34 600 123 456",
+          "email": "Correo electrónico",
+          "emailPlaceholder": "hola@ejemplo.com",
+          "message": "Mensaje",
+          "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
+          "submit": "Enviar solicitud"
+        }
+      }
+  }

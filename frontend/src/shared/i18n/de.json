@@ -1,0 +1,31 @@
+{
+    "nav": {
+        "home": "Startseite",
+        "calculator": "Rechner",
+        "contact": "Kontakt",
+        "login": "Login"
+      },
+    "hero": {
+      "title": "Dein Weg ins Rampenlicht.",
+      "subtitle": "Wir bauen Websites, die auffallen. Für Marken, die mehr wollen.",
+      "calculate": "Preis berechnen",
+      "contact": "Kontakt aufnehmen"
+    },
+    "contact": {
+        "title": "Kontaktieren Sie uns",
+        "subtitle": "Hinterlassen Sie eine Anfrage – wir melden uns innerhalb einer Stunde.",
+        "successTitle": "Anfrage gesendet!",
+        "successDesc": "Wir werden uns in Kürze bei Ihnen melden.",
+        "form": {
+          "name": "Name",
+          "namePlaceholder": "Max Mustermann",
+          "phone": "Telefon",
+          "phonePlaceholder": "+49 151 12345678",
+          "email": "E-Mail",
+          "emailPlaceholder": "hello@example.com",
+          "message": "Nachricht",
+          "messagePlaceholder": "Erzählen Sie uns von Ihrem Projekt...",
+          "submit": "Anfrage senden"
+        }
+      }
+  }

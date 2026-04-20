@@ -1,0 +1,31 @@
+{
+    "nav": {
+        "home": "Home",
+        "calculator": "Calculator",
+        "contact": "Contact",
+        "login": "Login"
+      },
+    "hero": {
+      "title": "Go Public. We Build the Stage.",
+      "subtitle": "Custom websites for cafes, barbershops, and brands ready to be seen.",
+      "calculate": "Get a Quote",
+      "contact": "Contact Us"
+    },
+      "contact": {
+        "title": "Contact Us",
+        "subtitle": "Leave a request and our manager will contact you within an hour.",
+        "successTitle": "Request Sent!",
+        "successDesc": "We will get back to you shortly.",
+        "form": {
+          "name": "Name",
+          "namePlaceholder": "John Doe",
+          "phone": "Phone",
+          "phonePlaceholder": "+44 20 7123 4567",
+          "email": "Email",
+          "emailPlaceholder": "hello@example.com",
+          "message": "Message",
+          "messagePlaceholder": "Tell us about your project...",
+          "submit": "Send Request"
+        }
+      }
+  }

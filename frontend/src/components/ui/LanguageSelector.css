@@ -1,0 +1,17 @@
+.language-selector {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border, #ccc);
+    background-color: var(--color-bg, #fff);
+    color: var(--color-text, #333);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .language-selector:hover,
+  .language-selector:focus {
+    border-color: var(--color-primary, #0056b3);
+  }
