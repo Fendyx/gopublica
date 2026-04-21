@@ -27,7 +27,7 @@ const STATUSES: Status[] = ['Новый', 'В работе', 'Закрыт', 'О
 const BUSINESS_TYPES = ['Ресторан', 'Барбершоп', 'Цветочный магазин', 'Другое'];
 const AVAILABLE_SERVICES = ['Меню', 'Бронирование столиков', 'Админ панель', 'Онлайн-запись (Барбер/Салон)', 'Интернет-магазин', 'Мультиязычность'];
 
-const API_URL = 'http://localhost:5000/api/leads'; 
+const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/leads' : '/api/leads';
 
 export default function LeadsCRMPage() {
   const [leads, setLeads] = useState<Lead[]>([]);

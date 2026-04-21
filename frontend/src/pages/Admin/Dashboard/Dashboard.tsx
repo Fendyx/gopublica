@@ -17,7 +17,7 @@ const STATUS_COLOR: Record<string, string> = {
   'Отказ':     '#dc2626',
 };
 
-const API_URL = 'http://localhost:5000/api/leads';
+const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/leads' : '/api/leads';
 
 export default function DashboardPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
