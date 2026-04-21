@@ -1,60 +1,73 @@
 .hero-section {
-    padding: 120px 48px 100px;
-    text-align: center;
-    background-color: var(--color-bg, #ffffff);
-    border-bottom: 1px solid var(--color-border, #eaeaea);
-  }
-  
-  .hero-title {
-    font-size: 4rem;
-    line-height: 1.05;
-    margin-bottom: 24px;
-    letter-spacing: -2px;
-    font-weight: 800;
-    color: var(--color-text, #111111);
-  }
-  
-  .hero-subtitle {
-    color: var(--color-text-muted, #666666);
-    font-size: 1.25rem;
-    max-width: 600px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
+  padding: 120px 24px 100px;
+  text-align: center;
+  background-color: var(--color-bg, #ffffff);
+  border-bottom: 1px solid var(--color-border, #eaeaea);
+}
+
+.hero-title {
+  /* clamp(МИН_РАЗМЕР, ЖЕЛАЕМЫЙ_РАЗМЕР(резиновый), МАКС_РАЗМЕР) - магия плавной адаптивности */
+  font-size: clamp(2.5rem, 5vw + 1rem, 4rem); 
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+  font-weight: 800;
+  color: var(--color-text, #111111);
+}
+
+.hero-subtitle {
+  color: var(--color-text-muted, #666666);
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-link {
+  text-decoration: none;
+  display: inline-block; 
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+
+/* Планшеты и телефоны */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 80px 20px 60px;
   }
   
   .hero-actions {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Позволит кнопкам перенестись на новых строках на мобильных */
+    flex-direction: column;
+    width: 100%;
+    /* Ограничиваем максимальную ширину кнопок, чтобы на iPad они не были гигантскими */
+    max-width: 350px; 
+    margin: 0 auto;
   }
   
-  /* Обертка для кнопок, чтобы Link не ломал их размеры */
   .hero-link {
-    text-decoration: none;
-    display: inline-block; 
+    width: 100%;
+    display: block;
   }
-  
-  /* Небольшая адаптивность для мобильных */
-  @media (max-width: 768px) {
-    .hero-section {
-      padding: 80px 24px 60px;
-    }
-    .hero-title {
-      font-size: 2.5rem;
-      letter-spacing: -1px;
-    }
-    .hero-subtitle {
-      font-size: 1.125rem;
-    }
-    .hero-actions {
-      flex-direction: column;
-    }
-    .hero-link {
-      width: 100%;
-    }
-    .hero-link button {
-      width: 100%; /* Кнопки на всю ширину на мобилке */
-    }
+
+  /* Захватываем любой элемент внутри ссылки (например, твой компонент Button) */
+  .hero-link > * {
+    width: 100%;
   }
+}
+
+/* Совсем маленькие экраны (старые iPhone) */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 60px 16px 40px;
+  }
+  .hero-actions {
+    gap: 12px;
+  }
+}

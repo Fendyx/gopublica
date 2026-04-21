@@ -1,0 +1,220 @@
+/* Базовая структура */
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-surface, #f9fafb);
+  }
+  
+  /* --- САЙДБАР --- */
+  .admin-sidebar {
+    width: 250px;
+    background-color: var(--color-sidebar-bg, #1e1e2f);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    z-index: 100;
+  }
+  
+  .admin-sidebar-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-logo-title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .admin-logo-subtitle {
+    font-size: 12px;
+    color: var(--color-sidebar-text, gray);
+    margin-top: 2px;
+  }
+  
+  .admin-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Навигация */
+  .admin-nav {
+    padding: 12px 8px;
+    flex: 1;
+  }
+  
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--color-sidebar-text, gray);
+    font-weight: 400;
+    transition: all 0.15s;
+  }
+  
+  .admin-nav-item.active {
+    color: #fff;
+    background-color: var(--color-sidebar-active, rgba(255, 255, 255, 0.1));
+    font-weight: 600;
+  }
+  
+  .admin-nav-icon {
+    font-size: 16px;
+  }
+  
+  /* Подвал сайдбара */
+  .admin-sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .admin-user-name {
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #fff;
+    font-size: 13px;
+  }
+  
+  .admin-back-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-sidebar-text, gray);
+    padding: 6px 12px;
+    font-size: 12px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  /* --- ОСНОВНОЙ КОНТЕНТ --- */
+  .admin-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Важно для предотвращения вылезания контента */
+  }
+  
+  .admin-header {
+    height: 56px;
+    padding: 0 32px;
+    border-bottom: 1px solid var(--color-border, #eaeaea);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-bg, #ffffff);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  
+  .admin-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    padding: 0;
+  }
+  
+  .admin-header-title {
+    color: var(--color-text-muted, gray);
+    font-size: 14px;
+  }
+  
+  .admin-role-badge {
+    font-size: 12px;
+    background-color: var(--color-surface, #f9fafb);
+    border: 1px solid var(--color-border, #eaeaea);
+    border-radius: 999px;
+    padding: 4px 12px;
+    color: var(--color-text-muted, gray);
+  }
+  
+  .admin-content {
+    flex: 1;
+    padding: 32px;
+    background-color: var(--color-surface, #f9fafb);
+    /* Добавляем скролл для таблиц, которые не влезают в экран */
+    overflow-x: auto; 
+  }
+  
+  .admin-overlay {
+    display: none;
+  }
+  
+  /* --- АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ И ПЛАНШЕТОВ --- */
+  @media (max-width: 768px) {
+    /* Прячем сайдбар за экран */
+    .admin-sidebar {
+      position: fixed;
+      transform: translateX(-100%);
+    }
+  
+    /* Показываем сайдбар при добавлении класса .open */
+    .admin-sidebar.open {
+      transform: translateX(0);
+    }
+  
+    /* Показываем крестик закрытия */
+    .admin-close-btn {
+      display: block;
+    }
+  
+    /* Показываем кнопку-бургер в шапке */
+    .admin-menu-btn {
+      display: block;
+    }
+  
+    /* Уменьшаем отступы контента */
+    .admin-header {
+      padding: 0 16px;
+    }
+    
+    .admin-content {
+      padding: 16px;
+    }
+  
+    /* Темный фон поверх контента, когда меню открыто */
+    .admin-overlay {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+  
+    .admin-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+  
+    /* Скрываем роль, чтобы не занимала место на узком экране */
+    .admin-role-badge {
+      display: none;
+    }
+  }

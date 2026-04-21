@@ -1,7 +1,7 @@
 import { useAuthStore } from '../../../store/store';
 
 // Если Vite запущен локально - используем localhost. Если на сервере (Render) - используем относительный путь
-const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api' : '/api';
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api' : '/api';
 
 // Актуальная типизация нашего лида (с ценой и услугами)
 export interface Lead {

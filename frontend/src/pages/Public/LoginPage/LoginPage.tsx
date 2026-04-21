@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../store/store';
 
-const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/auth' : '/api/auth';
+const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/api/auth' : '/api/auth';
 
 export default function LoginPage() {
   const navigate = useNavigate();
