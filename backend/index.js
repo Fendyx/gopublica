@@ -37,11 +37,26 @@ app.use('/api/portfolio',       require('./routes/portfolio'));
 app.use('/api/projects',        require('./routes/projects'));
 
 // ── Фронтенд (прод) ──────────────────────────────────
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+const fs = require('fs');
 
-// В Express 5+ вместо '*' используем регулярное выражение /.*/
+const frontendDistPath = path.join(__dirname, '../frontend/dist');
+
+// Проверяем, существует ли папка при запуске сервера
+if (!fs.existsSync(frontendDistPath)) {
+  console.error(`\n❌ ВНИМАНИЕ: Папка ${frontendDistPath} НЕ НАЙДЕНА!`);
+  console.error('❌ Скорее всего, поле "Root Directory" в Render не пустое!\n');
+} else {
+  console.log(`\n✅ Папка с фронтендом успешно найдена: ${frontendDistPath}\n`);
+}
+
+app.use(express.static(frontendDistPath));
+
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  const indexPath = path.join(frontendDistPath, 'index.html');
+  if (!fs.existsSync(indexPath)) {
+    return res.status(500).send('Frontend build not found on server');
+  }
+  res.sendFile(indexPath);
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
