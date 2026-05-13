@@ -1,32 +1,44 @@
-const path    = require('path');
-const express = require('express');
-const cors    = require('cors');
+const path     = require('path');
+const express  = require('express');
+const cors     = require('cors');
 const mongoose = require('mongoose');
+const fs       = require('fs');
 require('dotenv').config();
 
 const app  = express();
 const PORT = process.env.PORT || 5000;
 
+// ── Настройки CORS ───────────────────────────────────
+// Явно добавляем боевые домены, чтобы не зависеть только от .env
 const allowedOrigins = [
   'http://localhost:5173',
+  'https://gopublica.com',
+  'https://www.gopublica.com',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-    else callback(new Error(`CORS: origin ${origin} not allowed`));
+    // Если origin нет (например, прямые запросы) или он в списке разрешенных
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      // ВАЖНО: Возвращаем false вместо new Error(). 
+      // Это предотвращает краш запроса и появление 500 ошибки с HTML!
+      callback(null, false);
+    }
   },
   credentials: true,
 }));
 
 app.use(express.json());
 
+// ── База данных ──────────────────────────────────────
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ DB error:', err));
 
-// ── Роуты ────────────────────────────────────────────
+// ── API Роуты ────────────────────────────────────────
 app.use('/api/auth',            require('./routes/auth'));
 app.use('/api/leads',           require('./routes/leads'));
 app.use('/api/users',           require('./routes/users'));      
@@ -36,9 +48,7 @@ app.use('/api/change-requests', require('./routes/changeRequests'));
 app.use('/api/portfolio',       require('./routes/portfolio'));
 app.use('/api/projects',        require('./routes/projects'));
 
-// ── Фронтенд (прод) ──────────────────────────────────
-const fs = require('fs');
-
+// ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
 
 // Проверяем, существует ли папка при запуске сервера
@@ -49,8 +59,10 @@ if (!fs.existsSync(frontendDistPath)) {
   console.log(`\n✅ Папка с фронтендом успешно найдена: ${frontendDistPath}\n`);
 }
 
+// Раздаем статику (CSS, JS, картинки)
 app.use(express.static(frontendDistPath));
 
+// Для всех остальных запросов (роутинг React) отдаем index.html
 app.get(/.*/, (req, res) => {
   const indexPath = path.join(frontendDistPath, 'index.html');
   if (!fs.existsSync(indexPath)) {
@@ -59,4 +71,5 @@ app.get(/.*/, (req, res) => {
   res.sendFile(indexPath);
 });
 
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+// ── Запуск сервера ───────────────────────────────────
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
