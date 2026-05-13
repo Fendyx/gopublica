@@ -39,8 +39,8 @@ app.use('/api/projects',        require('./routes/projects'));
 // ── Фронтенд (прод) ──────────────────────────────────
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// ВАЖНО: Используем app.get('*', ...), а не просто app.use
-app.get('*', (req, res) => {
+// В Express 5+ вместо '*' используем регулярное выражение /.*/
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
