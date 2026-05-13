@@ -61,3 +61,45 @@
     transform: translateY(0);
     filter: brightness(0.9);
   }
+
+  /* ===== HERO BUTTON VARIANTS ===== */
+.btn-hero-primary {
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  transition: all 0.2s ease;
+}
+.btn-hero-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--text) 20%, transparent);
+}
+
+.btn-hero-outline {
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  transition: all 0.2s ease;
+}
+.btn-hero-outline:hover {
+  border-color: var(--text);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+/* Адаптив для кнопок */
+@media (max-width: 768px) {
+  .btn-hero-primary,
+  .btn-hero-outline {
+    width: 100%;
+    justify-content: center;
+  }
+}

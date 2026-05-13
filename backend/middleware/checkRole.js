@@ -1,3 +1,4 @@
+//backend\middleware\checkRole.js
 module.exports = (allowedRoles) => {
     return (req, res, next) => {
       // Если юзера нет или его роль не подходит под разрешенные

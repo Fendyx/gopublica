@@ -1,56 +1,14 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 import PublicGrid from '@/features/portfolio/PublicGrid';
+import HeroSection from '@/features/home/HeroSection';
 
 export default function HomePage() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   return (
     <div>
-      {/* Hero Section */}
-      <section style={{
-        padding: '120px 48px 100px',
-        textAlign: 'center',
-        background: 'var(--color-bg)',
-        borderBottom: '1px solid var(--color-border)',
-      }}>
-        <h1 style={{ 
-          fontSize: '4rem', 
-          lineHeight: 1.05, 
-          marginBottom: '24px', 
-          letterSpacing: '-2px',
-          fontWeight: 800,
-          color: 'var(--color-text)' 
-        }}>
-          {t('hero.title')}
-        </h1>
-        <p style={{ 
-          color: 'var(--color-text-muted)', 
-          fontSize: '1.25rem', 
-          maxWidth: '600px', 
-          margin: '0 auto 48px',
-          lineHeight: 1.6 
-        }}>
-          {t('hero.subtitle')}
-        </p>
-        
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
-          {/* Используем компонент Button с asChild для интеграции с Link */}
-          <Link to="/calculator" style={{ textDecoration: 'none' }}>
-            <Button size="lg">
-              {t('hero.calculate')}
-            </Button>
-          </Link>
-          
-          <Link to="/contact" style={{ textDecoration: 'none' }}>
-            <Button variant="outline" size="lg">
-              {t('hero.contact')}
-            </Button>
-          </Link>
-        </div>
-      </section>
-
+      
+      <HeroSection />
       {/* Portfolio Section (Тот самый блок, который мы вынесли) */}
       <PublicGrid />
 

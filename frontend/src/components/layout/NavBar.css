@@ -1,208 +1,185 @@
 .navbar {
-    border-bottom: 1px solid var(--color-border, #eaeaea);
-    background-color: var(--color-surface, #ffffff);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 48px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .navbar-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-text, #111);
-    text-decoration: none;
-    letter-spacing: -0.5px;
-    /* Важно: ставим логотип поверх мобильного меню */
-    z-index: 101; 
-  }
-  
-  /* Десктопная обертка меню */
-  .navbar-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex: 1;
-    margin-left: 48px;
-  }
-  
-  .navbar-links {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-  }
-  
-  .navbar-links a {
-    color: var(--color-text-muted, #666);
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-  
-  .navbar-links a:hover {
-    color: var(--color-text, #111);
-  }
-  
-  .navbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .user-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .admin-link {
-    color: #2563eb;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .profile-link {
-    font-weight: 500;
-    text-decoration: none;
-    color: black;
-    font-size: 14px;
-  }
-  
-  .btn-logout {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #dc2626;
-    font-weight: 500;
-    font-size: 14px;
-  }
-  
-  .btn-login {
-    padding: 8px 16px;
-    border-radius: 6px;
-    background-color: transparent;
-    border: 1px solid var(--color-border, #ccc);
-    color: var(--color-text, #333);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-  }
-  
-  .btn-login:hover {
-    background-color: var(--color-bg, #f5f5f5);
-    border-color: var(--color-text-muted, #888);
-  }
-  
-  /* --- СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
-  
-  /* Скрываем кнопку бургера на десктопе */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.2px;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover {
+  color: var(--text);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ThemeToggle wrapper */
+.navbar-actions .ThemeToggle {
+  display: flex;
+  align-items: center;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.action-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.action-link:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.action-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+.btn-login {
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: var(--primary);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btn-login:hover {
+  opacity: 0.9;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.hamburger:hover {
+  background: var(--bg);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
   .hamburger {
-    display: none;
+    display: block;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--surface);
     flex-direction: column;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 101; /* Бургер всегда должен быть поверх выехавшего меню */
+    align-items: flex-start;
+    padding: 64px 20px 24px;
+    margin: 0;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 99;
   }
-  
-  /* Полоски бургера */
-  .bar {
-    width: 25px;
-    height: 3px;
-    background-color: var(--color-text, #111);
-    border-radius: 3px;
-    transition: all 0.3s ease-in-out;
+
+  .navbar-menu.active {
+    right: 0;
   }
-  
-  @media (max-width: 768px) {
-    .navbar-container {
-      padding: 16px 24px;
-    }
-  
-    /* Показываем бургер */
-    .hamburger {
-      display: flex;
-    }
-  
-    /* Анимация превращения бургера в крестик */
-    .bar.open:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-    .bar.open:nth-child(2) {
-      opacity: 0;
-    }
-    .bar.open:nth-child(3) {
-      transform: translateY(-8px) rotate(-45deg);
-    }
-  
-    /* Превращаем меню в боковую шторку */
-    .navbar-menu {
-      position: fixed;
-      top: 0;
-      right: -100%; /* Прячем меню за экраном */
-      width: 280px;
-      height: 100vh;
-      background-color: var(--color-surface, #ffffff);
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      padding: 80px 24px 32px; /* Отступ сверху, чтобы не перекрывать логотип */
-      margin: 0;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-      transition: right 0.3s ease-in-out;
-      z-index: 100;
-    }
-  
-    /* Когда стейт isOpen === true, меню выезжает */
-    .navbar-menu.active {
-      right: 0;
-    }
-  
-    /* Перестраиваем ссылки в колонку */
-    .navbar-links {
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      gap: 24px;
-      margin-bottom: 32px;
-      border-bottom: 1px solid #eaeaea;
-      padding-bottom: 32px;
-    }
-  
-    .navbar-links a {
-      font-size: 18px; /* Делаем текст крупнее для пальцев */
-    }
-  
-    /* Перестраиваем действия в колонку */
-    .navbar-actions {
-      flex-direction: column;
-      align-items: flex-start;
-      width: 100%;
-      gap: 24px;
-    }
-  
-    .user-actions {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-      width: 100%;
-    }
-  
-    .btn-login {
-      width: 100%;
-      text-align: center;
-      padding: 12px;
-    }
+
+  .navbar-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
   }
+
+  .navbar-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .user-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 4px;
+  }
+
+  .action-link {
+    width: 100%;
+    padding: 10px 12px;
+  }
+
+  .btn-login {
+    width: 100%;
+    text-align: center;
+  }
+}

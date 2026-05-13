@@ -1,0 +1,60 @@
+/* frontend/src/components/shared/ThemeToggle.css */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-muted);
+}
+
+.theme-toggle:hover {
+  background: var(--bg);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.theme-icon svg {
+  transition: all 0.2s ease;
+}
+
+/* В админке (тёмный сайдбар) — инвертируем фон */
+.admin-sidebar .theme-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--sidebar-text);
+}
+
+.admin-sidebar .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--sidebar-active);
+  color: var(--sidebar-active);
+}
+
+/* Анимация переключения иконки */
+.theme-toggle .theme-icon svg {
+  animation: iconFade 0.2s ease;
+}
+
+@keyframes iconFade {
+  from { opacity: 0.5; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

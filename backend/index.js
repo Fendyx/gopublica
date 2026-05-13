@@ -1,37 +1,45 @@
-//backend/index.js
-const path = require('path');
+const path    = require('path');
 const express = require('express');
-const cors = require('cors');
+const cors    = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const app = express();
+const app  = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) callback(null, true);
+    else callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  credentials: true,
+}));
+
 app.use(express.json());
 
-// Подключение к MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Успешно подключились к MongoDB'))
-  .catch((err) => console.error('❌ Ошибка подключения к БД:', err));
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ DB error:', err));
 
-// Подключаем роуты (мы создадим их в следующем шаге)
-app.use('/api/leads', require('./routes/leads'));
-app.use('/api/auth', require('./routes/auth'));
+// ── Роуты ────────────────────────────────────────────
+app.use('/api/auth',            require('./routes/auth'));
+app.use('/api/leads',           require('./routes/leads'));
+app.use('/api/users',           require('./routes/users'));      
+app.use('/api/clients',         require('./routes/clients'));
+app.use('/api/subscriptions',   require('./routes/subscriptions'));
+app.use('/api/change-requests', require('./routes/changeRequests'));
+app.use('/api/portfolio',       require('./routes/portfolio'));
+app.use('/api/projects',        require('./routes/projects'));
 
-// 1. Указываем Express, где лежат собранные файлы фронтенда
+// ── Фронтенд (прод) ──────────────────────────────────
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-// 2. Любой запрос, который не попал в /api, перенаправляем на index.html фронтенда.
-// Используем app.use вместо app.get('*'), чтобы избежать ошибки в Express 5+
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
-
-// Запуск сервера
-app.listen(PORT, () => {
-  console.log(`🚀 Сервер запущен на http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

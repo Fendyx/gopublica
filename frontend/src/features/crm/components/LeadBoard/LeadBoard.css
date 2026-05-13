@@ -1,0 +1,45 @@
+.card-table { padding: 0; overflow: hidden; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.table-row { cursor: pointer; transition: background 0.15s; }
+.table-row:hover { background: var(--bg); }
+.table-empty { padding: 40px; text-align: center; color: var(--text-muted); }
+
+.badge-count { margin-left: 4px; font-size: 11px; opacity: 0.7; }
+.badge-ghost { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
+
+.select-status {
+  border: 1px solid;
+  background: transparent;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  min-width: 100px;
+}
+
+.link { color: var(--primary); font-size: 12px; text-decoration: none; }
+.link:hover { text-decoration: underline; }
+.text-placeholder { color: var(--border); }
+
+@media (max-width: 1024px) {
+  .table { display: block; overflow-x: auto; }
+  .hide-mobile { display: none; }
+}

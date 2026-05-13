@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/store'; // Подключаем стор
-import './AdminLayout.css'; // Подключаем CSS для адаптивности
+import { useAuthStore } from '../../store/store';
+import { ThemeToggle } from '../shared/ThemeToggle';
+import './AdminLayout.css';
 
 const NAV_ITEMS = [
-  { to: '/admin',        label: 'Дашборд',    icon: '▦', end: true  },
-  { to: '/admin/leads',  label: 'Лиды (CRM)', icon: '◈', end: false },
-  { to: '/admin/portfolio', label: 'Портфолио', icon: '◉', end: false },
-  { to: '/admin/projects',  label: 'Проекты',   icon: '◎', end: false },
+  { to: '/admin',           label: 'Dashboard',        icon: '▦', end: true  },
+  { to: '/admin/leads',     label: 'Leads CRM',        icon: '◈', end: false },
+  { to: '/admin/clients',   label: 'Clients',          icon: '◉', end: false },
+  { to: '/admin/requests',  label: 'Change Requests',  icon: '✎', end: false },
+  { to: '/admin/portfolio', label: 'Portfolio',        icon: '◎', end: false },
+  { to: '/admin/projects',  label: 'Projects',         icon: '◫', end: false },
+  { to: '/admin/profile',   label: 'My Profile',       icon: '◑', end: false },
 ];
 
 export default function AdminLayout() {
@@ -15,53 +19,46 @@ export default function AdminLayout() {
   const { user } = useAuthStore();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleBackToSite = () => {
-    navigate('/');
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <div className="admin-layout">
-      
-      {/* Темный фон при открытом меню на мобилке */}
-      <div 
-        className={`admin-overlay ${isSidebarOpen ? 'active' : ''}`} 
+      {/* Overlay для мобильного меню */}
+      <div
+        className={`admin-overlay ${isSidebarOpen ? 'active' : ''}`}
         onClick={closeSidebar}
-      ></div>
+        aria-hidden="true"
+      />
 
       {/* Sidebar */}
       <aside className={`admin-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="admin-sidebar-header">
-          <div>
+          <div className="admin-logo-wrapper">
             <div className="admin-logo-title">GoPublica</div>
             <div className="admin-logo-subtitle">Admin Panel</div>
           </div>
-          {/* Кнопка закрытия внутри сайдбара для мобилок */}
-          <button className="admin-close-btn" onClick={closeSidebar}>✕</button>
+          <button className="admin-close-btn" onClick={closeSidebar} aria-label="Close menu">✕</button>
         </div>
 
         <nav className="admin-nav">
           {NAV_ITEMS.map(({ to, label, icon, end }) => (
             <NavLink
-              key={to} to={to} end={end}
+              key={to}
+              to={to}
+              end={end}
               onClick={closeSidebar}
               className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
             >
-              <span className="admin-nav-icon">{icon}</span> {label}
+              <span className="admin-nav-icon" aria-hidden="true">{icon}</span>
+              {label}
             </NavLink>
           ))}
         </nav>
 
-        {/* Footer Sidebar */}
         <div className="admin-sidebar-footer">
-          <div className="admin-user-name">
-            {user?.name || 'Пользователь'}
-          </div>
-          <button onClick={handleBackToSite} className="admin-back-btn">
-            ← На сайт
+          <div className="admin-user-name">{user?.name || 'User'}</div>
+          <button onClick={() => navigate('/')} className="admin-back-btn">
+            ← Back to site
           </button>
         </div>
       </aside>
@@ -69,17 +66,19 @@ export default function AdminLayout() {
       {/* Main content */}
       <div className="admin-main">
         <header className="admin-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            {/* Кнопка открытия сайдбара (бургер) */}
-            <button className="admin-menu-btn" onClick={() => setIsSidebarOpen(true)}>
+          <div className="admin-header-left">
+            <button className="admin-menu-btn" onClick={() => setIsSidebarOpen(true)} aria-label="Open menu">
               ☰
             </button>
-            <span className="admin-header-title">Панель управления</span>
+            <span className="admin-header-title">Admin Panel</span>
           </div>
           
-          <span className="admin-role-badge">
-            role: <strong>{user?.role}</strong>
-          </span>
+          <div className="admin-header-right">
+            <ThemeToggle />
+            <span className="admin-role-badge">
+              role: <strong>{user?.role}</strong>
+            </span>
+          </div>
         </header>
 
         <main className="admin-content">

@@ -1,22 +1,22 @@
-//backend/middleware/auth.js
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'super_secret_key_gopublica';
+
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error('❌ JWT_SECRET не задан в .env! Сервер не запустится.');
+}
 
 module.exports = (req, res, next) => {
-  // Ищем токен в заголовках запроса
-  const token = req.header('Authorization')?.replace('Bearer ', '');
-  
+  const authHeader = req.header('Authorization');
+  const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+
   if (!token) {
     return res.status(401).json({ message: 'Нет доступа. Токен отсутствует.' });
   }
 
   try {
-    // Расшифровываем токен
-    const decoded = jwt.verify(token, JWT_SECRET);
-    // Кладем данные юзера (id и role) в запрос, чтобы другие функции их видели
-    req.user = decoded; 
-    next(); // Пропускаем дальше
-  } catch (error) {
+    req.user = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
     res.status(401).json({ message: 'Неверный или просроченный токен.' });
   }
 };

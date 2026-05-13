@@ -1,0 +1,15 @@
+.convert-form {
+  background: color-mix(in srgb, var(--success) 8%, transparent);
+  border-color: color-mix(in srgb, var(--success) 30%, transparent);
+  margin-top: 16px;
+}
+.convert-title { margin: 0 0 16px 0; color: var(--success); font-size: 15px; }
+.error-banner {
+  background: color-mix(in srgb, var(--danger) 10%, transparent);
+  color: var(--danger);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 12px;
+  border: 1px solid color-mix(in srgb, var(--danger) 25%, transparent);
+}

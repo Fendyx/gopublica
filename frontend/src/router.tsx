@@ -1,39 +1,43 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-// --- Layouts ---
-import PublicLayout  from './components/layout/PublicLayout';
-import AdminLayout   from './components/layout/AdminLayout';
+// ── Layouts ───────────────────────────────────────────────────────────────
+import PublicLayout from './components/layout/PublicLayout';
+import AdminLayout  from './components/layout/AdminLayout';
 
-// --- Routing ---
+// ── Routing ───────────────────────────────────────────────────────────────
 import ProtectedRoute from './components/routing/ProtectedRoute';
 
-// --- Public Pages ---
-import HomePage          from './pages/Public/Home/HomePage';
-import CalculatorPage    from './pages/Public/CalculatorPage/CalculatorPage';
-import ContactPage       from './pages/Public/ContactPage/ContactPage';
-import LoginPage         from './pages/Public/LoginPage/LoginPage';
-import ProfilePage       from './pages/Public/ProfilePage/ProfilePage';
+// ── Public Pages ──────────────────────────────────────────────────────────
+import HomePage       from './pages/Public/Home/HomePage';
+import CalculatorPage from './pages/Public/CalculatorPage/CalculatorPage';
+import ContactPage    from './pages/Public/ContactPage/ContactPage';
+import LoginPage      from './pages/Public/LoginPage/LoginPage';
+import ProfilePage    from './pages/Public/ProfilePage/ProfilePage';
 
-// --- Admin Pages ---
-import DashboardPage     from './pages/Admin/Dashboard/Dashboard';
-import LeadsCRMPage      from './pages/Admin/LeadsCRMPage/LeadsCRMPage';
-import PortfolioCMSPage  from './pages/Admin/PortfolioCMSPage/PortfolioCMSPage';
-import ProjectsPage      from './pages/Admin/ProjectsPage/ProjectsPage';
+// ── Admin Pages ───────────────────────────────────────────────────────────
+import DashboardPage    from './pages/Admin/Dashboard/Dashboard';
+import LeadsCRMPage     from './pages/Admin/LeadsCRMPage/LeadsCRMPage';
+import ClientsPage      from './pages/Admin/ClientsPage/ClientsPage';
+import ClientDetailPage from './pages/Admin/ClientDetailPage/ClientDetailPage';
+import RequestsPage     from './pages/Admin/RequestsPage/RequestsPage';
+import PortfolioCMSPage from './pages/Admin/PortfolioCMSPage/PortfolioCMSPage';
+import ProjectsPage     from './pages/Admin/ProjectsPage/ProjectsPage';
+import MyProfilePage from './pages/Admin/MyProfilePage/MyProfilePage';
 
 const router = createBrowserRouter([
-  // ── Страница логина (без layout) ─────────────────────────────────────────
+
+  // ── Страница логина (без layout) ────────────────────────────────────────
   { path: 'login', element: <LoginPage /> },
 
-  // ── Зона с публичным Layout (Хэдер сайта) ────────────────────────────────
+  // ── Публичная зона (с хэдером сайта) ────────────────────────────────────
   {
     element: <PublicLayout />,
     children: [
-      // Абсолютно открытые страницы
-      { index: true,          element: <HomePage /> },
-      { path: 'calculator',   element: <CalculatorPage /> },
-      { path: 'contact',      element: <ContactPage /> },
-      
-      // Страница профиля (С хэдером сайта, но доступна только авторизованным)
+      { index: true,        element: <HomePage /> },
+      { path: 'calculator', element: <CalculatorPage /> },
+      { path: 'contact',    element: <ContactPage /> },
+
+      // Профиль — с хэдером, но только для авторизованных
       {
         element: <ProtectedRoute allowedRoles={['user', 'admin', 'superadmin']} />,
         children: [
@@ -43,26 +47,30 @@ const router = createBrowserRouter([
     ],
   },
 
-  // ── Строгая Админ-зона (С боковым меню) ──────────────────────────────────
+  // ── Админ-зона (боковое меню, только admin/superadmin) ───────────────────
   {
     path: 'admin',
-    // СЮДА ПУСКАЕМ ТОЛЬКО АДМИНОВ!
     element: <ProtectedRoute allowedRoles={['admin', 'superadmin']} />,
     children: [
       {
         element: <AdminLayout />,
         children: [
-          { index: true,        element: <DashboardPage /> },
-          { path: 'leads',      element: <LeadsCRMPage /> },
-          { path: 'portfolio',  element: <PortfolioCMSPage /> },
-          { path: 'projects',   element: <ProjectsPage /> },
+          { index: true,           element: <DashboardPage /> },
+          { path: 'leads',         element: <LeadsCRMPage /> },
+          { path: 'clients',       element: <ClientsPage /> },
+          { path: 'clients/:id',   element: <ClientDetailPage /> },
+          { path: 'requests',      element: <RequestsPage /> },
+          { path: 'portfolio',     element: <PortfolioCMSPage /> },
+          { path: 'projects',      element: <ProjectsPage /> },
+          { path: 'profile', element: <MyProfilePage /> },
         ],
       },
     ],
   },
 
-  // ── Перехват неизвестных ссылок (404) ────────────────────────────────────
+  // ── 404 → главная ────────────────────────────────────────────────────────
   { path: '*', element: <Navigate to="/" replace /> },
+
 ]);
 
 export default router;

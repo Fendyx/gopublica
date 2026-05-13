@@ -1,0 +1,12 @@
+.modal-title { margin: 0 0 8px 0; font-size: 20px; }
+.text-sm { font-size: 12px; }
+.text-medium { margin: 3px 0 0 0; font-weight: 500; font-size: 14px; }
+.link-truncate { color: var(--primary); font-size: 13px; word-break: break-all; text-decoration: none; }
+.link-truncate:hover { text-decoration: underline; }
+
+/* Badge variants */
+.badge-primary {
+  background: var(--primary) !important;
+  color: #fff !important;
+  border-color: var(--primary) !important;
+}

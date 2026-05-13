@@ -1,17 +1,78 @@
+/* frontend/src/components/ui/LanguageSelector.css */
+.language-selector-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.language-selector-wrapper:hover {
+  border-color: var(--primary);
+  background: var(--bg);
+}
+
+.language-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
 .language-selector {
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: 1px solid var(--color-border, #ccc);
-    background-color: var(--color-bg, #fff);
-    color: var(--color-text, #333);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  
-  .language-selector:hover,
-  .language-selector:focus {
-    border-color: var(--color-primary, #0056b3);
-  }
+  appearance: none;
+  padding: 2px 18px 2px 4px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  min-width: 44px;
+  text-align: center;
+}
+
+.language-selector option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.selector-chevron {
+  position: absolute;
+  right: 8px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+.language-selector-wrapper:hover .selector-chevron {
+  color: var(--primary);
+}
+
+/* Admin sidebar override */
+.admin-sidebar .language-selector-wrapper {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.admin-sidebar .language-selector-wrapper:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--sidebar-active);
+}
+
+.admin-sidebar .language-icon,
+.admin-sidebar .selector-chevron {
+  color: var(--sidebar-text);
+}
+
+.admin-sidebar .language-selector {
+  color: var(--sidebar-text);
+}
+
+.admin-sidebar .language-selector option {
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+}

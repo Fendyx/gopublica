@@ -1,33 +1,38 @@
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-
-// Подключаем наши новые стили
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, ArrowUpRight, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { portfolioApi } from '@/features/portfolio/api/portfolioApi';
+import type { PortfolioCase } from '@/entities/case/types';
 import './PublicGrid.css';
 
-// Импортируем картинки
-import portfolio1 from "@/assets/portfolio-1.png";
-import portfolio2 from "@/assets/portfolio-2.png";
-import portfolio3 from "@/assets/portfolio-3.png";
-import portfolio4 from "@/assets/portfolio-4.png";
-import portfolio5 from "@/assets/portfolio-5.png";
-import portfolio6 from "@/assets/portfolio-6.png";
-
 export default function PublicGrid() {
-  const projects = [
-    { img: portfolio1, title: "Modern Barbershop in Warsaw", tag: "Barbershop" },
-    { img: portfolio2, title: "Fine Dining in Barcelona", tag: "Restaurant" },
-    { img: portfolio3, title: "Cocktail Bar in Amsterdam", tag: "Hospitality" },
-    { img: portfolio4, title: "Boutique Bakery in Paris", tag: "Bakery" },
-    { img: portfolio5, title: "Artisanal Coffee Shop in Berlin", tag: "Cafe" },
-    { img: portfolio6, title: "Premium Spa in Milan", tag: "Wellness" }
-  ];
+  const [cases, setCases] = useState<PortfolioCase[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    portfolioApi.getAll()
+      .then(setCases)
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="portfolio-section">
+        <div className="portfolio-container">
+          <div style={{ textAlign: 'center', padding: '80px' }}>
+            <Loader2 className="animate-spin" size={32} />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="work" className="portfolio-section">
       <div className="portfolio-container">
         
-        {/* Шапка */}
         <div className="portfolio-header">
           <div className="portfolio-title-wrapper">
             <h2 className="portfolio-title">Selected Work</h2>
@@ -41,11 +46,11 @@ export default function PublicGrid() {
           </Button>
         </div>
 
-        {/* Сетка */}
         <div className="portfolio-grid">
-          {projects.map((item, i) => (
-            <motion.div 
-              key={i}
+          {cases.map((item, i) => (
+            <motion.a
+              key={item._id}
+              href={`/case/${item.slug}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
@@ -54,7 +59,7 @@ export default function PublicGrid() {
             >
               <div className="portfolio-img-wrapper">
                 <img 
-                  src={item.img} 
+                  src={item.primaryImage?.url || item.heroImages[0]?.url} 
                   alt={item.title} 
                   className="portfolio-img"
                 />
@@ -62,20 +67,19 @@ export default function PublicGrid() {
               </div>
               
               <div className="portfolio-info">
-                <span className="portfolio-tag">{item.tag}</span>
+                <span className="portfolio-tag">{item.niche}</span>
                 <h3 className="portfolio-card-title">{item.title}</h3>
                 <span className="portfolio-link">
                   View Case Study 
                   <ArrowRight className="portfolio-link-icon" />
                 </span>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
         
-        {/* Кнопка для мобильных устройств */}
         <div className="portfolio-mobile-btn">
-          <Button variant="outline" size="lg" style={{ width: '100%', borderRadius: '50px' }}>
+          <Button variant="outline" size="lg">
             View all projects
           </Button>
         </div>

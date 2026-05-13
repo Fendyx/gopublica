@@ -1,0 +1,77 @@
+/* ===== ТЕМЫ ===== */
+:root {
+  /* Цвета - светлая тема */
+  --bg: #ffffff;
+  --surface: #f9fafb;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  
+  /* Акценты */
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --warning: #d97706;
+  --purple: #7c3aed;
+  
+  /* Sidebar (admin) */
+  --sidebar-bg: #1e293b;
+  --sidebar-text: #cbd5e1;
+  --sidebar-active: #2563eb;
+  
+  /* Отступы и размеры */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --sidebar-width: 240px;
+  
+  /* Шрифты */
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* ===== FORMS ===== */
+  --input-bg: var(--surface);
+  --input-border: var(--border);
+  --input-text: var(--text);
+  --input-placeholder: var(--text-muted);
+  --input-focus-border: var(--primary);
+  --input-focus-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+  
+  /* ===== BADGES & TAGS ===== */
+  --badge-font-size: 12px;
+  --badge-padding: 4px 10px;
+  --badge-radius: 999px;
+  
+  /* ===== MODALS ===== */
+  --modal-bg: var(--surface);
+  --modal-border: var(--border);
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  --modal-radius: 16px;
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  
+  /* ===== BUTTON VARIANTS ===== */
+  --btn-primary-bg: var(--text);
+  --btn-primary-text: var(--bg);
+  --btn-success-bg: var(--success);
+  --btn-success-text: #fff;
+  --btn-danger-bg: color-mix(in srgb, var(--danger) 10%, transparent);
+  --btn-danger-text: var(--danger);
+  --btn-ghost-bg: transparent;
+  --btn-ghost-text: var(--text-muted);
+  --btn-ghost-hover: var(--surface);
+}
+
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --surface: #1f2937;
+  --text: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border: #374151;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --sidebar-bg: #0f172a;
+  --sidebar-text: #94a3b8;
+  --modal-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+}

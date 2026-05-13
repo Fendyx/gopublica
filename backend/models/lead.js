@@ -1,26 +1,41 @@
 const mongoose = require('mongoose');
 
 const leadSchema = new mongoose.Schema({
-  name: { type: String, required: true },       
-  phone: { type: String, required: true },      
-  source: { type: String },                     
-  comment: { type: String },                    
-  status: { 
-    type: String, 
-    enum: ['Новый', 'В работе', 'Закрыт', 'Отказ'], 
-    default: 'Новый' 
+  name:  { type: String, required: true },
+  phone: { type: String, required: true },
+  source: { type: String, default: '' },
+  comment: { type: String, default: '' },
+
+  status: {
+    type: String,
+    enum: ['New', 'In Progress', 'Closed', 'Rejected'],
+    default: 'New',
   },
-  adminName: { type: String, default: 'Andrew' },
-  
-  // --- НОВЫЕ ПОЛЯ ---
-  price: { type: Number, default: 0 }, // Цена проекта
-  businessType: { 
-    type: String, 
-    enum: ['Ресторан', 'Барбершоп', 'Цветочный магазин', 'Другое'], 
-    default: 'Другое' 
+
+  price:        { type: Number, default: 0 },
+  businessType: { type: String, default: 'Other' },
+  servicesRequested: [{ type: String }],
+  priority: {
+    type: String,
+    enum: ['Low', 'Medium', 'High'],
+    default: 'Medium',
   },
-  servicesRequested: [{ type: String }] // Массив строк (выбранные услуги)
-  
+  followUpAt: { type: Date, default: null },
+
+  // ── Кто создал лид (неизменяемое поле) ──────────────────────────────────
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+
+  // ── Кому назначен (можно переназначить) ─────────────────────────────────
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null,
+  },
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Lead', leadSchema);
