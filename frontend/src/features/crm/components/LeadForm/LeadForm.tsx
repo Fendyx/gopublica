@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Plus, User, Phone, Link, DollarSign, Building2, Flag, Calendar } from 'lucide-react';
+import { X, Plus, User, Phone, Link, DollarSign, Building2, Flag } from 'lucide-react';
 import {
   BUSINESS_TYPES, PRESET_SERVICES, PRIORITIES,
   fetchAdmins, type Lead, type LeadPriority, type AdminUser,
@@ -18,11 +18,14 @@ const EMPTY = (currentUserId: string): Omit<Lead, '_id' | 'createdAt' | 'created
 interface Props {
   onSave: (data: Omit<Lead, '_id' | 'createdAt' | 'createdBy'>) => Promise<void>;
   onCancel: () => void;
+  // ↓ новые пропсы для режима редактирования
+  initialData?: Omit<Lead, '_id' | 'createdAt' | 'createdBy'>;
+  isEdit?: boolean;
 }
 
-export default function LeadForm({ onSave, onCancel }: Props) {
+export default function LeadForm({ onSave, onCancel, initialData, isEdit = false }: Props) {
   const { user } = useAuthStore();
-  const [form, setForm] = useState(EMPTY(user?.id || ''));
+  const [form, setForm] = useState(initialData ?? EMPTY(user?.id || ''));
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [saving, setSaving] = useState(false);
   const [customService, setCustomService] = useState('');
@@ -30,6 +33,11 @@ export default function LeadForm({ onSave, onCancel }: Props) {
   useEffect(() => {
     fetchAdmins().then(setAdmins).catch(console.error);
   }, []);
+
+  // Если initialData поменялся снаружи — синхронизируем
+  useEffect(() => {
+    if (initialData) setForm(initialData);
+  }, [initialData]);
 
   const set = (key: keyof ReturnType<typeof EMPTY>, value: any) =>
     setForm(prev => ({ ...prev, [key]: value }));
@@ -59,7 +67,7 @@ export default function LeadForm({ onSave, onCancel }: Props) {
   return (
     <div className="lead-form card">
       <div className="lead-form-header flex flex-between">
-        <h3 className="lead-form-title">New Lead</h3>
+        <h3 className="lead-form-title">{isEdit ? 'Edit Lead' : 'New Lead'}</h3>
         <button className="btn btn-icon btn-ghost" onClick={onCancel} aria-label="Close">
           <X size={18} />
         </button>
@@ -106,10 +114,19 @@ export default function LeadForm({ onSave, onCancel }: Props) {
         </div>
         <div>
           <label className="label"><User size={12} /> Assigned To</label>
-          <select className="select" value={typeof form.assignedTo === 'string' ? form.assignedTo : (form.assignedTo as any)?._id || ''}
-            onChange={e => set('assignedTo', e.target.value)}>
+          <select
+            className="select"
+            value={typeof form.assignedTo === 'string' ? form.assignedTo : (form.assignedTo as any)?._id || ''}
+            onChange={e => set('assignedTo', e.target.value)}
+            // Обычный admin не может переназначать
+            disabled={user?.role !== 'superadmin'}
+          >
             {admins.length === 0 && <option value={user?.id || ''}>{user?.name || 'Me'}</option>}
-            {admins.map(a => <option key={a._id} value={a._id}>{a.name} {a._id === user?.id ? '(me)' : ''}</option>)}
+            {admins.map(a => (
+              <option key={a._id} value={a._id}>
+                {a.name} {a._id === user?.id ? '(me)' : ''}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -154,7 +171,7 @@ export default function LeadForm({ onSave, onCancel }: Props) {
       <div className="flex gap-3">
         <button className="btn btn-primary" onClick={handleSubmit}
           disabled={saving || !form.name.trim() || !form.phone.trim()}>
-          {saving ? 'Saving...' : 'Save Lead'}
+          {saving ? 'Saving...' : isEdit ? 'Save Changes' : 'Save Lead'}
         </button>
         <button className="btn btn-ghost" onClick={onCancel}>Cancel</button>
       </div>

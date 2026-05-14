@@ -1,3 +1,4 @@
+//backend\routes\leads.js
 const express = require('express');
 const router  = express.Router();
 const Lead    = require('../models/lead');
@@ -16,11 +17,7 @@ const canEdit = (user, lead) => {
 // superadmin видит всё, admin видит только свои
 router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
-    const filter = req.user.role === 'superadmin'
-      ? {}
-      : { assignedTo: req.user.id };
-
-    const leads = await Lead.find(filter)
+    const leads = await Lead.find({}) 
       .populate('createdBy',  'name email')
       .populate('assignedTo', 'name email')
       .sort({ createdAt: -1 });
@@ -82,16 +79,22 @@ router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
     }
 
     const {
-      status, priority, assignedTo,
-      comment, followUpAt,
+      status, priority, assignedTo, comment, followUpAt,
+      name, phone, source, price, businessType, servicesRequested,
     } = req.body;
 
     // Whitelist — только эти поля можно обновить
     const update = {};
-    if (status     !== undefined) update.status     = status;
-    if (priority   !== undefined) update.priority   = priority;
-    if (comment    !== undefined) update.comment    = comment;
-    if (followUpAt !== undefined) update.followUpAt = followUpAt;
+    if (status             !== undefined) update.status             = status;
+    if (priority           !== undefined) update.priority           = priority;
+    if (comment            !== undefined) update.comment            = comment;
+    if (followUpAt         !== undefined) update.followUpAt         = followUpAt;
+    if (name               !== undefined) update.name               = name.trim();
+    if (phone              !== undefined) update.phone              = phone.trim();
+    if (source             !== undefined) update.source             = source?.trim() ?? '';
+    if (price              !== undefined) update.price              = Number(price) || 0;
+    if (businessType       !== undefined) update.businessType       = businessType;
+    if (servicesRequested  !== undefined) update.servicesRequested  = servicesRequested;
 
     // Переназначить может только superadmin
     if (assignedTo !== undefined && req.user.role === 'superadmin') {
