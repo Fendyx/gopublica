@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
-  fetchClient, updateClient, logPayment, updateSubscription,
+  fetchClient, updateClient,
   createChangeRequest, updateChangeRequest, deleteChangeRequest,
   type Client, type ChangeRequest,
 } from '../../../features/clients/api/clientsApi';
@@ -23,11 +23,6 @@ export default function ClientDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState('');
 
-  // Payment form
-  const [showPayment, setShowPayment] = useState(false);
-  const [paymentForm, setPaymentForm] = useState({ amount: 0, note: '', paidBy: '' });
-  const [savingPayment, setSavingPayment] = useState(false);
-
   // Change request form
   const [showCRForm, setShowCRForm] = useState(false);
   const [crForm, setCrForm] = useState({
@@ -43,18 +38,6 @@ export default function ClientDetailPage() {
       .catch(() => setError('Failed to load client'))
       .finally(() => setLoading(false));
   }, [id]);
-
-  const handleLogPayment = async () => {
-    if (!client?.subscription || !paymentForm.amount) return;
-    setSavingPayment(true);
-    try {
-      const updated = await logPayment(client.subscription._id, paymentForm);
-      setClient(prev => prev ? { ...prev, subscription: updated } : null);
-      setPaymentForm({ amount: 0, note: '', paidBy: '' });
-      setShowPayment(false);
-    } catch { setError('Failed to log payment'); }
-    finally { setSavingPayment(false); }
-  };
 
   const handleCreateCR = async () => {
     if (!id || !crForm.title.trim()) return;
@@ -113,7 +96,6 @@ export default function ClientDetailPage() {
 
   return (
     <div style={{ maxWidth: '900px' }}>
-      {/* Breadcrumb */}
       <div style={{ marginBottom: '20px', fontSize: '14px', color: '#6b7280' }}>
         <Link to="/admin/clients" style={{ color: '#6b7280', textDecoration: 'none' }}>
           Clients
@@ -178,107 +160,36 @@ export default function ClientDetailPage() {
         )}
       </div>
 
-      {/* Subscription */}
+      {/* Subscription (новая модель) */}
       <div style={cardStyle}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h3 style={{ margin: 0 }}>Subscription</h3>
-          <button onClick={() => setShowPayment(v => !v)}
-            style={{ padding: '7px 14px', background: '#16a34a', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '13px' }}>
-            + Log Payment
-          </button>
-        </div>
-
+        <h3 style={{ margin: '0 0 20px 0' }}>Subscription</h3>
         {sub ? (
-          <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '20px' }}>
-              {[
-                { label: 'Plan',         value: sub.plan },
-                { label: 'Monthly Fee',  value: `€${sub.amount}` },
-                { label: 'Status',       value: sub.status },
-                { label: 'Next Billing', value: fmt(sub.nextBillingDate) },
-              ].map(({ label, value }) => (
-                <div key={label}>
-                  <p style={{ margin: 0, ...labelStyle }}>{label}</p>
-                  <p style={{ margin: '3px 0 0 0', fontWeight: 600, fontSize: '15px' }}>{value}</p>
-                </div>
-              ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+            <div>
+              <p style={{ margin: 0, ...labelStyle }}>Plan</p>
+              <p style={{ margin: '3px 0 0 0', fontWeight: 600, fontSize: '15px' }}>
+                {sub.subscriptionPlan !== 'none' ? sub.subscriptionPlan.toUpperCase() : 'None'}
+              </p>
             </div>
-
-            {/* What's included */}
-            {sub.includes?.length > 0 && (
-              <div style={{ marginBottom: '20px' }}>
-                <p style={{ margin: '0 0 8px 0', ...labelStyle }}>Includes</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {sub.includes.map(item => (
-                    <span key={item} style={{ background: '#eff6ff', color: '#1d4ed8', border: '1px solid #bfdbfe', padding: '3px 10px', borderRadius: '6px', fontSize: '13px' }}>
-                      ✓ {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Log payment form */}
-            {showPayment && (
-              <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
-                <h4 style={{ margin: '0 0 12px 0', color: '#15803d', fontSize: '14px' }}>Log Payment</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '12px' }}>
-                  <div>
-                    <label style={labelStyle}>Amount (€) *</label>
-                    <input style={inputStyle} type="number" min={0}
-                      value={paymentForm.amount}
-                      onChange={e => setPaymentForm({ ...paymentForm, amount: Number(e.target.value) })} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Method</label>
-                    <input style={inputStyle} type="text" placeholder="Bank transfer, Cash..."
-                      value={paymentForm.note}
-                      onChange={e => setPaymentForm({ ...paymentForm, note: e.target.value })} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Received By</label>
-                    <input style={inputStyle} type="text" placeholder="Andrii"
-                      value={paymentForm.paidBy}
-                      onChange={e => setPaymentForm({ ...paymentForm, paidBy: e.target.value })} />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <button onClick={handleLogPayment} disabled={savingPayment || !paymentForm.amount}
-                    style={{ padding: '8px 16px', background: '#16a34a', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 600, fontSize: '13px' }}>
-                    {savingPayment ? 'Saving...' : 'Save Payment'}
-                  </button>
-                  <button onClick={() => setShowPayment(false)}
-                    style={{ padding: '8px 16px', background: 'white', color: '#374151', border: '1px solid #e5e7eb', borderRadius: '6px', cursor: 'pointer', fontSize: '13px' }}>
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Payment history */}
-            {sub.paymentHistory?.length > 0 && (
-              <div>
-                <p style={{ margin: '0 0 10px 0', ...labelStyle }}>Payment History</p>
-                <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', overflow: 'hidden' }}>
-                  {sub.paymentHistory.slice().reverse().map((p, i) => (
-                    <div key={p._id} style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      padding: '10px 16px',
-                      borderBottom: i < sub.paymentHistory.length - 1 ? '1px solid #f3f4f6' : 'none',
-                      background: i % 2 === 0 ? 'white' : '#fafafa',
-                    }}>
-                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <span style={{ fontSize: '13px', color: '#6b7280' }}>{fmt(p.date)}</span>
-                        {p.note && <span style={{ fontSize: '12px', background: '#f3f4f6', padding: '2px 8px', borderRadius: '4px' }}>{p.note}</span>}
-                        {p.paidBy && <span style={{ fontSize: '12px', color: '#9ca3af' }}>by {p.paidBy}</span>}
-                      </div>
-                      <span style={{ fontWeight: 700, color: '#16a34a' }}>€{p.amount}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </>
+            <div>
+              <p style={{ margin: 0, ...labelStyle }}>Status</p>
+              <p style={{ margin: '3px 0 0 0', fontWeight: 600, fontSize: '15px' }}>
+                {sub.subscriptionStatus}
+              </p>
+            </div>
+            <div>
+              <p style={{ margin: 0, ...labelStyle }}>Next Billing</p>
+              <p style={{ margin: '3px 0 0 0', fontWeight: 600, fontSize: '15px' }}>
+                {sub.currentPeriodEnd ? fmt(sub.currentPeriodEnd) : '—'}
+              </p>
+            </div>
+            <div>
+              <p style={{ margin: 0, ...labelStyle }}>Stripe ID</p>
+              <p style={{ margin: '3px 0 0 0', fontWeight: 500, fontSize: '13px', color: '#6b7280' }}>
+                {sub.stripeSubscriptionId || '—'}
+              </p>
+            </div>
+          </div>
         ) : (
           <p style={{ color: '#9ca3af', fontSize: '14px' }}>No subscription found.</p>
         )}
@@ -299,7 +210,6 @@ export default function ClientDetailPage() {
           </button>
         </div>
 
-        {/* CR Form */}
         {showCRForm && (
           <div style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px', marginBottom: '20px' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '12px' }}>
@@ -357,7 +267,6 @@ export default function ClientDetailPage() {
           </div>
         )}
 
-        {/* CR List */}
         {!client.changeRequests?.length ? (
           <p style={{ color: '#9ca3af', fontSize: '14px' }}>No change requests yet.</p>
         ) : (

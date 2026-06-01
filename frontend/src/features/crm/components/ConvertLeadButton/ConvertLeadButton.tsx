@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Check, X, Globe, Mail, DollarSign, Package } from 'lucide-react';
-import { convertLead, type ConvertLeadPayload } from '../../../clients/api/clientsApi';
 import './ConvertLeadButton.css';
 
 interface Props {
@@ -18,18 +17,22 @@ export default function ConvertLeadButton({ leadId, leadName, onConverted }: Pro
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [form, setForm] = useState<ConvertLeadPayload>({
+  const [form, setForm] = useState({
     email: '', country: 'PL', websiteUrl: '', plan: 'Basic', amount: 29,
   });
 
   const handleConvert = async () => {
-    setLoading(true); setError('');
-    try {
-      const { client } = await convertLead(leadId, form);
-      onConverted?.();
-      navigate(`/admin/clients/${client._id}`);
-    } catch (err: any) { setError(err.message); }
-    finally { setLoading(false); }
+    setLoading(true);
+    setError('');
+
+    // Конвертация через старый эндпоинт больше не используется.
+    // Просто показываем сообщение, что лид будет обработан вручную.
+    setError('ConvertLead is deprecated. Use manual client creation in CRM.');
+
+    // TODO: реализовать новую логику — либо убрать кнопку, либо создать клиента через /api/clients
+    // onConverted?.();
+    // navigate(`/admin/clients/${client._id}`);
+    setLoading(false);
   };
 
   if (!showForm) {

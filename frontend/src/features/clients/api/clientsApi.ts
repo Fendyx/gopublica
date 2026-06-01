@@ -19,25 +19,13 @@ export interface Client {
   createdAt?: string;
 }
 
+// НОВАЯ модель подписки — отражает TenantUser
 export interface Subscription {
-  _id: string;
-  clientId: string;
-  plan: 'Basic' | 'Standard' | 'Premium';
-  amount: number;
-  status: 'active' | 'paused' | 'cancelled';
-  startDate: string;
-  nextBillingDate: string;
-  includes: string[];
-  paymentHistory: Payment[];
   stripeSubscriptionId: string | null;
-}
-
-export interface Payment {
-  _id: string;
-  date: string;
-  amount: number;
-  note: string;
-  paidBy: string;
+  stripeCustomerId: string | null;
+  subscriptionStatus: 'none' | 'trialing' | 'active' | 'past_due' | 'canceled' | 'incomplete';
+  subscriptionPlan: 'none' | 'basic' | 'pro';
+  currentPeriodEnd: string | null;
 }
 
 export interface ChangeRequest {
@@ -54,14 +42,6 @@ export interface ChangeRequest {
   createdAt?: string;
 }
 
-export interface ConvertLeadPayload {
-  email?: string;
-  country?: string;
-  websiteUrl?: string;
-  plan?: 'Basic' | 'Standard' | 'Premium';
-  amount?: number;
-}
-
 // ── Clients ──────────────────────────────────────────
 
 export const fetchClients = async (): Promise<Client[]> => {
@@ -76,21 +56,6 @@ export const fetchClient = async (id: string): Promise<Client> => {
   return res.json();
 };
 
-export const convertLead = async (
-  leadId: string,
-  payload: ConvertLeadPayload
-): Promise<{ client: Client; subscription: Subscription }> => {
-  const res = await apiFetch(`/clients/convert/${leadId}`, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    const err = await res.json();
-    throw new Error(err.message || 'Failed to convert lead');
-  }
-  return res.json();
-};
-
 export const updateClient = async (
   id: string,
   patch: Partial<Client>
@@ -100,38 +65,6 @@ export const updateClient = async (
     body: JSON.stringify(patch),
   });
   if (!res.ok) throw new Error('Failed to update client');
-  return res.json();
-};
-
-// ── Subscriptions ─────────────────────────────────────
-
-export const fetchSubscription = async (clientId: string): Promise<Subscription> => {
-  const res = await apiFetch(`/subscriptions/${clientId}`);
-  if (!res.ok) throw new Error('Failed to fetch subscription');
-  return res.json();
-};
-
-export const updateSubscription = async (
-  id: string,
-  patch: Partial<Subscription>
-): Promise<Subscription> => {
-  const res = await apiFetch(`/subscriptions/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(patch),
-  });
-  if (!res.ok) throw new Error('Failed to update subscription');
-  return res.json();
-};
-
-export const logPayment = async (
-  subscriptionId: string,
-  payment: { amount: number; note?: string; paidBy?: string }
-): Promise<Subscription> => {
-  const res = await apiFetch(`/subscriptions/${subscriptionId}/payment`, {
-    method: 'POST',
-    body: JSON.stringify(payment),
-  });
-  if (!res.ok) throw new Error('Failed to log payment');
   return res.json();
 };
 

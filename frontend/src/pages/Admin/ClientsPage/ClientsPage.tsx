@@ -9,9 +9,17 @@ const STATUS_COLOR = {
 };
 
 const PLAN_COLOR = {
-  Basic:    '#6b7280',
-  Standard: '#2563eb',
-  Premium:  '#7c3aed',
+  basic: '#6b7280',
+  pro:   '#7c3aed',
+};
+
+const SUB_STATUS_LABEL: Record<string, string> = {
+  trialing: 'Trial',
+  active: 'Active',
+  past_due: 'Past Due',
+  canceled: 'Canceled',
+  incomplete: 'Incomplete',
+  none: 'None',
 };
 
 const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '—';
@@ -31,18 +39,13 @@ export default function ClientsPage() {
 
   const filtered = filter === 'all' ? clients : clients.filter(c => c.status === filter);
 
-  // Считаем MRR (Monthly Recurring Revenue)
-  const mrr = clients
-    .filter(c => c.status === 'active' && c.subscription?.status === 'active')
-    .reduce((sum, c) => sum + (c.subscription?.amount || 0), 0);
-
   return (
     <div>
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <h1 style={{ margin: '0 0 4px 0' }}>Clients</h1>
         <p style={{ margin: 0, color: '#6b7280', fontSize: '14px' }}>
-          {clients.filter(c => c.status === 'active').length} active clients · MRR: €{mrr}
+          {clients.filter(c => c.status === 'active').length} active clients
         </p>
       </div>
 
@@ -74,7 +77,7 @@ export default function ClientsPage() {
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
           <thead>
             <tr style={{ background: '#f9fafb' }}>
-              {['Client', 'Country', 'Website', 'Plan', 'Monthly Fee', 'Next Billing', 'Status', ''].map(h => (
+              {['Client', 'Country', 'Website', 'Plan', 'Sub Status', 'Next Billing', 'Status', ''].map(h => (
                 <th key={h} style={{ padding: '11px 16px', textAlign: 'left', fontWeight: 600, fontSize: '12px', color: '#6b7280', borderBottom: '1px solid #e5e7eb', whiteSpace: 'nowrap', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   {h}
                 </th>
@@ -86,7 +89,7 @@ export default function ClientsPage() {
               <tr><td colSpan={8} style={{ padding: '40px', textAlign: 'center', color: '#9ca3af' }}>Loading clients...</td></tr>
             ) : filtered.length === 0 ? (
               <tr><td colSpan={8} style={{ padding: '60px', textAlign: 'center', color: '#9ca3af' }}>
-                No clients yet. Convert a lead to get started.
+                No clients yet.
               </td></tr>
             ) : (
               filtered.map((client, i) => (
@@ -108,21 +111,25 @@ export default function ClientsPage() {
                     ) : <span style={{ color: '#d1d5db' }}>—</span>}
                   </td>
                   <td style={{ padding: '13px 16px' }}>
-                    {client.subscription ? (
+                    {client.subscription?.subscriptionPlan && client.subscription.subscriptionPlan !== 'none' ? (
                       <span style={{
                         fontSize: '12px', fontWeight: 700, padding: '3px 8px', borderRadius: '4px',
-                        background: (PLAN_COLOR[client.subscription.plan] || '#6b7280') + '15',
-                        color: PLAN_COLOR[client.subscription.plan] || '#6b7280',
+                        background: (PLAN_COLOR[client.subscription.subscriptionPlan] || '#6b7280') + '15',
+                        color: PLAN_COLOR[client.subscription.subscriptionPlan] || '#6b7280',
                       }}>
-                        {client.subscription.plan}
+                        {client.subscription.subscriptionPlan.toUpperCase()}
                       </span>
                     ) : '—'}
                   </td>
-                  <td style={{ padding: '13px 16px', fontWeight: 600, color: '#111827' }}>
-                    {client.subscription ? `€${client.subscription.amount}` : '—'}
+                  <td style={{ padding: '13px 16px', fontSize: '13px', color: '#6b7280' }}>
+                    {client.subscription?.subscriptionStatus
+                      ? SUB_STATUS_LABEL[client.subscription.subscriptionStatus]
+                      : '—'}
                   </td>
                   <td style={{ padding: '13px 16px', fontSize: '13px', color: '#6b7280' }}>
-                    {client.subscription ? fmt(client.subscription.nextBillingDate) : '—'}
+                    {client.subscription?.currentPeriodEnd
+                      ? fmt(client.subscription.currentPeriodEnd)
+                      : '—'}
                   </td>
                   <td style={{ padding: '13px 16px' }}>
                     <span style={{
