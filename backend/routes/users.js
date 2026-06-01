@@ -3,7 +3,7 @@ const router  = express.Router();
 const User    = require('../models/user');
 const Lead    = require('../models/lead');
 const Client  = require('../models/client');
-const Subscription = require('../models/subscription');
+const Subscription = require('../models/Subscription');
 const auth    = require('../middleware/auth');
 const checkRole = require('../middleware/checkRole');
 

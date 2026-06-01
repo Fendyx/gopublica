@@ -1,0 +1,37 @@
+.newsletters-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.news-card {
+  border-left: 4px solid var(--border);
+}
+
+.news-card--info {
+  border-left-color: var(--primary, #3b82f6);
+}
+
+.news-card--marketing {
+  border-left-color: var(--success, #10b981);
+}
+
+.news-card--alert {
+  border-left-color: var(--danger, #ef4444);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.whitespace-pre-line {
+  white-space: pre-line;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}

@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 // ── Настройки CORS ───────────────────────────────────
 // Явно добавляем боевые домены, чтобы не зависеть только от .env
 const allowedOrigins = [
+  'http://localhost:3000',
   'http://localhost:5173',
   'https://gopublica.com',
   'https://www.gopublica.com',
@@ -31,6 +32,8 @@ app.use(cors({
   credentials: true,
 }));
 
+app.use('/api/stripe/webhook', require('./routes/stripe/webhook')); // важно: перед express.json() для вебхуков
+
 app.use(express.json());
 
 // ── База данных ──────────────────────────────────────
@@ -47,6 +50,18 @@ app.use('/api/subscriptions',   require('./routes/subscriptions'));
 app.use('/api/change-requests', require('./routes/changeRequests'));
 app.use('/api/portfolio',       require('./routes/portfolio'));
 app.use('/api/projects',        require('./routes/projects'));
+app.use('/api/saas/menu',       require('./routes/saas/menu'));
+app.use('/api/saas/auth',       require('./routes/saas/auth'));
+app.use('/api/saas/reservations', require('./routes/saas/reservations'));
+app.use('/api/saas/settings',   require('./routes/saas/settings'));
+app.use('/api/saas/gallery',    require('./routes/saas/gallery'));
+app.use('/api/saas/dashboard',  require('./routes/saas/dashboard'));
+app.use('/api/saas/news',       require('./routes/saas/news'));
+app.use('/api/saas/categories', require('./routes/saas/categories'));
+app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
+app.use('/api/stripe', require('./routes/stripe/setupIntent'));
+app.use('/api/stripe', require('./routes/stripe/subscribe'));
+
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');

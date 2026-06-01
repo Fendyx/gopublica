@@ -1,6 +1,6 @@
 const Lead         = require('../models/lead');
 const Client       = require('../models/client');
-const Subscription = require('../models/subscription');
+const Subscription = require('../models/Subscription');
 
 async function convertLead(leadId, options = {}) {
   const lead = await Lead.findById(leadId)
