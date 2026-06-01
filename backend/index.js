@@ -46,7 +46,6 @@ app.use('/api/auth',            require('./routes/auth'));
 app.use('/api/leads',           require('./routes/leads'));
 app.use('/api/users',           require('./routes/users'));      
 app.use('/api/clients',         require('./routes/clients'));
-app.use('/api/subscriptions',   require('./routes/subscriptions'));
 app.use('/api/change-requests', require('./routes/changeRequests'));
 app.use('/api/portfolio',       require('./routes/portfolio'));
 app.use('/api/projects',        require('./routes/projects'));
