@@ -10,12 +10,16 @@ import './shared/i18n/config';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY); // ← добавь в .env
 
+// Принудительно очищаем тему, чтобы всегда применялась светлая (по дефолту)
+document.documentElement.removeAttribute('data-theme');
+localStorage.removeItem('theme'); // на всякий случай сносим из памяти
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
+    {/* <ThemeProvider> */}
       <Elements stripe={stripePromise}>
         <RouterProvider router={router} />
       </Elements>
-    </ThemeProvider>
+    {/* </ThemeProvider> */}
   </React.StrictMode>
 );

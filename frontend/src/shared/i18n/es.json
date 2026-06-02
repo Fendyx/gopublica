@@ -2,6 +2,7 @@
     "nav": {
         "home": "Inicio",
         "calculator": "Calculadora",
+        "pricing": "Precios",
         "contact": "Contacto",
         "login": "Iniciar sesión"
       },
@@ -97,5 +98,43 @@
         ]
       }
     }
+  },
+  "services": {
+  "mainTitle": "Para quién creamos sitios web",
+  "items": {
+    "restaurants": {
+      "title": "Restaurantes y Cafeterías",
+      "desc": "Sitios web con menús interactivos, reserva de mesas en línea y módulos de entrega."
+    },
+    "barbershops": {
+      "title": "Barberías",
+      "desc": "Sitios web elegantes con reservas en línea, perfiles de barberos y galerías de cortes de pelo."
+    },
+    "beautySalons": {
+      "title": "Salones de Belleza",
+      "desc": "Plataformas convenientes para reservar citas, mostrar servicios y vender cosméticos."
+    }
+  }
+},
+"footer": {
+    "description": "Creamos soluciones web modernas para empresas. Desde elegantes landing pages hasta complejas plataformas SaaS.",
+    "links": {
+      "title": "Navegación",
+      "home": "Inicio",
+      "portfolio": "Portafolio",
+      "pricing": "Precios",
+      "calculator": "Calculadora"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos de servicio",
+      "privacy": "Política de privacidad"
+    },
+    "contacts": {
+      "title": "Contacto",
+      "email": "gopublica.com@gmail.com",
+      "location": "Kraków, Polonia"
+    },
+    "rights": "Todos los derechos reservados."
   }
   }

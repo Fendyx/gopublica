@@ -1,45 +1,88 @@
-// NavBar.jsx
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// NavBar.tsx
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import LanguageSelector from '../ui/LanguageSelector';
-import { useAuthStore } from '../../store/store';
 import './NavBar.css';
-import { ThemeToggle } from '../shared/ThemeToggle';
 
 export default function NavBar() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { user, logout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const closeMenu = () => setIsOpen(false);
-  const handleLogout = () => {
-    logout();
-    closeMenu();
-    navigate('/');
-  };
 
-return (
+  // Закрытие меню при клике вне его области
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // Если меню открыто, и клик произошел НЕ по самому меню и НЕ по кнопке бургера
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !(event.target as Element).closest('.hamburger')
+      ) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Закрытие меню при изменении URL (например, нажали кнопку "Назад" в браузере)
+  useEffect(() => {
+    closeMenu();
+  }, [location.pathname]);
+
+  // Блокировка скролла страницы, когда меню открыто
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
           GoPublica
         </Link>
 
+        {/* Кнопка бургера. Обрати внимание, здесь крестик убран, он будет ВНУТРИ меню */}
         <button 
           className="hamburger" 
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          onClick={() => setIsOpen(true)}
+          aria-label="Open menu"
         >
-          {isOpen ? <X size={20} /> : <Menu size={20} />}
+          <Menu size={24} />
         </button>
 
-        <div className={`navbar-menu ${isOpen ? 'active' : ''}`}>
+        {/* Затемнение фона при открытом меню (Overlay) */}
+        {isOpen && <div className="menu-overlay" onClick={closeMenu}></div>}
+
+        <div className={`navbar-menu ${isOpen ? 'active' : ''}`} ref={menuRef}>
+          {/* Кнопка закрытия внутри самого меню (для мобилок) */}
+          <button 
+            className="menu-close-btn" 
+            onClick={closeMenu}
+            aria-label="Close menu"
+          >
+            <X size={24} />
+          </button>
+
           <div className="navbar-links">
             <Link to="/" onClick={closeMenu}>{t('nav.home', 'Главная')}</Link>
-            <Link to="/calculator" onClick={closeMenu}>{t('nav.calculator', 'Калькулятор')}</Link>
+            <Link to="/pricing" onClick={closeMenu}>{t('nav.pricing', 'Цены')}</Link>
             <Link to="/contact" onClick={closeMenu}>{t('nav.contact', 'Контакты')}</Link>
           </div>
 
@@ -47,35 +90,7 @@ return (
             <div className="lang-wrapper">
               <LanguageSelector />
             </div>
-
-            <div className="ThemeToggle">
-              <ThemeToggle />
-            </div>
-            
-            {user ? (
-              <div className="user-actions">
-                {(user.role === 'admin' || user.role === 'superadmin') && (
-                  <Link to="/admin" className="action-link admin-link" onClick={closeMenu}>
-                    <LayoutDashboard size={14} />
-                    <span>Панель</span>
-                  </Link>
-                )}
-                
-                <Link to="/profile" className="action-link profile-link" onClick={closeMenu}>
-                  <User size={14} />
-                  <span>{user.name}</span>
-                </Link>
-                
-                <button onClick={handleLogout} className="action-link btn-logout">
-                  <LogOut size={14} />
-                  <span>Выйти</span>
-                </button>
-              </div>
-            ) : (
-              <Link to="/login" className="btn-login" onClick={closeMenu}>
-                {t('nav.login', 'Войти')}
-              </Link>
-            )}
+            {/* Логин и юзер-экшены удалены */}
           </div>
         </div>
       </div>

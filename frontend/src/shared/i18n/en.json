@@ -2,6 +2,7 @@
     "nav": {
         "home": "Home",
         "calculator": "Calculator",
+        "pricing": "Pricing",
         "contact": "Contact",
         "login": "Login"
       },
@@ -98,5 +99,43 @@
         ]
       }
     }
+  },
+  "services": {
+    "mainTitle": "Who We Build Websites For",
+    "items": {
+      "restaurants": {
+        "title": "Restaurants & Cafes",
+        "desc": "Websites with interactive menus, online table reservations, and delivery modules."
+      },
+      "barbershops": {
+        "title": "Barbershops",
+        "desc": "Stylish websites with online booking, barber profiles, and haircut galleries."
+      },
+      "beautySalons": {
+        "title": "Beauty Salons",
+        "desc": "Convenient platforms for booking appointments, showcasing services, and selling cosmetics."
+      }
+    }
+  },
+  "footer": {
+    "description": "We create modern web solutions for business. From stylish landing pages to complex SaaS platforms.",
+    "links": {
+      "title": "Navigation",
+      "home": "Home",
+      "portfolio": "Portfolio",
+      "pricing": "Pricing",
+      "calculator": "Calculator"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    },
+    "contacts": {
+      "title": "Contact Us",
+      "email": "gopublica.com@gmail.com",
+      "location": "Kraków, Poland"
+    },
+    "rights": "All rights reserved."
   }
   }

@@ -29,7 +29,12 @@
   align-items: center;
   gap: 24px;
   flex: 1;
-  justify-content: flex-end;
+  justify-content: flex-end; /* Это работает нормально на десктопе */
+}
+
+/* Кнопка закрытия скрыта на десктопе */
+.menu-close-btn {
+  display: none;
 }
 
 .navbar-links {
@@ -56,59 +61,6 @@
   gap: 12px;
 }
 
-/* ThemeToggle wrapper */
-.navbar-actions .ThemeToggle {
-  display: flex;
-  align-items: center;
-}
-
-.user-actions {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.action-link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: all 0.2s;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.action-link:hover {
-  color: var(--text);
-  background: var(--bg);
-}
-
-.action-link svg {
-  width: 14px;
-  height: 14px;
-}
-
-.btn-login {
-  padding: 6px 14px;
-  border-radius: 6px;
-  background: var(--primary);
-  color: var(--bg);
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: opacity 0.2s;
-}
-
-.btn-login:hover {
-  opacity: 0.9;
-}
-
 .hamburger {
   display: none;
   background: none;
@@ -127,6 +79,19 @@
 @media (max-width: 768px) {
   .hamburger {
     display: block;
+    z-index: 101; /* Чтобы бургер был над контентом */
+  }
+
+  /* Затемнение фона */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 98;
+    animation: fadeIn 0.3s ease;
   }
 
   .navbar-menu {
@@ -137,49 +102,62 @@
     height: 100vh;
     background: var(--surface);
     flex-direction: column;
+    justify-content: flex-start; /* ИСПРАВЛЕНИЕ: прижимаем к верху, а не к низу */
     align-items: flex-start;
-    padding: 64px 20px 24px;
+    padding: 80px 24px 24px; /* Увеличили верхний паддинг, чтобы было место для крестика */
     margin: 0;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
     transition: right 0.3s ease;
-    z-index: 99;
+    z-index: 102; /* Меню выше overlay */
   }
 
   .navbar-menu.active {
     right: 0;
   }
 
+  /* Показываем крестик только на мобилках */
+  .menu-close-btn {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .menu-close-btn:hover {
+    background: var(--bg);
+  }
+
   .navbar-links {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 16px;
     width: 100%;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
+  }
+
+  .navbar-links a {
+    font-size: 16px; /* Чуть крупнее для удобства нажатия пальцем */
+    width: 100%;
+    padding: 8px 0;
   }
 
   .navbar-actions {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    gap: 8px;
+    gap: 16px;
   }
+}
 
-  .user-actions {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 4px;
-  }
-
-  .action-link {
-    width: 100%;
-    padding: 10px 12px;
-  }
-
-  .btn-login {
-    width: 100%;
-    text-align: center;
-  }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
