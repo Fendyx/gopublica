@@ -1,59 +1,264 @@
-.subscribe-page {
+.checkout-page {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-bg);
-  padding: 24px;
+  padding: 80px 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
 }
 
-.subscribe-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 40px;
-  width: 100%;
-  max-width: 440px;
-  text-align: center;
+.checkout-header-global {
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  text-align: left;
 }
 
-.subscribe-trial {
-  color: var(--color-text-secondary);
+.checkout-header-global h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+}
+
+.checkout-header-global p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.checkout-header-global p a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.checkout-error {
+  max-width: 1100px;
+  margin: 0 auto 32px auto;
+  background: color-mix(in srgb, var(--danger) 8%, transparent);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
   font-size: 0.9rem;
-  margin-bottom: 24px;
+  font-weight: 500;
 }
 
-.subscribe-error {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #dc2626;
-  padding: 10px 14px;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  margin-bottom: 16px;
+/* ДВУХКОЛОНОЧНЫЙ ГРИД НА ДЕСКТОПЕ */
+.checkout-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 440px; /* Левая часть - тянется, правая - фиксирована под оплату */
+  gap: 40px;
+  align-items: start;
 }
 
-.card-element-wrapper {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 12px;
+/* На мобильных устройствах схлопываем в одну колонку */
+@media (max-width: 920px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .checkout-header-global {
+    text-align: center;
+  }
+}
+
+.checkout-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.checkout-right {
+  position: relative;
+}
+
+.form-section h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: -0.01em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 20px;
 }
 
-.subscribe-btn {
-  width: 100%;
-  padding: 12px;
-  background: var(--color-accent);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity 0.2s;
+.form-group:last-child {
+  margin-bottom: 0;
 }
 
-.subscribe-btn:disabled {
-  opacity: 0.6;
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 540px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  background: var(--surface);
+  color: var(--text);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+/* ---- ПРАВЫЙ БЛОК: СТИКИ КАРТОЧКА ОПЛАТЫ ---- */
+.payment-sticky-card {
+  position: sticky;
+  top: 40px;
+  background: color-mix(in srgb, var(--surface) 40%, var(--bg));
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.payment-sticky-card h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.integrated-summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.summary-header {
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.summary-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 6px 0;
+}
+
+.summary-total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.summary-total span:last-child {
+  color: var(--primary);
+}
+
+.badge-rc {
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 99px;
+  font-weight: 600;
+  margin-left: 6px;
+  text-transform: uppercase;
+}
+
+/* ---- РАЗДЕЛЕННЫЕ ИНПУТЫ STRIPE ---- */
+.payment-input-area {
+  margin-bottom: 24px;
+}
+
+.stripe-row {
+  gap: 16px; /* Чуть меньше отступ между датой и CVC */
+}
+
+.stripe-input-wrapper {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  /* Задаем фиксированную минимальную высоту, чтобы Stripe элементы не схлопывались до их загрузки */
+  min-height: 44px; 
+}
+
+.stripe-input-wrapper:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.checkout-submit-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.checkout-submit-btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.checkout-submit-btn:active:not(:disabled) {
+  transform: scale(0.995);
+}
+
+.checkout-submit-btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
+}
+
+.checkout-secure-notice {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 16px 0 0 0;
+  line-height: 1.4;
 }

@@ -27,5 +27,76 @@
           "messagePlaceholder": "Tell us about your project...",
           "submit": "Send Request"
         }
+      },
+      "subscribe": {
+    "title": "Checkout",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Log in",
+    "stepCreateAccount": "Create an account",
+    "stepInvoiceData": "Invoice details",
+    "stepPayment": "Order details & payment",
+    "fullName": "Full name *",
+    "email": "Email *",
+    "password": "Password *",
+    "passwordPlaceholder": "Minimum 6 characters",
+    "country": "Country (required) *",
+    "companyName": "Company (optional)",
+    "vatId": "VAT EU ID (optional)",
+    "cardNumber": "Card number",
+    "expiryDate": "Expiry date",
+    "cvc": "CVC",
+    "plan": "Plan",
+    "trialBadge": "First 30 days free",
+    "netPrice": "Plan price (NET)",
+    "vatTax": "VAT",
+    "total": "Total to pay",
+    "reverseCharge": "Reverse Charge",
+    "processing": "Processing payment...",
+    "startTrialBtn": "Start free trial",
+    "payBtn": "Pay",
+    "secureNotice": "🔒 Protected by end-to-end Stripe SSL encryption.",
+    "errorPassword": "Password must be at least 6 characters long",
+    "errorCard": "Card element not found",
+    "errorGeneral": "An error occurred during checkout",
+    "countries": {
+      "PL": "Poland (PL) — 23%",
+      "DE": "Germany (DE) — 19%",
+      "CZ": "Czech Republic (CZ) — 21%",
+      "ES": "Spain (ES) — 21%",
+      "FR": "France (FR) — 20%",
+      "IT": "Italy (IT) — 22%",
+      "NL": "Netherlands (NL) — 21%"
+    }
+  },
+
+  "pricing": {
+    "title": "Simple and transparent pricing",
+    "subtitle": "First 30 days are free. No credit card required.",
+    "badge": "Recommended",
+    "period": "/ month",
+    "net": "net",
+    "btnText": "Start for free",
+    "footerNotice": "* All prices are in Euros (EUR) and are NET (excluding VAT). The final tax amount will be calculated on the checkout page depending on your jurisdiction.",
+    "plans": {
+      "basic": {
+        "features": [
+          "Restaurant website",
+          "Menu management",
+          "Booking form",
+          "Gallery",
+          "Email support"
+        ]
+      },
+      "pro": {
+        "features": [
+          "Everything in Basic",
+          "Multilingual support",
+          "SEO optimization",
+          "Telegram notifications",
+          "Priority support",
+          "Custom domain"
+        ]
       }
+    }
+  }
   }

@@ -15,7 +15,7 @@ import PricingPage      from './pages/Public/PricingPage/PricingPage';
 import RegisterPage     from './pages/Public/RegisterPage/RegisterPage';
 import ClientLoginPage  from './pages/Public/ClientLoginPage/ClientLoginPage';
 import DashboardPage    from './pages/Public/DashboardPage/DashboardPage';
-import SubscribePage from './pages/Public/SubscribePage/SubscribePage';
+import SubscribePage    from './pages/Public/SubscribePage/SubscribePage';
 
 // Admin (внутренняя CRM)
 import DashboardAdmin   from './pages/Admin/Dashboard/Dashboard';
@@ -33,9 +33,10 @@ const router = createBrowserRouter([
   // Страница входа для внутренней CRM (без layout)
   { path: 'login', element: <LoginPage /> },
 
-  // Вход и регистрация для клиентов (без layout)
+  // Вход, регистрация и ОПЛАТА для клиентов (без layout, чтобы не отвлекать от покупки)
   { path: 'login-client', element: <ClientLoginPage /> },
   { path: 'register',     element: <RegisterPage /> },
+  { path: 'subscribe',    element: <SubscribePage /> }, // ✅ ПЕРЕНЕСЛИ СЮДА! Теперь страница открыта для всех
 
   // Публичная зона
   {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
     element: <TenantProtectedRoute />,
     children: [
       { path: 'dashboard', element: <DashboardPage /> },
-      { path: 'subscribe', element: <SubscribePage /> },
+      // ❌ Отсюда subscribe УДАЛИЛИ
     ],
   },
 

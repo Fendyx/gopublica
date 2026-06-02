@@ -46,15 +46,17 @@ export const tenantApi = {
     return json; // { clientSecret: string }
   },
 
-  subscribeWithPaymentMethod: async (
+subscribeWithPaymentMethod: async (
     paymentMethodId: string,
     priceId: string,
     companyName?: string,
-    vatId?: string
+    vatId?: string,
+    country?: string // <--- ДОБАВИЛИ СТРАНУ
   ) => {
     const res = await tenantApiFetch('/stripe/subscribe', {
       method: 'POST',
-      body: JSON.stringify({ paymentMethodId, priceId, companyName, vatId }),
+      // ДОБАВИЛИ COUNTRY В BODY
+      body: JSON.stringify({ paymentMethodId, priceId, companyName, vatId, country }), 
     });
     const json = await res.json();
     if (!res.ok) throw new Error(json.error);

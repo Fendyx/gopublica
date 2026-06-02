@@ -27,5 +27,75 @@
           "messagePlaceholder": "Erzählen Sie uns von Ihrem Projekt...",
           "submit": "Anfrage senden"
         }
+      },
+      "subscribe": {
+    "title": "Kasse",
+    "alreadyHaveAccount": "Haben Sie bereits ein Konto?",
+    "login": "Anmelden",
+    "stepCreateAccount": "Konto erstellen",
+    "stepInvoiceData": "Rechnungsdaten",
+    "stepPayment": "Bestelldetails & Zahlung",
+    "fullName": "Vollständiger Name *",
+    "email": "E-Mail *",
+    "password": "Passwort *",
+    "passwordPlaceholder": "Mindestens 6 Zeichen",
+    "country": "Land (erforderlich) *",
+    "companyName": "Unternehmen (optional)",
+    "vatId": "USt-IdNr. (optional)",
+    "cardNumber": "Kartennummer",
+    "expiryDate": "Ablaufdatum",
+    "cvc": "CVC",
+    "plan": "Tarif",
+    "trialBadge": "Erste 30 Tage kostenlos",
+    "netPrice": "Planpreis (NETTO)",
+    "vatTax": "MwSt.",
+    "total": "Gesamtbetrag",
+    "reverseCharge": "Reverse Charge",
+    "processing": "Zahlung wird bearbeitet...",
+    "startTrialBtn": "Kostenlose Testversion starten",
+    "payBtn": "Bezahlen",
+    "secureNotice": "🔒 Geschützt durch Stripe SSL-Verschlüsselung.",
+    "errorPassword": "Das Passwort muss mindestens 6 Zeichen lang sein",
+    "errorCard": "Kartenelement nicht gefunden",
+    "errorGeneral": "Beim Checkout ist ein Fehler aufgetreten",
+    "countries": {
+      "PL": "Polen (PL) — 23%",
+      "DE": "Deutschland (DE) — 19%",
+      "CZ": "Tschechien (CZ) — 21%",
+      "ES": "Spanien (ES) — 21%",
+      "FR": "Frankreich (FR) — 20%",
+      "IT": "Italien (IT) — 22%",
+      "NL": "Niederlande (NL) — 21%"
+    }
+  },
+  "pricing": {
+    "title": "Einfache und transparente Preise",
+    "subtitle": "Die ersten 30 Tage sind kostenlos. Keine Kreditkarte erforderlich.",
+    "badge": "Empfohlen",
+    "period": "/ Monat",
+    "net": "netto",
+    "btnText": "Kostenlos starten",
+    "footerNotice": "* Alle Preise verstehen sich in Euro (EUR) und sind NETTO (exkl. MwSt.). Der endgültige Steuerbetrag wird auf der Stripe-Zahlungsseite abhängig von Ihrer Gerichtsbarkeit berechnet.",
+    "plans": {
+      "basic": {
+        "features": [
+          "Restaurant-Website",
+          "Menüverwaltung",
+          "Buchungsformular",
+          "Galerie",
+          "E-Mail-Support"
+        ]
+      },
+      "pro": {
+        "features": [
+          "Alles aus Basic",
+          "Mehrsprachigkeit",
+          "SEO-Optimierung",
+          "Telegram-Benachrichtigungen",
+          "Prioritäts-Support",
+          "Eigene Domain"
+        ]
       }
+    }
+  }
   }

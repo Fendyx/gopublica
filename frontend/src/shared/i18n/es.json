@@ -27,5 +27,75 @@
           "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
           "submit": "Enviar solicitud"
         }
+      },
+      "subscribe": {
+    "title": "Pago",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "stepCreateAccount": "Crear una cuenta",
+    "stepInvoiceData": "Datos de facturación",
+    "stepPayment": "Detalles del pedido y pago",
+    "fullName": "Nombre completo *",
+    "email": "Correo electrónico *",
+    "password": "Contraseña *",
+    "passwordPlaceholder": "Mínimo 6 caracteres",
+    "country": "País (obligatorio) *",
+    "companyName": "Empresa (opcional)",
+    "vatId": "NIF / IVA (opcional)",
+    "cardNumber": "Número de tarjeta",
+    "expiryDate": "Fecha de caducidad",
+    "cvc": "CVC",
+    "plan": "Plan",
+    "trialBadge": "Primeros 30 días gratis",
+    "netPrice": "Precio del plan (NETO)",
+    "vatTax": "IVA",
+    "total": "Total a pagar",
+    "reverseCharge": "Inversión del Sujeto Pasivo",
+    "processing": "Procesando pago...",
+    "startTrialBtn": "Comenzar prueba gratuita",
+    "payBtn": "Pagar",
+    "secureNotice": "🔒 Protegido por encriptación SSL de Stripe.",
+    "errorPassword": "La contraseña debe tener al menos 6 caracteres",
+    "errorCard": "Elemento de tarjeta no encontrado",
+    "errorGeneral": "Ocurrió un error durante el pago",
+    "countries": {
+      "PL": "Polonia (PL) — 23%",
+      "DE": "Alemania (DE) — 19%",
+      "CZ": "República Checa (CZ) — 21%",
+      "ES": "España (ES) — 21%",
+      "FR": "Francia (FR) — 20%",
+      "IT": "Italia (IT) — 22%",
+      "NL": "Países Bajos (NL) — 21%"
+    }
+  },
+  "pricing": {
+    "title": "Precios simples y transparentes",
+    "subtitle": "Los primeros 30 días son gratis. No se requiere tarjeta de crédito.",
+    "badge": "Recomendado",
+    "period": "/ mes",
+    "net": "neto",
+    "btnText": "Empezar gratis",
+    "footerNotice": "* Todos los precios están en euros (EUR) y son NETOS (sin IVA). El importe final del impuesto se calculará en la página de pago de Stripe en función de su jurisdicción.",
+    "plans": {
+      "basic": {
+        "features": [
+          "Sitio web del restaurante",
+          "Gestión del menú",
+          "Formulario de reserva",
+          "Galería",
+          "Soporte por correo"
+        ]
+      },
+      "pro": {
+        "features": [
+          "Todo lo de Basic",
+          "Soporte multilingüe",
+          "Optimización SEO",
+          "Notificaciones de Telegram",
+          "Soporte prioritario",
+          "Dominio personalizado"
+        ]
       }
+    }
+  }
   }
