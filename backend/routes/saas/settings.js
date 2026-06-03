@@ -31,7 +31,9 @@ router.put('/', authTenant, async (req, res) => {
       googleMapsUrl,
       seoTitle,
       seoDescription,
-      notifications   // <-- добавили это поле
+      notifications,
+      primaryLanguage,
+      primaryCurrency   // <-- добавили это поле
     } = req.body;
     const tenantId = req.tenantId;
 
@@ -45,7 +47,9 @@ router.put('/', authTenant, async (req, res) => {
         googleMapsUrl,
         seoTitle,
         seoDescription,
-        notifications   // <-- передаём в базу
+        notifications,   // <-- передаём в базу
+        primaryLanguage,
+        primaryCurrency   // <-- добавили это поле
       },
       { upsert: true, returnDocument: 'after' }
     );
