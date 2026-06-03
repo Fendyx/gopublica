@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { X, Phone, DollarSign, Building2, Calendar, Link2, Tag, MessageSquare, Trash2, Pencil } from 'lucide-react';
+import {
+  X, Phone, DollarSign, Building2, Calendar,
+  Link2, Tag, MessageSquare, Trash2, Pencil, MapPin, Clock,
+} from 'lucide-react';
 import {
   type Lead, type LeadStatus,
-  STATUS_COLOR, PRIORITY_COLOR, STATUSES, updateLead, deleteLead,
+  STATUS_COLOR, STATUS_ICON, PRIORITY_COLOR, STATUSES, updateLead, deleteLead,
   getAssignedName,
 } from '../../api/leadsApi';
 import ConvertLeadButton from '../ConvertLeadButton/ConvertLeadButton';
@@ -17,7 +20,10 @@ interface Props {
   onDeleted: (id: string) => void;
 }
 
-const isURL = (str?: string) => { try { return str ? Boolean(new URL(str)) : false; } catch { return false; } };
+const isURL = (str?: string) => {
+  try { return str ? Boolean(new URL(str)) : false; }
+  catch { return false; }
+};
 const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '—';
 
 export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props) {
@@ -37,18 +43,19 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
   };
 
   const handleStatusChange = async (status: LeadStatus) => {
-    try { const updated = await updateLead(lead._id!, { status }); onUpdated(updated); }
+    try {
+      const updated = await updateLead(lead._id!, { status });
+      onUpdated(updated);
+    }
     catch (err: any) { alert(err.message); }
   };
 
-  // Сохранение редактирования
   const handleEditSave = async (data: Omit<Lead, '_id' | 'createdAt' | 'createdBy'>) => {
     const updated = await updateLead(lead._id!, data);
     onUpdated(updated);
     setIsEditing(false);
   };
 
-  // Начальные данные для формы редактирования — из текущего лида
   const editInitialData: Omit<Lead, '_id' | 'createdAt' | 'createdBy'> = {
     name:              lead.name,
     phone:             lead.phone,
@@ -61,13 +68,16 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
     priority:          lead.priority,
     followUpAt:        lead.followUpAt,
     assignedTo:        lead.assignedTo,
+    city:              lead.city,
+    businessHours:     lead.businessHours,
   };
+
+  const statusColor = STATUS_COLOR[lead.status];
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
         {isEditing ? (
-          // ── Режим редактирования ──────────────────────────────────────────
           <div className="modal-body">
             <LeadForm
               isEdit
@@ -77,102 +87,139 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
             />
           </div>
         ) : (
-          // ── Режим просмотра ───────────────────────────────────────────────
           <>
-            <div className="modal-header flex flex-between">
-              <div>
-                <h2 className="modal-title">{lead.name}</h2>
-                <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="badge" style={{ background: `${STATUS_COLOR[lead.status]}15`, color: STATUS_COLOR[lead.status] }}>
-                    {lead.status}
+            {/* ── Header ─────────────────────────────────────────────────── */}
+            <div className="modal-header" style={{ borderTop: `3px solid ${statusColor}` }}>
+              <div className="modal-header-content">
+                <div className="modal-title-row">
+                  <h2 className="modal-title">{lead.name}</h2>
+                  <div className="modal-actions">
+                    {canEdit() && (
+                      <button className="btn btn-icon btn-ghost" onClick={() => setIsEditing(true)} aria-label="Edit">
+                        <Pencil size={15} />
+                      </button>
+                    )}
+                    <button className="btn btn-icon btn-ghost" onClick={onClose} aria-label="Close">
+                      <X size={18} />
+                    </button>
+                  </div>
+                </div>
+                <div className="modal-badges">
+                  <span className="status-badge" style={{ background: `${statusColor}15`, color: statusColor, borderColor: `${statusColor}30` }}>
+                    {STATUS_ICON[lead.status]} {lead.status}
                   </span>
                   {lead.priority && (
-                    <span className="badge badge-outline" style={{ color: PRIORITY_COLOR[lead.priority], borderColor: `${PRIORITY_COLOR[lead.priority]}40` }}>
-                      {lead.priority}
+                    <span className="priority-badge" style={{ color: PRIORITY_COLOR[lead.priority] }}>
+                      {lead.priority === 'High' ? '🔴' : lead.priority === 'Medium' ? '🟡' : '⚪'} {lead.priority}
                     </span>
                   )}
                   {lead.assignedTo && (
-                    <span className="text-muted text-sm">👤 {getAssignedName(lead.assignedTo)}</span>
+                    <span className="assigned-badge">👤 {getAssignedName(lead.assignedTo)}</span>
                   )}
                 </div>
               </div>
-              <div className="flex gap-2">
-                {canEdit() && (
-                  <button className="btn btn-icon btn-ghost" onClick={() => setIsEditing(true)} aria-label="Edit">
-                    <Pencil size={16} />
-                  </button>
-                )}
-                <button className="btn btn-icon btn-ghost" onClick={onClose}><X size={18} /></button>
-              </div>
             </div>
 
+            {/* ── Body ───────────────────────────────────────────────────── */}
             <div className="modal-body">
-              <div className="grid-2 mb-4">
-                {[
-                  { icon: Phone,      label: 'Phone',   value: lead.phone },
-                  { icon: DollarSign, label: 'Budget',  value: lead.price ? `$${lead.price.toLocaleString()}` : '—' },
-                  { icon: Building2,  label: 'Business', value: lead.businessType || '—' },
-                  { icon: Calendar,   label: 'Added',   value: fmt(lead.createdAt) },
-                ].map(({ icon: Icon, label, value }) => (
-                  <div key={label}>
-                    <p className="label flex gap-1"><Icon size={10} /> {label}</p>
-                    <p className="text-medium">{value}</p>
+
+              {/* Info grid */}
+              <div className="info-grid">
+                <div className="info-item">
+                  <span className="info-label"><Phone size={11} /> Phone</span>
+                  <span className="info-value">{lead.phone}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label"><DollarSign size={11} /> Budget</span>
+                  <span className="info-value">{lead.price ? `$${lead.price.toLocaleString()}` : '—'}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label"><Building2 size={11} /> Business</span>
+                  <span className="info-value">{lead.businessType || '—'}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label"><Calendar size={11} /> Added</span>
+                  <span className="info-value">{fmt(lead.createdAt)}</span>
+                </div>
+                {lead.city && (
+                  <div className="info-item">
+                    <span className="info-label"><MapPin size={11} /> City</span>
+                    <span className="info-value">{lead.city}</span>
                   </div>
-                ))}
+                )}
+                {lead.businessHours && (
+                  <div className="info-item">
+                    <span className="info-label"><Clock size={11} /> Hours</span>
+                    <span className="info-value">{lead.businessHours}</span>
+                  </div>
+                )}
               </div>
 
+              {/* Source */}
               {lead.source && (
-                <div className="card mb-4">
-                  <p className="label flex gap-1"><Link2 size={10} /> Source</p>
+                <div className="detail-card">
+                  <p className="detail-card-label"><Link2 size={11} /> Source</p>
                   {isURL(lead.source)
-                    ? <a href={lead.source} target="_blank" rel="noreferrer" className="link-truncate">🔗 {lead.source}</a>
-                    : <p className="text-medium">{lead.source}</p>
+                    ? <a href={lead.source} target="_blank" rel="noreferrer" className="source-link">🔗 {lead.source}</a>
+                    : <p className="info-value">{lead.source}</p>
                   }
                 </div>
               )}
 
+              {/* Services */}
               {lead.servicesRequested?.length ? (
-                <div className="mb-4">
-                  <p className="label flex gap-1"><Tag size={10} /> Services</p>
-                  <div className="flex flex-wrap gap-2">
-                    {lead.servicesRequested?.map(s => (
-                      <span key={s} className="badge badge-outline" style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}>{s}</span>
+                <div className="detail-section">
+                  <p className="detail-card-label"><Tag size={11} /> Services</p>
+                  <div className="tags-row">
+                    {lead.servicesRequested.map(s => (
+                      <span key={s} className="tag tag-primary">{s}</span>
                     ))}
                   </div>
                 </div>
               ) : null}
 
-              <div className="card mb-4">
-                <p className="label flex gap-1"><MessageSquare size={10} /> Notes</p>
-                <p className="text-medium">{lead.comment || 'No notes yet.'}</p>
+              {/* Notes */}
+              <div className="detail-card">
+                <p className="detail-card-label"><MessageSquare size={11} /> Notes</p>
+                <p className="notes-text">{lead.comment || 'No notes yet.'}</p>
               </div>
 
-              <div className="mb-4">
-                <p className="label">Change Status</p>
+              {/* Status change */}
+              <div className="detail-section">
+                <p className="detail-card-label">Change Status</p>
                 {canEdit() ? (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="status-buttons">
                     {STATUSES.map(s => (
                       <button key={s} onClick={() => handleStatusChange(s)}
-                        className={`badge ${lead.status === s ? 'badge-primary' : 'badge-outline'}`}
-                        style={lead.status !== s ? { color: STATUS_COLOR[s], borderColor: `${STATUS_COLOR[s]}40` } : {}}>
-                        {s}
+                        className={`status-btn ${lead.status === s ? 'status-btn-active' : ''}`}
+                        style={{
+                          '--status-color': STATUS_COLOR[s],
+                          background: lead.status === s ? `${STATUS_COLOR[s]}20` : 'transparent',
+                          color: STATUS_COLOR[s],
+                          borderColor: lead.status === s ? STATUS_COLOR[s] : `${STATUS_COLOR[s]}30`,
+                        } as React.CSSProperties}>
+                        {STATUS_ICON[s]} {s}
                       </button>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-muted text-sm">Only assigned admin can change status.</p>
+                  <p className="text-muted" style={{ fontSize: 13 }}>Only assigned admin can change status.</p>
                 )}
               </div>
 
+              {/* Convert button */}
               {lead.status !== 'Closed' && canEdit() && (
-                <ConvertLeadButton leadId={lead._id!} leadName={lead.name} onConverted={onClose} />
+                <div style={{ marginTop: 8 }}>
+                  <ConvertLeadButton leadId={lead._id!} leadName={lead.name} onConverted={onClose} />
+                </div>
               )}
             </div>
 
+            {/* ── Footer ─────────────────────────────────────────────────── */}
             {canEdit() && (
               <div className="modal-footer">
                 <button className="btn btn-sm btn-danger" onClick={handleDelete}>
-                  <Trash2 size={14} /> Delete
+                  <Trash2 size={13} /> Delete Lead
                 </button>
               </div>
             )}

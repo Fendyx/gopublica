@@ -1,9 +1,19 @@
 import { apiFetch } from '../../../shared/api/apiClient';
 
-export type LeadStatus   = 'New' | 'In Progress' | 'Closed' | 'Rejected';
-export type LeadPriority = 'Low' | 'Medium' | 'High';
+export type LeadStatus =
+  | 'New'
+  | 'In Progress'
+  | 'Closed'
+  | 'Rejected'
+  | 'Call Back'
+  | 'No Answer'
+  | 'Website Down'
+  | 'Bad Website';
 
-// Пользователь в populated виде
+export type LeadPriority = 'Low' | 'Medium' | 'High';
+export type SortBy  = 'date' | 'status' | 'city';
+export type SortDir = 'asc' | 'desc';
+
 export interface AssignedUser {
   _id: string;
   name: string;
@@ -17,12 +27,13 @@ export interface Lead {
   source: string;
   status: LeadStatus;
   comment: string;
+  city?: string;
+  businessHours?: string;
   price?: number;
   businessType?: string;
   servicesRequested?: string[];
   priority?: LeadPriority;
   followUpAt?: string;
-  // После populate — объект, при создании — строка id
   assignedTo?: AssignedUser | string;
   createdBy?:  AssignedUser | string;
   createdAt?: string;
@@ -35,7 +46,17 @@ export interface AdminUser {
   role: string;
 }
 
-export const STATUSES:   LeadStatus[]   = ['New', 'In Progress', 'Closed', 'Rejected'];
+export const STATUSES: LeadStatus[] = [
+  'New',
+  'In Progress',
+  'Call Back',
+  'No Answer',
+  'Website Down',
+  'Bad Website',
+  'Closed',
+  'Rejected',
+];
+
 export const PRIORITIES: LeadPriority[] = ['Low', 'Medium', 'High'];
 
 export const BUSINESS_TYPES = [
@@ -50,10 +71,25 @@ export const PRESET_SERVICES = [
 ];
 
 export const STATUS_COLOR: Record<LeadStatus, string> = {
-  'New':         '#2563eb',
-  'In Progress': '#d97706',
-  'Closed':      '#16a34a',
-  'Rejected':    '#dc2626',
+  'New':          '#2563eb',
+  'In Progress':  '#d97706',
+  'Closed':       '#16a34a',
+  'Rejected':     '#dc2626',
+  'Call Back':    '#f59e0b',
+  'No Answer':    '#6b7280',
+  'Website Down': '#ea580c',
+  'Bad Website':  '#7c3aed',
+};
+
+export const STATUS_ICON: Record<LeadStatus, string> = {
+  'New':          '🆕',
+  'In Progress':  '🔄',
+  'Closed':       '✅',
+  'Rejected':     '❌',
+  'Call Back':    '📞',
+  'No Answer':    '📵',
+  'Website Down': '🔴',
+  'Bad Website':  '🌐',
 };
 
 export const PRIORITY_COLOR: Record<LeadPriority, string> = {
@@ -62,7 +98,6 @@ export const PRIORITY_COLOR: Record<LeadPriority, string> = {
   'High':   '#dc2626',
 };
 
-// Хелперы для работы с populated/unpopulated полем
 export const getAssignedName = (val?: AssignedUser | string): string => {
   if (!val) return '—';
   if (typeof val === 'object') return val.name;

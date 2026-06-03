@@ -1,4 +1,3 @@
-//backend\routes\leads.js
 const express = require('express');
 const router  = express.Router();
 const Lead    = require('../models/lead');
@@ -7,17 +6,15 @@ const checkRole = require('../middleware/checkRole');
 
 const ADMIN_ROLES = ['admin', 'superadmin'];
 
-// Хелпер: проверяем может ли юзер редактировать этот лид
 const canEdit = (user, lead) => {
   if (user.role === 'superadmin') return true;
   return lead.assignedTo?.toString() === user.id;
 };
 
 // GET /api/leads — все лиды
-// superadmin видит всё, admin видит только свои
 router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
-    const leads = await Lead.find({}) 
+    const leads = await Lead.find({})
       .populate('createdBy',  'name email')
       .populate('assignedTo', 'name email')
       .sort({ createdAt: -1 });
@@ -29,14 +26,14 @@ router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 });
 
 // POST /api/leads — создать лид
-// assignedTo по умолчанию = текущий юзер
 router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const {
       name, phone, source, comment,
+      city, businessHours,
       price, businessType, servicesRequested,
       priority, followUpAt,
-      assignedTo, // может переназначить вручную
+      assignedTo,
     } = req.body;
 
     if (!name?.trim() || !phone?.trim()) {
@@ -48,13 +45,14 @@ router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
       phone:   phone.trim(),
       source:  source?.trim()  || '',
       comment: comment?.trim() || '',
+      city:    city?.trim()    || '',
+      businessHours: businessHours?.trim() || '',
       price:   Number(price)   || 0,
       businessType: businessType || 'Other',
       servicesRequested: Array.isArray(servicesRequested) ? servicesRequested : [],
       priority:   priority   || 'Medium',
       followUpAt: followUpAt || null,
       createdBy:  req.user.id,
-      // Если передали assignedTo — берём его, иначе назначаем себе
       assignedTo: assignedTo || req.user.id,
     });
 
@@ -68,7 +66,6 @@ router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 });
 
 // PUT /api/leads/:id — обновить лид
-// Только assignedTo или superadmin
 router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const lead = await Lead.findById(req.params.id);
@@ -81,9 +78,9 @@ router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
     const {
       status, priority, assignedTo, comment, followUpAt,
       name, phone, source, price, businessType, servicesRequested,
+      city, businessHours,
     } = req.body;
 
-    // Whitelist — только эти поля можно обновить
     const update = {};
     if (status             !== undefined) update.status             = status;
     if (priority           !== undefined) update.priority           = priority;
@@ -95,8 +92,9 @@ router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
     if (price              !== undefined) update.price              = Number(price) || 0;
     if (businessType       !== undefined) update.businessType       = businessType;
     if (servicesRequested  !== undefined) update.servicesRequested  = servicesRequested;
+    if (city               !== undefined) update.city               = city?.trim() ?? '';
+    if (businessHours      !== undefined) update.businessHours      = businessHours?.trim() ?? '';
 
-    // Переназначить может только superadmin
     if (assignedTo !== undefined && req.user.role === 'superadmin') {
       update.assignedTo = assignedTo;
     }
@@ -114,7 +112,6 @@ router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 });
 
 // DELETE /api/leads/:id
-// Только assignedTo или superadmin
 router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const lead = await Lead.findById(req.params.id);

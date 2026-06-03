@@ -6,9 +6,22 @@ const leadSchema = new mongoose.Schema({
   source: { type: String, default: '' },
   comment: { type: String, default: '' },
 
+  // ── Новые поля ───────────────────────────────────────────────────────────
+  city:          { type: String, default: '' },
+  businessHours: { type: String, default: '' },   // пример: "09:00–22:00, Пн–Вс"
+
   status: {
     type: String,
-    enum: ['New', 'In Progress', 'Closed', 'Rejected'],
+    enum: [
+      'New',
+      'In Progress',
+      'Closed',
+      'Rejected',
+      'Call Back',      // они попросили перезвонить
+      'No Answer',      // не берут трубку
+      'Website Down',   // сайт не работает
+      'Bad Website',    // сайт плохой
+    ],
     default: 'New',
   },
 
@@ -22,14 +35,11 @@ const leadSchema = new mongoose.Schema({
   },
   followUpAt: { type: Date, default: null },
 
-  // ── Кто создал лид (неизменяемое поле) ──────────────────────────────────
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-
-  // ── Кому назначен (можно переназначить) ─────────────────────────────────
   assignedTo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
