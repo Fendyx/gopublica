@@ -24,32 +24,20 @@ router.get('/', async (req, res) => {
 router.put('/', authTenant, async (req, res) => {
   try {
     const {
-      phone,
-      address,
-      email,
-      hours,
-      googleMapsUrl,
-      seoTitle,
-      seoDescription,
-      notifications,
-      primaryLanguage,
-      primaryCurrency   // <-- добавили это поле
+      phone, address, email, hours, hoursI18n,
+      googleMapsUrl, seoTitle, seoTitleI18n,
+      seoDescription, seoDescriptionI18n,
+      notifications, primaryLanguage, primaryCurrency
     } = req.body;
     const tenantId = req.tenantId;
 
     const updated = await TenantSettings.findOneAndUpdate(
       { tenantId },
       {
-        phone,
-        address,
-        email,
-        hours,
-        googleMapsUrl,
-        seoTitle,
-        seoDescription,
-        notifications,   // <-- передаём в базу
-        primaryLanguage,
-        primaryCurrency   // <-- добавили это поле
+        phone, address, email, hours, hoursI18n,
+        googleMapsUrl, seoTitle, seoTitleI18n,
+        seoDescription, seoDescriptionI18n,
+        notifications, primaryLanguage, primaryCurrency
       },
       { upsert: true, returnDocument: 'after' }
     );

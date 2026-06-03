@@ -9,10 +9,13 @@ const tenantSettingsSchema = new mongoose.Schema({
   phone: { type: String, default: '' },
   address: { type: String, default: '' },
   email: { type: String, default: '' },
-  hours: { type: String, default: '' },
+  hours: { type: String, default: '' },          // основной язык
+  hoursI18n: { type: Map, of: String, default: {} }, // переводы часов
   googleMapsUrl: { type: String, default: '' },
-  seoTitle: { type: String, default: '' },
+  seoTitle: { type: String, default: '' },       // основной язык
+  seoTitleI18n: { type: Map, of: String, default: {} }, // переводы seo title
   seoDescription: { type: String, default: '' },
+  seoDescriptionI18n: { type: Map, of: String, default: {} },
   notifications: {
     booking: {
       sound: { type: Boolean, default: true },
