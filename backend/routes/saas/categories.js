@@ -56,19 +56,28 @@ router.post('/', authTenant, async (req, res) => {
 
 // Поиск категорий для автодополнения (опционально, можно позже)
 // Поиск категорий для автодополнения
+// Поиск категорий для автодополнения
 router.get('/suggest', authTenant, async (req, res) => {
   try {
     const { q } = req.query;
     if (!q || q.length < 2) return res.json([]);
 
     const regex = new RegExp(q, 'i');
-    // Ищем по ключу или по названию (основному)
+
+    // Поддерживаемые языки – важно, чтобы они совпадали с фронтом
+    const LANGS = ['pl', 'en', 'de', 'ru', 'es', 'ua'];
+
+    // Строим условия поиска: ключ, основное название и каждый перевод
+    const orConditions = [
+      { key: regex },
+      { name: regex },
+      ...LANGS.map(lang => ({ [`translations.${lang}`]: regex }))
+    ];
+
     const categories = await CategoryTranslation.find({
-      $or: [
-        { key: regex },
-        { name: regex },
-      ],
+      $or: orConditions,
     }).limit(8).lean();
+
     res.json(categories);
   } catch (err) {
     res.status(500).json({ error: err.message });
