@@ -31,19 +31,18 @@ export default function ServicesSection() {
   ];
 
   return (
-    <section className="services-section">
-      <div className="container">
-        {/* Заголовок тоже берем из переводов */}
-        <h2 className="services-title">{t('services.mainTitle')}</h2>
-        
-        <div className="services-grid">
+    <section className="ses-section">
+      <div className="ses-container">
+        <h2 className="ses-title">{t('services.mainTitle')}</h2>
+
+        <div className="ses-grid">
           {services.map(({ title, desc, image }, index) => (
-            <div key={index} className="service-card">
-              <div className="service-image-wrapper">
-                <img src={image} alt={title} className="service-image" />
+            <div key={index} className="ses-card">
+              <div className="ses-image-wrapper">
+                <img src={image} alt={title} className="ses-image" />
               </div>
-              
-              <div className="service-content">
+
+              <div className="ses-content">
                 <h3>{title}</h3>
                 <p>{desc}</p>
               </div>

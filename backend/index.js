@@ -60,6 +60,8 @@ app.use('/api/saas/categories', require('./routes/saas/categories'));
 app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
 app.use('/api/stripe', require('./routes/stripe/setupIntent'));
 app.use('/api/stripe', require('./routes/stripe/subscribe'));
+app.use('/api/beauty/services', require('./routes/beauty/services'));
+app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
