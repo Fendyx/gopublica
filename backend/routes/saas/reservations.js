@@ -53,4 +53,18 @@ router.patch('/:id', authTenant, async (req, res) => {
   }
 });
 
+// Удаление бронирования (защищённый)
+router.delete('/:id', authTenant, async (req, res) => {
+  try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) return res.status(404).json({ error: 'Не найдено' });
+    if (reservation.tenantId !== req.tenantId) return res.status(403).json({ error: 'Нет доступа' });
+
+    await Reservation.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Удалено' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
