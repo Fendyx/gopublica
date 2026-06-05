@@ -62,6 +62,7 @@ app.use('/api/stripe', require('./routes/stripe/setupIntent'));
 app.use('/api/stripe', require('./routes/stripe/subscribe'));
 app.use('/api/beauty/services', require('./routes/beauty/services'));
 app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
+app.use('/api/beauty/masters', require('./routes/beauty/masters'));
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────

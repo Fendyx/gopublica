@@ -8,8 +8,9 @@ const serviceItemSchema = new mongoose.Schema(
     price: { type: Number, required: true },
     categoryKey: { type: String, default: '' },
     image: { type: String, default: "" },
-    isVegetarian: Boolean,       // можно переименовать позже, но не обязательно
+    isVegetarian: Boolean,
     isSpicy: Boolean,
+    duration: { type: Number, default: 30 },   // <-- ДОБАВЛЕНО (в минутах)
     order: { type: Number, default: 0 },
     translations: {
       type: Map,

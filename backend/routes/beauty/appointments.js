@@ -50,4 +50,62 @@ router.delete('/:id', authTenant, async (req, res) => {
   }
 });
 
+// GET /api/beauty/appointments/slots?tenantId=...&date=...&masterId=...&serviceIds=...
+router.get('/slots', async (req, res) => {
+  try {
+    const { tenantId, date, masterId, serviceIds } = req.query;
+    if (!tenantId || !date) return res.status(400).json({ error: 'tenantId and date required' });
+
+    // Получаем услуги для расчёта суммарной длительности
+    let totalDuration = 0;
+    if (serviceIds) {
+      const Service = require('../../models/beauty/ServiceItem');
+      const services = await Service.find({ _id: { $in: serviceIds.split(',') }, tenantId });
+      totalDuration = services.reduce((sum, s) => sum + (s.duration || 30), 0);
+    }
+
+    // Определяем рабочие часы (если мастер выбран, используем его, иначе общий диапазон)
+    let startHour = 9, endHour = 18;
+    if (masterId) {
+      const Master = require('../../models/beauty/Master');
+      const master = await Master.findOne({ _id: masterId, tenantId });
+      if (master && master.workingHours) {
+        startHour = parseInt(master.workingHours.start) || 9;
+        endHour = parseInt(master.workingHours.end) || 18;
+      }
+    }
+
+    // Генерируем возможные слоты каждые 30 минут
+    const slots = [];
+    for (let hour = startHour; hour < endHour; hour++) {
+      for (let minute of [0, 30]) {
+        if (hour === endHour - 1 && minute === 30) continue; // последний слот не должен выходить за конец
+        const time = `${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}`;
+        const end = new Date(`${date}T${time}`);
+        end.setMinutes(end.getMinutes() + totalDuration);
+        const endTime = `${String(end.getHours()).padStart(2,'0')}:${String(end.getMinutes()).padStart(2,'0')}`;
+        if (endTime > `${endHour}:00`) continue; // услуга не умещается до конца рабочего дня
+
+        // Проверяем занятость
+        const Appointment = require('../../models/beauty/Appointment');
+        const conflict = await Appointment.findOne({
+          tenantId,
+          date,
+          masterId: masterId || { $exists: true }, // любой мастер
+          $or: [
+            { time: time },
+            { time: { $lt: endTime, $gte: time } }  // упрощённо
+          ]
+        });
+        if (!conflict) {
+          slots.push({ time, available: true });
+        }
+      }
+    }
+    res.json(slots);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

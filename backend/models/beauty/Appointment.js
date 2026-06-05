@@ -2,14 +2,21 @@ const mongoose = require('mongoose');
 
 const appointmentSchema = new mongoose.Schema({
   tenantId: { type: String, required: true, index: true },
-  name: String,
-  phone: String,
-  email: String,
-  date: String,
-  time: String,
-  guests: Number,           // можно переименовать в clients, но оставим
-  comment: String,
-  serviceId: { type: mongoose.Schema.Types.ObjectId, ref: 'BeautyService', default: null },
+  clientName: String,
+  clientPhone: String,
+  clientEmail: String,
+  date: String,            // "2026-06-05"
+  time: String,            // "14:30"
+  duration: Number,        // суммарная длительность в минутах
+  services: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BeautyService' }],
+  masterId: { type: mongoose.Schema.Types.ObjectId, ref: 'BeautyMaster', default: null },
+  notes: String,
+  // Поля питомца
+  petName: String,
+  petSpecies: String,      // dog, cat, etc.
+  petBreed: String,
+  petSize: String,         // small, medium, large
+  petNotes: String,
   status: {
     type: String,
     enum: ['pending', 'confirmed', 'cancelled'],
