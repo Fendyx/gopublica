@@ -1,0 +1,100 @@
+import React, { useState } from 'react';
+import { importLeads } from '../../api/leadsApi'; // новый API-вызов
+import './ImportLeadsDialog.css';
+
+interface ImportResult {
+  inserted: number;
+  skipped: number;
+  skippedDetails?: { title: string; reason: string }[];
+}
+
+const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<any[] | null>(null);
+  const [result, setResult] = useState<ImportResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setFile(f);
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target?.result as string);
+        if (Array.isArray(data)) {
+          setPreview(data.slice(0, 10)); // показываем первые 10 для предпросмотра
+        } else {
+          setError('JSON must be an array');
+        }
+      } catch {
+        setError('Invalid JSON file');
+      }
+    };
+    reader.readAsText(f);
+  };
+
+  const handleImport = async () => {
+    if (!file) return;
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const leads = JSON.parse(text);
+      const res = await importLeads(leads); // вызов API
+      setResult(res);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!open) return null;
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>Import Leads from Apify JSON</h2>
+        <input type="file" accept=".json" onChange={handleFileChange} />
+        {error && <div className="error">{error}</div>}
+        {preview && (
+          <div className="preview">
+            <h3>Preview (first 10)</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Phone</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                {preview.map((item, idx) => (
+                  <tr key={idx}>
+                    <td>{item.title}</td>
+                    <td>{item.phone}</td>
+                    <td>{item.categoryName}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {result && (
+          <div className="result">
+            <p>Inserted: {result.inserted}</p>
+            <p>Skipped (duplicates): {result.skipped}</p>
+          </div>
+        )}
+        <div className="actions">
+          <button onClick={onClose}>Cancel</button>
+          <button onClick={handleImport} disabled={!file || loading}>
+            {loading ? 'Importing...' : 'Import'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ImportLeadsDialog;

@@ -160,3 +160,15 @@ export const fetchMyStats = async () => {
   if (!res.ok) throw new Error('Failed to fetch stats');
   return res.json();
 };
+
+export const importLeads = async (leads: any[]) => {
+  const res = await apiFetch('/leads/import', {
+    method: 'POST',
+    body: JSON.stringify(leads),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'Import failed');
+  }
+  return res.json();
+};

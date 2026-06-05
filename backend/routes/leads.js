@@ -128,4 +128,69 @@ router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
+router.post('/import', auth, async (req, res) => {
+  try {
+    const rawLeads = req.body; // ожидаем массив объектов формата Apify
+    if (!Array.isArray(rawLeads)) {
+      return res.status(400).json({ message: 'Body must be an array' });
+    }
+
+    const userId = req.user._id; // предполагаю, что auth middleware добавляет user в req
+    const toInsert = [];
+    const skipped = [];
+
+    for (const item of rawLeads) {
+      // Поиск дубликата по телефону (если есть) или по url
+      let existing = null;
+      if (item.phone) {
+        existing = await Lead.findOne({ phone: item.phone });
+      }
+      if (!existing && item.url) {
+        existing = await Lead.findOne({ source: item.url });
+      }
+      if (existing) {
+        skipped.push({ title: item.title, reason: 'Duplicate phone or URL' });
+        continue;
+      }
+
+      // Маппинг
+      const newLead = {
+        name: item.title,
+        phone: item.phone || '',
+        source: item.url || '',
+        city: item.city || '',
+        businessType: item.categoryName || 'Other',
+        servicesRequested: item.categories || [],
+        // Дополнительные поля, если добавил в модель:
+        // rating: item.totalScore,
+        // reviewsCount: item.reviewsCount,
+        // street: item.street,
+        // state: item.state,
+        // country: item.countryCode,
+        comment: `Imported from Apify. Rating: ${item.totalScore}, reviews: ${item.reviewsCount}`,
+        status: 'New',
+        price: 0,
+        priority: 'Medium',
+        createdBy: userId,
+        assignedTo: null,
+        businessHours: '',
+      };
+      toInsert.push(newLead);
+    }
+
+    if (toInsert.length > 0) {
+      await Lead.insertMany(toInsert);
+    }
+
+    res.json({
+      inserted: toInsert.length,
+      skipped: skipped.length,
+      skippedDetails: skipped,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
