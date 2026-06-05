@@ -130,17 +130,17 @@ router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 
 router.post('/import', auth, async (req, res) => {
   try {
-    const rawLeads = req.body; // ожидаем массив объектов формата Apify
-    if (!Array.isArray(rawLeads)) {
-      return res.status(400).json({ message: 'Body must be an array' });
+    const { leads, assignedTo } = req.body; // теперь ожидаем объект с полями leads и assignedTo
+    if (!Array.isArray(leads)) {
+      return res.status(400).json({ message: 'leads must be an array' });
     }
 
-    const userId = req.user._id; // предполагаю, что auth middleware добавляет user в req
+    const userId = req.user._id; // из middleware auth
     const toInsert = [];
     const skipped = [];
 
-    for (const item of rawLeads) {
-      // Поиск дубликата по телефону (если есть) или по url
+    for (const item of leads) {
+      // Поиск дубликата по телефону или URL
       let existing = null;
       if (item.phone) {
         existing = await Lead.findOne({ phone: item.phone });
@@ -153,7 +153,6 @@ router.post('/import', auth, async (req, res) => {
         continue;
       }
 
-      // Маппинг
       const newLead = {
         name: item.title,
         phone: item.phone || '',
@@ -161,18 +160,12 @@ router.post('/import', auth, async (req, res) => {
         city: item.city || '',
         businessType: item.categoryName || 'Other',
         servicesRequested: item.categories || [],
-        // Дополнительные поля, если добавил в модель:
-        // rating: item.totalScore,
-        // reviewsCount: item.reviewsCount,
-        // street: item.street,
-        // state: item.state,
-        // country: item.countryCode,
         comment: `Imported from Apify. Rating: ${item.totalScore}, reviews: ${item.reviewsCount}`,
         status: 'New',
         price: 0,
         priority: 'Medium',
-        createdBy: userId,
-        assignedTo: null,
+        createdBy: userId,               // обязательно
+        assignedTo: assignedTo || null,  // переданный или null
         businessHours: '',
       };
       toInsert.push(newLead);

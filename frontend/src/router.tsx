@@ -27,6 +27,7 @@ import PortfolioCMSPage from './pages/Admin/PortfolioCMSPage/PortfolioCMSPage';
 import ProjectsPage     from './pages/Admin/ProjectsPage/ProjectsPage';
 import MyProfilePage    from './pages/Admin/MyProfilePage/MyProfilePage';
 import NewslettersPage  from './pages/Admin/NewslettersPage/NewslettersPage';
+import ImportLeadsPage from './pages/Admin/ImportLeadsPage/ImportLeadsPage';
 
 const router = createBrowserRouter([
 
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
           { path: 'projects',    element: <ProjectsPage /> },
           { path: 'profile',     element: <MyProfilePage /> },
           { path: 'newsletters', element: <NewslettersPage /> },
+          { path: 'leads/import', element: <ImportLeadsPage /> }
         ],
       },
     ],

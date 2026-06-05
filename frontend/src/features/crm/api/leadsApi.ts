@@ -161,10 +161,10 @@ export const fetchMyStats = async () => {
   return res.json();
 };
 
-export const importLeads = async (leads: any[]) => {
+export const importLeads = async (leads: any[], assignedTo: string | null) => {
   const res = await apiFetch('/leads/import', {
     method: 'POST',
-    body: JSON.stringify(leads),
+    body: JSON.stringify({ leads, assignedTo }),
   });
   if (!res.ok) {
     const err = await res.json();
