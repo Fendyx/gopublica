@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { importLeads, fetchAdmins, type AdminUser } from '../../api/leadsApi';
+import { importLeads, fetchAdmins, BUSINESS_TYPES, type AdminUser } from '../../api/leadsApi';
 import { useAuthStore } from '../../../../store/store';
 import './ImportLeadsDialog.css';
 
@@ -18,12 +18,13 @@ const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
   const [error, setError] = useState('');
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [assignedTo, setAssignedTo] = useState<string>(user?.id || '');
+  const [businessType, setBusinessType] = useState<string>('Other');
+  const [customBusinessType, setCustomBusinessType] = useState('');
 
   useEffect(() => {
     fetchAdmins().then(setAdmins).catch(console.error);
   }, []);
 
-  // Установим по умолчанию текущего пользователя, если есть
   useEffect(() => {
     if (user?.id && !assignedTo) setAssignedTo(user.id);
   }, [user]);
@@ -54,7 +55,11 @@ const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
     try {
       const text = await file.text();
       const leads = JSON.parse(text);
-      const res = await importLeads(leads, assignedTo || null);
+      const finalBusinessType = businessType === 'Other' && customBusinessType.trim()
+        ? customBusinessType.trim()
+        : businessType;
+
+      const res = await importLeads(leads, assignedTo || null, finalBusinessType);
       setResult(res);
     } catch (err: any) {
       setError(err.message);
@@ -70,14 +75,9 @@ const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
         <h2>Import Leads from Apify JSON</h2>
         <input type="file" accept=".json" onChange={handleFileChange} />
 
-        {/* Выбор Assigned To */}
         <div className="form-group" style={{ marginTop: '1rem' }}>
           <label className="label">Assigned To</label>
-          <select
-            className="select"
-            value={assignedTo}
-            onChange={e => setAssignedTo(e.target.value)}
-          >
+          <select className="select" value={assignedTo} onChange={e => setAssignedTo(e.target.value)}>
             <option value="">— Unassigned —</option>
             {admins.map(a => (
               <option key={a._id} value={a._id}>
@@ -87,7 +87,34 @@ const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
           </select>
         </div>
 
+        <div className="form-group" style={{ marginTop: '1rem' }}>
+          <label className="label">Business Type</label>
+          <select
+            className="select"
+            value={businessType}
+            onChange={e => {
+              setBusinessType(e.target.value);
+              if (e.target.value !== 'Other') setCustomBusinessType('');
+            }}
+          >
+            {BUSINESS_TYPES.map(t => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+          {businessType === 'Other' && (
+            <input
+              className="input"
+              type="text"
+              value={customBusinessType}
+              onChange={e => setCustomBusinessType(e.target.value)}
+              placeholder="Specify business type..."
+              style={{ marginTop: '0.5rem' }}
+            />
+          )}
+        </div>
+
         {error && <div className="error">{error}</div>}
+
         {preview && (
           <div className="preview">
             <h3>Preview (first 10)</h3>
@@ -111,12 +138,14 @@ const ImportLeadsDialog: React.FC<{ open: boolean; onClose: () => void }> = ({ o
             </table>
           </div>
         )}
+
         {result && (
           <div className="result">
             <p>Inserted: {result.inserted}</p>
             <p>Skipped (duplicates): {result.skipped}</p>
           </div>
         )}
+
         <div className="actions">
           <button onClick={onClose}>Cancel</button>
           <button onClick={handleImport} disabled={!file || loading}>

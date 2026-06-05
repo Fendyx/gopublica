@@ -18,7 +18,6 @@ router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
       .populate('createdBy',  'name email')
       .populate('assignedTo', 'name email')
       .sort({ createdAt: -1 });
-
     res.json(leads);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching leads', error: err.message });
@@ -58,7 +57,6 @@ router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 
     await lead.populate('createdBy',  'name email');
     await lead.populate('assignedTo', 'name email');
-
     res.status(201).json(lead);
   } catch (err) {
     res.status(400).json({ message: 'Error creating lead', error: err.message });
@@ -128,46 +126,64 @@ router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
+// ============================================================
+// POST /api/leads/import — массовый импорт лидов из Apify JSON
+// ============================================================
 router.post('/import', auth, async (req, res) => {
   try {
-    const { leads, assignedTo } = req.body; // теперь ожидаем объект с полями leads и assignedTo
+    // извлекаем ID пользователя (варианты _id, id, userId)
+    const userId = req.user?._id || req.user?.id || req.user?.userId;
+    if (!userId) {
+      return res.status(400).json({ message: 'Cannot determine user ID from token' });
+    }
+
+    const { leads, assignedTo, businessType } = req.body;
+
     if (!Array.isArray(leads)) {
       return res.status(400).json({ message: 'leads must be an array' });
     }
 
-    const userId = req.user._id; // из middleware auth
     const toInsert = [];
     const skipped = [];
 
     for (const item of leads) {
-      // Поиск дубликата по телефону или URL
-      let existing = null;
-      if (item.phone) {
-        existing = await Lead.findOne({ phone: item.phone });
-      }
-      if (!existing && item.url) {
-        existing = await Lead.findOne({ source: item.url });
-      }
-      if (existing) {
-        skipped.push({ title: item.title, reason: 'Duplicate phone or URL' });
+      // 1. Обязательное наличие телефона
+      if (!item.phone || item.phone.trim() === '') {
+        skipped.push({ title: item.title, reason: 'Missing phone' });
         continue;
       }
 
+      // 2. Поиск дубликата по телефону
+      const existingByPhone = await Lead.findOne({ phone: item.phone.trim() });
+      if (existingByPhone) {
+        skipped.push({ title: item.title, reason: 'Duplicate phone' });
+        continue;
+      }
+
+      // 3. Определяем businessType: приоритет у переданного с фронта, иначе из categoryName, иначе 'Other'
+      const finalBusinessType = businessType
+        ? businessType
+        : (item.categoryName || 'Other');
+
+      // 4. Приводим assignedTo
+      const assignedToId = (assignedTo && assignedTo !== '') ? assignedTo : null;
+
       const newLead = {
         name: item.title,
-        phone: item.phone || '',
+        phone: item.phone.trim(),
         source: item.url || '',
         city: item.city || '',
-        businessType: item.categoryName || 'Other',
+        businessType: finalBusinessType,
         servicesRequested: item.categories || [],
         comment: `Imported from Apify. Rating: ${item.totalScore}, reviews: ${item.reviewsCount}`,
         status: 'New',
         price: 0,
         priority: 'Medium',
-        createdBy: userId,               // обязательно
-        assignedTo: assignedTo || null,  // переданный или null
+        createdBy: userId,
+        assignedTo: assignedToId,
         businessHours: '',
       };
+
       toInsert.push(newLead);
     }
 
