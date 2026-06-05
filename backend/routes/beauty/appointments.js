@@ -65,7 +65,7 @@ router.get('/slots', async (req, res) => {
     }
 
     // Определяем рабочие часы (если мастер выбран, используем его, иначе общий диапазон)
-    let startHour = 9, endHour = 18;
+    let startHour = 9, endHour = 23; // <-- изменили 18 на 21
     if (masterId) {
       const Master = require('../../models/beauty/Master');
       const master = await Master.findOne({ _id: masterId, tenantId });
