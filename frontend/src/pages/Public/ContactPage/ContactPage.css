@@ -34,20 +34,6 @@
   pointer-events: none;
 }
 
-.contact-hero__badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  background: var(--bg);
-  margin-bottom: 20px;
-}
-
 .contact-hero__title {
   font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
@@ -62,43 +48,8 @@
   font-size: 17px;
   color: var(--text-muted);
   max-width: 480px;
-  margin: 0 auto 32px;
-  line-height: 1.6;
-}
-
-.contact-hero__sub strong {
-  color: var(--text);
-  font-weight: 600;
-}
-
-/* ── Coverage strip ── */
-.contact-coverage {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  max-width: 680px;
   margin: 0 auto;
-  position: relative;
-}
-
-.coverage-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--bg);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  transition: border-color 0.15s, transform 0.15s;
-}
-
-.coverage-chip:hover {
-  border-color: var(--primary);
-  transform: translateY(-1px);
+  line-height: 1.6;
 }
 
 /* ── Main layout: 2-column grid ── */
@@ -139,77 +90,6 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
-}
-
-/* ── Phone cards ── */
-.phone-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.phone-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 18px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--surface);
-  text-decoration: none;
-  color: var(--text);
-  transition: border-color 0.18s, box-shadow 0.18s, transform 0.15s;
-}
-
-.phone-card:hover {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 10%, transparent);
-  transform: translateY(-1px);
-}
-
-.phone-card__flag {
-  font-size: 28px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.phone-card__body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.phone-card__region {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.phone-card__number {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--text);
-}
-
-.phone-card__hours {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.phone-card__arrow {
-  font-size: 18px;
-  color: var(--primary);
-  opacity: 0.7;
-  transition: transform 0.15s, opacity 0.15s;
-}
-
-.phone-card:hover .phone-card__arrow {
-  transform: translateX(4px);
-  opacity: 1;
 }
 
 /* ── Messenger cards ── */
@@ -288,45 +168,6 @@
 
 .email-link:hover {
   border-bottom-color: var(--primary);
-}
-
-/* ── Response promise ── */
-.response-promise {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid color-mix(in srgb, var(--success) 30%, transparent);
-  background: color-mix(in srgb, var(--success) 6%, transparent);
-}
-
-.response-promise__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--success);
-  margin-top: 5px;
-  flex-shrink: 0;
-  /* pulse animation */
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 50%, transparent);
-  animation: pulse-dot 2.4s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 50%, transparent); }
-  50%       { box-shadow: 0 0 0 6px transparent; }
-}
-
-.response-promise p {
-  margin: 0;
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.response-promise p strong {
-  color: var(--success);
 }
 
 /* ── Form wrapper ── */

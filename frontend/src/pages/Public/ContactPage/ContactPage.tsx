@@ -9,7 +9,6 @@ interface FormData {
   phone: string;
   subject: string;
   message: string;
-  country: string;
 }
 
 const SUBJECTS = [
@@ -28,7 +27,6 @@ export default function ContactPage() {
     phone: "",
     subject: "",
     message: "",
-    country: "",
   });
   const [formState, setFormState] = useState<FormState>("idle");
   const formRef = useRef<HTMLFormElement>(null);
@@ -50,25 +48,8 @@ export default function ContactPage() {
     await new Promise((r) => setTimeout(r, 1800));
 
     setFormState("success");
-    setForm({ name: "", email: "", phone: "", subject: "", message: "", country: "" });
+    setForm({ name: "", email: "", phone: "", subject: "", message: "" });
   };
-
-  const contacts = [
-    {
-      region: "Deutschland",
-      flag: "🇩🇪",
-      phone: "+49 176 12 345 678",
-      phoneHref: "tel:+4917612345678",
-      description: "Mo–Fr 9:00–18:00 MEZ",
-    },
-    {
-      region: "Polska",
-      flag: "🇵🇱",
-      phone: "+48 500 123 456",
-      phoneHref: "tel:+48500123456",
-      description: "Pn–Pt 9:00–18:00 CET",
-    },
-  ];
 
   const messengers = [
     {
@@ -95,62 +76,22 @@ export default function ContactPage() {
     },
   ];
 
-  const coverage = [
-    { country: "Deutschland", flag: "🇩🇪" },
-    { country: "Polen", flag: "🇵🇱" },
-    { country: "Österreich", flag: "🇦🇹" },
-    { country: "Schweiz", flag: "🇨🇭" },
-    { country: "Nederland", flag: "🇳🇱" },
-    { country: "France", flag: "🇫🇷" },
-    { country: "España", flag: "🇪🇸" },
-    { country: "Україна", flag: "🇺🇦" },
-  ];
-
   return (
     <div className="contact-page">
       {/* ── Hero ── */}
       <section className="contact-hero">
-        <div className="contact-hero__badge">Контакты</div>
         <h1 className="contact-hero__title">
           Поговорим о вашем проекте
         </h1>
         <p className="contact-hero__sub">
-          Работаем с бизнесами по всей Европе. Ответим в течение&nbsp;
-          <strong>2 рабочих часов</strong>.
+          Работаем с бизнесами по всей Европе. Ответим максимально быстро.
         </p>
-        {/* Coverage strip */}
-        <div className="contact-coverage">
-          {coverage.map((c) => (
-            <span key={c.country} className="coverage-chip">
-              <span>{c.flag}</span>
-              <span>{c.country}</span>
-            </span>
-          ))}
-        </div>
       </section>
 
       {/* ── Main grid ── */}
       <section className="contact-main">
         {/* LEFT: info column */}
         <div className="contact-info">
-          {/* Phone cards */}
-          <div className="info-block">
-            <span className="info-block__label">Позвонить нам</span>
-            <div className="phone-cards">
-              {contacts.map((c) => (
-                <a key={c.region} href={c.phoneHref} className="phone-card">
-                  <span className="phone-card__flag">{c.flag}</span>
-                  <div className="phone-card__body">
-                    <span className="phone-card__region">{c.region}</span>
-                    <span className="phone-card__number">{c.phone}</span>
-                    <span className="phone-card__hours">{c.description}</span>
-                  </div>
-                  <span className="phone-card__arrow">→</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
           {/* Messengers */}
           <div className="info-block">
             <span className="info-block__label">Написать в мессенджер</span>
@@ -180,15 +121,6 @@ export default function ContactPage() {
             <a href="mailto:hello@gopublica.com" className="email-link">
               hello@gopublica.com
             </a>
-          </div>
-
-          {/* Response promise */}
-          <div className="response-promise">
-            <div className="response-promise__dot" />
-            <p>
-              Обычно отвечаем в течение <strong>2 часов</strong> в рабочее время.
-              Срочные запросы — по телефону или WhatsApp.
-            </p>
           </div>
         </div>
 
@@ -247,35 +179,17 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="form-row">
-                <div className="form-field">
-                  <label htmlFor="phone">Телефон</label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="+49 / +48"
-                    value={form.phone}
-                    onChange={handleChange}
-                    autoComplete="tel"
-                  />
-                </div>
-                <div className="form-field">
-                  <label htmlFor="country">Страна</label>
-                  <select
-                    id="country"
-                    name="country"
-                    value={form.country}
-                    onChange={handleChange}
-                  >
-                    <option value="">Выбрать…</option>
-                    {coverage.map((c) => (
-                      <option key={c.country} value={c.country}>
-                        {c.flag} {c.country}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="form-field">
+                <label htmlFor="phone">Телефон</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+49 / +48"
+                  value={form.phone}
+                  onChange={handleChange}
+                  autoComplete="tel"
+                />
               </div>
 
               <div className="form-field">
@@ -310,7 +224,7 @@ export default function ContactPage() {
 
               {formState === "error" && (
                 <div className="form-error-msg">
-                  Что-то пошло не так. Попробуйте ещё раз или позвоните нам.
+                  Что-то пошло не так. Попробуйте ещё раз или напишите нам напрямую.
                 </div>
               )}
 

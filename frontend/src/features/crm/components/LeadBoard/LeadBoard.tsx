@@ -18,11 +18,6 @@ interface Props {
 
 const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '—';
 
-const isURL = (str?: string) => {
-  try { return str ? Boolean(new URL(str)) : false; }
-  catch { return false; }
-};
-
 const SortIcon = ({ col, sortBy, sortDir }: { col: SortBy; sortBy: SortBy; sortDir: SortDir }) => {
   if (sortBy !== col) return <ArrowUpDown size={12} className="sort-icon sort-icon-inactive" />;
   return sortDir === 'asc'
@@ -77,14 +72,12 @@ export default function LeadBoard({
     return assignedId === user?.id;
   };
 
-  // ── Status filter pills ──────────────────────────────────────────────────
   const filterOptions: (LeadStatus | 'All')[] = ['All', ...STATUSES];
 
   return (
     <div className="lead-board">
       {/* ── Toolbar ──────────────────────────────────────────────────────── */}
       <div className="board-toolbar">
-        {/* Status filter */}
         <div className="filter-row">
           <span className="filter-label">Status</span>
           <div className="filter-pills">
@@ -104,7 +97,6 @@ export default function LeadBoard({
           </div>
         </div>
 
-        {/* Sort controls */}
         <div className="sort-row">
           <span className="filter-label">Sort by</span>
           {(['date', 'status', 'city'] as SortBy[]).map(col => (
@@ -122,6 +114,7 @@ export default function LeadBoard({
         <table className="leads-table">
           <thead>
             <tr>
+              <th style={{ width: 40 }}>#</th>
               <th>Client</th>
               <th>Business</th>
               <th>
@@ -147,15 +140,18 @@ export default function LeadBoard({
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={9} className="table-empty">
+              <tr><td colSpan={10} className="table-empty">
                 <div className="loading-state">Loading leads...</div>
               </td></tr>
             ) : sorted.length === 0 ? (
-              <tr><td colSpan={9} className="table-empty">
+              <tr><td colSpan={10} className="table-empty">
                 <div className="empty-state">No leads found</div>
               </td></tr>
-            ) : sorted.map(lead => (
+            ) : sorted.map((lead, idx) => (
               <tr key={lead._id} onClick={() => onSelectLead(lead)} className="table-row">
+                <td className="text-muted text-sm" style={{ textAlign: 'center', fontWeight: 500 }}>
+                  {sorted.length - idx}
+                </td>
                 <td>
                   <span className="lead-name">{lead.name}</span>
                 </td>
