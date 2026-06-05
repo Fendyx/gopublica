@@ -1,0 +1,97 @@
+/* TrustMarquee.css */
+
+.tm-section {
+  padding: 32px 0 28px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.tm-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tm-eyebrow-line {
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+}
+
+.tm-eyebrow-text {
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Marquee ── */
+.tm-marquee-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.tm-fade {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.tm-fade-left  { left:  0; background: linear-gradient(to right, var(--surface), transparent); }
+.tm-fade-right { right: 0; background: linear-gradient(to left,  var(--surface), transparent); }
+
+.tm-track {
+  display: flex;
+  width: max-content;
+  animation: tm-scroll 27s linear infinite;
+  will-change: transform;
+}
+.tm-track:hover { animation-play-state: paused; }
+
+@keyframes tm-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% / 3)); }
+}
+
+.tm-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.tm-name {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  cursor: default;
+}
+.tm-track:hover .tm-name:hover {
+  color: var(--primary);
+}
+
+.tm-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .tm-fade { width: 50px; }
+}

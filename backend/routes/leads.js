@@ -1,3 +1,4 @@
+//backend\routes\leads.js
 const express = require('express');
 const router  = express.Router();
 const Lead    = require('../models/lead');
@@ -129,9 +130,9 @@ router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 // ============================================================
 // POST /api/leads/import — массовый импорт лидов из Apify JSON
 // ============================================================
+// POST /api/leads/import — массовый импорт лидов из Apify JSON
 router.post('/import', auth, async (req, res) => {
   try {
-    // извлекаем ID пользователя (варианты _id, id, userId)
     const userId = req.user?._id || req.user?.id || req.user?.userId;
     if (!userId) {
       return res.status(400).json({ message: 'Cannot determine user ID from token' });
@@ -143,6 +144,19 @@ router.post('/import', auth, async (req, res) => {
       return res.status(400).json({ message: 'leads must be an array' });
     }
 
+    // ------------------------ ДИАГНОСТИКА ------------------------
+    const totalBefore = await Lead.countDocuments();
+    console.log('=== DIAGNOSTIC START ===');
+    console.log('Total leads in DB before import:', totalBefore);
+    if (totalBefore > 0) {
+      const sample = await Lead.find({}).limit(5).select('phone name');
+      console.log('Sample leads in DB:');
+      sample.forEach(l => console.log(`  ${l.phone} — ${l.name}`));
+    } else {
+      console.log('DB is completely empty.');
+    }
+    // -------------------------------------------------------------
+
     const toInsert = [];
     const skipped = [];
 
@@ -153,14 +167,18 @@ router.post('/import', auth, async (req, res) => {
         continue;
       }
 
+      const phoneTrimmed = item.phone.trim();
+      console.log(`Checking phone: "${phoneTrimmed}"`);
+
       // 2. Поиск дубликата по телефону
-      const existingByPhone = await Lead.findOne({ phone: item.phone.trim() });
+      const existingByPhone = await Lead.findOne({ phone: phoneTrimmed });
       if (existingByPhone) {
+        console.log(`  -> DUPLICATE FOUND: existing lead "${existingByPhone.name}"`);
         skipped.push({ title: item.title, reason: 'Duplicate phone' });
         continue;
       }
 
-      // 3. Определяем businessType: приоритет у переданного с фронта, иначе из categoryName, иначе 'Other'
+      // 3. Определяем businessType
       const finalBusinessType = businessType
         ? businessType
         : (item.categoryName || 'Other');
@@ -170,7 +188,7 @@ router.post('/import', auth, async (req, res) => {
 
       const newLead = {
         name: item.title,
-        phone: item.phone.trim(),
+        phone: phoneTrimmed,
         source: item.url || '',
         city: item.city || '',
         businessType: finalBusinessType,
@@ -189,7 +207,11 @@ router.post('/import', auth, async (req, res) => {
 
     if (toInsert.length > 0) {
       await Lead.insertMany(toInsert);
+      console.log(`Inserted ${toInsert.length} documents.`);
     }
+
+    console.log(`Skipped ${skipped.length} documents.`);
+    console.log('=== DIAGNOSTIC END ===');
 
     res.json({
       inserted: toInsert.length,

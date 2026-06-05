@@ -15,6 +15,7 @@ const EMPTY = (currentUserId: string): Omit<Lead, '_id' | 'createdAt' | 'created
   priority: 'Medium',
   city: '',
   businessHours: '',
+  followUpAt: '',
 });
 
 interface Props {
@@ -107,6 +108,29 @@ export default function LeadForm({ onSave, onCancel, initialData, isEdit = false
           </div>
         </div>
       </div>
+
+      <div className="form-section">
+  <div className="form-section-title">📞 Schedule Call</div>
+  <div className="form-group">
+    <label className="label"><Phone size={12} /> Call Back At</label>
+    <input
+      className="input"
+      type="datetime-local"
+      value={form.followUpAt ? new Date(form.followUpAt).toISOString().slice(0, 16) : ''}
+      onChange={e => set('followUpAt', e.target.value ? new Date(e.target.value).toISOString() : null)}
+    />
+    {form.followUpAt && (
+      <button
+        type="button"
+        className="btn btn-sm btn-ghost"
+        style={{ marginTop: 4, fontSize: 12 }}
+        onClick={() => set('followUpAt', null)}
+      >
+        × Clear
+      </button>
+    )}
+  </div>
+</div>
 
       {/* Row 3: Source + Budget */}
       <div className="form-section">

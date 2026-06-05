@@ -72,7 +72,7 @@ router.post('/subscribe', authTenant, async (req, res) => {
     const subscription = await Stripe.subscriptions.create({
       customer: user.stripeCustomerId,
       items: [{ price: priceId }],
-      // trial_period_days: 30,
+      trial_period_days: 30,
       default_payment_method: paymentMethodId,
       
       // ВОТ ОНА - МАГИЯ СТРАЙПА ДЛЯ VAT OSS И REVERSE CHARGE!

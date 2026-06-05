@@ -74,6 +74,29 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
 
   const statusColor = STATUS_COLOR[lead.status];
 
+  const getFollowUpLabel = (dateStr: string) => {
+  const d = new Date(dateStr);
+  const now = new Date();
+  const diffMs = d.getTime() - now.getTime();
+  const diffH = diffMs / 1000 / 3600;
+
+  if (diffMs < 0) return { label: `⚠️ Overdue · ${d.toLocaleDateString('en-GB')} ${d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, color: '#dc2626' };
+  if (diffH < 24) return { label: `🔔 Today at ${d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, color: '#d97706' };
+  if (diffH < 48) return { label: `📅 Tomorrow at ${d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, color: '#2563eb' };
+  return { label: `📅 ${d.toLocaleDateString('en-GB')} ${d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}`, color: '#16a34a' };
+};
+
+const [schedulingCall, setSchedulingCall] = useState(false);
+const [callDateTime, setCallDateTime]     = useState('');
+
+const handleScheduleCall = async () => {
+  const iso = callDateTime ? new Date(callDateTime).toISOString() : null;
+  const updated = await updateLead(lead._id!, { followUpAt: iso ?? undefined });
+  onUpdated(updated);
+  setSchedulingCall(false);
+  setCallDateTime('');
+};
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={e => e.stopPropagation()}>
@@ -153,6 +176,15 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
                     <span className="info-value">{lead.businessHours}</span>
                   </div>
                 )}
+                {lead.followUpAt && (() => {
+                  const { label, color } = getFollowUpLabel(lead.followUpAt);
+                  return (
+                    <div className="info-item" style={{ gridColumn: '1 / -1' }}>
+                      <span className="info-label">Scheduled Call</span>
+                      <span className="info-value" style={{ color, fontWeight: 600 }}>{label}</span>
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Source */}
@@ -183,6 +215,51 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
                 <p className="detail-card-label"><MessageSquare size={11} /> Notes</p>
                 <p className="notes-text">{lead.comment || 'No notes yet.'}</p>
               </div>
+
+              {canEdit() && (
+                <div className="detail-section">
+                  <p className="detail-card-label">📞 Schedule Call</p>
+                  {!schedulingCall ? (
+                    <button
+                      className="btn btn-sm btn-ghost"
+                      onClick={() => {
+                        setSchedulingCall(true);
+                        setCallDateTime(
+                          lead.followUpAt
+                            ? new Date(lead.followUpAt).toISOString().slice(0, 16)
+                            : ''
+                        );
+                      }}
+                    >
+                      {lead.followUpAt ? '✏️ Change scheduled call' : '+ Set call reminder'}
+                    </button>
+                  ) : (
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                      <input
+                        type="datetime-local"
+                        className="input"
+                        style={{ flex: 1, minWidth: 200 }}
+                        value={callDateTime}
+                        onChange={e => setCallDateTime(e.target.value)}
+                      />
+                      <button className="btn btn-sm btn-primary" onClick={handleScheduleCall}>Save</button>
+                      {lead.followUpAt && (
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={async () => {
+                            const updated = await updateLead(lead._id!, { followUpAt: undefined });
+                            onUpdated(updated);
+                            setSchedulingCall(false);
+                          }}
+                        >
+                          Clear
+                        </button>
+                      )}
+                      <button className="btn btn-sm btn-ghost" onClick={() => setSchedulingCall(false)}>Cancel</button>
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Status change */}
               <div className="detail-section">

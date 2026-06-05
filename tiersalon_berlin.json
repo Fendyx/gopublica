@@ -1,0 +1,452 @@
+[
+  {
+    "title": "Lydias Hundestübchen",
+    "totalScore": 4.4,
+    "reviewsCount": 99,
+    "street": "Maximilianstraße 47",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 91204664",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lydias%20Hundest%C3%BCbchen&query_place_id=ChIJybjcexJSqEcRLRLL6I2Tx7U",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Amling",
+    "totalScore": 4.6,
+    "reviewsCount": 101,
+    "street": "Aalesunder Str. 2",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 4454027",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Amling&query_place_id=ChIJH6nJ4Q9SqEcR42-IPMvSFkY",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Gitti's Hundesalon",
+    "totalScore": 5,
+    "reviewsCount": 3,
+    "street": "Aroser Allee 67",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Gitti's%20Hundesalon&query_place_id=ChIJb-rhBs9TqEcRjnIGLJVcALc",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon NUR MUT",
+    "totalScore": 4.2,
+    "reviewsCount": 67,
+    "street": "Kopenhagener Str. 65",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 26038147",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20NUR%20MUT&query_place_id=ChIJfTkpjwRSqEcR9HW8JHlsIOU",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "KASHAN's Fellharmonie Hundesalon",
+    "totalScore": 5,
+    "reviewsCount": 73,
+    "street": "Zabel-Krüger-Damm 39",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 172 5140094",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KASHAN's%20Fellharmonie%20Hundesalon&query_place_id=ChIJGa-V7MFTqEcRInkm092uuJE",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundefriseur \"Bonny\" Inh. Monika Fritz",
+    "totalScore": 4.3,
+    "reviewsCount": 50,
+    "street": "Mahlerstraße 16",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 9273105",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundefriseur%20%22Bonny%22%20Inh.%20Monika%20Fritz&query_place_id=ChIJw3QYPN1NqEcRGzacTvNyxAY",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Rund um den Hund",
+    "totalScore": 4.6,
+    "reviewsCount": 40,
+    "street": "Prerower Platz 5",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 96063715",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Rund%20um%20den%20Hund&query_place_id=ChIJadkJ41dMqEcRsQfUGA3fNA8",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Brigitte Glander",
+    "totalScore": 3.6,
+    "reviewsCount": 8,
+    "street": "Aroser Allee 67",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 4956547",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Brigitte%20Glander&query_place_id=ChIJET_JB89TqEcRoMPaE-NSZkA",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundepflege Schnauzbart",
+    "totalScore": 4.4,
+    "reviewsCount": 20,
+    "street": "Zum Kappgraben 51",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 9433518",
+    "categories": [
+      "Haustier-Betreuungsservice"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundepflege%20Schnauzbart&query_place_id=ChIJ_8x32zJNqEcRRJ_9DnLCnu4",
+    "categoryName": "Haustier-Betreuungsservice"
+  },
+  {
+    "title": "Hundesalon Rogalski",
+    "totalScore": 4,
+    "reviewsCount": 24,
+    "street": "Berliner Allee 154",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Rogalski&query_place_id=ChIJu2-0z8VNqEcRRbjERxcWLrw",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Sascha's Hundeoase, Hundefriseur mit Herz",
+    "totalScore": 4.9,
+    "reviewsCount": 79,
+    "street": "Oranienburger Str. 212",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 15678 851990",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sascha's%20Hundeoase%2C%20Hundefriseur%20mit%20Herz&query_place_id=ChIJpe99YmtTqEcRC2QPMyAbKbk",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon MiLedi",
+    "totalScore": 4.4,
+    "reviewsCount": 24,
+    "street": "Eichborndamm 56",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 82141345",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20MiLedi&query_place_id=ChIJS_978vRTqEcRJ0xBxGsrplo",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Buffy",
+    "totalScore": 4.6,
+    "reviewsCount": 71,
+    "street": "Marzahner Promenade 32",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 93665809",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Buffy&query_place_id=ChIJtw2hdvRLqEcRnRV5sQFcUkg",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Domeniks Hunde Salon",
+    "totalScore": 3.9,
+    "reviewsCount": 123,
+    "street": "Havemann-Center, Havemannstraße 12",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 93662214",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Domeniks%20Hunde%20Salon&query_place_id=ChIJ64XTRHhLqEcRhSa7fItR_Ik",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Angela Unger",
+    "totalScore": 4.3,
+    "reviewsCount": 30,
+    "street": "Falkenseer Chaussee 217",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 37151359",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Angela%20Unger&query_place_id=ChIJb5GnT6D4qEcRVn5hUUAxTIU",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Aguś",
+    "totalScore": 4.7,
+    "reviewsCount": 20,
+    "street": "Wörther Str. 23",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1521 3445234",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Agu%C5%9B&query_place_id=ChIJ3zCdTLNXqEcRAkUebiZ0wSs",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon ,, Elwis,,",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Pepitapromenade 33",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Herrenfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20%2C%2C%20Elwis%2C%2C&query_place_id=ChIJQb6hEgBXqEcRmdeJdxybD1k",
+    "categoryName": "Herrenfriseur"
+  },
+  {
+    "title": "HUND & KATZE Tierpflege",
+    "totalScore": 4.5,
+    "reviewsCount": 41,
+    "street": "Kurfürstendamm 90",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 8912179",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=HUND%20%26%20KATZE%20Tierpflege&query_place_id=ChIJV4quSr0jZUERpaOiksPjTFI",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Glanz und Groom",
+    "totalScore": 5,
+    "reviewsCount": 5,
+    "street": "Kreuznacher Str. 10",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 20331535",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Glanz%20und%20Groom&query_place_id=ChIJG6J0_FBRqEcRne0iEClSdJ4",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Fell-und Pfötchenpflege",
+    "totalScore": 4.9,
+    "reviewsCount": 52,
+    "street": "Südostallee 146",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 172 9449241",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Fell-und%20Pf%C3%B6tchenpflege&query_place_id=ChIJUY0ojR5JqEcREaQtXv_igJU",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundepflege Dino",
+    "totalScore": 4.8,
+    "reviewsCount": 64,
+    "street": "Neudecker Weg 81",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 6633875",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundepflege%20Dino&query_place_id=ChIJBxlCmQlHqEcRp02Y3GaSArM",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Vier Pfoten Hundesalon Altglienicke",
+    "totalScore": 5,
+    "reviewsCount": 13,
+    "street": "Ewaldstraße 57",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 84857952",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Vier%20Pfoten%20Hundesalon%20Altglienicke&query_place_id=ChIJLTjEdV9HqEcR43iN-8RKMM4",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundestube Wendenschloß",
+    "totalScore": 5,
+    "reviewsCount": 25,
+    "street": "Wendenschloßstraße 429",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 26379270",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundestube%20Wendenschlo%C3%9F&query_place_id=ChIJKcfsG_JHqEcRXcTBfkVkKBA",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Hugo",
+    "totalScore": 4.1,
+    "reviewsCount": 27,
+    "street": "Wegenerstraße 14",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 170 1840916",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Hugo&query_place_id=ChIJ7epx3_JQqEcRMR7H9aIEvr0",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon King, Ralf Röpnack",
+    "totalScore": 4.6,
+    "reviewsCount": 50,
+    "street": "Windscheidstraße 12",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 3234448",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20King%2C%20Ralf%20R%C3%B6pnack&query_place_id=ChIJbdn5RdlQqEcRIZTM_-WTF5M",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Villa Bunterhund",
+    "totalScore": 4.4,
+    "reviewsCount": 16,
+    "street": "Hultschiner Damm 168",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 30366828",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Villa%20Bunterhund&query_place_id=ChIJUb--ibhJqEcRKAQexSBoXss",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Tiersalon fellfein Hundesalon Katzensalon",
+    "totalScore": 4.9,
+    "reviewsCount": 46,
+    "street": "Archenholdstraße 28",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tiersalon%20fellfein%20Hundesalon%20Katzensalon&query_place_id=ChIJgUqYlzlPqEcR-yHZVbdFzI8",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Hundesalon Steglitz",
+    "totalScore": 4.2,
+    "reviewsCount": 62,
+    "street": "Hindenburgdamm 65b",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 76230982",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hundesalon%20Steglitz&query_place_id=ChIJ2Q7kGVQ7ZUERKGOsCb9YXHc",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Edelgard Mechsner",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Luzerner Str. 13",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 8177882",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Edelgard%20Mechsner&query_place_id=ChIJG-c-l3Q7ZUERgl-_Df6qbjc",
+    "categoryName": "Tierfriseur"
+  },
+  {
+    "title": "Lieblingsfutter",
+    "totalScore": 4.4,
+    "reviewsCount": 13,
+    "street": "Ruhlaer Str. 15",
+    "city": "Berlin",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 30 403646940",
+    "categories": [
+      "Tierfriseur"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lieblingsfutter&query_place_id=ChIJ2VAthaRQqEcRk1riWXuq2Q4",
+    "categoryName": "Tierfriseur"
+  }
+]
