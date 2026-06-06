@@ -13,22 +13,39 @@
       "contact": "Kontakt aufnehmen"
     },
     "contact": {
-        "title": "Kontaktieren Sie uns",
-        "subtitle": "Hinterlassen Sie eine Anfrage – wir melden uns innerhalb einer Stunde.",
-        "successTitle": "Anfrage gesendet!",
-        "successDesc": "Wir werden uns in Kürze bei Ihnen melden.",
-        "form": {
-          "name": "Name",
-          "namePlaceholder": "Max Mustermann",
-          "phone": "Telefon",
-          "phonePlaceholder": "+49 151 12345678",
-          "email": "E-Mail",
-          "emailPlaceholder": "hello@example.com",
-          "message": "Nachricht",
-          "messagePlaceholder": "Erzählen Sie uns von Ihrem Projekt...",
-          "submit": "Anfrage senden"
-        }
-      },
+    "title": "Lassen Sie uns über Ihr Projekt sprechen",
+    "subtitle": "Wir arbeiten mit Unternehmen in ganz Europa. Wir antworten so schnell wie möglich.",
+    "messengerLabel": "Messenger",
+    "emailLabel": "E-Mail",
+    "form": {
+      "title": "Anfrage senden",
+      "subtitle": "Beschreiben Sie Ihr Projekt — wir erstellen kostenlos ein Angebot.",
+      "successTitle": "Anfrage gesendet!",
+      "successText": "Wir werden uns in Kürze bei Ihnen melden.",
+      "sendMore": "Weitere senden",
+      "name": "Name *",
+      "namePlaceholder": "Max Mustermann",
+      "email": "E-Mail *",
+      "phone": "Telefon",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Betreff wählen…",
+      "subjects": [
+        "Website-Entwicklung",
+        "Support & Wartung",
+        "SaaS-Plattform",
+        "Preisanfrage",
+        "Partnerschaft",
+        "Sonstiges"
+      ],
+      "message": "Nachricht *",
+      "messagePlaceholder": "Erzählen Sie uns von Ihrem Unternehmen und Ihrer Aufgabe…",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.",
+      "submit": "Anfrage senden →",
+      "privacyStart": "Mit Klick auf den Button stimmen Sie der Verarbeitung personenbezogener Daten gemäß unserer ",
+      "privacyLink": "Datenschutzerklärung",
+      "privacyEnd": " zu."
+    }
+  },
       "subscribe": {
     "title": "Kasse",
     "alreadyHaveAccount": "Haben Sie bereits ein Konto?",

@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const fs       = require('fs');
 require('dotenv').config();
 
+const webpush = require('web-push')
+webpush.setVapidDetails(process.env.VAPID_EMAIL, process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
+
 const app  = express();
 const PORT = process.env.PORT || 5000;
 
@@ -64,6 +67,7 @@ app.use('/api/beauty/services', require('./routes/beauty/services'));
 app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
 app.use('/api/beauty/masters', require('./routes/beauty/masters'));
 app.use('/api/beauty/categories', require('./routes/beauty/categories'));
+app.use('/api/saas/push', require('./routes/saas/push'))
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────

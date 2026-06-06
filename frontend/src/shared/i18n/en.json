@@ -12,23 +12,40 @@
       "calculate": "Get a Quote",
       "contact": "Contact Us"
     },
-      "contact": {
-        "title": "Contact Us",
-        "subtitle": "Leave a request and our manager will contact you within an hour.",
-        "successTitle": "Request Sent!",
-        "successDesc": "We will get back to you shortly.",
-        "form": {
-          "name": "Name",
-          "namePlaceholder": "John Doe",
-          "phone": "Phone",
-          "phonePlaceholder": "+44 20 7123 4567",
-          "email": "Email",
-          "emailPlaceholder": "hello@example.com",
-          "message": "Message",
-          "messagePlaceholder": "Tell us about your project...",
-          "submit": "Send Request"
-        }
-      },
+  "contact": {
+    "title": "Let's talk about your project",
+    "subtitle": "We work with businesses across Europe. We'll reply as quickly as possible.",
+    "messengerLabel": "Message us",
+    "emailLabel": "Email",
+    "form": {
+      "title": "Send a request",
+      "subtitle": "Describe your project — we will prepare a free proposal.",
+      "successTitle": "Request sent!",
+      "successText": "We will get back to you shortly.",
+      "sendMore": "Send another",
+      "name": "Name *",
+      "namePlaceholder": "John Doe",
+      "email": "Email *",
+      "phone": "Phone",
+      "subject": "Subject",
+      "subjectPlaceholder": "Choose a subject…",
+      "subjects": [
+        "Website Development",
+        "Support & Maintenance",
+        "SaaS Platform",
+        "Pricing Request",
+        "Partnership",
+        "Other"
+      ],
+      "message": "Message *",
+      "messagePlaceholder": "Tell us about your business and task…",
+      "error": "Something went wrong. Please try again or contact us directly.",
+      "submit": "Send request →",
+      "privacyStart": "By clicking the button, you agree to the processing of personal data in accordance with our ",
+      "privacyLink": "privacy policy",
+      "privacyEnd": "."
+    }
+  },
       "subscribe": {
     "title": "Checkout",
     "alreadyHaveAccount": "Already have an account?",

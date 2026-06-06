@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import "./ContactPage.css";
 
 type FormState = "idle" | "sending" | "success" | "error";
@@ -11,16 +12,8 @@ interface FormData {
   message: string;
 }
 
-const SUBJECTS = [
-  "Разработка сайта",
-  "Поддержка и обслуживание",
-  "SaaS платформа",
-  "Ценовое предложение",
-  "Партнёрство",
-  "Другое",
-];
-
 export default function ContactPage() {
+  const { t } = useTranslation();
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
@@ -30,6 +23,9 @@ export default function ContactPage() {
   });
   const [formState, setFormState] = useState<FormState>("idle");
   const formRef = useRef<HTMLFormElement>(null);
+
+  // Получаем массив тем из локализации
+  const SUBJECTS = t("contact.form.subjects", { returnObjects: true }) as string[];
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -43,8 +39,7 @@ export default function ContactPage() {
     e.preventDefault();
     setFormState("sending");
 
-    // TODO: replace with real API call, e.g.:
-    // await apiClient.post("/contact", form);
+    // TODO: replace with real API call
     await new Promise((r) => setTimeout(r, 1800));
 
     setFormState("success");
@@ -78,23 +73,15 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page">
-      {/* ── Hero ── */}
       <section className="contact-hero">
-        <h1 className="contact-hero__title">
-          Поговорим о вашем проекте
-        </h1>
-        <p className="contact-hero__sub">
-          Работаем с бизнесами по всей Европе. Ответим максимально быстро.
-        </p>
+        <h1 className="contact-hero__title">{t("contact.title")}</h1>
+        <p className="contact-hero__sub">{t("contact.subtitle")}</p>
       </section>
 
-      {/* ── Main grid ── */}
       <section className="contact-main">
-        {/* LEFT: info column */}
         <div className="contact-info">
-          {/* Messengers */}
           <div className="info-block">
-            <span className="info-block__label">Написать в мессенджер</span>
+            <span className="info-block__label">{t("contact.messengerLabel")}</span>
             <div className="messenger-cards">
               {messengers.map((m) => (
                 <a
@@ -115,32 +102,30 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Email */}
           <div className="info-block">
-            <span className="info-block__label">Email</span>
+            <span className="info-block__label">{t("contact.emailLabel")}</span>
             <a href="mailto:hello@gopublica.com" className="email-link">
               hello@gopublica.com
             </a>
           </div>
         </div>
 
-        {/* RIGHT: form */}
         <div className="contact-form-wrap">
           <div className="contact-form-header">
-            <h2>Отправить запрос</h2>
-            <p>Опишите проект — мы подготовим предложение бесплатно.</p>
+            <h2>{t("contact.form.title")}</h2>
+            <p>{t("contact.form.subtitle")}</p>
           </div>
 
           {formState === "success" ? (
             <div className="form-success">
               <div className="form-success__icon">✓</div>
-              <h3>Заявка отправлена!</h3>
-              <p>Мы свяжемся с вами в ближайшее время.</p>
+              <h3>{t("contact.form.successTitle")}</h3>
+              <p>{t("contact.form.successText")}</p>
               <button
                 className="btn btn--primary"
                 onClick={() => setFormState("idle")}
               >
-                Отправить ещё
+                {t("contact.form.sendMore")}
               </button>
             </div>
           ) : (
@@ -152,12 +137,12 @@ export default function ContactPage() {
             >
               <div className="form-row">
                 <div className="form-field">
-                  <label htmlFor="name">Имя *</label>
+                  <label htmlFor="name">{t("contact.form.name")}</label>
                   <input
                     id="name"
                     name="name"
                     type="text"
-                    placeholder="Иван Мюллер"
+                    placeholder={t("contact.form.namePlaceholder")}
                     value={form.name}
                     onChange={handleChange}
                     required
@@ -165,12 +150,12 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="form-field">
-                  <label htmlFor="email">Email *</label>
+                  <label htmlFor="email">{t("contact.form.email")}</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="ivan@company.de"
+                    placeholder="hello@company.com"
                     value={form.email}
                     onChange={handleChange}
                     required
@@ -180,7 +165,7 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="phone">Телефон</label>
+                <label htmlFor="phone">{t("contact.form.phone")}</label>
                 <input
                   id="phone"
                   name="phone"
@@ -193,14 +178,14 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="subject">Тема обращения</label>
+                <label htmlFor="subject">{t("contact.form.subject")}</label>
                 <select
                   id="subject"
                   name="subject"
                   value={form.subject}
                   onChange={handleChange}
                 >
-                  <option value="">Выбрать тему…</option>
+                  <option value="">{t("contact.form.subjectPlaceholder")}</option>
                   {SUBJECTS.map((s) => (
                     <option key={s} value={s}>
                       {s}
@@ -210,12 +195,12 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="message">Сообщение *</label>
+                <label htmlFor="message">{t("contact.form.message")}</label>
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
-                  placeholder="Расскажите о вашем бизнесе и задаче…"
+                  placeholder={t("contact.form.messagePlaceholder")}
                   value={form.message}
                   onChange={handleChange}
                   required
@@ -224,7 +209,7 @@ export default function ContactPage() {
 
               {formState === "error" && (
                 <div className="form-error-msg">
-                  Что-то пошло не так. Попробуйте ещё раз или напишите нам напрямую.
+                  {t("contact.form.error")}
                 </div>
               )}
 
@@ -236,14 +221,14 @@ export default function ContactPage() {
                 {formState === "sending" ? (
                   <span className="btn-spinner" />
                 ) : (
-                  "Отправить заявку →"
+                  t("contact.form.submit")
                 )}
               </button>
 
               <p className="form-privacy">
-                Нажимая кнопку, вы соглашаетесь с обработкой персональных
-                данных в соответствии с&nbsp;
-                <a href="/privacy">политикой конфиденциальности</a>.
+                {t("contact.form.privacyStart")}
+                <a href="/privacy">{t("contact.form.privacyLink")}</a>
+                {t("contact.form.privacyEnd")}
               </p>
             </form>
           )}

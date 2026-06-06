@@ -13,22 +13,39 @@
       "contact": "Contactar"
     },
     "contact": {
-        "title": "Contáctanos",
-        "subtitle": "Deja tu solicitud y un gerente te contactará en menos de una hora.",
-        "successTitle": "¡Solicitud enviada!",
-        "successDesc": "Nos pondremos en contacto contigo en breve.",
-        "form": {
-          "name": "Nombre",
-          "namePlaceholder": "Juan Pérez",
-          "phone": "Teléfono",
-          "phonePlaceholder": "+34 600 123 456",
-          "email": "Correo electrónico",
-          "emailPlaceholder": "hola@ejemplo.com",
-          "message": "Mensaje",
-          "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
-          "submit": "Enviar solicitud"
-        }
-      },
+    "title": "Hablemos de tu proyecto",
+    "subtitle": "Trabajamos con empresas de toda Europa. Responderemos lo antes posible.",
+    "messengerLabel": "Escríbenos",
+    "emailLabel": "Email",
+    "form": {
+      "title": "Enviar solicitud",
+      "subtitle": "Describe tu proyecto — prepararemos una propuesta gratuita.",
+      "successTitle": "¡Solicitud enviada!",
+      "successText": "Nos pondremos en contacto contigo en breve.",
+      "sendMore": "Enviar otra",
+      "name": "Nombre *",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Email *",
+      "phone": "Teléfono",
+      "subject": "Asunto",
+      "subjectPlaceholder": "Elige un asunto…",
+      "subjects": [
+        "Desarrollo web",
+        "Soporte y mantenimiento",
+        "Plataforma SaaS",
+        "Presupuesto",
+        "Asociación",
+        "Otro"
+      ],
+      "message": "Mensaje *",
+      "messagePlaceholder": "Cuéntanos sobre tu negocio y tarea…",
+      "error": "Algo salió mal. Por favor, inténtalo de nuevo o contáctanos directamente.",
+      "submit": "Enviar solicitud →",
+      "privacyStart": "Al hacer clic en el botón, aceptas el procesamiento de datos personales de acuerdo con nuestra ",
+      "privacyLink": "política de privacidad",
+      "privacyEnd": "."
+    }
+  },
       "subscribe": {
     "title": "Pago",
     "alreadyHaveAccount": "¿Ya tienes una cuenta?",

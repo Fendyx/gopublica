@@ -1,0 +1,786 @@
+[
+  {
+    "title": "Der kleine Hafenladen",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Nördliche Hafenstraße 6",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 80007706",
+    "categories": [
+      "Café",
+      "Gebrauchtwarenhändler",
+      "Kiosk",
+      "Tabakgeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Der%20kleine%20Hafenladen&query_place_id=ChIJPcj1GIeRokcRXoORAGtdzv8",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Cafe Tohmaz",
+    "totalScore": 4.7,
+    "reviewsCount": 413,
+    "street": "Zeller Str. 3",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 45324412",
+    "categories": [
+      "Café",
+      "Libanesisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cafe%20Tohmaz&query_place_id=ChIJUwLusPCRokcR5D0pt-WPt0g",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Café Amboss",
+    "totalScore": 5,
+    "reviewsCount": 64,
+    "street": "Wagnerstraße 10",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Café",
+      "Kaffeegeschäft",
+      "Café mit Frucht- und Süßspeisen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Amboss&query_place_id=ChIJHwhkxMSRokcRYhlmp_StspY",
+    "categoryName": "Café"
+  },
+  {
+    "title": "CaféXperiment",
+    "totalScore": 4.9,
+    "reviewsCount": 101,
+    "street": "Koellikerstraße 1a",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 61943443",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9Xperiment&query_place_id=ChIJie_AHwCRokcRa8thwTcjsfM",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Café Nimmersatt - Cafe & Kitchen",
+    "totalScore": 4.8,
+    "reviewsCount": 196,
+    "street": "Weingartenstraße 39",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 29769971",
+    "categories": [
+      "Café",
+      "Frühstückslokal",
+      "Brunch-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Nimmersatt%20-%20Cafe%20%26%20Kitchen&query_place_id=ChIJV0NCiDuRokcRFuzfQogzLGE",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Café Vue Store - Würzburg",
+    "totalScore": 4.6,
+    "reviewsCount": 60,
+    "street": "Sterngasse 4",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Vue%20Store%20-%20W%C3%BCrzburg&query_place_id=ChIJKyBkHP-RokcRlW0ADFWTL6Y",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Café Rudowitz",
+    "totalScore": 4.7,
+    "reviewsCount": 326,
+    "street": "Sanderstraße 10a",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 175 8553108",
+    "categories": [
+      "Café",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Rudowitz&query_place_id=ChIJn_rnhjCQokcRtFBK1tP0cDY",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Hülsemann’s Cafébar",
+    "totalScore": 4.7,
+    "reviewsCount": 18,
+    "street": "Marktpl. 7",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 4045761",
+    "categories": [
+      "Café",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=H%C3%BClsemann%E2%80%99s%20Caf%C3%A9bar&query_place_id=ChIJAb1JWFGRokcRXa3wVNLwDac",
+    "categoryName": "Café"
+  },
+  {
+    "title": "InCa Lesecafé",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Marktpl. 9",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Café",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=InCa%20Lesecaf%C3%A9&query_place_id=ChIJqywWiTOQokcR0N5TndpjW1s",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Kult",
+    "totalScore": 4.4,
+    "reviewsCount": 498,
+    "street": "Landwehrstraße 10",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 53143",
+    "categories": [
+      "Café",
+      "Frühstückslokal",
+      "Bar",
+      "Kneipe",
+      "Vegetarisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kult&query_place_id=ChIJ_bzohDqQokcRuZvtRMt6lZc",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Käppeles Lädele",
+    "totalScore": 5,
+    "reviewsCount": 10,
+    "street": "Steinbachtal",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1575 4528998",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=K%C3%A4ppeles%20L%C3%A4dele&query_place_id=ChIJf9zy1jiQokcRCCPtnprkvDk",
+    "categoryName": "Café"
+  },
+  {
+    "title": "marias - Smoothies, Bagels and More",
+    "totalScore": 4.7,
+    "reviewsCount": 215,
+    "street": "Wilhelmstraße 5",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 35828370",
+    "categories": [
+      "Café",
+      "Bagelshop",
+      "Imbiss",
+      "Coffeeshop",
+      "Saftbar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=marias%20-%20Smoothies%2C%20Bagels%20and%20More&query_place_id=ChIJVaF9oTOQokcR55NAbGc6Ets",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Shanti Cafe-Bar",
+    "totalScore": 3.7,
+    "reviewsCount": 68,
+    "street": "Bronnbachergasse 19",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 20700272",
+    "categories": [
+      "Café",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Shanti%20Cafe-Bar&query_place_id=ChIJmXuzYDSQokcRzJR8tUMbZ-E",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Bäckerei Schiffer",
+    "totalScore": 3.9,
+    "reviewsCount": 189,
+    "street": "Dominikanerpl. 4",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 3532296",
+    "categories": [
+      "Café",
+      "Bäckerei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=B%C3%A4ckerei%20Schiffer&query_place_id=ChIJd2ibcTOQokcR_wqmCsC_FzQ",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Shop in der Festung Marienberg",
+    "totalScore": 2,
+    "reviewsCount": 18,
+    "street": "QWQC+XR, Schönborntor, Marienberg",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Shop%20in%20der%20Festung%20Marienberg&query_place_id=ChIJpZ3BLeuRokcR-csHSABmDtU",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Trattoria da Carmelo",
+    "totalScore": 4.7,
+    "reviewsCount": 320,
+    "street": "Pleicherkirchpl. 7",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 18883",
+    "categories": [
+      "Italienisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Trattoria%20da%20Carmelo&query_place_id=ChIJ7_aI2jSQokcRNE-c_K0-3mA",
+    "categoryName": "Italienisches Restaurant"
+  },
+  {
+    "title": "Höreder Beck",
+    "totalScore": 3.5,
+    "reviewsCount": 64,
+    "street": "Virchowstraße 2",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 99158103",
+    "categories": [
+      "Café",
+      "Bäckerei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=H%C3%B6reder%20Beck&query_place_id=ChIJG2Tjx_5Mc0ERtyprMPWtUkA",
+    "categoryName": "Café"
+  },
+  {
+    "title": "DIA",
+    "totalScore": 4.8,
+    "reviewsCount": 196,
+    "street": "Zeller Str. 9",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=DIA&query_place_id=ChIJ0YtgSVaRokcRYg2ztDSQRyU",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Klinik-Café Erthal-Sozialwerk",
+    "totalScore": 4.7,
+    "reviewsCount": 18,
+    "street": "Josef-Schneider-Straße 2/Haus D25",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 20157425",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Klinik-Caf%C3%A9%20Erthal-Sozialwerk&query_place_id=ChIJgRNwnEuPokcRhVYgau5sWTQ",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Kaya Salat Feinkost",
+    "totalScore": 4.7,
+    "reviewsCount": 7,
+    "street": "Nürnberger Str. 12",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 24844872",
+    "categories": [
+      "Vegetarisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kaya%20Salat%20Feinkost&query_place_id=ChIJ8f8sNwCPokcRK8oovs4id80",
+    "categoryName": "Vegetarisches Restaurant"
+  },
+  {
+    "title": "Maxl Bäck",
+    "totalScore": 4.3,
+    "reviewsCount": 125,
+    "street": "Versbacher Str. 75",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 27057691",
+    "categories": [
+      "Café",
+      "Bäckerei",
+      "Coffeeshop",
+      "Konditorei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Maxl%20B%C3%A4ck&query_place_id=ChIJddMuQ52PokcRHBxBtSXq4Uc",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Cafeteria Campus Hubland Nord Würzburg",
+    "totalScore": 1,
+    "reviewsCount": 1,
+    "street": "Gerda-Laufer-Straße 138",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cafeteria%20Campus%20Hubland%20Nord%20W%C3%BCrzburg&query_place_id=ChIJNe57cgCPokcRcoJRciAyyak",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Das Casa Eisautomat Lengfeld",
+    "totalScore": 5,
+    "reviewsCount": 7,
+    "street": "Weg zum Sportpl. 8",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Eisdiele"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Das%20Casa%20Eisautomat%20Lengfeld&query_place_id=ChIJc5WGZjePokcRGaYm1lCUezo",
+    "categoryName": "Eisdiele"
+  },
+  {
+    "title": "Kaya Döner Würzburg",
+    "totalScore": 4.8,
+    "reviewsCount": 89,
+    "street": "Zwischen Carglass und Xpipe, Nürnberger Str. 116",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1573 4477300",
+    "categories": [
+      "Kebabimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kaya%20D%C3%B6ner%20W%C3%BCrzburg&query_place_id=ChIJZ5jgzOOPokcRTgZDJvOKu_E",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Restaurante La Vida",
+    "totalScore": 4.4,
+    "reviewsCount": 13,
+    "street": "Sanderheinrichsleitenweg 15",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 30197608",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Vida&query_place_id=ChIJPQGw4EWPokcRW1k0yKrFpPg",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Restaurant Than Tin",
+    "totalScore": 3.7,
+    "reviewsCount": 3,
+    "street": "Nürnberger Str. 76",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Asiatisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Than%20Tin&query_place_id=ChIJK9yebQCPokcR1Bcf-duFEAc",
+    "categoryName": "Asiatisches Restaurant"
+  },
+  {
+    "title": "Döner Bros.",
+    "totalScore": 4.8,
+    "reviewsCount": 221,
+    "street": "Werner-von-Siemens-Straße 22",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1514 7211799",
+    "categories": [
+      "Döner-Restaurant",
+      "Fast-Food-Restaurant",
+      "Pizzeria",
+      "Imbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%C3%B6ner%20Bros.&query_place_id=ChIJf-x8LdSPokcRkihdeJl0axE",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "R.P. Gastronomie GmbH",
+    "totalScore": 4.8,
+    "reviewsCount": 4,
+    "street": "Äußere Aumühlstraße 9",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Imbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=R.P.%20Gastronomie%20GmbH&query_place_id=ChIJ5655oy2OokcR9RZGGkEM3k4",
+    "categoryName": "Imbiss"
+  },
+  {
+    "title": "Delphi",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": null,
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Griechisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Delphi&query_place_id=ChIJuzjkIACPokcR8xMMVQoD_bU",
+    "categoryName": "Griechisches Restaurant"
+  },
+  {
+    "title": "Dijar Imbiss",
+    "totalScore": 3.6,
+    "reviewsCount": 63,
+    "street": "Gewerbegebiet Industriestraße, Industriestraße 7",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 99176466",
+    "categories": [
+      "Restaurant mit Essen zum Mitnehmen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dijar%20Imbiss&query_place_id=ChIJ0SGKRymPokcRjGaSTyj_dd0",
+    "categoryName": "Restaurant mit Essen zum Mitnehmen"
+  },
+  {
+    "title": "Restaurant Pizzeria La Pineta",
+    "totalScore": 4.5,
+    "reviewsCount": 649,
+    "street": "Zeppelinstraße 116",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 883228",
+    "categories": [
+      "Italienisches Restaurant",
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Pizzeria%20La%20Pineta&query_place_id=ChIJ0ykvksSPokcRSPicjpDZfqo",
+    "categoryName": "Italienisches Restaurant"
+  },
+  {
+    "title": "Georgischer Imbiss",
+    "totalScore": 4,
+    "reviewsCount": 3,
+    "street": "Heisenbergstraße 4A",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1577 7334419",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Georgischer%20Imbiss&query_place_id=ChIJwQFQQQCPokcR263ZGFJrhKY",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Biergarten am Hubland",
+    "totalScore": 4.2,
+    "reviewsCount": 14,
+    "street": "Elisabeth-Scheuring-Straße 154",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Biergarten"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Biergarten%20am%20Hubland&query_place_id=ChIJOyqwWACPokcR2sqkf-k93A4",
+    "categoryName": "Biergarten"
+  },
+  {
+    "title": "Pop-up Biergarten",
+    "totalScore": 4,
+    "reviewsCount": 2,
+    "street": "Am Terrassenpark 8",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Biergarten"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pop-up%20Biergarten&query_place_id=ChIJKclsRwCPokcRJve2fWbZeRc",
+    "categoryName": "Biergarten"
+  },
+  {
+    "title": "Café Mittendrin",
+    "totalScore": 4.5,
+    "reviewsCount": 2,
+    "street": "Brüsseler Str. 16",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 600640",
+    "categories": [
+      "Café",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Mittendrin&query_place_id=ChIJz-TKqNOFokcRnS-VNLItUYg",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Coffee Fellows",
+    "totalScore": 3.9,
+    "reviewsCount": 324,
+    "street": "Kopenhagener Straße 100, A3 Richtung",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 619630",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Coffee%20Fellows&query_place_id=ChIJN66W22CFokcRZDkLi9JSY2k",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Café Eiskiosk 2000",
+    "totalScore": 4.6,
+    "reviewsCount": 213,
+    "street": "Wenzelstraße 17",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 613873",
+    "categories": [
+      "Café",
+      "Eiscafé",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Eiskiosk%202000&query_place_id=ChIJfbOARfuPokcRmlO4rFwqfWw",
+    "categoryName": "Café"
+  },
+  {
+    "title": "ArtCafé Juhee",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Gutental 7",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 163 6195005",
+    "categories": [
+      "Kunst-Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ArtCaf%C3%A9%20Juhee&query_place_id=ChIJezAWiPCPokcReksY5zojHpA",
+    "categoryName": "Kunst-Café"
+  },
+  {
+    "title": "Eli-Pili",
+    "totalScore": 4.7,
+    "reviewsCount": 71,
+    "street": "Bonner Str. 20A",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 21760331",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Eli-Pili&query_place_id=ChIJK7cC3TKFokcRYVeZAD3xYPU",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Cafe Tohmaz",
+    "totalScore": 4.4,
+    "reviewsCount": 37,
+    "street": "Theaterstraße 18",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 32909773",
+    "categories": [
+      "Café",
+      "Frühstückslokal"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cafe%20Tohmaz&query_place_id=ChIJc-oeha-RokcRcVII13qKvMk",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Lavendel Eatery",
+    "totalScore": 4.5,
+    "reviewsCount": 73,
+    "street": "Theaterstraße 10",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 177 2408036",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lavendel%20Eatery&query_place_id=ChIJrQ9-vM2RokcRZuq2tpzgDLM",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Caffe etc. Catering",
+    "totalScore": 4.6,
+    "reviewsCount": 163,
+    "street": "Eichhornstraße 8A",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 179 9108305",
+    "categories": [
+      "Espressobar",
+      "Eiscafé"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caffe%20etc.%20Catering&query_place_id=ChIJWakkUjKQokcRT6ujjBDPftI",
+    "categoryName": "Espressobar"
+  },
+  {
+    "title": "Happy Street Kitchen",
+    "totalScore": 4.8,
+    "reviewsCount": 124,
+    "street": "Schönbornstr. 3, (Lage: Marienplatz, hinterm Kaufhof, Katharinengasse 4/Marienplatz",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Imbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Happy%20Street%20Kitchen&query_place_id=ChIJvUt1djSQokcRK2SGra9S7zU",
+    "categoryName": "Imbiss"
+  },
+  {
+    "title": "Weinstube Halbleib",
+    "totalScore": 4.6,
+    "reviewsCount": 221,
+    "street": "Kolpingstraße 9",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 51916",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Weinstube%20Halbleib&query_place_id=ChIJF_w6GzOQokcR_RP9DOJYdfc",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "080 Würzburg | Vintage - Fashion - Café",
+    "totalScore": 4.3,
+    "reviewsCount": 6,
+    "street": "Brücknerstraße 7",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Vintage-Moden-Geschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=080%20W%C3%BCrzburg%20%7C%20Vintage%20-%20Fashion%20-%20Caf%C3%A9&query_place_id=ChIJebzMJzmRokcRMjSvrMDz0M4",
+    "categoryName": "Vintage-Moden-Geschäft"
+  },
+  {
+    "title": "Bratwurststand Thüringer Bratwurst",
+    "totalScore": 5,
+    "reviewsCount": 12,
+    "street": "Alfred-Nobel-Straße 14",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Imbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bratwurststand%20Th%C3%BCringer%20Bratwurst&query_place_id=ChIJvfWABwCRokcRXckKmrqmWkI",
+    "categoryName": "Imbiss"
+  },
+  {
+    "title": "Dürüm Haus des Antonie-Werr",
+    "totalScore": 4.4,
+    "reviewsCount": 8,
+    "street": "Wredestraße 4A",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Veganes Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%C3%BCr%C3%BCm%20Haus%20des%20Antonie-Werr&query_place_id=ChIJsWADQwCRokcRilfRuiYmzHA",
+    "categoryName": "Veganes Restaurant"
+  },
+  {
+    "title": "Hähnchenwagen",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Frankfurter Str. 56",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Hähnchenimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=H%C3%A4hnchenwagen&query_place_id=ChIJg2VrHACRokcRFcJAvqogzLU",
+    "categoryName": "Hähnchenimbiss"
+  },
+  {
+    "title": "WFV Gaststätte",
+    "totalScore": 4,
+    "reviewsCount": 1,
+    "street": "Mainaustraße",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=WFV%20Gastst%C3%A4tte&query_place_id=ChIJdTp7KwCRokcRQfIsmOxrTvE",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Dürrbachauer Drehspießbude",
+    "totalScore": 4.1,
+    "reviewsCount": 229,
+    "street": "Alfred-Nobel-Straße 1",
+    "city": "Würzburg",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 931 40476750",
+    "categories": [
+      "Imbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%C3%BCrrbachauer%20Drehspie%C3%9Fbude&query_place_id=ChIJLz6IxSmRokcRR12mUO9vl0A",
+    "categoryName": "Imbiss"
+  }
+]

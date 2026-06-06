@@ -1,0 +1,792 @@
+[
+  {
+    "title": "Restaurant Mediterrano",
+    "totalScore": 4.5,
+    "reviewsCount": 449,
+    "street": "Im Remenfeld 1",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 23623944",
+    "categories": [
+      "Mediterranean restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Mediterrano&query_place_id=ChIJY1-Zkcr1r0cRlJey8s48tM0",
+    "categoryName": "Mediterranean restaurant"
+  },
+  {
+    "title": "Hähnchenprinz",
+    "totalScore": 4.7,
+    "reviewsCount": 40,
+    "street": "Berliner Str. 53",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 177 2271193",
+    "categories": [
+      "Chicken shop",
+      "Fried chicken takeaway"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=H%C3%A4hnchenprinz&query_place_id=ChIJkfdgBQD1r0cRcCRIBoDzhRY",
+    "categoryName": "Chicken shop"
+  },
+  {
+    "title": "Vereinsheim KGV Im Holzmoore",
+    "totalScore": 4.6,
+    "reviewsCount": 103,
+    "street": "Petzvalstraße 11",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 172 4075255",
+    "categories": [
+      "Gastropub"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Vereinsheim%20KGV%20Im%20Holzmoore&query_place_id=ChIJx3_5FUX0r0cRGDV6AJs91Nw",
+    "categoryName": "Gastropub"
+  },
+  {
+    "title": "MMI Restaurant",
+    "totalScore": 5,
+    "reviewsCount": 3,
+    "street": "Klostergang 53",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MMI%20Restaurant&query_place_id=ChIJq6r6RKz1r0cRarCiOzTcug0",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Pommes-Box UG",
+    "totalScore": 4.6,
+    "reviewsCount": 30,
+    "street": "Hungerkamp 4m",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 179 2264383",
+    "categories": [
+      "Fast food restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pommes-Box%20UG&query_place_id=ChIJjZfTNOv1r0cRsnuy8wLvanQ",
+    "categoryName": "Fast food restaurant"
+  },
+  {
+    "title": "Sen Asia",
+    "totalScore": 4.1,
+    "reviewsCount": 16,
+    "street": "Berliner Str. 53",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 162 4256868",
+    "categories": [
+      "Snack bar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sen%20Asia&query_place_id=ChIJm-YsQAD1r0cRHSf06WYgSPE",
+    "categoryName": "Snack bar"
+  },
+  {
+    "title": "Fidan Feinkost Oase",
+    "totalScore": 3.5,
+    "reviewsCount": 91,
+    "street": "Berliner Str. 53",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 43519138",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Fidan%20Feinkost%20Oase&query_place_id=ChIJW36N5y_1r0cRKoaWY0BYRuM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "O'Bella Ciao",
+    "totalScore": 4.8,
+    "reviewsCount": 92,
+    "street": "Buchenweg 13",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 5309 2990722",
+    "categories": [
+      "Italian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=O'Bella%20Ciao&query_place_id=ChIJ9SD_PQDzr0cRIg6ywCHlmdU",
+    "categoryName": "Italian restaurant"
+  },
+  {
+    "title": "Ristorante Da Noi",
+    "totalScore": 4.9,
+    "reviewsCount": 43,
+    "street": "Retemeyerstraße 1",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 25073500",
+    "categories": [
+      "Italian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ristorante%20Da%20Noi&query_place_id=ChIJDeYdlSz1r0cRc1J9ui9dwSM",
+    "categoryName": "Italian restaurant"
+  },
+  {
+    "title": "il Capriccio - Braunschweig",
+    "totalScore": 4.6,
+    "reviewsCount": 985,
+    "street": "Rautheimer Str. 1",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 70729003",
+    "categories": [
+      "Italian restaurant",
+      "Grocery delivery service",
+      "Delivery Restaurant",
+      "Takeout Restaurant",
+      "Pasta shop",
+      "Pizza delivery",
+      "Pizza restaurant",
+      "Southern Italian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=il%20Capriccio%20-%20Braunschweig&query_place_id=ChIJ20sG-Jj1r0cR_GehUiyYx3c",
+    "categoryName": "Italian restaurant"
+  },
+  {
+    "title": "La Vita",
+    "totalScore": 4.7,
+    "reviewsCount": 371,
+    "street": "Görlitzstraße 8",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 12878801",
+    "categories": [
+      "Pizza restaurant",
+      "Fast food restaurant",
+      "Italian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=La%20Vita&query_place_id=ChIJ5zbI41lfpUcRgQP5kUI1fbE",
+    "categoryName": "Pizza restaurant"
+  },
+  {
+    "title": "Cesar Kebap & More",
+    "totalScore": 4.7,
+    "reviewsCount": 22,
+    "street": "Margarete-Steiff-Straße 2",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 27085970",
+    "categories": [
+      "Fast food restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cesar%20Kebap%20%26%20More&query_place_id=ChIJVVBGUwD1r0cRT5HbKuEej-Q",
+    "categoryName": "Fast food restaurant"
+  },
+  {
+    "title": "Oishiino - Koreanisches BBQ",
+    "totalScore": 4,
+    "reviewsCount": 55,
+    "street": "Leipziger Str. 232",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 25042716",
+    "categories": [
+      "Korean restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Oishiino%20-%20Koreanisches%20BBQ&query_place_id=ChIJATTfQQBfpUcRlTYMJ2YEBiE",
+    "categoryName": "Korean restaurant"
+  },
+  {
+    "title": "Wirtschaftsgebäude",
+    "totalScore": 4.7,
+    "reviewsCount": 46,
+    "street": "Bundesallee 100",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Cafeteria",
+      "Takeout Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Wirtschaftsgeb%C3%A4ude&query_place_id=ChIJX_z1YXT3r0cRlYowi3v50Ks",
+    "categoryName": "Cafeteria"
+  },
+  {
+    "title": "Watenbüttel Kebaphaus",
+    "totalScore": 4.5,
+    "reviewsCount": 241,
+    "street": "Celler Heerstraße 317",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 515141",
+    "categories": [
+      "Kebab shop",
+      "Doner kebab restaurant",
+      "Pizza restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Watenb%C3%BCttel%20Kebaphaus&query_place_id=ChIJC_BB2Dz3r0cRuSB0M0BoHw4",
+    "categoryName": "Kebab shop"
+  },
+  {
+    "title": "Amici Pizza Napoletana",
+    "totalScore": 4.9,
+    "reviewsCount": 82,
+    "street": "David-Mansfeld-Weg 20",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 47372324",
+    "categories": [
+      "Pizza Takeout"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Amici%20Pizza%20Napoletana&query_place_id=ChIJufAylir3r0cRkImxgz7312k",
+    "categoryName": "Pizza Takeout"
+  },
+  {
+    "title": "Brothers Imbiss",
+    "totalScore": 4.8,
+    "reviewsCount": 92,
+    "street": "Rüningenstraße 80",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1575 5656909",
+    "categories": [
+      "Doner kebab restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Brothers%20Imbiss&query_place_id=ChIJtywdHQBZpUcRd0M9uU8CWo4",
+    "categoryName": "Doner kebab restaurant"
+  },
+  {
+    "title": "Donau Grill",
+    "totalScore": 4.8,
+    "reviewsCount": 647,
+    "street": "Donaustraße 45",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 47230055",
+    "categories": [
+      "Kebab shop",
+      "Fast food restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Donau%20Grill&query_place_id=ChIJ3UEjtiL2r0cR7xDyQCisVsY",
+    "categoryName": "Kebab shop"
+  },
+  {
+    "title": "Restaurant am Kanal",
+    "totalScore": 4.3,
+    "reviewsCount": 3,
+    "street": "Am Kanal 4",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20am%20Kanal&query_place_id=ChIJr_r0awDxr0cRpb4rXXJ71M8",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Levanta Restaurant | مطعم ليفانتا",
+    "totalScore": 4.7,
+    "reviewsCount": 94,
+    "street": "Bohlweg 16",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 63747397",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Levanta%20Restaurant%20%7C%20%D9%85%D8%B7%D8%B9%D9%85%20%D9%84%D9%8A%D9%81%D8%A7%D9%86%D8%AA%D8%A7&query_place_id=ChIJvW6ARo31r0cRtkIHlsRw-ss",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Sonnenblume",
+    "totalScore": 3.2,
+    "reviewsCount": 93,
+    "street": "Elbestraße 23",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 2886305",
+    "categories": [
+      "Fast food restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sonnenblume&query_place_id=ChIJQy79tzr2r0cRkdd9BcMhKiY",
+    "categoryName": "Fast food restaurant"
+  },
+  {
+    "title": "Braunschweig",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Lichtenberger Str. 53",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Braunschweig&query_place_id=ChIJ79whcQD3r0cRFBfPC3fVy88",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Dog Couple",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Harzblick 44",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dog%20Couple&query_place_id=ChIJi4GDcaJYpUcRKBR_Anb_edY",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "My Bistro",
+    "totalScore": 4.6,
+    "reviewsCount": 361,
+    "street": "Gifhorner Str. 83",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 23175550",
+    "categories": [
+      "Asian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=My%20Bistro&query_place_id=ChIJjZ4z3bf2r0cRw3OtvV73qUU",
+    "categoryName": "Asian restaurant"
+  },
+  {
+    "title": "Daniel's Imbiss",
+    "totalScore": 4.8,
+    "reviewsCount": 29,
+    "street": "Hafenstraße 60",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1511 2291035",
+    "categories": [
+      "Snack bar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Daniel's%20Imbiss&query_place_id=ChIJV9UXEgD3r0cRY2DVtHr5E0U",
+    "categoryName": "Snack bar"
+  },
+  {
+    "title": "Drina-Stuben",
+    "totalScore": 4.6,
+    "reviewsCount": 172,
+    "street": "Ligusterweg 20",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 326175",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Drina-Stuben&query_place_id=ChIJbb2SDdj1r0cRwt2dgCOE1qo",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Restaurant im Tenniscenter Veltenhof",
+    "totalScore": 4.3,
+    "reviewsCount": 204,
+    "street": "Ernst-Böhme-Straße 15",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 314766",
+    "categories": [
+      "German restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20im%20Tenniscenter%20Veltenhof&query_place_id=ChIJKa5fGNr2r0cRlDIXVapq4rs",
+    "categoryName": "German restaurant"
+  },
+  {
+    "title": "Restaurant Sandwüste",
+    "totalScore": 5,
+    "reviewsCount": 8,
+    "street": "Fridtjof-Nansen-Straße 29A",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 352397",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Sandw%C3%BCste&query_place_id=ChIJz5MoYjn3r0cRoAFWRrO2atk",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Nesly - Braunschweig",
+    "totalScore": 4.8,
+    "reviewsCount": 267,
+    "street": "Hagenring 27a",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 172 5274928",
+    "categories": [
+      "Mediterranean restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Nesly%20-%20Braunschweig&query_place_id=ChIJlZdF7131r0cRTA2yvMWAZC8",
+    "categoryName": "Mediterranean restaurant"
+  },
+  {
+    "title": "Secret Bar Restaurant Braunschweig",
+    "totalScore": 4.4,
+    "reviewsCount": 76,
+    "street": "Lange Str. 64",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 86693199",
+    "categories": [
+      "Restaurant",
+      "Bar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Secret%20Bar%20Restaurant%20Braunschweig&query_place_id=ChIJIcedfAD3r0cRkN4k7fgQlOQ",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Osaka Sushi House",
+    "totalScore": 4.9,
+    "reviewsCount": 34,
+    "street": "Willy-Brandt-Platz 1",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Sushi restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Osaka%20Sushi%20House&query_place_id=ChIJu9Ey1a71r0cRmLhJsP5Hf3w",
+    "categoryName": "Sushi restaurant"
+  },
+  {
+    "title": "Buddha Lounge - Braunschweig",
+    "totalScore": 4.3,
+    "reviewsCount": 1050,
+    "street": "Lange Str. 60",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 80195510",
+    "categories": [
+      "Pan-Asian restaurant",
+      "Sushi restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Buddha%20Lounge%20-%20Braunschweig&query_place_id=ChIJhx4jeZT3r0cR5HZ2cqX_Aqw",
+    "categoryName": "Pan-Asian restaurant"
+  },
+  {
+    "title": "Berlin Döner",
+    "totalScore": 4.5,
+    "reviewsCount": 215,
+    "street": "Saarstraße 139",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 47234482",
+    "categories": [
+      "Turkish restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Berlin%20D%C3%B6ner&query_place_id=ChIJ0dDyRj_3r0cRrMSFRC7xmeM",
+    "categoryName": "Turkish restaurant"
+  },
+  {
+    "title": "NEM Grill",
+    "totalScore": 4.3,
+    "reviewsCount": 2024,
+    "street": "Neue Str. 8",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 26159801",
+    "categories": [
+      "Vietnamese restaurant",
+      "Bar",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=NEM%20Grill&query_place_id=ChIJ8fCHE3f2r0cReqgBj5haKd8",
+    "categoryName": "Vietnamese restaurant"
+  },
+  {
+    "title": "Yakamoz Restaurant",
+    "totalScore": 4.5,
+    "reviewsCount": 1172,
+    "street": "Kattreppeln 10",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 61286778",
+    "categories": [
+      "Turkish restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Yakamoz%20Restaurant&query_place_id=ChIJ6e4NP3b2r0cRbOSsrKYoWrA",
+    "categoryName": "Turkish restaurant"
+  },
+  {
+    "title": "Thang Long",
+    "totalScore": 4.3,
+    "reviewsCount": 533,
+    "street": "Fallersleber Str. 45",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 1206338",
+    "categories": [
+      "Vietnamese restaurant",
+      "Sushi restaurant",
+      "Wok restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Thang%20Long&query_place_id=ChIJK0A1gnj2r0cR09guPIZJDCM",
+    "categoryName": "Vietnamese restaurant"
+  },
+  {
+    "title": "KINGDÖNER&PIZZERIA",
+    "totalScore": 4.7,
+    "reviewsCount": 58,
+    "street": "Lammer Heide 6",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 88931690",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KINGD%C3%96NER%26PIZZERIA&query_place_id=ChIJgZQcLQD3r0cRAmsbDH4Ejhg",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Sportheim Lehndorf „ Zur Verlängerung",
+    "totalScore": 5,
+    "reviewsCount": 20,
+    "street": "Blitzeichenweg 20",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 177 7165901",
+    "categories": [
+      "Gastropub",
+      "Bar",
+      "Dart bar",
+      "Party planner"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sportheim%20Lehndorf%20%E2%80%9E%20Zur%20Verl%C3%A4ngerung&query_place_id=ChIJAXYA0c31r0cRA9Yn22-kcbw",
+    "categoryName": "Gastropub"
+  },
+  {
+    "title": "MC DÖNER 2 IMBISS",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Neudammstraße 111",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 178 4060841",
+    "categories": [
+      "Turkish restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MC%20D%C3%96NER%202%20IMBISS&query_place_id=ChIJpfc2ZQD3r0cR41CVYBEzPh8",
+    "categoryName": "Turkish restaurant"
+  },
+  {
+    "title": "Michelangelo Pizzeria",
+    "totalScore": 4.5,
+    "reviewsCount": 691,
+    "street": "Wilhelm-Bode-Straße 14",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 340156",
+    "categories": [
+      "Italian restaurant",
+      "Pizza restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Michelangelo%20Pizzeria&query_place_id=ChIJyxsZn831r0cRd1lXQ_LR9O0",
+    "categoryName": "Italian restaurant"
+  },
+  {
+    "title": "Schloss Restaurant Schawrma",
+    "totalScore": 3.2,
+    "reviewsCount": 41,
+    "street": "Friedrich-Wilhelm-Straße 35",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1590 4738321",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Schloss%20Restaurant%20Schawrma&query_place_id=ChIJ06hmZRf3r0cRGVPXKnQZIiY",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Lamme",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Lammer Heide 6",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lamme&query_place_id=ChIJDziVWAD3r0cRpVpCJqBMrSw",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Grill 4 you",
+    "totalScore": 5,
+    "reviewsCount": 5,
+    "street": "Vor dem Dorfe 2",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 83057648",
+    "categories": [
+      "Doner kebab restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Grill%204%20you&query_place_id=ChIJ4cwnYQD1r0cReT2Y1WKqyBI",
+    "categoryName": "Doner kebab restaurant"
+  },
+  {
+    "title": "Das kleine Cafe",
+    "totalScore": 3.8,
+    "reviewsCount": 202,
+    "street": "Ölschlägern 17",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Cafe",
+      "American restaurant",
+      "Beer store",
+      "Cake shop",
+      "French restaurant",
+      "German restaurant",
+      "Gluten-free restaurant",
+      "Vegan restaurant",
+      "Vegetarian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Das%20kleine%20Cafe&query_place_id=ChIJ_7g1ukn1r0cRThjgiGlWZCE",
+    "categoryName": "Cafe"
+  },
+  {
+    "title": "Vittorio Ventura Restaurant Katane",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Stobenstraße 36 36",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Italian restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Vittorio%20Ventura%20Restaurant%20Katane&query_place_id=ChIJx43Rg5b1r0cRO8kHpAyzw0M",
+    "categoryName": "Italian restaurant"
+  },
+  {
+    "title": "ASIA LEBA Braunschweig",
+    "totalScore": 3.8,
+    "reviewsCount": 97,
+    "street": "Hamburger Str. 280",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 12297977",
+    "categories": [
+      "Asian restaurant",
+      "Takeout Restaurant",
+      "Sushi restaurant",
+      "Sushi takeaway",
+      "Vietnamese restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ASIA%20LEBA%20Braunschweig&query_place_id=ChIJb5d0W8z3r0cRC-QL5OqDy94",
+    "categoryName": "Asian restaurant"
+  },
+  {
+    "title": "Aichoucha Aouili Restaurant",
+    "totalScore": 1,
+    "reviewsCount": 1,
+    "street": "Bültenweg 81",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Aichoucha%20Aouili%20Restaurant&query_place_id=ChIJ__9bw9T1r0cRaKt_Ybxt4VM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "TAKSIM KEBAP",
+    "totalScore": 4.4,
+    "reviewsCount": 574,
+    "street": "Köterei 1",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 531 51606969",
+    "categories": [
+      "Kebab shop",
+      "Fast food restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=TAKSIM%20KEBAP&query_place_id=ChIJryoQOz70r0cRGeKOMFVWMeY",
+    "categoryName": "Kebab shop"
+  },
+  {
+    "title": "Doyum Grill",
+    "totalScore": 4.5,
+    "reviewsCount": 622,
+    "street": "Hauptstraße 23",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 5307 9802707",
+    "categories": [
+      "Kebab shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Doyum%20Grill&query_place_id=ChIJg3grWjTxr0cRsGJ4118duyY",
+    "categoryName": "Kebab shop"
+  },
+  {
+    "title": "McDöner Imbiss",
+    "totalScore": 4.3,
+    "reviewsCount": 85,
+    "street": "Bienroder Str. 28",
+    "city": "Braunschweig",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 163 3687801",
+    "categories": [
+      "Kebab shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=McD%C3%B6ner%20Imbiss&query_place_id=ChIJo7gcmi_zr0cRy__zuccMQWM",
+    "categoryName": "Kebab shop"
+  }
+]
