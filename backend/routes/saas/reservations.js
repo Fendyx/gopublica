@@ -19,8 +19,8 @@ router.post('/', async (req, res) => {
     const subs = await PushSubscription.find({ tenantId })
     if (subs.length > 0) {
       const payload = JSON.stringify({
-        title: '🍽️ Новое бронирование',
-        body: `${name} · ${date} в ${time}${guests ? ` · ${guests} гостей` : ''}`,
+        title: '🍽️ Neue Buchung',
+        body: `${name} · ${date} um ${time}${guests ? ` · ${guests} Gäste` : ''}`,
         tag: `booking-${reservation._id}`,
         url: '/admin/reservations',
       })
