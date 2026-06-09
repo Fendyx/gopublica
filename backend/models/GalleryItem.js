@@ -6,8 +6,13 @@ const galleryItemSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
+  branchId: {
+    type: String,
+    default: null,
+    index: true,
+  },
   image: {
-    type: String, // URL из Cloudinary
+    type: String,
     required: true,
   },
   caption: {

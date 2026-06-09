@@ -1,38 +1,3 @@
-const express = require('express');
-const router = express.Router();
-const MenuItem = require('../../models/MenuItem');
-const authTenant = require('../../middleware/authTenant');
-
-// Публичный роут: получение меню по tenantId и опционально branchId
-router.get('/', async (req, res) => {
-  try {
-    const { tenantId, branchId } = req.query;
-    if (!tenantId) {
-      return res.status(400).json({ error: 'tenantId is required' });
-    }
-
-    let query = { tenantId };
-    if (branchId) {
-      // Если указан филиал – берём его позиции (branchId = значение) и глобальные (branchId = null)
-      query = {
-        tenantId,
-        $or: [
-          { branchId: branchId },
-          { branchId: null }
-        ]
-      };
-    } else {
-      // Без branchId – только глобальные (старое поведение)
-      query = { tenantId, branchId: null };
-    }
-
-    const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 });
-    res.json(items);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
 // Защищённый роут: добавление блюда
 router.post('/', authTenant, async (req, res) => {
   try {
@@ -41,26 +6,29 @@ router.post('/', authTenant, async (req, res) => {
       description,
       price,
       category,
-      categoryKey,       // <-- добавлено
+      categoryKey,
       image,
       isVegetarian,
       isSpicy,
       order,
-      translations,      // <-- добавлено
+      translations,
+      branchId,  // добавить
     } = req.body;
 
     const newItem = new MenuItem({
       tenantId: req.tenantId,
+      branchId: branchId || null,   // если не передан – глобальное
+      baseItemId: null,             // пока не используем
       name,
       description,
       price,
       category,
-      categoryKey,       // <-- добавлено
+      categoryKey,
       image,
       isVegetarian,
       isSpicy,
       order,
-      translations,      // <-- добавлено
+      translations,
     });
     await newItem.save();
     res.status(201).json(newItem);
@@ -81,30 +49,13 @@ router.put('/:id', authTenant, async (req, res) => {
       return res.status(403).json({ error: 'Доступ запрещён' });
     }
 
-    Object.assign(item, req.body);
+    // Обновляем, но branchId обычно не меняем (или разрешим, но осторожно)
+    const { branchId, ...updateData } = req.body;
+    if (branchId !== undefined) item.branchId = branchId;
+    Object.assign(item, updateData);
     await item.save();
     res.json(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
-// Удаление (защищённый)
-router.delete('/:id', authTenant, async (req, res) => {
-  try {
-    const item = await MenuItem.findById(req.params.id);
-    if (!item) {
-      return res.status(404).json({ error: 'Блюдо не найдено' });
-    }
-    if (item.tenantId !== req.tenantId) {
-      return res.status(403).json({ error: 'Доступ запрещён' });
-    }
-
-    await MenuItem.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Deleted' });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-module.exports = router;
