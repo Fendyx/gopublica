@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const menuItemSchema = new mongoose.Schema(
   {
     tenantId: { type: String, required: true, index: true },
+    branchId:    { type: String, default: null, index: true },   // null = глобальное для всех филиалов
+    baseItemId:  { type: String, default: null }, 
     name: { type: String, required: true }, // основной язык
     description: { type: String, default: "" },
     price: { type: Number, required: true },

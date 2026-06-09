@@ -6,6 +6,7 @@ const reservationSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
+  branchId: { type: String, required: true, index: true },
   name: String,
   phone: String,
   email: String,

@@ -1,0 +1,760 @@
+[
+  {
+    "title": "Salon Psa Zwierzyniec",
+    "totalScore": 5,
+    "reviewsCount": 12,
+    "street": "Rybna 14",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 727 145 001",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20Psa%20Zwierzyniec&query_place_id=ChIJ85wIV0xdFkcRaRxl1Qa8gL4",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Loca Groomer",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Przejście przez sklep zoologiczny Zwierzogród, Szwedzka 52",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 888 160 190",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Loca%20Groomer&query_place_id=ChIJrcIsRoZbFkcRQYsryy0QM8I",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Perros - Salon Pielęgnacji Psów i Sklep Zoologiczny",
+    "totalScore": 4.8,
+    "reviewsCount": 184,
+    "street": "Józefa Chełmońskiego 17",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 357 43 43",
+    "categories": [
+      "Fryzjer dla zwierząt",
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Perros%20-%20Salon%20Piel%C4%99gnacji%20Ps%C3%B3w%20i%20Sklep%20Zoologiczny&query_place_id=ChIJRyrwwUtaFkcR5xPKjyD-Kac",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "URODA CZTEROŁAPA fryzjer dla psów, salon pielęgnacji psów",
+    "totalScore": 4.7,
+    "reviewsCount": 89,
+    "street": "Kazimierza Wielkiego 111",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 666 026 404",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=URODA%20CZTERO%C5%81APA%20fryzjer%20dla%20ps%C3%B3w%2C%20salon%20piel%C4%99gnacji%20ps%C3%B3w&query_place_id=ChIJyfBY1DlbFkcR1_5ngJ6xD9M",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Groomer Kraków",
+    "totalScore": 4.2,
+    "reviewsCount": 15,
+    "street": "Glinik 84",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 223 061",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Groomer%20Krak%C3%B3w&query_place_id=ChIJV55pZsVPFkcRXNHZ2hqa66c",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Groomer Kraków LuckyPuppy",
+    "totalScore": 5,
+    "reviewsCount": 4,
+    "street": "Glinik 86A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 223 061",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Groomer%20Krak%C3%B3w%20LuckyPuppy&query_place_id=ChIJd1qTe40tzSsRzvukigoPwV8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Fafel Grooming Salon",
+    "totalScore": 5,
+    "reviewsCount": 76,
+    "street": "Osiedle Dywizjonu 303 71",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 514 164 274",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Fafel%20Grooming%20Salon&query_place_id=ChIJ6XdFS25FFkcRkWcCUqJZc4s",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "GROOM4DOG Salon pielęgnacji psów i kotów",
+    "totalScore": 5,
+    "reviewsCount": 51,
+    "street": "Klementyny Hoffmanowej 18",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 789 561 811",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=GROOM4DOG%20Salon%20piel%C4%99gnacji%20ps%C3%B3w%20i%20kot%C3%B3w&query_place_id=ChIJ2TwaoMldFkcRSodWT4JGZrg",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Cztery łapy",
+    "totalScore": 5,
+    "reviewsCount": 67,
+    "street": "Spółdzielców 3",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 517 520 502",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cztery%20%C5%82apy&query_place_id=ChIJxwgDpMNDFkcRpbLYZuIzJsY",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "HauStyle-psi fryzjer",
+    "totalScore": 4.7,
+    "reviewsCount": 87,
+    "street": "Kobierzyńska 121",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 537 836 858",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=HauStyle-psi%20fryzjer&query_place_id=ChIJma3QN35dFkcRl2v0MZHUhM0",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Pets Room",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Łużycka 22",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 793 243 075",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pets%20Room&query_place_id=ChIJw1jEavxDFkcR7NN_hJlC2pE",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Fryzjer dla psa. Salon psiej urody-Dog room",
+    "totalScore": 5,
+    "reviewsCount": 26,
+    "street": "Podedworze 6b",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 793 241 907",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Fryzjer%20dla%20psa.%20Salon%20psiej%20urody-Dog%20room&query_place_id=ChIJ5wXtChRDFkcR3kEuY8pUgzU",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Mały Wilk - pielęgnacja i strzyżenie psów",
+    "totalScore": 4.1,
+    "reviewsCount": 84,
+    "street": "Torfowa 1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 697 883 863",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ma%C5%82y%20Wilk%20-%20piel%C4%99gnacja%20i%20strzy%C5%BCenie%20ps%C3%B3w&query_place_id=ChIJDZGJZ25dFkcRUSNDEsEDLPA",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Salon strzyżenia i pielęgnacji psów",
+    "totalScore": 4.6,
+    "reviewsCount": 36,
+    "street": "Letnia 27",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 511 993 007",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20strzy%C5%BCenia%20i%20piel%C4%99gnacji%20ps%C3%B3w&query_place_id=ChIJAw4jKaVDFkcRamFmV1DSN54",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Salon pielęgnacji psów, sklep zoologiczny PERROS",
+    "totalScore": 4.7,
+    "reviewsCount": 59,
+    "street": "Nowosądecka 52",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 535 668 505",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20piel%C4%99gnacji%20ps%C3%B3w%2C%20sklep%20zoologiczny%20PERROS&query_place_id=ChIJxadGhUVDFkcR37z1Y9R_RGg",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Salon Pielęgnacji Psów \"Nowy York\"",
+    "totalScore": 4.9,
+    "reviewsCount": 51,
+    "street": "Alfreda Dauna 97/lok 2",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 502 300 312",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20Piel%C4%99gnacji%20Ps%C3%B3w%20%22Nowy%20York%22&query_place_id=ChIJXardTVpDFkcRUUdofGwCYCU",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Salon Strzyżenia Psów Iwona Piechówka",
+    "totalScore": 4.9,
+    "reviewsCount": 12,
+    "street": "Jana Długosza 13",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 505 694 335",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20Strzy%C5%BCenia%20Ps%C3%B3w%20Iwona%20Piech%C3%B3wka&query_place_id=ChIJ1RoeDV1bFkcRcTMFYACqlXE",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "RENATA ŻELAZKO FIRMA HANDLOWA-\"RENI\"",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Leonida Teligi 24",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 504 986 987",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=RENATA%20%C5%BBELAZKO%20FIRMA%20HANDLOWA-%22RENI%22&query_place_id=ChIJd1EW__xDFkcR8P33mOHNMZQ",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Psi Fryzjer",
+    "totalScore": 4,
+    "reviewsCount": 3,
+    "street": "Alfreda Dauna 97/lok 2",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 502 300 312",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Psi%20Fryzjer&query_place_id=ChIJAQAQTVpDFkcRM8BHkBf_DbQ",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "ANIMALIS. Salon piękności psów.",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Widłakowa 6h",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 419 349",
+    "categories": [
+      "Fryzjer dla zwierząt",
+      "Salon piękności"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ANIMALIS.%20Salon%20pi%C4%99kno%C5%9Bci%20ps%C3%B3w.&query_place_id=ChIJ-buGnUZDFkcR5lXUwUVmt_8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "ANIAMLIS. Salon Piękności Psów",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Widłakowa 6H",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 419 349",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ANIAMLIS.%20Salon%20Pi%C4%99kno%C5%9Bci%20Ps%C3%B3w&query_place_id=ChIJSRI9kJxdFkcR4wZdQ8Y3Q5w",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Choomiki",
+    "totalScore": 4.5,
+    "reviewsCount": 161,
+    "street": "Wincentego Witosa 7",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 573 676 542",
+    "categories": [
+      "Sklep zoologiczny",
+      "Sklep akwarystyczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Choomiki&query_place_id=ChIJ53AfSLlDFkcRz_JKH0Lva7A",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "Sklep zoologiczny Świat zwierzat",
+    "totalScore": 4.5,
+    "reviewsCount": 20,
+    "street": "kiosk numer 13, Beskidzka 43",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 513 073 376",
+    "categories": [
+      "Sklep zoologiczny",
+      "Sklep z karmą dla zwierząt",
+      "Usługa transportowa"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sklep%20zoologiczny%20%C5%9Awiat%20zwierzat&query_place_id=ChIJh6Ql-7RcFkcRkkGA5g6BL_o",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "Zoologia",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Bolesława Limanowskiego 8",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Zoologia&query_place_id=ChIJ9YhxkURbFkcRBKnq-nlU66E",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "FENEK",
+    "totalScore": 4.9,
+    "reviewsCount": 172,
+    "street": "Bieżanowska 88",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 692 675 464",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=FENEK&query_place_id=ChIJDzdVGmJDFkcRE9CpDxbQjTQ",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "SKLEP ZOOLOGICZNY PIES I KOT",
+    "totalScore": 4.4,
+    "reviewsCount": 30,
+    "street": "Kordiana 5",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=SKLEP%20ZOOLOGICZNY%20PIES%20I%20KOT&query_place_id=ChIJtTq3g85DFkcRFPMGxnvswlo",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "MIZIAJEK Psi Fryzjer Groomer Mobilny",
+    "totalScore": 5,
+    "reviewsCount": 5,
+    "street": "Wojciecha z Brudzewa 3",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 455 408 958",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MIZIAJEK%20Psi%20Fryzjer%20Groomer%20Mobilny&query_place_id=ChIJJytB6UJFFkcR100vcVlcWIo",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "PAN PIES- pielęgnacja i strzyżenie zwierząt/psi fryzjer/salon groomerski",
+    "totalScore": 4.8,
+    "reviewsCount": 44,
+    "street": "Pierwsze piętro, Wolska 7",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 710 757",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=PAN%20PIES-%20piel%C4%99gnacja%20i%20strzy%C5%BCenie%20zwierz%C4%85t%2Fpsi%20fryzjer%2Fsalon%20groomerski&query_place_id=ChIJP4etfVtFFkcR0-ji_x8v7ZE",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Szcześllliwy zwierz",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": null,
+    "city": null,
+    "state": null,
+    "countryCode": null,
+    "phone": "+48 536 105 017",
+    "categories": [
+      "Fryzjer dla zwierząt",
+      "Service establishment"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Szcze%C5%9Bllliwy%20zwierz&query_place_id=ChIJgxBzq5ArIosRoZkz_KUbxF4",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Tommy Grooming",
+    "totalScore": 4.8,
+    "reviewsCount": 28,
+    "street": "Szopkarzy 14",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 571 878 835",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tommy%20Grooming&query_place_id=ChIJcxAYQwBbFkcRcUUdV6lQkdo",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Tommy Grooming",
+    "totalScore": 5,
+    "reviewsCount": 10,
+    "street": "Fiołkowa 4/71",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 571 878 835",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tommy%20Grooming&query_place_id=ChIJqZXwW35bFkcRoTDOScj2h1Q",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Daj Włos - Psi fryzjer Kraków Groomer | Nowa Huta",
+    "totalScore": 5,
+    "reviewsCount": 20,
+    "street": "wejście od ulicy Ludźmierskiej, osiedle Urocze 5",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 502 095 570",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Daj%20W%C5%82os%20-%20Psi%20fryzjer%20Krak%C3%B3w%20Groomer%20%7C%20Nowa%20Huta&query_place_id=ChIJA5u78k9FFkcRcBE1PNiBBHo",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "DogLove fryzjer (groomer) i hotelik dla psów",
+    "totalScore": 5,
+    "reviewsCount": 22,
+    "street": "Osiedle Willowe 29",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 513 261 361",
+    "categories": [
+      "Fryzjer dla zwierząt",
+      "Opieka nad zwierzętami"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=DogLove%20fryzjer%20(groomer)%20i%20hotelik%20dla%20ps%C3%B3w&query_place_id=ChIJD5PrVumulKMRptPoCYGHZA8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Wyczesani - Salon Pielęgnacji Psów, fryzjer dla psów",
+    "totalScore": 4.9,
+    "reviewsCount": 79,
+    "street": "osiedle Urocze 18",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 502 951 645",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Wyczesani%20-%20Salon%20Piel%C4%99gnacji%20Ps%C3%B3w%2C%20fryzjer%20dla%20ps%C3%B3w&query_place_id=ChIJ_Zqw4VtFFkcRVXpprwgv8IQ",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Sara. Strzyżenie psów",
+    "totalScore": 4.8,
+    "reviewsCount": 37,
+    "street": "Osiedle Centrum D 2",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 606 362 964",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sara.%20Strzy%C5%BCenie%20ps%C3%B3w&query_place_id=ChIJ2cwEKBdFFkcRljT8_9oPru8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Hotel i Spa dla psów Holi Home",
+    "totalScore": 4.7,
+    "reviewsCount": 12,
+    "street": "Jeżynowa 11",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 606 892 093",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hotel%20i%20Spa%20dla%20ps%C3%B3w%20Holi%20Home&query_place_id=ChIJiyVFzMtRzGkRna0RAZ98iK8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Domowi Przyjaciele",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Rotmistrza Zbigniewa Dunin-Wąsowicza",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Domowi%20Przyjaciele&query_place_id=ChIJOakAt4JbFkcRqUnrvlg7YU0",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "VetZoo",
+    "totalScore": 4.7,
+    "reviewsCount": 3,
+    "street": "Marszałka Józefa Piłsudskiego 30",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 411 39 89",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=VetZoo&query_place_id=ChIJtZv_RJ1bFkcR_G0jAKlPevg",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "Północne SPA",
+    "totalScore": 4.6,
+    "reviewsCount": 117,
+    "street": "Nowowiejska 5",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 530 100 314",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=P%C3%B3%C5%82nocne%20SPA&query_place_id=ChIJuwjqd8JbFkcRg81uN61cj-A",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Pabijan Patrycja. Salon pielęgnacji psów",
+    "totalScore": 5,
+    "reviewsCount": 11,
+    "street": "Krowoderskich Zuchów 24",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 509 377 705",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pabijan%20Patrycja.%20Salon%20piel%C4%99gnacji%20ps%C3%B3w&query_place_id=ChIJQyyU3U9aFkcRBDzMIvo6P8U",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Psi Look Salon piękności zwierząt",
+    "totalScore": 3,
+    "reviewsCount": 6,
+    "street": "26, Osiedle Mozarta 23",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 660 682 922",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Psi%20Look%20Salon%20pi%C4%99kno%C5%9Bci%20zwierz%C4%85t&query_place_id=ChIJOQLlYfNaFkcRQ9sLkjVOC48",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Strzyżenie psow",
+    "totalScore": 2.5,
+    "reviewsCount": 2,
+    "street": "Osiedle Józefa Strusia 1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 606 461 500",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Strzy%C5%BCenie%20psow&query_place_id=ChIJRRKqxFxFFkcRvk4zcZAWVV8",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Flora Dog style",
+    "totalScore": 4.3,
+    "reviewsCount": 3,
+    "street": "Gen. Witolda Urbanowicza 10A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Flora%20Dog%20style&query_place_id=ChIJF4kgxElFFkcRXjUZ7xHT77s",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "PUPIL SPA Pracownia Groomerska",
+    "totalScore": 3.7,
+    "reviewsCount": 3,
+    "street": "Mostowa 6",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 795 627 509",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=PUPIL%20SPA%20Pracownia%20Groomerska&query_place_id=ChIJISRha0JbFkcRKRWec3kYZdM",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Royal Turkish Barber",
+    "totalScore": 5,
+    "reviewsCount": 4,
+    "street": "Józefa Dietla 25",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 666 534 176",
+    "categories": [
+      "Salon fryzjerski"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Royal%20Turkish%20Barber&query_place_id=ChIJVaaXeitbFkcRyTUa-aRxT5U",
+    "categoryName": "Salon fryzjerski"
+  },
+  {
+    "title": "Dream Barbershop",
+    "totalScore": 4.9,
+    "reviewsCount": 334,
+    "street": "Wielopole 20A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 573 901 458",
+    "categories": [
+      "Salon fryzjerski",
+      "Fryzjer"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dream%20Barbershop&query_place_id=ChIJzaKa1VhbFkcREMzDqkMD6oI",
+    "categoryName": "Salon fryzjerski"
+  },
+  {
+    "title": "Pupilove Targi",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Podgórska 34",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pupilove%20Targi&query_place_id=ChIJN8PeFT9bFkcRUlp4w7Ckvys",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "Psubratek&Sejutek",
+    "totalScore": 4.9,
+    "reviewsCount": 60,
+    "street": "Widok 22",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Fryzjer dla zwierząt"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Psubratek%26Sejutek&query_place_id=ChIJeT7KvMZbFkcRLeDJ4SteEqo",
+    "categoryName": "Fryzjer dla zwierząt"
+  },
+  {
+    "title": "Limo ZOO sklep zoologiczny Prokocim",
+    "totalScore": 4.9,
+    "reviewsCount": 25,
+    "street": "Teligi 24/lu14",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 530 106 313",
+    "categories": [
+      "Sklep zoologiczny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Limo%20ZOO%20sklep%20zoologiczny%20Prokocim&query_place_id=ChIJybjoUYtDFkcRAq9RtrDq_ys",
+    "categoryName": "Sklep zoologiczny"
+  },
+  {
+    "title": "Graboś Academy hair&beauty",
+    "totalScore": 4.6,
+    "reviewsCount": 21,
+    "street": "Lasówka 30C/LU1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 603 180 816",
+    "categories": [
+      "Fryzjer"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Grabo%C5%9B%20Academy%20hair%26beauty&query_place_id=ChIJPaRqUzHa7QMRkemXCSBVci8",
+    "categoryName": "Fryzjer"
+  }
+]

@@ -1,0 +1,791 @@
+[
+  {
+    "title": "Zeera Indian Restaurant Balicka I مطعم زيرا الهندي",
+    "totalScore": 5,
+    "reviewsCount": 488,
+    "street": "Balicka 324",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 577 771 889",
+    "categories": [
+      "Indisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Zeera%20Indian%20Restaurant%20Balicka%20I%20%D9%85%D8%B7%D8%B9%D9%85%20%D8%B2%D9%8A%D8%B1%D8%A7%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D9%8A&query_place_id=ChIJb4UooG9ZFkcRBHbJGhb0Vf8",
+    "categoryName": "Indisches Restaurant"
+  },
+  {
+    "title": "Bieszczadzkie Smaki w Szwajcarii",
+    "totalScore": 5,
+    "reviewsCount": 3,
+    "street": "Jana Stanisława Bystronia 20",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 739 617 166",
+    "categories": [
+      "Naturkostrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bieszczadzkie%20Smaki%20w%20Szwajcarii&query_place_id=ChIJK1vNYelPFkcR2xyL3Fx2G-E",
+    "categoryName": "Naturkostrestaurant"
+  },
+  {
+    "title": "GRANDE PIZZA",
+    "totalScore": 4.6,
+    "reviewsCount": 396,
+    "street": "Glinik 60a",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 733 153 333",
+    "categories": [
+      "Restaurant",
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=GRANDE%20PIZZA&query_place_id=ChIJlfXp8k9PFkcRyN03oB9hu-o",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Hanguk Bistro Korean Bowl",
+    "totalScore": 4.9,
+    "reviewsCount": 302,
+    "street": "Juliusza Lea 189",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 794 790 528",
+    "categories": [
+      "Koreanisches Restaurant",
+      "Asiatisches Restaurant",
+      "Kaltnudelrestaurant",
+      "Koreanisches Grillrestaurant",
+      "Restaurant für Rindfleisch nach koreanischer Art",
+      "Geschäft für koreanische Lebensmittel",
+      "Restaurant für Rippchen nach koreanischer Art",
+      "Sundae-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hanguk%20Bistro%20Korean%20Bowl&query_place_id=ChIJfbQ3JsRbFkcRzv4uud_HUN8",
+    "categoryName": "Koreanisches Restaurant"
+  },
+  {
+    "title": "La Familia Restauracja & Pub",
+    "totalScore": 4.8,
+    "reviewsCount": 47,
+    "street": "Kawiory 26",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 577 062 626",
+    "categories": [
+      "Restaurant",
+      "Burgerrestaurant",
+      "Italienisches Restaurant",
+      "Mittagsrestaurant",
+      "Pizzeria",
+      "Kneipe"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=La%20Familia%20Restauracja%20%26%20Pub&query_place_id=ChIJ6WQ5QMtbFkcRhXiHWSx-M6w",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "THE DÖNER KEBAB",
+    "totalScore": 4.7,
+    "reviewsCount": 59,
+    "street": "Stanisława Fiszera 1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 781 842 791",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=THE%20D%C3%96NER%20KEBAB&query_place_id=ChIJTx-OAQBbFkcR9Fn1t_qzOiY",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Ha Long",
+    "totalScore": 4.4,
+    "reviewsCount": 26,
+    "street": "Stawowa 61",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Thailändisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ha%20Long&query_place_id=ChIJxXELUgBbFkcRSbXIQKs28jU",
+    "categoryName": "Thailändisches Restaurant"
+  },
+  {
+    "title": "KEBAB GALAXY AZORY MEHOFFERA",
+    "totalScore": 4.5,
+    "reviewsCount": 549,
+    "street": "Józefa Mehoffera 4A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 393 409",
+    "categories": [
+      "Türkisches Restaurant",
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KEBAB%20GALAXY%20AZORY%20MEHOFFERA&query_place_id=ChIJ42W4LqFbFkcRvaMrmhq2YvI",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Phuong Hoang | Bar orientalny",
+    "totalScore": 4.6,
+    "reviewsCount": 1373,
+    "street": "Kadecka 8",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 636 80 55",
+    "categories": [
+      "Vietnamesisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Phuong%20Hoang%20%7C%20Bar%20orientalny&query_place_id=ChIJcy4is7FbFkcRJjbENnvcI4k",
+    "categoryName": "Vietnamesisches Restaurant"
+  },
+  {
+    "title": "Świętochłowice",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Śmiała 11",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Grillrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=%C5%9Awi%C4%99toch%C5%82owice&query_place_id=ChIJzwVYRgBZFkcRQ4eKn7J6d20",
+    "categoryName": "Grillrestaurant"
+  },
+  {
+    "title": "BIMI DESSERTS & KOI NO SUSHI (Bronowice)",
+    "totalScore": 4.4,
+    "reviewsCount": 23,
+    "street": "Stawowa 61",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 728 841 058",
+    "categories": [
+      "Konditorei",
+      "Asiatisches Restaurant",
+      "Sushi-Restaurant",
+      "Sushi Takeaway"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=BIMI%20DESSERTS%20%26%20KOI%20NO%20SUSHI%20(Bronowice)&query_place_id=ChIJ62sjvsNbFkcR3NGQcT_utPM",
+    "categoryName": "Konditorei"
+  },
+  {
+    "title": "GFT Polska",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Stawowa 61",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=GFT%20Polska&query_place_id=ChIJHdP8CABbFkcRD-7pivF87s8",
+    "categoryName": "Pizzeria"
+  },
+  {
+    "title": "MENU ST24 Krakow Training site",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Królowej Jadwigi 255F",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 666 837 973",
+    "categories": [
+      "Asiatisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MENU%20ST24%20Krakow%20Training%20site&query_place_id=ChIJh783KfVbFkcRaDoRJqzNEx0",
+    "categoryName": "Asiatisches Restaurant"
+  },
+  {
+    "title": "BIBIMBAR korean bistro",
+    "totalScore": 4.6,
+    "reviewsCount": 417,
+    "street": "Galicyjska 1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 573 304 726",
+    "categories": [
+      "Koreanisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=BIBIMBAR%20korean%20bistro&query_place_id=ChIJ0Yx9zHdFFkcRU6yt-mwW_Go",
+    "categoryName": "Koreanisches Restaurant"
+  },
+  {
+    "title": "American Restaurants Sp. z o.o.",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Osiedle Niepodległości 3A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 71 386 16 15",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=American%20Restaurants%20Sp.%20z%20o.o.&query_place_id=ChIJD79Y2zhFFkcRDeDH_3og5js",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Asiana 3 dragon kuchnia orientalna Wietnamska i Chińska",
+    "totalScore": 4.3,
+    "reviewsCount": 191,
+    "street": "Kruszwicka 21c",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 606 579 205",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Asiana%203%20dragon%20kuchnia%20orientalna%20Wietnamska%20i%20Chi%C5%84ska&query_place_id=ChIJE-Ub7SJFFkcRoQKyzxDeADg",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "DIAN KEBAB HOUSE",
+    "totalScore": 4.2,
+    "reviewsCount": 644,
+    "street": "Osiedle Centrum C 8A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 515 222 673",
+    "categories": [
+      "Türkisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=DIAN%20KEBAB%20HOUSE&query_place_id=ChIJ-Y_Zq-hFFkcR8pJZQe5jKMY",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "5th Avenue Restaurant & Lounge Bar",
+    "totalScore": 4.8,
+    "reviewsCount": 309,
+    "street": "Dąbska 5",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 201 40 45",
+    "categories": [
+      "Restaurant",
+      "Loungebar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=5th%20Avenue%20Restaurant%20%26%20Lounge%20Bar&query_place_id=ChIJHfLaQ7ZbFkcRH_Jmpxn2nD0",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Bar Orientalny Lam Kieu",
+    "totalScore": 4.5,
+    "reviewsCount": 865,
+    "street": "Aleksandra Lubomirskiego 51",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 357 41 77",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bar%20Orientalny%20Lam%20Kieu&query_place_id=ChIJzVvmkRhbFkcRk5GhCCyc5Vg",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "ZOHAIB KEBAB KRAKOW 1",
+    "totalScore": 4.6,
+    "reviewsCount": 136,
+    "street": "Strzelców 21E",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 510 276 392",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ZOHAIB%20KEBAB%20KRAKOW%201&query_place_id=ChIJvXQM1xxbFkcRSTG-7X3mvAs",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "OGGI Urban Bistro",
+    "totalScore": 4.3,
+    "reviewsCount": 258,
+    "street": "Centrum Serenada, Aleja Generała Tadeusza Bora-Komorowskiego 41",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 577 677 827",
+    "categories": [
+      "Coffeeshop",
+      "Bistro"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=OGGI%20Urban%20Bistro&query_place_id=ChIJw12RG8daFkcR9UQiLJUPtQE",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Türk Döner Kebap",
+    "totalScore": 4.3,
+    "reviewsCount": 192,
+    "street": "Aleja Pułkownika Władysława Beliny-Prażmowskiego 3",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 536 567 680",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=T%C3%BCrk%20D%C3%B6ner%20Kebap&query_place_id=ChIJUcGXUQBbFkcRKz5DMS-fcGI",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Burger Truck",
+    "totalScore": 2.9,
+    "reviewsCount": 15,
+    "street": "Dąbska",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Burgerrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Burger%20Truck&query_place_id=ChIJXcZAaABFFkcRaCSJQY_QCRs",
+    "categoryName": "Burgerrestaurant"
+  },
+  {
+    "title": "CUORE Pizza&Cucina",
+    "totalScore": 4.8,
+    "reviewsCount": 519,
+    "street": "Sokola 58b",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 500 468 673",
+    "categories": [
+      "Italienisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=CUORE%20Pizza%26Cucina&query_place_id=ChIJUQMsGp9fFkcRxEtifDiA-80",
+    "categoryName": "Italienisches Restaurant"
+  },
+  {
+    "title": "APNA KEBAB",
+    "totalScore": 4.6,
+    "reviewsCount": 81,
+    "street": "Włoska",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 452 092 686",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=APNA%20KEBAB&query_place_id=ChIJL0aMlAJDFkcRHUhwSl2YTjs",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Trzy Kaczki",
+    "totalScore": 4.4,
+    "reviewsCount": 3308,
+    "street": "Obrońców Tobruku 29A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 793 714 374",
+    "categories": [
+      "Restaurant",
+      "Restaurant mit europäischer Küche",
+      "Familienrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Trzy%20Kaczki&query_place_id=ChIJG_RpsVdcFkcR7wiSvfYTin0",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Chatori Chat",
+    "totalScore": 5,
+    "reviewsCount": 39,
+    "street": "Mieczykowa 11/08",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 574 825 497",
+    "categories": [
+      "Indischer Takeaway"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Chatori%20Chat&query_place_id=ChIJi9uf1EFdFkcRNHkNq5qrsFc",
+    "categoryName": "Indischer Takeaway"
+  },
+  {
+    "title": "Mustafa Kebab Krakow",
+    "totalScore": 4.6,
+    "reviewsCount": 341,
+    "street": "Wielicka 79a",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 739 413 991",
+    "categories": [
+      "Kebabimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mustafa%20Kebab%20Krakow&query_place_id=ChIJefeFWgBFFkcRzlwIiC03qXg",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Kebab Kingdom",
+    "totalScore": 4.2,
+    "reviewsCount": 116,
+    "street": "Cechowa 118",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 427 501",
+    "categories": [
+      "Türkisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20Kingdom&query_place_id=ChIJP6gkgQlDFkcRhF9-US45T3Y",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Just Jollof African Restaurant and Event catering Poland",
+    "totalScore": 4.8,
+    "reviewsCount": 64,
+    "street": "Bolesława Limanowskiego 37",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 577 915 355",
+    "categories": [
+      "Restaurant",
+      "Lebensmittel- und Getränkelieferant für Caterer",
+      "Veranstaltungsstätte"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Just%20Jollof%20African%20Restaurant%20and%20Event%20catering%20Poland&query_place_id=ChIJH7wPZ31bFkcRL4wtBrwSIj4",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "KamilBusiness",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Nowosądecka",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KamilBusiness&query_place_id=ChIJyWcz8DVDFkcRWpS0JfqDMZs",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Mr Lobster",
+    "totalScore": 4.6,
+    "reviewsCount": 588,
+    "street": "Lwowska 23",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 538 355 508",
+    "categories": [
+      "Italienisches Restaurant",
+      "Pizzeria",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mr%20Lobster&query_place_id=ChIJ_VoKHAZbFkcRY1PP6YwfD5o",
+    "categoryName": "Italienisches Restaurant"
+  },
+  {
+    "title": "Mera kebab",
+    "totalScore": 4.5,
+    "reviewsCount": 209,
+    "street": "al. Adolfa Dygasińskiego 1",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 453 467 011",
+    "categories": [
+      "Kebabimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mera%20kebab&query_place_id=ChIJ8e-_6UFDFkcRplk6CrKcm7Q",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Anh Tuan",
+    "totalScore": 4.5,
+    "reviewsCount": 817,
+    "street": "Malborska 35",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 307 559",
+    "categories": [
+      "Asiatisches Restaurant",
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Anh%20Tuan&query_place_id=ChIJO5OryPFDFkcREYUxgf4MZzA",
+    "categoryName": "Asiatisches Restaurant"
+  },
+  {
+    "title": "SMAK",
+    "totalScore": 4.3,
+    "reviewsCount": 146,
+    "street": "Stefana Grota-Roweckiego 37D",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 792 856 707",
+    "categories": [
+      "Kebabimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=SMAK&query_place_id=ChIJQybvNwBdFkcRWsKyz7NtGGs",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Szopa na Polanie",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "os. Oleksówki 6A",
+    "city": "Nowy Targ",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Szopa%20na%20Polanie&query_place_id=ChIJeyXvawBdFkcRYkOTYXRIB3E",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Stołówka FAIS (Bistro 11)",
+    "totalScore": 4.5,
+    "reviewsCount": 8,
+    "street": "Profesora Stanisława Łojasiewicza 11",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Bistro"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sto%C5%82%C3%B3wka%20FAIS%20(Bistro%2011)&query_place_id=ChIJCYfkGABdFkcRj1jSzhEPZ_8",
+    "categoryName": "Bistro"
+  },
+  {
+    "title": "Kebab u Pajdy",
+    "totalScore": 4.4,
+    "reviewsCount": 2604,
+    "street": "Kobierzyńska 113",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 507 494 712",
+    "categories": [
+      "Kebabimbiss",
+      "Bar",
+      "Fast-Food-Restaurant",
+      "Burgerrestaurant",
+      "Restaurant",
+      "Vegetarisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20u%20Pajdy&query_place_id=ChIJkwIc2ltdFkcRxSEJ40xGpCY",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Gia Long",
+    "totalScore": 3.4,
+    "reviewsCount": 247,
+    "street": "Powstańców Wielkopolskich 18/B",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 674 601",
+    "categories": [
+      "Pan-asiatisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Gia%20Long&query_place_id=ChIJASCslExbFkcRbpZpEheYXv4",
+    "categoryName": "Pan-asiatisches Restaurant"
+  },
+  {
+    "title": "THAI LONG",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Leonida Teligi 37",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 297 668",
+    "categories": [
+      "Thailändisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=THAI%20LONG&query_place_id=ChIJUX26tyVDFkcRH74N4k9P3ok",
+    "categoryName": "Thailändisches Restaurant"
+  },
+  {
+    "title": "Turas Kebab",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Bieżanowska 78B",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Turas%20Kebab&query_place_id=ChIJJ0ZbX_lDFkcR9vOn43TS780",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "Q-Sushi",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Stokrotka, Komuny Paryskiej 1A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sushi-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Q-Sushi&query_place_id=ChIJh5lIcABdFkcRp3GSMFg3dWQ",
+    "categoryName": "Sushi-Restaurant"
+  },
+  {
+    "title": "Zapiekanki ze skawiny",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Wyłom 20",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Polnisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Zapiekanki%20ze%20skawiny&query_place_id=ChIJSWBMawBdFkcRXQhtz34n1gw",
+    "categoryName": "Polnisches Restaurant"
+  },
+  {
+    "title": "Stara Portiernia Pierogarnia Kraków",
+    "totalScore": 3.6,
+    "reviewsCount": 8,
+    "street": "Komuny Paryskiej 1A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 604 280 215",
+    "categories": [
+      "Jiaozi-Restaurant",
+      "Polnisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Stara%20Portiernia%20Pierogarnia%20Krak%C3%B3w&query_place_id=ChIJi69d6YZdFkcRIBasQngrS5U",
+    "categoryName": "Jiaozi-Restaurant"
+  },
+  {
+    "title": "Resto Bar Orientalny Tre Xanh",
+    "totalScore": 3.3,
+    "reviewsCount": 360,
+    "street": "Stefana Grota-Roweckiego 37C",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 12 265 62 69",
+    "categories": [
+      "Chinesisches Abholrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Resto%20Bar%20Orientalny%20Tre%20Xanh&query_place_id=ChIJhQOEmY9cFkcRy33wqY6vEGE",
+    "categoryName": "Chinesisches Abholrestaurant"
+  },
+  {
+    "title": "Mazur's kebab",
+    "totalScore": 4,
+    "reviewsCount": 672,
+    "street": "Lipska 22",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 506 153 291",
+    "categories": [
+      "Kebabimbiss",
+      "Fast-Food-Restaurant",
+      "Lebensmittel-Lieferservice",
+      "Bringdienst für Essen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mazur's%20kebab&query_place_id=ChIJqXS6Ot5FFkcRhDyfhHdkqvs",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "ChiFan - Chinese Streetfood",
+    "totalScore": 4.7,
+    "reviewsCount": 507,
+    "street": "Krzywda 28",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 516 786 858",
+    "categories": [
+      "Chinesisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ChiFan%20-%20Chinese%20Streetfood&query_place_id=ChIJFehuUxRdFkcRRz3Ttzaatmk",
+    "categoryName": "Chinesisches Restaurant"
+  },
+  {
+    "title": "Sem kebab",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Wielicka 8A",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 574 780 223",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sem%20kebab&query_place_id=ChIJ4-VedABbFkcRL2MgSTWOpwo",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Kaczka Wok",
+    "totalScore": 4.4,
+    "reviewsCount": 12,
+    "street": "Powstańców Wielkopolskich 18",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 728 820 822",
+    "categories": [
+      "Restaurant mit Essen zum Mitnehmen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kaczka%20Wok&query_place_id=ChIJK2N-iiZbFkcR4eLgA6010XQ",
+    "categoryName": "Restaurant mit Essen zum Mitnehmen"
+  },
+  {
+    "title": "Kebab YEAH",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Jana Henryka Dąbrowskiego 5",
+    "city": "Kraków",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 733 653 133",
+    "categories": [
+      "Restaurant",
+      "Bar",
+      "Bierhandlung",
+      "Döner-Restaurant",
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20YEAH&query_place_id=ChIJd0c0R-xbFkcRdK1Am-2rXJE",
+    "categoryName": "Restaurant"
+  }
+]

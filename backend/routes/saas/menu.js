@@ -3,15 +3,30 @@ const router = express.Router();
 const MenuItem = require('../../models/MenuItem');
 const authTenant = require('../../middleware/authTenant');
 
-// Публичный роут: получение меню по tenantId
+// Публичный роут: получение меню по tenantId и опционально branchId
 router.get('/', async (req, res) => {
   try {
-    const { tenantId } = req.query;
+    const { tenantId, branchId } = req.query;
     if (!tenantId) {
       return res.status(400).json({ error: 'tenantId is required' });
     }
 
-    const items = await MenuItem.find({ tenantId }).sort({ category: 1, order: 1 });
+    let query = { tenantId };
+    if (branchId) {
+      // Если указан филиал – берём его позиции (branchId = значение) и глобальные (branchId = null)
+      query = {
+        tenantId,
+        $or: [
+          { branchId: branchId },
+          { branchId: null }
+        ]
+      };
+    } else {
+      // Без branchId – только глобальные (старое поведение)
+      query = { tenantId, branchId: null };
+    }
+
+    const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 });
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });
