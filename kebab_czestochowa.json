@@ -1,0 +1,747 @@
+[
+  {
+    "title": "Ayaz antalya kebab",
+    "totalScore": 4.8,
+    "reviewsCount": 526,
+    "street": "Marszałka Józefa Piłsudskiego 2",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 579 216 806",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ayaz%20antalya%20kebab&query_place_id=ChIJtblC2UG1EEcR0u1F33RhTDM",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "CDN.BAR KEBAB",
+    "totalScore": 4.2,
+    "reviewsCount": 871,
+    "street": "Drogowców 15/17",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 534 906 305",
+    "categories": [
+      "Kebab",
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=CDN.BAR%20KEBAB&query_place_id=ChIJuSJEPWa1EEcRlLhE1UlmhPY",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Sidi Bou Shawarma - Kebab Wyczerpy",
+    "totalScore": 4.3,
+    "reviewsCount": 88,
+    "street": "Batalionów Chłopskich 5",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 514 352 896",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sidi%20Bou%20Shawarma%20-%20Kebab%20Wyczerpy&query_place_id=ChIJSU14xjS1EEcRngZ-7WkFCDc",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Umami Kebab",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Józefa Conrada-Korzeniowskiego 1",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 600 877 078",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Umami%20Kebab&query_place_id=ChIJZyeNu9a1EEcRLAd0MSOQpM8",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Kebab Kepsik",
+    "totalScore": 4.5,
+    "reviewsCount": 580,
+    "street": "Aleja Najświętszej Maryi Panny 43",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 798 025 999",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20Kepsik&query_place_id=ChIJBaegMWC1EEcRturXE7DW2ig",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Al Hindi Kebab",
+    "totalScore": 4.6,
+    "reviewsCount": 679,
+    "street": "Obrońców Westerplatte 21",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 535 770 883",
+    "categories": [
+      "Kuchnia turecka"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Al%20Hindi%20Kebab&query_place_id=ChIJT2g-6SK3EEcR7FHU1v7N9x0",
+    "categoryName": "Kuchnia turecka"
+  },
+  {
+    "title": "Bollywood Kebab",
+    "totalScore": 4.2,
+    "reviewsCount": 6,
+    "street": "Aleja Najświętszej Maryi Panny 31",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bollywood%20Kebab&query_place_id=ChIJJewgWwC1EEcRcjiP2mqhMJ8",
+    "categoryName": null
+  },
+  {
+    "title": "BD KING Kebab",
+    "totalScore": 3.7,
+    "reviewsCount": 1457,
+    "street": "aleja Wolności 18",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 884 970 270",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=BD%20KING%20Kebab&query_place_id=ChIJnTSSK8W1EEcRCjyxVJMpf1E",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Kurd Kebab",
+    "totalScore": 4.1,
+    "reviewsCount": 576,
+    "street": "Aleja Najświętszej Maryi Panny 27",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 730 053 000",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kurd%20Kebab&query_place_id=ChIJexTeV0G1EEcRhcOhvK-Ci0M",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "TOMAS KEBAB&BURGER CZĘSTOCHOWA",
+    "totalScore": 4.6,
+    "reviewsCount": 708,
+    "street": "3 Maja 32",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 517 195 805",
+    "categories": [
+      "Fast food"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=TOMAS%20KEBAB%26BURGER%20CZ%C4%98STOCHOWA&query_place_id=ChIJ6w1P4cG3EEcRtkXykYmWLzA",
+    "categoryName": "Fast food"
+  },
+  {
+    "title": "Legend 97' Kebab",
+    "totalScore": 3.6,
+    "reviewsCount": 125,
+    "street": "Aleja Najświętszej Maryi Panny 27",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Jedzenie z dostawą do domu"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Legend%2097'%20Kebab&query_place_id=ChIJvSvyX4y1EEcRR9d2SJ2Fuh4",
+    "categoryName": "Jedzenie z dostawą do domu"
+  },
+  {
+    "title": "Pracownia na Warszawskiej",
+    "totalScore": 4.5,
+    "reviewsCount": 168,
+    "street": "Warszawska 81/lok. 1",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 784 042 462",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pracownia%20na%20Warszawskiej&query_place_id=ChIJ518Yxly1EEcRk9ADvkvF8xc",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "LA FESTA PIOTR MAKOCHOŃ",
+    "totalScore": 4.8,
+    "reviewsCount": 6,
+    "street": "Władysława Broniewskiego 3",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=LA%20FESTA%20PIOTR%20MAKOCHO%C5%83&query_place_id=ChIJL5QOT3C3EEcR0GHgMBjr5X8",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Bollywood KEBAB",
+    "totalScore": 3.9,
+    "reviewsCount": 2047,
+    "street": "Aleja Armii Krajowej 64",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 793 534 330",
+    "categories": [
+      "Kebab",
+      "Doner kebab",
+      "Jedzenie z dostawą do domu",
+      "Restauracja",
+      "Kuchnia turecka"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bollywood%20KEBAB&query_place_id=ChIJ74teJCq0EEcR2NApTW86edM",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "PitStop Kebab",
+    "totalScore": 4.7,
+    "reviewsCount": 43,
+    "street": "Główna 144",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 886 885 990",
+    "categories": [
+      "Strefa gastronomiczna"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=PitStop%20Kebab&query_place_id=ChIJR9p3XIS3EEcRWt7kJhF4ROo",
+    "categoryName": "Strefa gastronomiczna"
+  },
+  {
+    "title": "Illegal Kebab",
+    "totalScore": 4.7,
+    "reviewsCount": 119,
+    "street": "Świętego Rocha 36",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 570 261 944",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Illegal%20Kebab&query_place_id=ChIJW-j0_Ay3EEcR8uMVvKCr0w0",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Łoli Kebab",
+    "totalScore": 4.7,
+    "reviewsCount": 189,
+    "street": "Świętej Barbary 1/3",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 573 675 472",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=%C5%81oli%20Kebab&query_place_id=ChIJyRL6sUW3EEcR1ck98MYHfck",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "MENSKY KEBAB - Gemüse Częstochowa",
+    "totalScore": 4.9,
+    "reviewsCount": 430,
+    "street": "Palmowa 1/9A Lok.17L",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 880 990 945",
+    "categories": [
+      "Fast food",
+      "Kebab",
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MENSKY%20KEBAB%20-%20Gem%C3%BCse%20Cz%C4%99stochowa&query_place_id=ChIJJQwARp61EEcRE6825S7RHhw",
+    "categoryName": "Fast food"
+  },
+  {
+    "title": "Delicious kebab Czętochowa",
+    "totalScore": 4.4,
+    "reviewsCount": 92,
+    "street": "Powstańców Warszawy 147",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 678 622",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Delicious%20kebab%20Cz%C4%99tochowa&query_place_id=ChIJoe6qZgDJEEcRwu9GI9rDDV8",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Kebab na górce",
+    "totalScore": 4.5,
+    "reviewsCount": 405,
+    "street": "Górna 16",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 786 138 147",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20na%20g%C3%B3rce&query_place_id=ChIJz7-Ntey1EEcRDrF21Pb1i8s",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Bilal Spicy Kebab",
+    "totalScore": 4.5,
+    "reviewsCount": 76,
+    "street": "Witolda Gombrowicza 5",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bilal%20Spicy%20Kebab&query_place_id=ChIJ1XquvDe1EEcRR3WtPS91lpE",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Aleja Najświętszej Maryi Panny 24/LOK 25",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Troy Kebab, Aleja Najświętszej Maryi Panny 24",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Aleja%20Naj%C5%9Bwi%C4%99tszej%20Maryi%20Panny%2024%2FLOK%2025&query_place_id=ChIJlSNwF9C1EEcRF7Gl56Bhz4U",
+    "categoryName": null
+  },
+  {
+    "title": "Kebab Desiderio",
+    "totalScore": 1,
+    "reviewsCount": 4,
+    "street": "Wały Generała Józefa Dwernickiego 11/lok 17",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 516 032 038",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20Desiderio&query_place_id=ChIJJ8XeBFa1EEcRxkBm2K1GxAs",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "ROK TYGRYSA inspired by asia",
+    "totalScore": 4.4,
+    "reviewsCount": 737,
+    "street": "Aleja Najświętszej Maryi Panny 51",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 515 789 888",
+    "categories": [
+      "Restauracja azjatycka (kuchnia fusion)"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=ROK%20TYGRYSA%20inspired%20by%20asia&query_place_id=ChIJsQdm0aK1EEcR1MHmFBnbL9I",
+    "categoryName": "Restauracja azjatycka (kuchnia fusion)"
+  },
+  {
+    "title": "Bar Kebab Zaprasza",
+    "totalScore": 4,
+    "reviewsCount": 12,
+    "street": "Aleja Najświętszej Maryi Panny 43",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Restauracja z daniami na wynos"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bar%20Kebab%20Zaprasza&query_place_id=ChIJqV3pYCq1EEcRZCpP1GMtdW4",
+    "categoryName": "Restauracja z daniami na wynos"
+  },
+  {
+    "title": "Bar Frykas",
+    "totalScore": 5,
+    "reviewsCount": 6,
+    "street": "Marszałka Józefa Piłsudskiego 14/23",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Bar"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bar%20Frykas&query_place_id=ChIJbVqtdQC1EEcRxx4fqFCvETk",
+    "categoryName": "Bar"
+  },
+  {
+    "title": "Polak D. Sklep spożywczy",
+    "totalScore": 4.4,
+    "reviewsCount": 23,
+    "street": "Ludowa 146",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 34 322 07 82",
+    "categories": [
+      "Sklep spożywczy"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Polak%20D.%20Sklep%20spo%C5%BCywczy&query_place_id=ChIJGUWOi7u2EEcRjAQ4dc6dzCo",
+    "categoryName": "Sklep spożywczy"
+  },
+  {
+    "title": "Restauracja \"Harnaś\" Przyjęcia Okolicznościowe",
+    "totalScore": 4.1,
+    "reviewsCount": 55,
+    "street": "Cmentarna 16",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 602 711 040",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restauracja%20%22Harna%C5%9B%22%20Przyj%C4%99cia%20Okoliczno%C5%9Bciowe&query_place_id=ChIJeRScgDG0EEcRoox6OO_Lqk8",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Piwiarnia w Alejach",
+    "totalScore": 4.8,
+    "reviewsCount": 989,
+    "street": "Aleja Najświętszej Maryi Panny 31",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 733 689 943",
+    "categories": [
+      "Pub"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Piwiarnia%20w%20Alejach&query_place_id=ChIJyxBmn9q1EEcRfArpM5t_3bo",
+    "categoryName": "Pub"
+  },
+  {
+    "title": "AVE PLAZA",
+    "totalScore": 4.7,
+    "reviewsCount": 23,
+    "street": "Aleja Najświętszej Maryi Panny 29",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 503 038 114",
+    "categories": [
+      "Centrum biznesowe"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=AVE%20PLAZA&query_place_id=ChIJwWaNDI61EEcR4pNwOldmn3w",
+    "categoryName": "Centrum biznesowe"
+  },
+  {
+    "title": "KEBAB FORTUNA",
+    "totalScore": 5,
+    "reviewsCount": 13,
+    "street": "Al. 11 Listopada 25",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 888 756 761",
+    "categories": [
+      "Strefa gastronomiczna"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KEBAB%20FORTUNA&query_place_id=ChIJgXK1WbK1EEcRCHdYHTqWv7Y",
+    "categoryName": "Strefa gastronomiczna"
+  },
+  {
+    "title": "Kebab Kingdom",
+    "totalScore": 4.2,
+    "reviewsCount": 139,
+    "street": "Majora Waleriana Łukasińskiego 37",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 368 026",
+    "categories": [
+      "Kuchnia turecka"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebab%20Kingdom&query_place_id=ChIJ67_tPZ61EEcRVf0pKdhUKeI",
+    "categoryName": "Kuchnia turecka"
+  },
+  {
+    "title": "Wyspa Groszek",
+    "totalScore": 3.9,
+    "reviewsCount": 97,
+    "street": "Krzysztofa Kamila Baczyńskiego 6a",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep spożywczy"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Wyspa%20Groszek&query_place_id=ChIJg8pCNiG0EEcRHHB-E1awnok",
+    "categoryName": "Sklep spożywczy"
+  },
+  {
+    "title": "TORTILLA CETRO",
+    "totalScore": 1,
+    "reviewsCount": 1,
+    "street": "Aleja Najświętszej Maryi Panny 12c",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 572 860 861",
+    "categories": [
+      "Restauracja",
+      "Fast food",
+      "Zdrowa żywność",
+      "Restauracja z daniami na wynos"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=TORTILLA%20CETRO&query_place_id=ChIJURpmh0-1EEcROcbmE3ksPpM",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Solarium Ibiza Sol",
+    "totalScore": 4.3,
+    "reviewsCount": 26,
+    "street": "Aleja Armii Krajowej 46",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 34 343 85 02",
+    "categories": [
+      "Solarium"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Solarium%20Ibiza%20Sol&query_place_id=ChIJn2W6USu0EEcR1zqNfq6D4Dk",
+    "categoryName": "Solarium"
+  },
+  {
+    "title": "\"Alamo\"",
+    "totalScore": 3,
+    "reviewsCount": 2,
+    "street": "Aleja Najświętszej Maryi Panny 12",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Wypożyczalnia samochodów"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=%22Alamo%22&query_place_id=ChIJQzZsvM-1EEcRBi5ucXE4EQo",
+    "categoryName": "Wypożyczalnia samochodów"
+  },
+  {
+    "title": "Kapadocja Kebab&Grill",
+    "totalScore": 4.5,
+    "reviewsCount": 214,
+    "street": "Aleja Najświętszej Maryi Panny 69/12",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 451 220 082",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kapadocja%20Kebab%26Grill&query_place_id=ChIJFSgDFki1EEcRgv_gCFJwzOg",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Malitoo Kebab Częstochowa",
+    "totalScore": 4,
+    "reviewsCount": 45,
+    "street": "Mirowska 20",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 729 521 687",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Malitoo%20Kebab%20Cz%C4%99stochowa&query_place_id=ChIJn_-wm3G1EEcRsmiI44ofHxc",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Ismail Kebab",
+    "totalScore": 4.1,
+    "reviewsCount": 795,
+    "street": "aleja Wolności 33/Lok 7B",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 503 683 855",
+    "categories": [
+      "Kebab",
+      "Restauracja z daniami na wynos",
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ismail%20Kebab&query_place_id=ChIJN0PfRNy1EEcREoqjNPtIEyU",
+    "categoryName": "Kebab"
+  },
+  {
+    "title": "Doner City Shisha",
+    "totalScore": 4.2,
+    "reviewsCount": 568,
+    "street": "aleja Wolności 19",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 34 324 50 63",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Doner%20City%20Shisha&query_place_id=ChIJR1U1JcW1EEcRrsCXzxXXn40",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Bollywood kebab",
+    "totalScore": 4,
+    "reviewsCount": 32,
+    "street": "Władysława Orkana 93",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 793 534 330",
+    "categories": [
+      "Kuchnia turecka"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bollywood%20kebab&query_place_id=ChIJqbZpBQC1EEcRnF76Ghene_I",
+    "categoryName": "Kuchnia turecka"
+  },
+  {
+    "title": "Sklep Mocny Nocny - Orkana 91/93 - Alkohole",
+    "totalScore": 4.5,
+    "reviewsCount": 118,
+    "street": null,
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Sklep monopolowy"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sklep%20Mocny%20Nocny%20-%20Orkana%2091%2F93%20-%20Alkohole&query_place_id=ChIJ42SxrYe1EEcRyX-rOGrX8IQ",
+    "categoryName": "Sklep monopolowy"
+  },
+  {
+    "title": "Kurczak z rożna",
+    "totalScore": 4.8,
+    "reviewsCount": 25,
+    "street": "Brzozowa 2",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 698 180 130",
+    "categories": [
+      "Fast food"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kurczak%20z%20ro%C5%BCna&query_place_id=ChIJr1kkdZa1EEcRqqkguYdoF2s",
+    "categoryName": "Fast food"
+  },
+  {
+    "title": "Arianos Döner Kebab",
+    "totalScore": 3,
+    "reviewsCount": 258,
+    "street": "200, al. Wojska Polskiego 207",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Restauracja"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Arianos%20D%C3%B6ner%20Kebab&query_place_id=ChIJUc_ikse1EEcRgbOh01T_kno",
+    "categoryName": "Restauracja"
+  },
+  {
+    "title": "Kebap Dorom",
+    "totalScore": 2.7,
+    "reviewsCount": 14,
+    "street": null,
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "",
+    "categories": [
+      "Fast food"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kebap%20Dorom&query_place_id=ChIJ449PCn-1EEcRA3GT8sBR_xg",
+    "categoryName": "Fast food"
+  },
+  {
+    "title": "Mi to rybka- ryby świeże i wędzone",
+    "totalScore": 4.8,
+    "reviewsCount": 85,
+    "street": "Sabinowska 118",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 668 309 910",
+    "categories": [
+      "Sklep rybny"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mi%20to%20rybka-%20ryby%20%C5%9Bwie%C5%BCe%20i%20w%C4%99dzone&query_place_id=ChIJt_GWkTXLEEcRqvu7j7LdlKo",
+    "categoryName": "Sklep rybny"
+  },
+  {
+    "title": "Legend 97' Kebab",
+    "totalScore": 4.4,
+    "reviewsCount": 132,
+    "street": "Generała Leopolda Okulickiego 80",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 883 270 537",
+    "categories": [
+      "Jedzenie z dostawą do domu"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Legend%2097'%20Kebab&query_place_id=ChIJ_TVFOfW3EEcRJh_N1h11cXc",
+    "categoryName": "Jedzenie z dostawą do domu"
+  },
+  {
+    "title": "Miedziany Piec - Pizza napoletana AVPN nr 895",
+    "totalScore": 4.9,
+    "reviewsCount": 2464,
+    "street": "aleja Wolności 11",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 798 982 803",
+    "categories": [
+      "Restauracja włoska (kuchnia Neapolu)",
+      "Kuchnia włoska",
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Miedziany%20Piec%20-%20Pizza%20napoletana%20AVPN%20nr%20895&query_place_id=ChIJecUdDtm1EEcR6nRbsY_NEbk",
+    "categoryName": "Restauracja włoska (kuchnia Neapolu)"
+  },
+  {
+    "title": "YUFKA KEBAB CZĘSTOCHOWA",
+    "totalScore": 4.5,
+    "reviewsCount": 68,
+    "street": "Marysia 76A",
+    "city": "Częstochowa",
+    "state": null,
+    "countryCode": "PL",
+    "phone": "+48 790 413 229",
+    "categories": [
+      "Kebab"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=YUFKA%20KEBAB%20CZ%C4%98STOCHOWA&query_place_id=ChIJvYnpksS1EEcRkP1Cuu1kMjw",
+    "categoryName": "Kebab"
+  }
+]

@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* Тема (заменяет tailwind.config.ts) */
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --radius: 0.5rem;
+}
+
+/* Базовые переменные */
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #171717;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #171717;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #0a0a0a;
+
+  /* Кастомные цвета твоего проекта */
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --primary-color: #2563eb;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --primary-color: #3b82f6;
+}
+
+/* Глобальные стили */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Анимации (из бывшего tailwind.config.ts) */
+@keyframes float1 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  20% { transform: translate(45px, -75px) scale(1.06); }
+  50% { transform: translate(15px, -35px) scale(0.95); }
+  75% { transform: translate(-35px, 30px) scale(1.03); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  30% { transform: translate(-55px, -45px) scale(1.08); }
+  60% { transform: translate(35px, 55px) scale(0.93); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  35% { transform: translate(-65px, 45px) scale(1.1); }
+  70% { transform: translate(50px, -35px) scale(0.88); }
+}
+
+@keyframes iridescent {
+  0% { filter: blur(72px) hue-rotate(0deg); background-position: 0% 50%; }
+  33% { background-position: 100% 0%; }
+  66% { background-position: 50% 100%; }
+  100% { filter: blur(72px) hue-rotate(360deg); background-position: 0% 50%; }
+}
+
+@keyframes iridescent3 {
+  0% { filter: blur(80px) hue-rotate(0deg); background-position: 0% 50%; }
+  33% { background-position: 100% 0%; }
+  66% { background-position: 50% 100%; }
+  100% { filter: blur(80px) hue-rotate(360deg); background-position: 0% 50%; }
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 42% 58% 60% 40% / 48% 52% 48% 52%; }
+  25% { border-radius: 58% 42% 40% 60% / 52% 48% 52% 48%; }
+  50% { border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%; }
+  75% { border-radius: 40% 60% 50% 50% / 60% 40% 48% 52%; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tm-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% / 3)); }
+}
+
+/* ===== ШАРЫ HERO ===== */
+.hero-shape-1 {
+  background: radial-gradient(circle at 30% 40%, #60a5fa, #7c3aed, #06b6d4, #2563eb);
+  background-size: 300% 300%;
+  filter: blur(72px);
+  animation:
+    float1 20s ease-in-out infinite,
+    iridescent 9s linear infinite;
+}
+
+.hero-shape-2 {
+  background: radial-gradient(circle at 60% 30%, #7c3aed, #ec4899, #60a5fa, #a855f7);
+  background-size: 300% 300%;
+  border-radius: 42% 58% 60% 40% / 48% 52% 48% 52%;
+  filter: blur(65px);
+  animation:
+    float2 26s ease-in-out infinite,
+    iridescent 12s linear infinite reverse,
+    morph 18s ease-in-out infinite;
+}
+
+.hero-shape-3 {
+  background: radial-gradient(circle at 50% 60%, #16a34a, #06b6d4, #7c3aed);
+  background-size: 300% 300%;
+  filter: blur(80px);
+  opacity: 0.28;
+  animation:
+    float3 30s ease-in-out infinite,
+    iridescent3 15s linear infinite;
+}
+
+/* Тёмная тема – вертикальный градиент для hero-фона */
+[data-theme="dark"] .hero-gradient {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+}
+
+/* Увеличиваем яркость шаров в тёмной теме */
+[data-theme="dark"] .hero-shape-1,
+[data-theme="dark"] .hero-shape-2,
+[data-theme="dark"] .hero-shape-3 {
+  opacity: 0.4;
+}
+

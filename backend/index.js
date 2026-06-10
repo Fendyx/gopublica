@@ -69,6 +69,7 @@ app.use('/api/beauty/masters', require('./routes/beauty/masters'));
 app.use('/api/beauty/categories', require('./routes/beauty/categories'));
 app.use('/api/saas/push', require('./routes/saas/push'))
 app.use('/api/saas/branches', require('./routes/saas/branches'));
+app.use('/api/stripe', require('./routes/stripe/cancel'));
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────

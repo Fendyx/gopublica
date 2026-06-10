@@ -1,0 +1,340 @@
+{
+"nav": {
+  "home": "Home",
+  "pricing": "Pricing",
+  "contact": "Contact",
+  "login": "Login",
+  "register": "Register",
+  "dashboard": "Dashboard"
+},
+  "footer": {
+    "description": "SaaS solutions that help your business grow online — websites, CRM, reservations and more.",
+    "links": {
+      "title": "Navigation",
+      "home": "Home",
+      "pricing": "Pricing",
+      "portfolio": "Portfolio",
+      "calculator": "Calculator"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    },
+    "contacts": {
+      "title": "Contact",
+      "email": "support@gopublica.com",
+      "location": "Kraków, Poland"
+    },
+    "rights": "All rights reserved."
+  },
+  "hero": {
+  "title": "Your Business, Fully Digitalized",
+  "subtitle": "One platform for your website, CRM, online ordering and more — without any coding.",
+  "startFree": "Start Free Trial",
+  "contact": "Contact us"
+},
+  "trust": {
+    "eyebrow": "trusted by"
+  },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "subtitle": "Start free 30-day trial, no credit card required.",
+    "badge": "Popular",
+    "period": "/month",
+    "net": "net",
+    "btnText": "Start free trial",
+    "footerNotice": "All prices are net. VAT may apply depending on your country.",
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "features": ["1 website", "Basic CRM", "Email support"]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": ["3 websites", "Advanced CRM", "Priority support", "Custom domain"]
+      }
+    }
+  },
+  "subscribe": {
+    "title": "Subscribe to GoPublica",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Log in",
+    "stepCreateAccount": "Create your account",
+    "fullName": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "passwordPlaceholder": "Min. 6 characters",
+    "stepInvoiceData": "Invoice data",
+    "country": "Country",
+    "companyName": "Company name (optional)",
+    "vatId": "VAT ID (optional)",
+    "countries": {
+      "PL": "Poland",
+      "DE": "Germany",
+      "CZ": "Czech Republic",
+      "ES": "Spain",
+      "FR": "France",
+      "IT": "Italy",
+      "NL": "Netherlands"
+    },
+    "stepPayment": "Payment",
+    "plan": "Plan",
+    "netPrice": "Net price",
+    "vatTax": "VAT",
+    "reverseCharge": "reverse charge",
+    "total": "Total",
+    "cardNumber": "Card number",
+    "expiryDate": "Expiry date",
+    "cvc": "CVC",
+    "payBtn": "Pay",
+    "startTrialBtn": "Start free trial",
+    "processing": "Processing...",
+    "secureNotice": "🔒 Secured by Stripe",
+    "errorPassword": "Password must be at least 6 characters",
+    "errorCard": "Card element not found",
+    "errorGeneral": "Something went wrong"
+  },
+
+"dashboard": {
+  "nav": { "overview": "Overview", "billing": "Billing", "sites": "Sites", "settings": "Settings" },
+  "overviewTitle": "Welcome, {name}!",
+  "profile": "Profile",
+  "email": "Email",
+  "phone": "Phone",
+  "subscription": "Subscription",
+  "plan": "Plan",
+  "status": "Status",
+  "currentPeriodEnd": "Renews",
+  "logout": "Logout"
+},
+
+  "login": {
+  "title": "Client Login",
+  "comingSoon": "Login page is coming soon.",
+  "backHome": "Back to Home"
+},
+
+"billing": {
+  "title": "Billing",
+  "currentPlan": "Current Plan",
+  "upgradeToPro": "Upgrade to Pro",
+  "proThanks": "You are on the best plan!",
+  "dangerZone": "Danger Zone",
+  "cancelDescription": "Cancelling will take effect at the end of your current billing period.",
+  "cancelSubscription": "Cancel Subscription",
+  "confirmCancel": "Are you absolutely sure?",
+  "cancelWarning": "Your subscription will remain active until the end of the paid period, then it will be cancelled.",
+  "keepPlan": "Keep my plan",
+  "confirmCancelBtn": "Yes, cancel",
+  "cancelling": "Cancelling..."
+},
+"sites": {
+  "title": "Your Sites",
+  "siteInProgress": "Your website is being built",
+  "siteInProgressDesc": "Our team is currently working on your website. As soon as it's ready, you'll see the link below and can visit it immediately.",
+  "comingSoon": "Link will appear here",
+  "questionsContact": "Have questions? Contact us at"
+},
+"settings": {
+  "title": "Settings",
+  "profile": "Profile",
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "editHint": "Editing coming soon.",
+  "dangerZone": "Danger Zone",
+  "deleteWarning": "Permanently delete your account and all data. This action cannot be undone.",
+  "deleteAccount": "Delete Account",
+  "confirmDelete": "Are you absolutely sure?",
+  "deleteIrreversible": "All your sites, subscription, and personal data will be permanently removed.",
+  "keepAccount": "Keep my account",
+  "confirmDeleteBtn": "Yes, delete",
+  "deleting": "Deleting...",
+  "errorDelete": "Something went wrong"
+},
+"contact": {
+  "title": "Contact Us",
+  "subtitle": "We'd love to hear from you. Reach out via messenger, email, or the form below.",
+  "messengerLabel": "Quick chat",
+  "emailLabel": "Email",
+  "form": {
+    "title": "Send a message",
+    "subtitle": "Fill in the form and we'll reply within 24 hours.",
+    "name": "Full name",
+    "namePlaceholder": "John Doe",
+    "email": "Email",
+    "phone": "Phone",
+    "subject": "Subject",
+    "subjectPlaceholder": "Select topic",
+    "subjects": ["New project", "Subscription", "Support", "Other"],
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your project...",
+    "submit": "Send message",
+    "successTitle": "Message sent!",
+    "successText": "Thanks for reaching out. We'll get back to you shortly.",
+    "sendMore": "Send another",
+    "error": "Something went wrong. Please try again.",
+    "privacyStart": "By submitting you agree to our ",
+    "privacyLink": "Privacy Policy",
+    "privacyEnd": ""
+  }
+},
+  "agencyFood": {
+    "heroEyebrow": "Digital solutions for restaurants",
+    "heroTitle": "Transform Your Food Business",
+    "heroSubtitle": "We build cutting-edge digital experiences for modern restaurants, cafes, and food delivery services.",
+    "visitDemo": "Visit Demo",
+    "learnMore": "See how it works",
+    
+    "overviewEyebrow": "What we build",
+    "overviewTitle": "Everything you need to grow online",
+    "overviewText": "From seamless online ordering to smart reservation systems, we provide comprehensive solutions tailored specifically for the food and hospitality industry.",
+    
+    "features": {
+      "onlineOrdering": {
+        "title": "Online Ordering",
+        "desc": "Custom delivery and takeout platforms with zero commission fees on your end."
+      },
+      "crmIntegration": {
+        "title": "CRM & Loyalty",
+        "desc": "Keep your customers coming back with integrated reward programs and data analytics."
+      },
+      "menuManagement": {
+        "title": "Smart Menus",
+        "desc": "Update your offerings in real-time across all your digital platforms with one click."
+      }
+    },
+    
+    "solutionsEyebrow": "Our solutions",
+    "solutionsTitle": "Tailored for your success",
+    
+    "solutions": {
+      "website": "Custom Websites",
+      "websiteDesc": "Blazing fast, SEO-optimized websites that reflect your brand identity and convert visitors into hungry customers.",
+      "reservations": "Table Reservations",
+      "reservationsDesc": "Automated booking systems that reduce no-shows and optimize your floor plan during peak hours."
+    },
+    
+    "ctaTitle": "Ready to see it live?",
+    "ctaSubtitle": "Explore a fully working demo"
+  },
+  "agencyGrooming": {
+    "title": "Digital Solutions for Pet Grooming & Beauty",
+    "description": "Custom booking websites and management tools for modern pet grooming salons.",
+    
+    "heroEyebrow": "Smart tools for pet salons",
+    "heroTitle": "Scale Your Grooming Business",
+    "heroSubtitle": "We build beautiful booking websites and management platforms designed specifically for pet grooming professionals.",
+    "visitDemo": "Visit Demo",
+    "learnMore": "See how it works",
+    
+    "overviewEyebrow": "What we build",
+    "overviewTitle": "Everything to keep tails wagging",
+    "overviewText": "From automated appointment scheduling to detailed pet profiles, our digital solutions help you save time and focus on what you do best — caring for pets.",
+    
+    "features": {
+      "onlineBooking": {
+        "title": "24/7 Online Booking",
+        "desc": "Let clients schedule appointments anytime without interrupting your grooming sessions."
+      },
+      "petProfiles": {
+        "title": "Detailed Pet Profiles",
+        "desc": "Keep track of breeds, coat types, allergies, and behavioral notes all in one place."
+      },
+      "loyalty": {
+        "title": "Loyalty & Rewards",
+        "desc": "Encourage repeat visits with automated reward programs for your best furry clients."
+      }
+    },
+    
+    "solutionsEyebrow": "Our solutions",
+    "solutionsTitle": "Tailored for your salon",
+    "solutions": {
+      "website": "Custom Websites",
+      "websiteDesc": "Mobile-friendly, beautifully designed websites that showcase your portfolio and services.",
+      "reservations": "Smart Scheduling",
+      "reservationsDesc": "Avoid double-bookings and send automated SMS reminders to reduce no-shows."
+    },
+    
+    "ctaTitle": "Ready to see it live?",
+    "ctaSubtitle": "Explore a fully working demo tailored for grooming salons."
+  },
+
+  "agencyOther": {
+    "title": "Digital Solutions for Auto Repair & Services",
+    "description": "Custom websites and CRM systems for auto services, tuning centers, and other local businesses.",
+    
+    "heroEyebrow": "Digital infrastructure for services",
+    "heroTitle": "Drive Your Business Forward",
+    "heroSubtitle": "Powerful web solutions and management tools for auto shops, tuning centers, and any service-based business.",
+    "visitDemo": "Visit Demo",
+    "learnMore": "See how it works",
+    
+    "overviewEyebrow": "What we build",
+    "overviewTitle": "Built for speed and efficiency",
+    "overviewText": "Whether you run an auto repair shop or a specialized tuning center, we provide the digital tools to streamline your workflow and attract more clients.",
+    
+    "features": {
+      "carService": {
+        "title": "Service Scheduling",
+        "desc": "Streamline maintenance appointments and manage your garage bays efficiently."
+      },
+      "tuning": {
+        "title": "Portfolio Showcase",
+        "desc": "Highlight your best tuning projects with high-quality galleries and case studies."
+      },
+      "anyBusiness": {
+        "title": "Versatile Solutions",
+        "desc": "Adaptable booking and CRM systems that fit the unique needs of any service business."
+      }
+    },
+    
+    "solutionsEyebrow": "Our solutions",
+    "solutionsTitle": "Engineered for success",
+    "solutions": {
+      "website": "High-Performance Sites",
+      "websiteDesc": "Fast-loading, SEO-optimized websites that help local customers find your business first.",
+      "reservations": "Client Management",
+      "reservationsDesc": "Track service histories, send maintenance reminders, and build lasting customer relationships."
+    },
+    
+    "ctaTitle": "Ready to see it live?",
+    "ctaSubtitle": "Explore a fully working demo for service businesses."
+  },
+  "home": {
+    "solutionsTitle": "Solutions for Every Industry",
+    "solutionsSubtitle": "From restaurants to car tuning — we've got you covered.",
+    "solutions": {
+      "food": { "title": "Restaurants & Cafes", "desc": "Online menus, ordering, reservations." },
+      "grooming": { "title": "Pet Grooming", "desc": "Booking, pet profiles, loyalty." },
+      "salon": { "title": "Beauty & Barbers", "desc": "Appointments, staff, service menus." },
+      "other": { "title": "Other Businesses", "desc": "Custom websites for any industry." }
+    }
+  },
+  "auth": {
+  "loginTitle": "Client Login",
+  "email": "Email",
+  "password": "Password",
+  "loading": "Logging in...",
+  "loginBtn": "Log in",
+  "noAccount": "Don't have an account?",
+  "register": "Register",
+  "errorLogin": "Invalid email or password"
+},
+"register": {
+  "title": "Create your account",
+  "name": "Full name",
+  "email": "Email",
+  "password": "Password",
+  "passwordPlaceholder": "Min. 6 characters",
+  "companyName": "Company name (optional)",
+  "vatId": "VAT ID (optional)",
+  "registerBtn": "Sign up",
+  "creating": "Creating account...",
+  "alreadyHaveAccount": "Already have an account?",
+  "login": "Log in",
+  "acceptTermsAndPrivacy": "You must accept the Terms of Service and Privacy Policy to continue.",
+  "errorRegister": "Something went wrong"
+}
+}

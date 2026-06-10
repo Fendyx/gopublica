@@ -5,11 +5,12 @@ const bcrypt     = require('bcryptjs');
 const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const TenantUser = require('../../models/TenantUser');
 const authTenant = require('../../middleware/authTenant');
+const ConsentRecord = require('../../models/ConsentRecord');
 
 // ── Регистрация (gopublica self-service) ──────────────────────
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, name, phone, companyName, vatId } = req.body;
+    const { email, password, name, phone, companyName, vatId, termsAccepted, privacyAccepted, marketingConsent } = req.body;
 
     if (!email || !password || !name) {
       return res.status(400).json({ error: 'email, password и name обязательны' });
@@ -27,7 +28,6 @@ router.post('/register', async (req, res) => {
       phone,
     });
 
-    // Если указан VAT – прикрепляем Tax ID
     if (vatId) {
       await Stripe.customers.createTaxId(customer.id, {
         type: 'eu_vat',
@@ -44,6 +44,26 @@ router.post('/register', async (req, res) => {
       vatId:           vatId || '',
       stripeCustomerId: customer.id,
     });
+
+    // ── Фиксация согласий ─────────────────────────────────
+    const consents = { terms: false, privacy: false, marketing: false };
+    if (termsAccepted) {
+      consents.terms = true;
+      await ConsentRecord.create({ userId: user._id, type: 'terms', granted: true, ip: req.ip, userAgent: req.get('User-Agent') });
+    }
+    if (privacyAccepted) {
+      consents.privacy = true;
+      await ConsentRecord.create({ userId: user._id, type: 'privacy', granted: true, ip: req.ip, userAgent: req.get('User-Agent') });
+    }
+    if (marketingConsent !== undefined) {
+      consents.marketing = marketingConsent;
+      await ConsentRecord.create({ userId: user._id, type: 'marketing', granted: marketingConsent, ip: req.ip, userAgent: req.get('User-Agent') });
+    }
+    user.consents = {
+      ...consents,
+      lastUpdated: new Date()
+    };
+    await user.save();
 
     const token = jwt.sign(
       { userId: user._id, tenantId: null, role: user.role },
@@ -63,6 +83,7 @@ router.post('/register', async (req, res) => {
         tenantId:           user.tenantId,
         subscriptionStatus: user.subscriptionStatus,
         subscriptionPlan:   user.subscriptionPlan,
+        consents:           user.consents,
       },
     });
   } catch (err) {
@@ -71,8 +92,6 @@ router.post('/register', async (req, res) => {
 });
 
 // ── Логин (один эндпоинт для обоих флоу) ─────────────────────
-// gopublica portal: { email, password }
-// agency-food:      { email, password, tenantId }
 router.post('/login', async (req, res) => {
   try {
     const { email, password, tenantId } = req.body;
@@ -81,8 +100,6 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ error: 'email и password обязательны' });
     }
 
-    // Если tenantId передан — ищем по паре (ресторанный флоу)
-    // Если нет — ищем только по email (портальный флоу)
     const query = tenantId ? { email, tenantId } : { email };
     const user  = await TenantUser.findOne(query);
 
@@ -119,6 +136,7 @@ router.post('/login', async (req, res) => {
         subscriptionStatus: user.subscriptionStatus,
         subscriptionPlan:   user.subscriptionPlan,
         currentPeriodEnd:   user.currentPeriodEnd,
+        consents:           user.consents,   // <-- теперь возвращаем согласия
       },
     });
   } catch (err) {
@@ -131,7 +149,10 @@ router.get('/me', authTenant, async (req, res) => {
   try {
     const user = await TenantUser.findById(req.userId).select('-passwordHash');
     if (!user) return res.status(404).json({ error: 'Не найден' });
-    res.json(user);
+    res.json({
+      ...user.toObject(),
+      consents: user.consents,   // передаём согласия в ответе
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

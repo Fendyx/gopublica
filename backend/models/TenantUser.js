@@ -46,6 +46,13 @@ const tenantUserSchema = new mongoose.Schema({
     default: 'none',
   },
   currentPeriodEnd: { type: Date, default: null },
+  // внутри schema
+  consents: {
+    terms: { type: Boolean, default: false },
+    privacy: { type: Boolean, default: false },
+    marketing: { type: Boolean, default: false },
+    lastUpdated: Date
+  },
 
 }, { timestamps: true });
 
