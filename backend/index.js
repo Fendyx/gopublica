@@ -9,7 +9,7 @@ const webpush = require('web-push')
 webpush.setVapidDetails(process.env.VAPID_EMAIL, process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
 
 const app  = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 // ── Настройки CORS ───────────────────────────────────
 // Явно добавляем боевые домены, чтобы не зависеть только от .env
