@@ -10,8 +10,13 @@ export default function LanguageSelector() {
   const router = useRouter();
 
   const switchLocale = (newLocale: string) => {
-    const path = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(path);
+    // Разбиваем путь на сегменты
+    const segments = pathname.split('/');
+    // Заменяем первый сегмент (пустой) и второй (текущая локаль)
+    // Например, ['', 'en', 'pricing'] → ['', 'de', 'pricing']
+    segments[1] = newLocale;
+    const newPath = segments.join('/') || '/';
+    router.push(newPath);
   };
 
   return (

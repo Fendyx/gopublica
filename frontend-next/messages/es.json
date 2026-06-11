@@ -1,0 +1,321 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "register": "Registro",
+    "dashboard": "Panel de control"
+  },
+  "footer": {
+    "description": "Soluciones SaaS que ayudan a tu negocio a crecer en línea: sitios web, CRM, reservas y más.",
+    "links": {
+      "title": "Navegación",
+      "home": "Inicio",
+      "pricing": "Precios",
+      "portfolio": "Portafolio",
+      "calculator": "Calculadora"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos de servicio",
+      "privacy": "Política de privacidad"
+    },
+    "contacts": {
+      "title": "Contacto",
+      "email": "support@gopublica.com",
+      "location": "Cracovia, Polonia"
+    },
+    "rights": "Todos los derechos reservados."
+  },
+  "hero": {
+    "title": "Tu negocio, totalmente digitalizado",
+    "subtitle": "Una plataforma para tu sitio web, CRM, pedidos en línea y más, sin necesidad de programar.",
+    "startFree": "Comenzar prueba gratuita",
+    "contact": "Contáctanos"
+  },
+  "trust": {
+    "eyebrow": "confían en nosotros"
+  },
+  "pricing": {
+    "title": "Elige tu plan",
+    "subtitle": "Comienza tu prueba gratuita de 30 días, sin necesidad de tarjeta de crédito.",
+    "badge": "Popular",
+    "period": "/mes",
+    "net": "neto",
+    "btnText": "Comenzar prueba gratuita",
+    "footerNotice": "Todos los precios son netos. Se puede aplicar IVA dependiendo de tu país.",
+    "plans": {
+      "basic": {
+        "name": "Básico",
+        "features": ["1 sitio web", "CRM básico", "Soporte por correo"]
+      },
+      "pro": {
+        "name": "Pro",
+        "features": ["3 sitios web", "CRM avanzado", "Soporte prioritario", "Dominio personalizado"]
+      }
+    }
+  },
+  "subscribe": {
+    "title": "Suscríbete a GoPublica",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "stepCreateAccount": "Crea tu cuenta",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Mín. 6 caracteres",
+    "stepInvoiceData": "Datos de facturación",
+    "country": "País",
+    "companyName": "Nombre de la empresa (opcional)",
+    "vatId": "NIF/IVA (opcional)",
+    "countries": {
+      "PL": "Polonia",
+      "DE": "Alemania",
+      "CZ": "República Checa",
+      "ES": "España",
+      "FR": "Francia",
+      "IT": "Italia",
+      "NL": "Países Bajos"
+    },
+    "stepPayment": "Pago",
+    "plan": "Plan",
+    "netPrice": "Precio neto",
+    "vatTax": "IVA",
+    "reverseCharge": "inversión del sujeto pasivo",
+    "total": "Total",
+    "cardNumber": "Número de tarjeta",
+    "expiryDate": "Fecha de caducidad",
+    "cvc": "CVC",
+    "payBtn": "Pagar",
+    "startTrialBtn": "Comenzar prueba gratuita",
+    "processing": "Procesando...",
+    "secureNotice": "🔒 Asegurado por Stripe",
+    "errorPassword": "La contraseña debe tener al menos 6 caracteres",
+    "errorCard": "Elemento de tarjeta no encontrado",
+    "errorGeneral": "Algo salió mal"
+  },
+  "dashboard": {
+    "nav": { "overview": "Resumen", "billing": "Facturación", "sites": "Sitios", "settings": "Configuración" },
+    "overviewTitle": "¡Hola, {name}!",
+    "profile": "Perfil",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "subscription": "Suscripción",
+    "plan": "Plan",
+    "status": "Estado",
+    "currentPeriodEnd": "Renovación",
+    "logout": "Cerrar sesión"
+  },
+  "login": {
+    "title": "Inicio de sesión para clientes",
+    "comingSoon": "La página de inicio de sesión estará disponible pronto.",
+    "backHome": "Volver al inicio"
+  },
+  "billing": {
+    "title": "Facturación",
+    "currentPlan": "Plan actual",
+    "upgradeToPro": "Mejorar a Pro",
+    "proThanks": "¡Estás en el mejor plan!",
+    "dangerZone": "Zona de peligro",
+    "cancelDescription": "La cancelación se hará efectiva al final de tu período de facturación actual.",
+    "cancelSubscription": "Cancelar suscripción",
+    "confirmCancel": "¿Estás completamente seguro?",
+    "cancelWarning": "Tu suscripción permanecerá activa hasta el final del período pagado y luego se cancelará.",
+    "keepPlan": "Mantener mi plan",
+    "confirmCancelBtn": "Sí, cancelar",
+    "cancelling": "Cancelando..."
+  },
+  "sites": {
+    "title": "Tus Sitios",
+    "siteInProgress": "Tu sitio web está en construcción",
+    "siteInProgressDesc": "Nuestro equipo está trabajando actualmente en tu sitio web. Tan pronto como esté listo, verás el enlace a continuación y podrás visitarlo de inmediato.",
+    "comingSoon": "El enlace aparecerá aquí",
+    "questionsContact": "¿Tienes preguntas? Contáctanos en"
+  },
+  "settings": {
+    "title": "Configuración",
+    "profile": "Perfil",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "editHint": "La edición estará disponible pronto.",
+    "dangerZone": "Zona de peligro",
+    "deleteWarning": "Eliminar permanentemente tu cuenta y todos los datos. Esta acción no se puede deshacer.",
+    "deleteAccount": "Eliminar cuenta",
+    "confirmDelete": "¿Estás completamente seguro?",
+    "deleteIrreversible": "Todos tus sitios, suscripciones y datos personales se eliminarán permanentemente.",
+    "keepAccount": "Mantener mi cuenta",
+    "confirmDeleteBtn": "Sí, eliminar",
+    "deleting": "Eliminando...",
+    "errorDelete": "Algo salió mal"
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Nos encantaría escucharte. Comunícate a través de mensajería, correo electrónico o el formulario a continuación.",
+    "messengerLabel": "Chat rápido",
+    "emailLabel": "Correo electrónico",
+    "form": {
+      "title": "Enviar un mensaje",
+      "subtitle": "Rellena el formulario y te responderemos en 24 horas.",
+      "name": "Nombre completo",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "subject": "Asunto",
+      "subjectPlaceholder": "Seleccionar tema",
+      "subjects": ["Nuevo proyecto", "Suscripción", "Soporte", "Otro"],
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
+      "submit": "Enviar mensaje",
+      "successTitle": "¡Mensaje enviado!",
+      "successText": "Gracias por contactarnos. Te responderemos en breve.",
+      "sendMore": "Enviar otro",
+      "error": "Algo salió mal. Por favor, inténtalo de nuevo.",
+      "privacyStart": "Al enviar aceptas nuestra ",
+      "privacyLink": "Política de privacidad",
+      "privacyEnd": ""
+    }
+  },
+  "agencyFood": {
+    "heroEyebrow": "Soluciones digitales para restaurantes",
+    "heroTitle": "Transforma tu negocio gastronómico",
+    "heroSubtitle": "Construimos experiencias digitales de vanguardia para restaurantes modernos, cafeterías y servicios de entrega de comida.",
+    "visitDemo": "Ver Demo",
+    "learnMore": "Mira cómo funciona",
+    "overviewEyebrow": "Lo que construimos",
+    "overviewTitle": "Todo lo que necesitas para crecer en línea",
+    "overviewText": "Desde pedidos en línea sin problemas hasta sistemas de reservas inteligentes, ofrecemos soluciones integrales adaptadas específicamente para la industria de la alimentación y la hostelería.",
+    "features": {
+      "onlineOrdering": {
+        "title": "Pedidos en línea",
+        "desc": "Plataformas personalizadas de entrega y comida para llevar con cero comisiones por tu parte."
+      },
+      "crmIntegration": {
+        "title": "CRM y Fidelidad",
+        "desc": "Haz que tus clientes regresen con programas de recompensas integrados y análisis de datos."
+      },
+      "menuManagement": {
+        "title": "Menús inteligentes",
+        "desc": "Actualiza tus ofertas en tiempo real en todas tus plataformas digitales con un solo clic."
+      }
+    },
+    "solutionsEyebrow": "Nuestras soluciones",
+    "solutionsTitle": "Diseñado para tu éxito",
+    "solutions": {
+      "website": "Sitios web personalizados",
+      "websiteDesc": "Sitios web ultrarrápidos, optimizados para SEO, que reflejan tu marca y convierten a los visitantes en clientes hambrientos.",
+      "reservations": "Reservas de mesas",
+      "reservationsDesc": "Sistemas automatizados de reservas que reducen las ausencias y optimizan el plano de tu sala en las horas pico."
+    },
+    "ctaTitle": "¿Listo para verlo en vivo?",
+    "ctaSubtitle": "Explora una demostración completamente funcional"
+  },
+  "agencyGrooming": {
+    "title": "Soluciones digitales para peluquería de mascotas y belleza",
+    "description": "Sitios web de reservas y herramientas de gestión personalizados para salones modernos de peluquería canina y felina.",
+    "heroEyebrow": "Herramientas inteligentes para salones de mascotas",
+    "heroTitle": "Escala tu negocio de peluquería canina",
+    "heroSubtitle": "Construimos hermosos sitios web de reservas y plataformas de gestión diseñadas específicamente para profesionales de la peluquería de mascotas.",
+    "visitDemo": "Ver Demo",
+    "learnMore": "Mira cómo funciona",
+    "overviewEyebrow": "Lo que construimos",
+    "overviewTitle": "Todo para que las colas no dejen de moverse",
+    "overviewText": "Desde la programación automatizada de citas hasta perfiles detallados de mascotas, nuestras soluciones digitales te ayudan a ahorrar tiempo y centrarte en lo que mejor sabes hacer: cuidar a las mascotas.",
+    "features": {
+      "onlineBooking": {
+        "title": "Reservas en línea 24/7",
+        "desc": "Permite que los clientes programen citas en cualquier momento sin interrumpir tus sesiones de trabajo."
+      },
+      "petProfiles": {
+        "title": "Perfiles detallados de mascotas",
+        "desc": "Realiza un seguimiento de las razas, tipos de pelaje, alergias y notas de comportamiento, todo en un solo lugar."
+      },
+      "loyalty": {
+        "title": "Fidelidad y Recompensas",
+        "desc": "Fomenta las visitas repetidas con programas de recompensas automatizados para tus mejores clientes peludos."
+      }
+    },
+    "solutionsEyebrow": "Nuestras soluciones",
+    "solutionsTitle": "Adaptado a tu salón",
+    "solutions": {
+      "website": "Sitios web personalizados",
+      "websiteDesc": "Sitios web adaptables a dispositivos móviles y bellamente diseñados que muestran tu portafolio y servicios.",
+      "reservations": "Programación inteligente",
+      "reservationsDesc": "Evita reservas duplicadas y envía recordatorios automáticos por SMS para reducir las ausencias."
+    },
+    "ctaTitle": "¿Listo para verlo en vivo?",
+    "ctaSubtitle": "Explora una demostración completamente funcional adaptada para salones de peluquería de mascotas."
+  },
+  "agencyOther": {
+    "title": "Soluciones digitales para talleres y servicios",
+    "description": "Sitios web personalizados y sistemas CRM para servicios de automoción, centros de tuning y otros negocios locales.",
+    "heroEyebrow": "Infraestructura digital para servicios",
+    "heroTitle": "Impulsa tu negocio",
+    "heroSubtitle": "Potentes soluciones web y herramientas de gestión para talleres mecánicos, centros de tuning y cualquier negocio basado en servicios.",
+    "visitDemo": "Ver Demo",
+    "learnMore": "Mira cómo funciona",
+    "overviewEyebrow": "Lo que construimos",
+    "overviewTitle": "Construido para la velocidad y la eficiencia",
+    "overviewText": "Ya sea que administres un taller de reparación de automóviles o un centro especializado en tuning, proporcionamos las herramientas digitales para optimizar tu flujo de trabajo y atraer más clientes.",
+    "features": {
+      "carService": {
+        "title": "Programación de servicios",
+        "desc": "Agiliza las citas de mantenimiento y gestiona los puestos de tu taller de forma eficaz."
+      },
+      "tuning": {
+        "title": "Escaparate de portafolio",
+        "desc": "Destaca tus mejores proyectos de tuning con galerías de alta calidad y casos de estudio."
+      },
+      "anyBusiness": {
+        "title": "Soluciones versátiles",
+        "desc": "Sistemas de reserva y CRM adaptables que se ajustan a las necesidades únicas de cualquier empresa de servicios."
+      }
+    },
+    "solutionsEyebrow": "Nuestras soluciones",
+    "solutionsTitle": "Diseñado para el éxito",
+    "solutions": {
+      "website": "Sitios web de alto rendimiento",
+      "websiteDesc": "Sitios web de carga rápida, optimizados para SEO que ayudan a los clientes locales a encontrar tu negocio primero.",
+      "reservations": "Gestión de clientes",
+      "reservationsDesc": "Realiza un seguimiento del historial de servicios, envía recordatorios de mantenimiento y crea relaciones duraderas con los clientes."
+    },
+    "ctaTitle": "¿Listo para verlo en vivo?",
+    "ctaSubtitle": "Explora una demostración completamente funcional para empresas de servicios."
+  },
+  "home": {
+    "solutionsTitle": "Soluciones para cada industria",
+    "solutionsSubtitle": "Desde restaurantes hasta tuning de coches: te tenemos cubierto.",
+    "solutions": {
+      "food": { "title": "Restaurantes y Cafeterías", "desc": "Menús en línea, pedidos, reservas." },
+      "grooming": { "title": "Peluquería de Mascotas", "desc": "Reservas, perfiles de mascotas, fidelidad." },
+      "salon": { "title": "Belleza y Barberías", "desc": "Citas, personal, menús de servicios." },
+      "other": { "title": "Otros Negocios", "desc": "Sitios web personalizados para cualquier industria." }
+    }
+  },
+  "auth": {
+    "loginTitle": "Inicio de sesión para clientes",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "loading": "Iniciando sesión...",
+    "loginBtn": "Iniciar sesión",
+    "noAccount": "¿No tienes una cuenta?",
+    "register": "Regístrate",
+    "errorLogin": "Correo electrónico o contraseña no válidos"
+  },
+  "register": {
+    "title": "Crea tu cuenta",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Mín. 6 caracteres",
+    "companyName": "Nombre de la empresa (opcional)",
+    "vatId": "NIF/IVA (opcional)",
+    "registerBtn": "Registrarse",
+    "creating": "Creando cuenta...",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "acceptTermsAndPrivacy": "Debes aceptar los Términos de servicio y la Política de privacidad para continuar.",
+    "errorRegister": "Algo salió mal"
+  }
+}
