@@ -15,7 +15,7 @@ import { useTenantAuthStore } from '@/store/tenantAuthStore';
 import { tenantApi } from '@/entities/subscription/api/tenantApi';
 import ConsentCheckboxes from '@/shared/ui/ConsentCheckboxes';
 
-const HAS_TRIAL = false;
+const HAS_TRIAL = true;
 const BASE_PRICE = 39.0;
 
 const VAT_RATES: Record<string, number> = {
