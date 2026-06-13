@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useAuthStore } from '@/store/authStore';
 import {
   LayoutDashboard, Users, FileText, Settings, Menu, X, LogOut,
@@ -13,21 +14,24 @@ import { Button } from '@/shared/ui/Button';
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const { token, user, logout } = useAuthStore();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  const loginPath = `/${locale}/admin/login`;
 
   useEffect(() => { setMounted(true); }, []);
 
   // Редиректим только если мы НЕ на странице логина и токен отсутствует
   useEffect(() => {
-    if (mounted && !token && pathname !== '/admin/login') {
-      router.replace('/admin/login');
+    if (mounted && !token && pathname !== loginPath) {
+      router.replace(loginPath);
     }
-  }, [token, mounted, pathname, router]);
+  }, [token, mounted, pathname, router, loginPath]);
 
   // На странице логина показываем только форму, без админского оформления
-  if (pathname === '/admin/login') {
+  if (pathname === loginPath) {
     return <>{children}</>;
   }
 
@@ -35,15 +39,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!mounted || !token) return null;
 
   const navItems = [
-    { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/admin/leads', label: 'Leads', icon: Target },
-    { href: '/admin/clients', label: 'Clients', icon: Users },
-    { href: '/admin/news', label: 'Newsletters', icon: FileText },
-    { href: '/admin/settings', label: 'Settings', icon: Settings },
+    { href: `/${locale}/admin`, label: 'Dashboard', icon: LayoutDashboard },
+    { href: `/${locale}/admin/leads`, label: 'Leads', icon: Target },
+    { href: `/${locale}/admin/clients`, label: 'Clients', icon: Users },
+    { href: `/${locale}/admin/news`, label: 'Newsletters', icon: FileText },
+    { href: `/${locale}/admin/settings`, label: 'Settings', icon: Settings },
   ];
 
   const isActive = (href: string) =>
-    pathname === href || (href !== '/admin' && pathname.startsWith(href));
+    pathname === href || (href !== `/${locale}/admin` && pathname.startsWith(href));
 
   return (
     <div className="min-h-screen flex bg-[var(--bg)]">
@@ -98,7 +102,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             className="w-full gap-2"
             onClick={() => {
               logout();
-              router.push('/admin/login');
+              router.push(loginPath);
             }}
           >
             <LogOut size={16} /> Logout

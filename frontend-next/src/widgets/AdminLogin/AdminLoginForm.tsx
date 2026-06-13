@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useAuthStore } from '@/store/authStore';
 
 export default function AdminLoginForm() {
   const router = useRouter();
+  const locale = useLocale();
   const { login } = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,7 +28,7 @@ export default function AdminLoginForm() {
       if (!res.ok) throw new Error(data.message || 'Login failed');
       // Бекенд возвращает { token, user: { id, name, email, role } }
       login(data.token, data.user);
-      router.push('/admin/leads'); // или '/admin/dashboard'
+      router.push(`/${locale}/admin/leads`);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -38,20 +40,37 @@ export default function AdminLoginForm() {
     <div className="min-h-screen flex items-center justify-center bg-[var(--bg)] px-4">
       <div className="w-full max-w-sm">
         <h1 className="text-2xl font-bold text-center mb-6">Admin Login</h1>
-        {error && <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm text-red-600">{error}</div>}
+        {error && (
+          <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-2 text-sm text-red-600">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-4 bg-[var(--surface)] p-6 rounded-2xl border border-[var(--border)] shadow-sm">
           <div>
             <label className="text-sm font-semibold">Email</label>
-            <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-              className="w-full mt-1 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]" />
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="w-full mt-1 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+            />
           </div>
           <div>
             <label className="text-sm font-semibold">Password</label>
-            <input type="password" required value={password} onChange={e => setPassword(e.target.value)}
-              className="w-full mt-1 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]" />
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="w-full mt-1 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+            />
           </div>
-          <button type="submit" disabled={loading}
-            className="w-full rounded-lg bg-[var(--primary-color)] text-white py-2.5 font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity">
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-[var(--primary-color)] text-white py-2.5 font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity"
+          >
             {loading ? 'Logging in...' : 'Log in'}
           </button>
         </form>

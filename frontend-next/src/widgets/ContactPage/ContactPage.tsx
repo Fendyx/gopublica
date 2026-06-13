@@ -48,7 +48,7 @@ export default function ContactPage() {
         {
             name: 'Telegram',
             icon: <FaTelegramPlane size={22} />,
-            href: 'https://t.me/yourhandle',
+            href: 'https://t.me/',
             label: '@yourhandle',
             color: '#2AABEE',
         },

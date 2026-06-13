@@ -22,6 +22,12 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --radius: 0.5rem;
+  /* 👇 ДОБАВЛЯЕМ ТВОИ КАСТОМНЫЕ ЦВЕТА СЮДА 👇 */
+  --color-base: var(--bg);
+  --color-surface: var(--surface);
+  --color-brand: var(--primary-color);
+  --color-body: var(--text);
+  --color-body-muted: var(--text-muted);
 }
 
 /* Базовые переменные */
@@ -172,3 +178,4 @@ body {
   opacity: 0.4;
 }
 
+.scrollbar-hide::-webkit-scrollbar { display: none; }

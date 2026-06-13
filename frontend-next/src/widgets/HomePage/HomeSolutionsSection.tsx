@@ -13,14 +13,14 @@ const solutions = [
   { 
     key: 'grooming', 
     href: '/agency-beauty-grooming', 
-    mediaType: 'image', 
-    mediaSrc: 'https://images.unsplash.com/photo-1599305090598-fe179d501227?q=80&w=800&auto=format&fit=crop' 
+    mediaType: 'video', 
+    mediaSrc: '/videos/grooming-demo.mp4' 
   },
   { 
     key: 'salon', 
     href: '/agency-beauty-salon', 
-    mediaType: 'image', 
-    mediaSrc: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop' 
+    mediaType: 'video', 
+    mediaSrc: '/videos/beautysalon-demo.mp4' 
   },
   { 
     key: 'other', 

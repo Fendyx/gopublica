@@ -1,32 +1,42 @@
 {
-"nav": {
-  "home": "Home",
-  "pricing": "Pricing",
-  "contact": "Contact",
-  "login": "Login",
-  "register": "Register",
-  "dashboard": "Dashboard"
-},
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "howItWorks": "How it works",
+    "solutions": "Solutions",
+    "solutionsOverview": "All solutions",
+    "login": "Log in",
+    "register": "Start free",
+    "dashboard": "Dashboard"
+  },
+
   "footer": {
-    "description": "SaaS solutions that help your business grow online — websites, CRM, reservations and more.",
-    "links": {
-      "title": "Navigation",
-      "home": "Home",
-      "pricing": "Pricing",
-      "portfolio": "Portfolio",
-      "calculator": "Calculator"
+    "description": "Everything your small business needs to shine online — websites, reservations, online orders, and more.",
+    "solutionsTitle": "Solutions",
+    "solutionsOverview": "All solutions",
+    "categories": {
+      "food": "Restaurants",
+      "beauty": "Beauty & Grooming",
+      "auto": "Auto Services"
     },
-    "legal": {
-      "title": "Legal",
-      "terms": "Terms of Service",
-      "privacy": "Privacy Policy"
-    },
-    "contacts": {
-      "title": "Contact",
-      "email": "support@gopublica.com",
-      "location": "Kraków, Poland"
-    },
-    "rights": "All rights reserved."
+    "howItWorks": "How it works",
+    "companyTitle": "Company",
+    "contact": "Contact",
+    "pricing": "Pricing",
+    "legalTitle": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contactTitle": "Contact",
+    "email": "hello@gopublica.com",
+    "location": "Orlando, FL",
+    "rights": "All rights reserved.",
+    "socialAriaLabels": {
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "telegram": "Telegram",
+      "youtube": "YouTube"
+    }
   },
   "hero": {
   "title": "Your Business, Fully Digitalized",
@@ -38,21 +48,48 @@
     "eyebrow": "trusted by"
   },
   "pricing": {
-    "title": "Choose Your Plan",
-    "subtitle": "Start free 30-day trial, no credit card required.",
-    "badge": "Popular",
+    "eyebrow": "Pricing",
+    "title": "Simple, transparent pricing",
+    "subtitle": "Everything you need to run your business online. We handle the tech, you focus on your customers.",
+    "badge": "Most Popular",
     "period": "/month",
-    "net": "net",
+    "net": "excl. VAT",
     "btnText": "Start free trial",
-    "footerNotice": "All prices are net. VAT may apply depending on your country.",
+    "btnTextDashboard": "Go to Dashboard",
+    "trialNote": "✦ 30-day free trial on all plans · No credit card required",
+    "upgradeToUnlock": "upgrade",
+    "footerNotice": "All prices are net. VAT may apply depending on your country. Cancel anytime, no questions asked.",
+
+    "features": {
+      "adminPanel":         "Full admin panel (menu, services, prices)",
+      "booking":            "Table & appointment booking system",
+      "gallery":            "Gallery, news & content management",
+      "domainSsl":          "Domain + SSL — fully managed by us",
+      "basicStats":         "Basic website analytics",
+      "location1":          "1 business location",
+      "location3":          "Up to 3 business locations",
+      "locationUnlimited":  "Unlimited locations",
+      "supportHours":       "Support during business hours",
+      "prioritySupport":    "Priority support",
+      "onlineOrders":       "Online ordering & payment processing",
+      "advancedAnalytics":  "Advanced analytics & custom reports",
+      "dedicatedManager":   "Dedicated account manager",
+      "whiteLabel":         "White-label (no GoPublica branding)",
+      "customIntegrations": "Custom integrations on request"
+    },
+
     "plans": {
-      "basic": {
-        "name": "Basic",
-        "features": ["1 website", "Basic CRM", "Email support"]
+      "starter": {
+        "name":    "Starter",
+        "tagline": "Perfect to get online"
       },
-      "pro": {
-        "name": "Pro",
-        "features": ["3 websites", "Advanced CRM", "Priority support", "Custom domain"]
+      "growth": {
+        "name":    "Growth",
+        "tagline": "Best for growing businesses"
+      },
+      "scale": {
+        "name":    "Scale",
+        "tagline": "For chains & franchises"
       }
     }
   },
@@ -336,5 +373,149 @@
   "login": "Log in",
   "acceptTermsAndPrivacy": "You must accept the Terms of Service and Privacy Policy to continue.",
   "errorRegister": "Something went wrong"
-}
+},
+
+"presentation": {
+    "step_label": "Step",
+    "nav_prev": "Back",
+    "nav_next": "Next",
+    "start_button": "Let's start",
+    "steps": {
+      "intro": {
+        "title": "Here's How We Work Together",
+        "subtitle": "5 simple steps — from first call to your site going live. Let's walk through it."
+      },
+      "meeting_1": {
+        "title": "Meeting #1: Launching Your 30-Day Free Trial",
+        "description": "We'll set up your account together. You get full access for 30 days at zero cost to see the value.",
+        "highlight": "🔒 We link your card via Stripe to secure your spot, but no charges occur today. It's your safety guarantee."
+      },
+      "dashboard": {
+        "title": "Your Personal Command Center",
+        "description": "Immediately after our call, you'll be redirected to your dashboard. Tracking progress, invoices, and site status is now all in one place."
+      },
+      "design_phase": {
+        "title": "We Build, You Relax",
+        "description": "Our team takes your business info and crafts a professional website. You focus on your customers; we handle the code and design."
+      },
+      "meeting_2": {
+        "title": "Meeting #2: Review & Final Touches",
+        "description": "We show you the finished result. We'll walk through every page together and make any final tweaks in real-time."
+      },
+      "activation": {
+        "title": "One-Click Activation",
+        "description": "Ready to go live? Just hit the 'Activate' button in your dashboard to cover the one-time professional setup fee.",
+        "highlight": "💶 €300 one-time fee includes: Professional Design, Domain Setup, and SEO Optimization. Secure payment via Stripe."
+      },
+      "done": {
+        "title": "You're Live — Congrats! 🎉",
+        "subtitle": "Any questions before we move forward? We're ready to answer everything."
+      }
+    }
+  },
+ "solutions": {
+  "page": {
+    "title": "Solutions that drive your business",
+    "subtitle": "All tools work together to save you time, money and hassle."
+  },
+  "categories": {
+    "all": "All",
+    "food": "Food & Beverage",
+    "beauty": "Beauty & Grooming",
+    "auto": "Auto Services",
+    "universal": "Universal"
+  },
+  "modules": {
+    "qr-menu": {
+      "title": "Smart QR Menu",
+      "desc": "Update your menu in seconds, guests scan and browse in their language.",
+      "heroDesc": "No more reprinting costs. Change prices and items instantly from your phone."
+    },
+    "reservations": {
+      "title": "Table Reservations",
+      "desc": "Accept bookings 24/7 without missing a single call.",
+      "heroDesc": "Let guests book their own table, even when you’re closed."
+    },
+    "online-ordering": {
+      "title": "Direct Online Ordering",
+      "desc": "Keep 100% of revenue – no UberEats commissions.",
+      "heroDesc": "Take control of takeout and delivery without sharing your profit."
+    },
+    "appointments": {
+      "title": "Online Booking 24/7",
+      "desc": "Clients choose service, master, and time slot themselves.",
+      "heroDesc": "Your calendar fills up even while you sleep."
+    },
+    "staff-management": {
+      "title": "Staff Management",
+      "desc": "Set work schedules and close calendars in one click.",
+      "heroDesc": "Sick day? Block John’s calendar instantly and protect your schedule."
+    },
+    "portfolio": {
+      "title": "Interactive Portfolio",
+      "desc": "Upload fresh cuts or manicures straight from your phone.",
+      "heroDesc": "Turn your best work into a client magnet."
+    },
+    "quote-estimator": {
+      "title": "Quote Estimator",
+      "desc": "Instant price range based on car model and service type.",
+      "heroDesc": "Generate qualified leads without picking up the phone."
+    },
+    "before-after": {
+      "title": "Before/After Slider",
+      "desc": "Visual slider that sells better than any text.",
+      "heroDesc": "Show the transformation. That’s all it takes."
+    },
+    "service-request": {
+      "title": "Service Request with Photo",
+      "desc": "Upload a damage photo and get a preliminary quote.",
+      "heroDesc": "Let customers send you the damage, not drive across town."
+    },
+    "careers": {
+      "title": "Hiring Form",
+      "desc": "Recruit staff faster with a ready-to-use career page.",
+      "heroDesc": "Accept applications 24/7. No more paper resumes."
+    },
+    "review-booster": {
+      "title": "Review Booster",
+      "desc": "Automatically send happy customers to leave 5-star reviews.",
+      "heroDesc": "Turn every happy visit into a public review."
+    },
+    "analytics": {
+      "title": "Business Dashboard",
+      "desc": "See where visitors come from and what they click.",
+      "heroDesc": "Understand your traffic without touching Google Analytics."
+    }
+  },
+  "badge": {
+    "included": "Included",
+    "premium": "Premium"
+  },
+  "card": {
+    "learnMore": "Learn more →"
+  },
+  "detail": {
+    "cta": "Book a demo",
+    "ctaTitle": "Ready to grow your business?",
+    "dashboard": {
+      "title": "Full control in your pocket",
+      "desc": "See how every booking, order or request instantly appears in your admin panel."
+    },
+    "benefits": {
+      "title": "Why it pays for itself",
+      "item1": {
+        "title": "Save hours every day",
+        "desc": "Automate the tasks that eat your time — confirmations, reminders, and updates."
+      },
+      "item2": {
+        "title": "Build your customer list",
+        "desc": "Capture emails and phone numbers automatically for future marketing."
+      },
+      "item3": {
+        "title": "Reduce no‑shows",
+        "desc": "Automatic SMS reminders keep your calendar full and your revenue predictable."
+      }
+    }
+  }
+  }
 }
