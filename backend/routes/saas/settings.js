@@ -4,7 +4,32 @@ const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/authTenant');
 
-// Публичный роут: получить настройки (глобальные или филиала)
+// ─── НОВЫЙ РОУТ: поиск тенанта по домену ────────────────────────────────────
+// GET /api/saas/settings/by-domain?domain=sushi-master.com
+// Публичный (без авторизации) — вызывается proxy.ts при каждом запросе
+router.get('/by-domain', async (req, res) => {
+  try {
+    const { domain } = req.query;
+    if (!domain) return res.status(400).json({ error: 'domain required' });
+
+    const settings = await TenantSettings
+      .findOne({ domain })
+      .select(
+        'tenantId niche theme features ' +
+        'phone address email hours seoTitle seoDescription ' +
+        'primaryLanguage primaryCurrency'
+      );
+
+    if (!settings) return res.status(404).json({ error: 'Tenant not found' });
+
+    res.json(settings);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ─── СУЩЕСТВУЮЩИЙ РОУТ: получить настройки (глобальные или филиала) ──────────
+// GET /api/saas/settings?tenantId=xxx&branchId=yyy
 router.get('/', async (req, res) => {
   try {
     const { tenantId, branchId } = req.query;
@@ -16,13 +41,11 @@ router.get('/', async (req, res) => {
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
       if (!branch) return res.status(404).json({ error: 'Branch not found' });
-      // Сливаем: глобальные + переопределения филиала
+
       const merged = {
         ...globalSettings.toObject?.(),
         ...branch.settingsOverride,
-        // специально для часов – если в branch.settingsOverride есть hours/hoursI18n, они перекроют
       };
-      // Убираем лишние mongoose-поля
       delete merged._id;
       delete merged.__v;
       delete merged.createdAt;
@@ -36,27 +59,25 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Защищённый роут: обновить настройки (глобальные или филиала)
+// ─── СУЩЕСТВУЮЩИЙ РОУТ: обновить настройки (глобальные или филиала) ──────────
+// PUT /api/saas/settings
 router.put('/', authTenant, async (req, res) => {
   try {
     const { branchId, ...settingsData } = req.body;
     const tenantId = req.tenantId;
 
     if (branchId) {
-      // Обновляем переопределения филиала
       const branch = await Branch.findOne({ _id: branchId, tenantId });
       if (!branch) return res.status(404).json({ error: 'Branch not found' });
 
-      // Обновляем только те поля, которые пришли
       Object.assign(branch.settingsOverride, settingsData);
       await branch.save();
-      // Возвращаем смерженный результат
+
       const globalSettings = await TenantSettings.findOne({ tenantId }) || {};
       const merged = { ...globalSettings.toObject?.(), ...branch.settingsOverride };
       delete merged._id;
       return res.json(merged);
     } else {
-      // Обновляем глобальные настройки
       const updated = await TenantSettings.findOneAndUpdate(
         { tenantId },
         settingsData,
