@@ -3,17 +3,26 @@ const router = express.Router();
 const CategoryTranslation = require('../../models/CategoryTranslation');
 const authTenant = require('../../middleware/authTenant');
 
-// Получить доступные категории для ресторана
-router.get('/', authTenant, async (req, res) => {
+// ПУБЛИЧНЫЙ РОУТ: Получить доступные категории (Без authTenant!)
+router.get('/', async (req, res) => {
   try {
-    const tenantId = req.tenantId;
-    // Все категории, которые либо общие (addedByTenants пуст), либо уже привязаны к этому тенанту
+    // Теперь берем tenantId из URL (например: /api/saas/categories?tenantId=cafe-flo)
+    const tenantId = req.query.tenantId;
+
+    // Базовое условие: всегда отдаем общие дефолтные категории
+    const orConditions = [
+      { addedByTenants: { $size: 0 } }
+    ];
+
+    // Если фронтенд прислал tenantId, добавляем его в поиск
+    if (tenantId) {
+      orConditions.push({ addedByTenants: tenantId });
+    }
+
     const categories = await CategoryTranslation.find({
-      $or: [
-        { addedByTenants: { $size: 0 } },
-        { addedByTenants: tenantId },
-      ],
+      $or: orConditions,
     }).lean();
+    
     res.json(categories);
   } catch (err) {
     res.status(500).json({ error: err.message });
