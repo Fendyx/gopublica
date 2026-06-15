@@ -14,24 +14,8 @@ const PORT = 5000;
 // ── Настройки CORS ───────────────────────────────────
 app.use(cors({
   origin: (origin, callback) => {
-    // В SaaS-архитектуре мы динамически разрешаем ЛЮБЫЕ домены (origin),
-    // потому что клиенты будут привязывать свои уникальные адреса (pizza.com, sushi.pl).
-    // Возвращаем true для всех.
+    // В SaaS-архитектуре мы динамически разрешаем ЛЮБЫЕ домены
     callback(null, true);
-  },
-  credentials: true,
-}));
-
-app.use(cors({
-  origin: (origin, callback) => {
-    // Если origin нет (например, прямые запросы) или он в списке разрешенных
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      // ВАЖНО: Возвращаем false вместо new Error(). 
-      // Это предотвращает краш запроса и появление 500 ошибки с HTML!
-      callback(null, false);
-    }
   },
   credentials: true,
 }));
@@ -94,6 +78,15 @@ app.get(/.*/, (req, res) => {
     return res.status(500).send('Frontend build not found on server');
   }
   res.sendFile(indexPath);
+});
+
+// ── Глобальный обработчик ошибок API (Защита от падений) ──
+app.use((err, req, res, next) => {
+  console.error('🔥 Ошибка на сервере:', err.message);
+  if (req.path.startsWith('/api/')) {
+    return res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+  }
+  next(err);
 });
 
 // ── Запуск сервера ───────────────────────────────────
