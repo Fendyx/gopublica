@@ -104,8 +104,8 @@ export default function ContactPage() {
 
           <div className="info-block">
             <span className="info-block__label">{t("contact.emailLabel")}</span>
-            <a href="mailto:hello@gopublica.com" className="email-link">
-              hello@gopublica.com
+            <a href="mailto:support@gopublica.com" className="email-link">
+              support@gopublica.com
             </a>
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function ContactPage() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="hello@company.com"
+                    placeholder="support@gopublica.com"
                     value={form.email}
                     onChange={handleChange}
                     required

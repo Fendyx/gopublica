@@ -12,14 +12,15 @@ const app  = express();
 const PORT = 5000;
 
 // ── Настройки CORS ───────────────────────────────────
-// Явно добавляем боевые домены, чтобы не зависеть только от .env
-const allowedOrigins = [
-  'http://localhost:3000',
-  'http://localhost:5173',
-  'https://gopublica.com',
-  'https://www.gopublica.com',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+app.use(cors({
+  origin: (origin, callback) => {
+    // В SaaS-архитектуре мы динамически разрешаем ЛЮБЫЕ домены (origin),
+    // потому что клиенты будут привязывать свои уникальные адреса (pizza.com, sushi.pl).
+    // Возвращаем true для всех.
+    callback(null, true);
+  },
+  credentials: true,
+}));
 
 app.use(cors({
   origin: (origin, callback) => {
