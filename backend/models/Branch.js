@@ -32,6 +32,10 @@ const branchSchema = new mongoose.Schema({
     of: String,
     default: {},
   },
+  deliveryFee: { type: Number, default: 0 },           // стоимость доставки
+  minOrderAmountForDelivery: { type: Number, default: 0 }, // мин. сумма для доставки
+  deliveryRadiusKm: { type: Number, default: null },   // радиус доставки
+  hasOnlineOrdering: { type: Boolean, default: null },  // null = наследуется от тенанта
   coordinates: {
     lat: { type: Number, default: null },
     lng: { type: Number, default: null },

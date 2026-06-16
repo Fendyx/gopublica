@@ -78,7 +78,16 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasGallery:      { type: Boolean, default: true },
     hasDelivery:     { type: Boolean, default: false },
     hasClickCollect: { type: Boolean, default: false },
+    hasOnlineOrdering: { type: Boolean, default: false },
   },
+
+  payments: {
+  stripeAccountId:      { type: String, default: '' },
+  chargesEnabled:       { type: Boolean, default: false },
+  payoutsEnabled:       { type: Boolean, default: false },
+  onboardingComplete:   { type: Boolean, default: false },
+  platformFeePercent:   { type: Number, default: 5 },    // наша комиссия 5%
+},
 
 }, { timestamps: true });
 

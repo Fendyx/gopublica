@@ -56,6 +56,9 @@ app.use('/api/saas/push', require('./routes/saas/push'))
 app.use('/api/saas/branches', require('./routes/saas/branches'));
 app.use('/api/stripe', require('./routes/stripe/cancel'));
 app.use('/api/saas/analytics', require('./routes/saas/analytics'));
+// после существующих роутов
+app.use('/api/orders/public', require('./routes/orders/public'));
+app.use('/api/saas/orders', require('./routes/saas/orders'));
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────

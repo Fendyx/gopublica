@@ -1,7 +1,9 @@
 const express    = require('express');
 const router     = express.Router();
 const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const TenantUser = require('../../models/TenantUser');
+const TenantUser = require('../../models/TenantUser');   // было '../models/TenantUser' — неверно
+const Order      = require('../../models/Order');
+const Customer   = require('../../models/Customer');
 
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -18,6 +20,34 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
   try {
     switch (event.type) {
 
+      // ----------------- Заказы (онлайн-меню) -----------------
+      case 'payment_intent.succeeded': {
+        const paymentIntent = event.data.object;
+        if (paymentIntent.metadata?.orderId) {
+          const order = await Order.findById(paymentIntent.metadata.orderId);
+          if (order && order.status === 'pending_payment') {
+            order.status = 'paid';
+            order.payment.paymentIntentId = paymentIntent.id;
+            if (paymentIntent.charges?.data?.[0]) {
+              order.payment.stripeFee = paymentIntent.charges.data[0].balance_transaction
+                ? paymentIntent.charges.data[0].balance_transaction.fee / 100
+                : 0;
+            }
+            await order.save();
+
+            await Customer.findByIdAndUpdate(order.customerId, {
+              $inc: { ordersCount: 1, totalSpent: order.pricing.total },
+            });
+
+            // Уведомление ресторану
+            require('../../services/orderNotification').notifyNewOrder(order);
+            console.log(`✅ Order ${order._id} paid, waiting confirmation`);
+          }
+        }
+        break;
+      }
+
+      // ----------------- Подписки (существующая логика) -----------------
       case 'checkout.session.completed': {
         const session = event.data.object;
         const sub     = await Stripe.subscriptions.retrieve(session.subscription);
@@ -31,7 +61,6 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
         }
 
         if (user) {
-          // Safeguard the date parsing
           const periodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000) : null;
 
           await TenantUser.findByIdAndUpdate(user._id, {
@@ -57,7 +86,6 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
           user = await TenantUser.findOne({ stripeCustomerId: sub.customer });
         }
         if (user) {
-          // Safeguard the date parsing
           const periodEnd = sub.current_period_end ? new Date(sub.current_period_end * 1000) : null;
 
           await TenantUser.findByIdAndUpdate(user._id, {
