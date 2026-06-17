@@ -79,6 +79,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasDelivery:     { type: Boolean, default: false },
     hasClickCollect: { type: Boolean, default: false },
     hasOnlineOrdering: { type: Boolean, default: false },
+    hasJobApplications: { type: Boolean, default: false },
   },
 
   payments: {

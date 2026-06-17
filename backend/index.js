@@ -29,6 +29,10 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ DB error:', err));
 
+// ── Импорт новых роутов для заявок ──────────────────
+const jobsPublicRoutes = require('./routes/jobsPublic');
+const saasJobsRoutes = require('./routes/saas/jobs');
+
 // ── API Роуты ────────────────────────────────────────
 app.use('/api/auth',            require('./routes/auth'));
 app.use('/api/leads',           require('./routes/leads'));
@@ -60,6 +64,9 @@ app.use('/api/saas/analytics', require('./routes/saas/analytics'));
 app.use('/api/orders/public', require('./routes/orders/public'));
 app.use('/api/saas/orders', require('./routes/saas/orders'));
 
+// ── Новые роуты для заявок ──────────────────────────
+app.use('/api/public/jobs', jobsPublicRoutes);
+app.use('/api/saas/jobs', saasJobsRoutes);
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');

@@ -3,18 +3,15 @@ const router = express.Router();
 const CategoryTranslation = require('../../models/CategoryTranslation');
 const authTenant = require('../../middleware/authTenant');
 
-// ПУБЛИЧНЫЙ РОУТ: Получить доступные категории (Без authTenant!)
+// ПУБЛИЧНЫЙ РОУТ: Получить доступные категории
 router.get('/', async (req, res) => {
   try {
-    // Теперь берем tenantId из URL (например: /api/saas/categories?tenantId=cafe-flo)
     const tenantId = req.query.tenantId;
 
-    // Базовое условие: всегда отдаем общие дефолтные категории
     const orConditions = [
       { addedByTenants: { $size: 0 } }
     ];
 
-    // Если фронтенд прислал tenantId, добавляем его в поиск
     if (tenantId) {
       orConditions.push({ addedByTenants: tenantId });
     }
@@ -22,28 +19,27 @@ router.get('/', async (req, res) => {
     const categories = await CategoryTranslation.find({
       $or: orConditions,
     }).lean();
-    
+
     res.json(categories);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// Создать или обновить перевод категории (когда админ добавил свою)
+// Создать или обновить категорию
 router.post('/', authTenant, async (req, res) => {
   try {
-    const { key, translations } = req.body;
+    const { key, translations, icon } = req.body;
     const tenantId = req.tenantId;
 
     let category = await CategoryTranslation.findOne({ key });
     if (category) {
-      // Обновляем переводы (дополняем, а не перезаписываем)
       if (translations) {
         for (const lang of Object.keys(translations)) {
           category.translations.set(lang, translations[lang]);
         }
       }
-      // Добавляем tenantId, если его ещё нет
+      if (icon !== undefined) category.icon = icon;
       if (!category.addedByTenants.includes(tenantId)) {
         category.addedByTenants.push(tenantId);
       }
@@ -54,6 +50,7 @@ router.post('/', authTenant, async (req, res) => {
         name: req.body.name || key,
         translations: translations || {},
         addedByTenants: [tenantId],
+        icon: icon || '',
       });
       await category.save();
     }
@@ -63,8 +60,36 @@ router.post('/', authTenant, async (req, res) => {
   }
 });
 
-// Поиск категорий для автодополнения (опционально, можно позже)
-// Поиск категорий для автодополнения
+// Обновить иконку / переводы / название категории
+router.patch('/:key', authTenant, async (req, res) => {
+  try {
+    const { name, translations, icon } = req.body;
+    const update = {};
+
+    if (name !== undefined) update.name = name;
+    if (icon !== undefined) update.icon = icon;
+
+    const category = await CategoryTranslation.findOne({ key: req.params.key });
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    if (name !== undefined) category.name = name;
+    if (icon !== undefined) category.icon = icon;
+
+    if (translations) {
+      for (const lang of Object.keys(translations)) {
+        category.translations.set(lang, translations[lang]);
+      }
+    }
+
+    await category.save();
+    res.json(category);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Поиск категорий для автодополнения
 router.get('/suggest', authTenant, async (req, res) => {
   try {
@@ -72,11 +97,8 @@ router.get('/suggest', authTenant, async (req, res) => {
     if (!q || q.length < 2) return res.json([]);
 
     const regex = new RegExp(q, 'i');
-
-    // Поддерживаемые языки – важно, чтобы они совпадали с фронтом
     const LANGS = ['pl', 'en', 'de', 'ru', 'es', 'ua'];
 
-    // Строим условия поиска: ключ, основное название и каждый перевод
     const orConditions = [
       { key: regex },
       { name: regex },
