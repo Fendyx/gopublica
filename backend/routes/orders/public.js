@@ -3,7 +3,10 @@ const router = express.Router();
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../../models/Order');
 const Customer = require('../../models/Customer');
+const CustomerUser = require('../../models/CustomerUser');
 const TenantSettings = require('../../models/TenantSettings');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // ==============================
 // ЕДИНАЯ ФУНКЦИЯ РАСЧЁТА ЦЕНЫ
@@ -64,13 +67,13 @@ router.post('/estimate', getTenant, (req, res) => {
 });
 
 // ==============================
-// 2. СОЗДАНИЕ ЗАКАЗА
+// 2. СОЗДАНИЕ ЗАКАЗА (С Auth)
 // ==============================
 router.post('/', getTenant, async (req, res) => {
   try {
     const { tenantId, tenant } = req;
     if (!tenant.features?.hasOnlineOrdering) {
-      return res.status(403).json({ error: 'Online ordering is disabled for this restaurant' });
+      return res.status(403).json({ error: 'Online ordering is disabled' });
     }
 
     const {
@@ -78,7 +81,9 @@ router.post('/', getTenant, async (req, res) => {
       fulfillment,
       items,
       customer: customerInput,
+      password, // НОВОЕ ПОЛЕ
       locale = 'pl',
+      consents // НОВОЕ ПОЛЕ
     } = req.body;
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -88,13 +93,47 @@ router.post('/', getTenant, async (req, res) => {
       return res.status(400).json({ error: 'Customer name, email and phone are required' });
     }
 
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const deliveryFee = fulfillment?.type === 'delivery' ? (fulfillment.deliveryFee || 0) : 0;
+    // --- Auth & GDPR Логика ---
+    let customerUserId = null;
+    let authToken = null;
 
-    // Рассчитываем точную цену через единую функцию
-    const fees = calculateFees(subtotal, deliveryFee, tenant);
+    if (password && consents?.terms && consents?.privacy) {
+      const existingUser = await CustomerUser.findOne({ tenantId, email: customerInput.email.toLowerCase() });
 
-    // Находим или создаём клиента
+      if (existingUser) {
+        const isMatch = await existingUser.comparePassword(password);
+        if (!isMatch) {
+          return res.status(401).json({ error: 'Email уже зарегистрирован, но неверный пароль.' });
+        }
+        customerUserId = existingUser._id;
+      } else {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new CustomerUser({
+          email: customerInput.email.toLowerCase(),
+          passwordHash: hashedPassword,
+          name: customerInput.name,
+          phone: customerInput.phone,
+          tenantId,
+          consents: {
+            terms: consents.terms,
+            privacy: consents.privacy,
+            marketing: consents.marketing || false,
+            acceptedAt: new Date()
+          }
+        });
+        await newUser.save();
+        customerUserId = newUser._id;
+      }
+
+      authToken = jwt.sign(
+        { userId: customerUserId, tenantId, role: 'customer' },
+        process.env.JWT_SECRET,
+        { expiresIn: '30d' }
+      );
+    }
+    // ------------------------------
+
+    // CRM Логика (Customer модель)
     let customer = await Customer.findOne({ tenantId, email: customerInput.email });
     if (!customer) {
       customer = new Customer({
@@ -109,7 +148,6 @@ router.post('/', getTenant, async (req, res) => {
       if (customerInput.phone) customer.phone = customerInput.phone;
     }
 
-    // Сохраняем адрес, если доставка
     if (fulfillment?.type === 'delivery' && fulfillment.address) {
       const addr = fulfillment.address;
       const exists = customer.addresses.some(
@@ -128,11 +166,15 @@ router.post('/', getTenant, async (req, res) => {
     }
     await customer.save();
 
-    // Создаём заказ
+    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const deliveryFee = fulfillment?.type === 'delivery' ? (fulfillment.deliveryFee || 0) : 0;
+    const fees = calculateFees(subtotal, deliveryFee, tenant);
+
     const order = new Order({
       tenantId,
       branchId: branchId || null,
       customerId: customer._id,
+      customerUserId: customerUserId, // Связь с Auth юзером
       fulfillment: {
         type: fulfillment?.type || 'pickup',
         scheduledFor: fulfillment?.scheduledFor || null,
@@ -143,9 +185,11 @@ router.post('/', getTenant, async (req, res) => {
       items: items.map(i => ({
         menuItemId: i.menuItemId,
         name: i.name,
+        basePrice: i.basePrice || 0, // <--- Добавили
         price: i.price,
         quantity: i.quantity,
         notes: i.notes || '',
+        modifiers: i.modifiers || [], // <--- Добавили
       })),
       customer: {
         name: customerInput.name,
@@ -165,6 +209,7 @@ router.post('/', getTenant, async (req, res) => {
       orderId: order._id,
       total: order.pricing.total,
       serviceFee: order.pricing.serviceFee,
+      token: authToken,
     });
   } catch (err) {
     console.error('POST /api/orders/public error:', err);
@@ -176,7 +221,7 @@ router.post('/', getTenant, async (req, res) => {
 });
 
 // ==============================
-// 3. ОПЛАТА (PaymentIntent)
+// 3. ОПЛАТА (PaymentIntent) - ЭТО ТО, ЧТО НЕ РАБОТАЛО
 // ==============================
 router.post('/:id/pay', getTenant, async (req, res) => {
   try {
@@ -189,16 +234,12 @@ router.post('/:id/pay', getTenant, async (req, res) => {
       return res.status(400).json({ error: 'Restaurant is not connected to Stripe' });
     }
 
-    // Сумма в groszy
     const amountInGroszy = Math.round(order.pricing.total * 100);
-    // Платформа забирает всю serviceFee (включая покрытие Stripe)
     const applicationFeeGroszy = Math.round(order.pricing.serviceFee * 100);
 
     const paymentIntent = await Stripe.paymentIntents.create({
       amount: amountInGroszy,
       currency: order.pricing.currency,
-      // Stripe сам подбирает методы (карта, Blik, P24, Klarna и т.д.)
-      // на основе валюты и того, что включено в Dashboard у платформы
       automatic_payment_methods: { enabled: true },
       transfer_data: {
         destination: tenant.payments.stripeAccountId,

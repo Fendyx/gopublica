@@ -3,9 +3,18 @@ const mongoose = require('mongoose');
 const orderItemSchema = new mongoose.Schema({
   menuItemId: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true },
   name:       { type: String, required: true },
-  price:      { type: Number, required: true },   // цена за единицу на момент заказа (в злотых, например 12.50)
+  basePrice:  { type: Number, required: true }, // Базовая цена
+  price:      { type: Number, required: true }, // Итоговая цена (с модификаторами)
   quantity:   { type: Number, required: true, min: 1 },
   notes:      { type: String, default: '' },
+  // НОВОЕ ПОЛЕ
+  modifiers: [{
+    groupId: String,
+    groupName: String,
+    optionId: String,
+    optionName: String,
+    priceImpact: Number
+  }],
 }, { _id: false });
 
 const orderSchema = new mongoose.Schema({
@@ -35,6 +44,13 @@ const orderSchema = new mongoose.Schema({
     phone: { type: String, required: true },
     email: { type: String, default: '' },
   },
+
+  // В схему Order добавь это поле:
+    customerUserId: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'CustomerUser', 
+      index: true 
+    },
 
   pricing: {
     currency:    { type: String, default: 'pln' },

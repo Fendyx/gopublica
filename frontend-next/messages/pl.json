@@ -3,34 +3,43 @@
     "home": "Strona główna",
     "pricing": "Cennik",
     "contact": "Kontakt",
-    "login": "Logowanie",
-    "register": "Rejestracja",
+    "howItWorks": "Jak to działa",
+    "solutions": "Rozwiązania",
+    "solutionsOverview": "Wszystkie rozwiązania",
+    "login": "Zaloguj się",
+    "register": "Zacznij za darmo",
     "dashboard": "Panel"
   },
   "footer": {
-    "description": "Rozwiązania SaaS, które pomagają Twojemu biznesowi rozwijać się w sieci — strony WWW, CRM, rezerwacje i więcej.",
-    "links": {
-      "title": "Nawigacja",
-      "home": "Strona główna",
-      "pricing": "Cennik",
-      "portfolio": "Portfolio",
-      "calculator": "Kalkulator"
+    "description": "Wszystko, czego Twoja mała firma potrzebuje, by zabłysnąć online — strony internetowe, rezerwacje, zamówienia online i wiele więcej.",
+    "solutionsTitle": "Rozwiązania",
+    "solutionsOverview": "Wszystkie rozwiązania",
+    "categories": {
+      "food": "Restauracje",
+      "beauty": "Beauty & Grooming",
+      "auto": "Serwisy samochodowe"
     },
-    "legal": {
-      "title": "Informacje prawne",
-      "terms": "Regulamin",
-      "privacy": "Polityka prywatności"
-    },
-    "contacts": {
-      "title": "Kontakt",
-      "email": "support@gopublica.com",
-      "location": "Kraków, Polska"
-    },
-    "rights": "Wszelkie prawa zastrzeżone."
+    "howItWorks": "Jak to działa",
+    "companyTitle": "Firma",
+    "contact": "Kontakt",
+    "pricing": "Cennik",
+    "legalTitle": "Informacje prawne",
+    "terms": "Regulamin",
+    "privacy": "Polityka prywatności",
+    "contactTitle": "Kontakt",
+    "email": "support@gopublica.com",
+    "location": "Orlando, FL",
+    "rights": "Wszelkie prawa zastrzeżone.",
+    "socialAriaLabels": {
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "telegram": "Telegram",
+      "youtube": "YouTube"
+    }
   },
   "hero": {
     "title": "Twój biznes, w pełni zdigitalizowany",
-    "subtitle": "Jedna platforma dla Twojej strony, CRM, zamówień online i nie tylko — bez kodowania.",
+    "subtitle": "Jedna platforma dla Twojej strony, CRM, zamówień online i więcej — bez kodowania.",
     "startFree": "Rozpocznij darmowy okres próbny",
     "contact": "Skontaktuj się z nami"
   },
@@ -38,21 +47,46 @@
     "eyebrow": "zaufali nam"
   },
   "pricing": {
-    "title": "Wybierz swój plan",
-    "subtitle": "Rozpocznij 30-dniowy darmowy okres próbny, karta kredytowa nie jest wymagana.",
-    "badge": "Popularny",
+    "eyebrow": "Cennik",
+    "title": "Proste, przejrzyste ceny",
+    "subtitle": "Wszystko, czego potrzebujesz, aby prowadzić firmę online. My zajmujemy się technologią, Ty skupiasz się na klientach.",
+    "badge": "Najpopularniejszy",
     "period": "/miesiąc",
     "net": "netto",
     "btnText": "Rozpocznij darmowy okres próbny",
-    "footerNotice": "Wszystkie ceny są cenami netto. VAT może zostać doliczony w zależności od Twojego kraju.",
+    "btnTextDashboard": "Przejdź do panelu",
+    "trialNote": "✦ 30-dniowy darmowy okres próbny na wszystkich planach · Karta kredytowa nie jest wymagana",
+    "upgradeToUnlock": "przejdź na wyższy plan",
+    "footerNotice": "Wszystkie ceny są cenami netto. VAT może zostać doliczony w zależności od kraju. Zrezygnuj w dowolnym momencie, bez pytań.",
+    "features": {
+      "adminPanel": "Pełny panel administracyjny (menu, usługi, ceny)",
+      "booking": "System rezerwacji stolików i wizyt",
+      "gallery": "Galeria, aktualności i zarządzanie treścią",
+      "domainSsl": "Domena + SSL — w pełni zarządzane przez nas",
+      "basicStats": "Podstawowe statystyki strony",
+      "location1": "1 lokalizacja firmy",
+      "location3": "Do 3 lokalizacji",
+      "locationUnlimited": "Nieograniczona liczba lokalizacji",
+      "supportHours": "Wsparcie w godzinach pracy",
+      "prioritySupport": "Priorytetowe wsparcie",
+      "onlineOrders": "Zamówienia online i obsługa płatności",
+      "advancedAnalytics": "Zaawansowane analizy i raporty niestandardowe",
+      "dedicatedManager": "Dedykowany opiekun klienta",
+      "whiteLabel": "White-label (bez oznaczeń GoPublica)",
+      "customIntegrations": "Niestandardowe integracje na życzenie"
+    },
     "plans": {
-      "basic": {
-        "name": "Podstawowy",
-        "features": ["1 strona WWW", "Podstawowy CRM", "Wsparcie e-mail"]
+      "starter": {
+        "name": "Starter",
+        "tagline": "Idealny na start w sieci"
       },
-      "pro": {
-        "name": "Pro",
-        "features": ["3 strony WWW", "Zaawansowany CRM", "Wsparcie priorytetowe", "Własna domena"]
+      "growth": {
+        "name": "Growth",
+        "tagline": "Najlepszy dla rozwijających się firm"
+      },
+      "scale": {
+        "name": "Scale",
+        "tagline": "Dla sieci i franczyz"
       }
     }
   },
@@ -62,7 +96,7 @@
     "login": "Zaloguj się",
     "stepCreateAccount": "Utwórz konto",
     "fullName": "Imię i nazwisko",
-    "email": "E-mail",
+    "email": "Email",
     "password": "Hasło",
     "passwordPlaceholder": "Min. 6 znaków",
     "stepInvoiceData": "Dane do faktury",
@@ -96,10 +130,15 @@
     "errorGeneral": "Coś poszło nie tak"
   },
   "dashboard": {
-    "nav": { "overview": "Przegląd", "billing": "Płatności", "sites": "Strony", "settings": "Ustawienia" },
+    "nav": {
+      "overview": "Przegląd",
+      "billing": "Płatności",
+      "sites": "Strony",
+      "settings": "Ustawienia"
+    },
     "overviewTitle": "Witaj, {name}!",
     "profile": "Profil",
-    "email": "E-mail",
+    "email": "Email",
     "phone": "Telefon",
     "subscription": "Subskrypcja",
     "plan": "Plan",
@@ -109,58 +148,58 @@
   },
   "login": {
     "title": "Logowanie klienta",
-    "comingSoon": "Strona logowania będzie wkrótce dostępna.",
-    "backHome": "Wróć na stronę główną"
+    "comingSoon": "Strona logowania wkrótce dostępna.",
+    "backHome": "Powrót do strony głównej"
   },
   "billing": {
     "title": "Płatności",
-    "currentPlan": "Obecny plan",
-    "upgradeToPro": "Zmień plan na Pro",
+    "currentPlan": "Aktualny plan",
+    "upgradeToPro": "Przejdź na Pro",
     "proThanks": "Korzystasz z najlepszego planu!",
-    "dangerZone": "Strefa niebezpieczna",
-    "cancelDescription": "Anulowanie odniesie skutek na koniec bieżącego okresu rozliczeniowego.",
+    "dangerZone": "Strefa zagrożenia",
+    "cancelDescription": "Anulowanie zacznie obowiązywać z końcem bieżącego okresu rozliczeniowego.",
     "cancelSubscription": "Anuluj subskrypcję",
-    "confirmCancel": "Czy na pewno chcesz anulować?",
-    "cancelWarning": "Twoja subskrypcja pozostanie aktywna do końca opłaconego okresu, po czym zostanie anulowana.",
-    "keepPlan": "Zatrzymaj mój plan",
+    "confirmCancel": "Jesteś absolutnie pewny?",
+    "cancelWarning": "Twoja subskrypcja pozostanie aktywna do końca opłaconego okresu, a następnie zostanie anulowana.",
+    "keepPlan": "Zachowaj mój plan",
     "confirmCancelBtn": "Tak, anuluj",
     "cancelling": "Anulowanie..."
   },
   "sites": {
     "title": "Twoje strony",
-    "siteInProgress": "Twoja strona jest w budowie",
-    "siteInProgressDesc": "Nasz zespół obecnie pracuje nad Twoją stroną. Gdy tylko będzie gotowa, zobaczysz link poniżej i będziesz mógł od razu ją odwiedzić.",
+    "siteInProgress": "Twoja strona jest w trakcie tworzenia",
+    "siteInProgressDesc": "Nasz zespół pracuje obecnie nad Twoją stroną. Gdy będzie gotowa, zobaczysz link poniżej i będziesz mógł ją natychmiast odwiedzić.",
     "comingSoon": "Link pojawi się tutaj",
-    "questionsContact": "Masz pytania? Skontaktuj się z nami pod adresem"
+    "questionsContact": "Masz pytania? Skontaktuj się z nami:"
   },
   "settings": {
     "title": "Ustawienia",
     "profile": "Profil",
-    "name": "Imię",
-    "email": "E-mail",
+    "name": "Imię i nazwisko",
+    "email": "Email",
     "phone": "Telefon",
-    "editHint": "Edycja będzie wkrótce dostępna.",
-    "dangerZone": "Strefa niebezpieczna",
-    "deleteWarning": "Trwale usuń swoje konto i wszystkie dane. Tej akcji nie można cofnąć.",
+    "editHint": "Edycja wkrótce dostępna.",
+    "dangerZone": "Strefa zagrożenia",
+    "deleteWarning": "Trwale usuń swoje konto i wszystkie dane. Tej operacji nie można cofnąć.",
     "deleteAccount": "Usuń konto",
-    "confirmDelete": "Czy na pewno chcesz to zrobić?",
-    "deleteIrreversible": "Wszystkie Twoje strony, subskrypcje i dane osobowe zostaną trwale usunięte.",
-    "keepAccount": "Zatrzymaj moje konto",
+    "confirmDelete": "Jesteś absolutnie pewny?",
+    "deleteIrreversible": "Wszystkie Twoje strony, subskrypcja i dane osobowe zostaną trwale usunięte.",
+    "keepAccount": "Zachowaj moje konto",
     "confirmDeleteBtn": "Tak, usuń",
     "deleting": "Usuwanie...",
     "errorDelete": "Coś poszło nie tak"
   },
   "contact": {
     "title": "Skontaktuj się z nami",
-    "subtitle": "Chętnie Cię wysłuchamy. Skontaktuj się przez komunikator, e-mail lub poniższy formularz.",
+    "subtitle": "Chętnie Cię wysłuchamy. Skontaktuj się przez komunikator, e-mail lub formularz poniżej.",
     "messengerLabel": "Szybki czat",
-    "emailLabel": "E-mail",
+    "emailLabel": "Email",
     "form": {
       "title": "Wyślij wiadomość",
-      "subtitle": "Wypełnij formularz, a my odpowiemy w ciągu 24 godzin.",
+      "subtitle": "Wypełnij formularz, a odpowiemy w ciągu 24 godzin.",
       "name": "Imię i nazwisko",
       "namePlaceholder": "Jan Kowalski",
-      "email": "E-mail",
+      "email": "Email",
       "phone": "Telefon",
       "subject": "Temat",
       "subjectPlaceholder": "Wybierz temat",
@@ -169,31 +208,31 @@
       "messagePlaceholder": "Opowiedz nam o swoim projekcie...",
       "submit": "Wyślij wiadomość",
       "successTitle": "Wiadomość wysłana!",
-      "successText": "Dziękujemy za kontakt. Wkrótce się do Ciebie odezwiemy.",
+      "successText": "Dziękujemy za kontakt. Odezwiemy się wkrótce.",
       "sendMore": "Wyślij kolejną",
       "error": "Coś poszło nie tak. Spróbuj ponownie.",
-      "privacyStart": "Wysyłając wiadomość, akceptujesz naszą ",
+      "privacyStart": "Wysyłając formularz, akceptujesz naszą ",
       "privacyLink": "Politykę prywatności",
       "privacyEnd": ""
     }
   },
   "agencyFood": {
-    "heroEyebrow": "Cyfrowe rozwiązania dla gastronomii",
-    "heroTitle": "Zmień swój biznes gastronomiczny",
-    "heroSubtitle": "Tworzymy nowoczesne rozwiązania cyfrowe dla nowoczesnych restauracji, kawiarni i usług dostawy jedzenia.",
-    "visitDemo": "Zobacz Demo",
+    "heroEyebrow": "Cyfrowe rozwiązania dla restauracji",
+    "heroTitle": "Zmień swoją gastronomię",
+    "heroSubtitle": "Tworzymy nowoczesne doświadczenia cyfrowe dla restauracji, kawiarni i usług dostawy jedzenia.",
+    "visitDemo": "Zobacz demo",
     "learnMore": "Zobacz, jak to działa",
-    "overviewEyebrow": "Co budujemy",
-    "overviewTitle": "Wszystko, czego potrzebujesz, aby rozwijać się online",
-    "overviewText": "Od płynnego zamawiania online po inteligentne systemy rezerwacji – dostarczamy kompleksowe rozwiązania skrojone specjalnie dla branży gastronomicznej i hotelarskiej.",
+    "overviewEyebrow": "Co tworzymy",
+    "overviewTitle": "Wszystko, czego potrzebujesz, by rosnąć online",
+    "overviewText": "Od płynnych zamówień online po inteligentne systemy rezerwacji – dostarczamy kompleksowe rozwiązania stworzone specjalnie dla branży gastronomicznej i hotelarskiej.",
     "features": {
       "onlineOrdering": {
         "title": "Zamówienia online",
-        "desc": "Niestandardowe platformy do dostaw i odbioru osobistego bez żadnych prowizji z Twojej strony."
+        "desc": "Dedykowane platformy dostawy i na wynos bez prowizji po Twojej stronie."
       },
       "crmIntegration": {
-        "title": "CRM i Lojalność",
-        "desc": "Spraw, by klienci wracali dzięki zintegrowanym programom lojalnościowym i analityce danych."
+        "title": "CRM i programy lojalnościowe",
+        "desc": "Spraw, by klienci wracali, dzięki zintegrowanym programom nagród i analizie danych."
       },
       "menuManagement": {
         "title": "Inteligentne menu",
@@ -201,112 +240,124 @@
       }
     },
     "solutionsEyebrow": "Nasze rozwiązania",
-    "solutionsTitle": "Skrojone na miarę Twojego sukcesu",
+    "solutionsTitle": "Dopasowane do Twojego sukcesu",
     "solutions": {
-      "website": "Niestandardowe strony WWW",
-      "websiteDesc": "Błyskawicznie działające, zoptymalizowane pod SEO strony, które odzwierciedlają tożsamość Twojej marki i zamieniają odwiedzających w głodnych klientów.",
+      "website": "Strony internetowe na zamówienie",
+      "websiteDesc": "Błyskawicznie szybkie, zoptymalizowane pod SEO strony, które odzwierciedlają tożsamość Twojej marki i zamieniają odwiedzających w głodnych klientów.",
       "reservations": "Rezerwacje stolików",
-      "reservationsDesc": "Zautomatyzowane systemy rezerwacji, które redukują liczbę nieobecności i optymalizują rozmieszczenie gości w godzinach szczytu."
+      "reservationsDesc": "Zautomatyzowane systemy rezerwacji, które redukują nieobecności i optymalizują układ sali w godzinach szczytu."
     },
-    "ctaTitle": "Gotowy, aby zobaczyć to na żywo?",
-    "ctaSubtitle": "Odkryj w pełni działające demo"
+    "ctaTitle": "Gotowy zobaczyć to na żywo?",
+    "ctaSubtitle": "Poznaj w pełni działające demo"
   },
   "agencyGrooming": {
-    "title": "Cyfrowe rozwiązania dla groomerów",
-    "description": "Niestandardowe strony rezerwacyjne i narzędzia do zarządzania dla nowoczesnych salonów pielęgnacji zwierząt.",
-    "heroEyebrow": "Inteligentne narzędzia dla salonów",
-    "heroTitle": "Rozwijaj swój biznes groomerski",
-    "heroSubtitle": "Tworzymy piękne strony do rezerwacji i platformy do zarządzania zaprojektowane specjalnie dla profesjonalistów z branży groomerskiej.",
-    "visitDemo": "Zobacz Demo",
+    "title": "Cyfrowe rozwiązania dla groomingu i beauty dla zwierząt",
+    "description": "Strony internetowe z rezerwacjami i narzędzia do zarządzania dla nowoczesnych salonów groomingu.",
+    "heroEyebrow": "Inteligentne narzędzia dla salonów zoologicznych",
+    "heroTitle": "Rozwiń swój biznes groomingowy",
+    "heroSubtitle": "Tworzymy piękne strony rezerwacyjne i platformy do zarządzania zaprojektowane specjalnie dla profesjonalistów groomingu.",
+    "visitDemo": "Zobacz demo",
     "learnMore": "Zobacz, jak to działa",
-    "overviewEyebrow": "Co budujemy",
+    "overviewEyebrow": "Co tworzymy",
     "overviewTitle": "Wszystko, by ogony merdały z radości",
-    "overviewText": "Od zautomatyzowanego umawiania wizyt po szczegółowe profile zwierząt – nasze cyfrowe rozwiązania pomagają zaoszczędzić czas, abyś mógł skupić się na tym, co robisz najlepiej, czyli na opiece nad zwierzętami.",
+    "overviewText": "Od automatycznego umawiania wizyt po szczegółowe profile zwierząt – nasze rozwiązania cyfrowe pomagają zaoszczędzić czas i skupić się na tym, co robisz najlepiej – opiece nad zwierzętami.",
     "features": {
       "onlineBooking": {
-        "title": "Rezerwacja online 24/7",
-        "desc": "Pozwól klientom umawiać wizyty o każdej porze, bez przerywania Twojej pracy."
+        "title": "Rezerwacje online 24/7",
+        "desc": "Pozwól klientom umawiać wizyty o każdej porze, nie przerywając Twoich sesji groomingowych."
       },
       "petProfiles": {
         "title": "Szczegółowe profile zwierząt",
-        "desc": "Śledź rasy, rodzaje sierści, alergie i uwagi behawioralne w jednym miejscu."
+        "desc": "Śledź rasy, rodzaje sierści, alergie i notatki behawioralne w jednym miejscu."
       },
       "loyalty": {
-        "title": "Lojalność i Nagrody",
-        "desc": "Zachęcaj do ponownych wizyt dzięki zautomatyzowanym programom nagród dla najlepszych futrzastych klientów."
+        "title": "Lojalność i nagrody",
+        "desc": "Zachęcaj do kolejnych wizyt dzięki zautomatyzowanym programom nagród dla Twoich najlepszych futrzanych klientów."
       }
     },
     "solutionsEyebrow": "Nasze rozwiązania",
     "solutionsTitle": "Dopasowane do Twojego salonu",
     "solutions": {
-      "website": "Niestandardowe strony WWW",
+      "website": "Strony internetowe na zamówienie",
       "websiteDesc": "Przyjazne dla urządzeń mobilnych, pięknie zaprojektowane strony, które prezentują Twoje portfolio i usługi.",
-      "reservations": "Inteligentne planowanie",
-      "reservationsDesc": "Unikaj podwójnych rezerwacji i wysyłaj automatyczne powiadomienia SMS, aby zmniejszyć liczbę nieobecności."
+      "reservations": "Inteligentny grafik",
+      "reservationsDesc": "Unikaj podwójnych rezerwacji i wysyłaj automatyczne przypomnienia SMS, aby ograniczyć nieobecności."
     },
-    "ctaTitle": "Gotowy, aby zobaczyć to na żywo?",
-    "ctaSubtitle": "Odkryj w pełni działające demo skrojone pod salony groomerskie."
+    "ctaTitle": "Gotowy zobaczyć to na żywo?",
+    "ctaSubtitle": "Poznaj w pełni działające demo dostosowane do salonów groomingu."
   },
   "agencyOther": {
-    "title": "Cyfrowe rozwiązania dla warsztatów i usług",
-    "description": "Niestandardowe strony i systemy CRM dla serwisów samochodowych, centrów tuningowych i innych lokalnych firm.",
+    "title": "Cyfrowe rozwiązania dla serwisów i usług samochodowych",
+    "description": "Strony internetowe na zamówienie i systemy CRM dla serwisów samochodowych, centrów tuningu i innych lokalnych biznesów.",
     "heroEyebrow": "Cyfrowa infrastruktura dla usług",
-    "heroTitle": "Napędzaj swój biznes",
-    "heroSubtitle": "Potężne rozwiązania internetowe i narzędzia do zarządzania dla warsztatów, centrów tuningowych i każdego biznesu opartego na usługach.",
-    "visitDemo": "Zobacz Demo",
+    "heroTitle": "Rusz do przodu z biznesem",
+    "heroSubtitle": "Potężne rozwiązania webowe i narzędzia do zarządzania dla warsztatów samochodowych, centrów tuningu i każdej firmy usługowej.",
+    "visitDemo": "Zobacz demo",
     "learnMore": "Zobacz, jak to działa",
-    "overviewEyebrow": "Co budujemy",
-    "overviewTitle": "Stworzone dla szybkości i wydajności",
-    "overviewText": "Niezależnie od tego, czy prowadzisz warsztat samochodowy, czy specjalistyczne centrum tuningowe, dostarczamy cyfrowe narzędzia, które usprawnią Twoją pracę i przyciągną więcej klientów.",
+    "overviewEyebrow": "Co tworzymy",
+    "overviewTitle": "Stworzone z myślą o szybkości i efektywności",
+    "overviewText": "Niezależnie od tego, czy prowadzisz warsztat samochodowy, czy specjalistyczne centrum tuningu, dostarczamy cyfrowe narzędzia, które usprawnią Twoją pracę i przyciągną więcej klientów.",
     "features": {
       "carService": {
-        "title": "Planowanie usług",
-        "desc": "Usprawnij umawianie wizyt serwisowych i efektywnie zarządzaj stanowiskami w warsztacie."
+        "title": "Planowanie serwisu",
+        "desc": "Usprawnij wizyty serwisowe i efektywnie zarządzaj stanowiskami w warsztacie."
       },
       "tuning": {
-        "title": "Prezentacja Portfolio",
-        "desc": "Wyróżnij swoje najlepsze projekty tuningowe dzięki wysokiej jakości galeriom i studiom przypadków."
+        "title": "Prezentacja portfolio",
+        "desc": "Wyróżnij swoje najlepsze projekty tuningowe za pomocą wysokiej jakości galerii i case studies."
       },
       "anyBusiness": {
-        "title": "Wszechstronne rozwiązania",
-        "desc": "Zdolne do adaptacji systemy rezerwacji i CRM, które pasują do unikalnych potrzeb każdej firmy usługowej."
+        "title": "Uniwersalne rozwiązania",
+        "desc": "Adaptowalne systemy rezerwacji i CRM, które pasują do unikalnych potrzeb każdej firmy usługowej."
       }
     },
     "solutionsEyebrow": "Nasze rozwiązania",
     "solutionsTitle": "Zaprojektowane dla sukcesu",
     "solutions": {
-      "website": "Strony o wysokiej wydajności",
-      "websiteDesc": "Szybko ładujące się, zoptymalizowane pod SEO strony, dzięki którym lokalni klienci znajdą Cię jako pierwszego.",
+      "website": "Wydajne strony internetowe",
+      "websiteDesc": "Szybko ładujące się, zoptymalizowane pod SEO strony, które pomagają lokalnym klientom znaleźć Twoją firmę jako pierwszą.",
       "reservations": "Zarządzanie klientami",
-      "reservationsDesc": "Śledź historię serwisowania, wysyłaj przypomnienia o przeglądach i buduj trwałe relacje z klientami."
+      "reservationsDesc": "Śledź historię serwisową, wysyłaj przypomnienia o przeglądach i buduj trwałe relacje z klientami."
     },
-    "ctaTitle": "Gotowy, aby zobaczyć to na żywo?",
-    "ctaSubtitle": "Odkryj w pełni działające demo dla firm usługowych."
+    "ctaTitle": "Gotowy zobaczyć to na żywo?",
+    "ctaSubtitle": "Poznaj w pełni działające demo dla firm usługowych."
   },
   "home": {
     "solutionsTitle": "Rozwiązania dla każdej branży",
-    "solutionsSubtitle": "Od restauracji po tuning samochodowy — mamy wszystko, czego potrzebujesz.",
+    "solutionsSubtitle": "Od restauracji po tuning samochodowy – mamy wszystko, czego potrzebujesz.",
     "solutions": {
-      "food": { "title": "Restauracje i Kawiarnie", "desc": "Menu online, zamówienia, rezerwacje." },
-      "grooming": { "title": "Pielęgnacja zwierząt", "desc": "Rezerwacje, profile zwierząt, lojalność." },
-      "salon": { "title": "Uroda i Barberzy", "desc": "Wizyty, personel, menu usług." },
-      "other": { "title": "Inne firmy", "desc": "Niestandardowe strony dla każdej branży." }
+      "food": {
+        "title": "Restauracje i kawiarnie",
+        "desc": "Menu online, zamówienia, rezerwacje."
+      },
+      "grooming": {
+        "title": "Grooming dla zwierząt",
+        "desc": "Rezerwacje, profile zwierząt, lojalność."
+      },
+      "salon": {
+        "title": "Beauty i barberzy",
+        "desc": "Wizyty, personel, karty usług."
+      },
+      "other": {
+        "title": "Inne firmy",
+        "desc": "Strony internetowe na zamówienie dla każdej branży."
+      }
     }
   },
   "auth": {
     "loginTitle": "Logowanie klienta",
-    "email": "E-mail",
+    "email": "Email",
     "password": "Hasło",
     "loading": "Logowanie...",
     "loginBtn": "Zaloguj się",
     "noAccount": "Nie masz konta?",
     "register": "Zarejestruj się",
-    "errorLogin": "Nieprawidłowy adres e-mail lub hasło"
+    "errorLogin": "Nieprawidłowy email lub hasło"
   },
   "register": {
     "title": "Utwórz konto",
     "name": "Imię i nazwisko",
-    "email": "E-mail",
+    "email": "Email",
     "password": "Hasło",
     "passwordPlaceholder": "Min. 6 znaków",
     "companyName": "Nazwa firmy (opcjonalnie)",
@@ -315,7 +366,150 @@
     "creating": "Tworzenie konta...",
     "alreadyHaveAccount": "Masz już konto?",
     "login": "Zaloguj się",
-    "acceptTermsAndPrivacy": "Aby kontynuować, musisz zaakceptować Regulamin i Politykę prywatności.",
+    "acceptTermsAndPrivacy": "Musisz zaakceptować Regulamin i Politykę prywatności, aby kontynuować.",
     "errorRegister": "Coś poszło nie tak"
+  },
+  "presentation": {
+    "step_label": "Krok",
+    "nav_prev": "Wstecz",
+    "nav_next": "Dalej",
+    "start_button": "Zaczynajmy",
+    "steps": {
+      "intro": {
+        "title": "Oto jak współpracujemy",
+        "subtitle": "5 prostych kroków – od pierwszej rozmowy do uruchomienia Twojej strony. Przejdźmy przez to."
+      },
+      "meeting_1": {
+        "title": "Spotkanie #1: Uruchamiamy Twój 30-dniowy darmowy okres próbny",
+        "description": "Razem skonfigurujemy Twoje konto. Otrzymujesz pełny dostęp na 30 dni bez żadnych kosztów, aby przekonać się o wartości.",
+        "highlight": "🔒 Podpinamy Twoją kartę przez Stripe, aby zabezpieczyć miejsce, ale dziś nie pobieramy żadnych opłat. To Twoja gwarancja bezpieczeństwa."
+      },
+      "dashboard": {
+        "title": "Twoje osobiste centrum dowodzenia",
+        "description": "Zaraz po rozmowie zostaniesz przekierowany do panelu. Śledzenie postępów, faktur i statusu strony jest teraz w jednym miejscu."
+      },
+      "design_phase": {
+        "title": "My budujemy, Ty odpoczywasz",
+        "description": "Nasz zespół bierze informacje o Twojej firmie i tworzy profesjonalną stronę. Ty skupiasz się na klientach, my zajmujemy się kodem i designem."
+      },
+      "meeting_2": {
+        "title": "Spotkanie #2: Przegląd i ostatnie szlify",
+        "description": "Pokazujemy gotowy efekt. Przechodzimy razem przez każdą stronę i nanosimy ostatnie poprawki na żywo."
+      },
+      "activation": {
+        "title": "Aktywacja jednym kliknięciem",
+        "description": "Gotowy do startu? Wystarczy kliknąć przycisk „Aktywuj” w panelu, aby opłacić jednorazową opłatę za profesjonalne wdrożenie.",
+        "highlight": "💶 €300 jednorazowej opłaty obejmuje: profesjonalny design, konfigurację domeny i optymalizację SEO. Bezpieczna płatność przez Stripe."
+      },
+      "done": {
+        "title": "Jesteś w sieci — gratulacje! 🎉",
+        "subtitle": "Masz jakieś pytania, zanim ruszymy dalej? Jesteśmy gotowi odpowiedzieć na wszystko."
+      }
+    }
+  },
+  "solutions": {
+    "page": {
+      "title": "Rozwiązania, które napędzają Twój biznes",
+      "subtitle": "Wszystkie narzędzia współpracują, aby zaoszczędzić Ci czas, pieniądze i nerwy."
+    },
+    "categories": {
+      "all": "Wszystkie",
+      "food": "Gastronomia",
+      "beauty": "Beauty & Grooming",
+      "auto": "Serwisy samochodowe",
+      "universal": "Uniwersalne"
+    },
+    "modules": {
+      "qr-menu": {
+        "title": "Inteligentne menu QR",
+        "desc": "Zaktualizuj menu w kilka sekund, goście skanują i przeglądają w swoim języku.",
+        "heroDesc": "Koniec z kosztami przedruków. Zmieniaj ceny i pozycje natychmiast z telefonu."
+      },
+      "reservations": {
+        "title": "Rezerwacje stolików",
+        "desc": "Przyjmuj rezerwacje 24/7, nie tracąc żadnego telefonu.",
+        "heroDesc": "Pozwól gościom rezerwować stolik nawet wtedy, gdy jesteś zamknięty."
+      },
+      "online-ordering": {
+        "title": "Bezpośrednie zamówienia online",
+        "desc": "Zatrzymaj 100% przychodu – bez prowizji UberEats.",
+        "heroDesc": "Przejmij kontrolę nad dostawą i na wynos, nie dzieląc się zyskiem."
+      },
+      "appointments": {
+        "title": "Rezerwacje online 24/7",
+        "desc": "Klienci sami wybierają usługę, specjalistę i termin.",
+        "heroDesc": "Twój kalendarz wypełnia się nawet wtedy, gdy śpisz."
+      },
+      "staff-management": {
+        "title": "Zarządzanie personelem",
+        "desc": "Ustalaj grafiki i zamykaj kalendarze jednym kliknięciem.",
+        "heroDesc": "Zwolnienie lekarskie? Zablokuj kalendarz Jana natychmiast i chroń swój harmonogram."
+      },
+      "portfolio": {
+        "title": "Interaktywne portfolio",
+        "desc": "Wrzucaj świeże fryzury lub manicure prosto z telefonu.",
+        "heroDesc": "Zmień swoją najlepszą pracę w magnes na klientów."
+      },
+      "quote-estimator": {
+        "title": "Wycena online",
+        "desc": "Natychmiastowy przedział cenowy na podstawie modelu auta i rodzaju usługi.",
+        "heroDesc": "Generuj wartościowe leady bez podnoszenia słuchawki."
+      },
+      "before-after": {
+        "title": "Suwak przed/po",
+        "desc": "Wizualny suwak, który sprzedaje lepiej niż jakikolwiek tekst.",
+        "heroDesc": "Pokaż transformację. Tylko tyle trzeba."
+      },
+      "service-request": {
+        "title": "Zgłoszenie serwisowe ze zdjęciem",
+        "desc": "Prześlij zdjęcie uszkodzenia i otrzymaj wstępną wycenę.",
+        "heroDesc": "Pozwól klientom wysłać Ci zdjęcie szkody, zamiast jeździć przez całe miasto."
+      },
+      "careers": {
+        "title": "Formularz rekrutacyjny",
+        "desc": "Rekrutuj szybciej dzięki gotowej stronie kariery.",
+        "heroDesc": "Przyjmuj aplikacje 24/7. Nigdy więcej papierowych CV."
+      },
+      "review-booster": {
+        "title": "Wzmacniacz opinii",
+        "desc": "Automatycznie zachęcaj zadowolonych klientów do wystawiania 5-gwiazdkowych recenzji.",
+        "heroDesc": "Zmień każdą udaną wizytę w publiczną opinię."
+      },
+      "analytics": {
+        "title": "Panel biznesowy",
+        "desc": "Zobacz, skąd pochodzą odwiedzający i w co klikają.",
+        "heroDesc": "Zrozum swój ruch bez dotykania Google Analytics."
+      }
+    },
+    "badge": {
+      "included": "W zestawie",
+      "premium": "Premium"
+    },
+    "card": {
+      "learnMore": "Dowiedz się więcej →"
+    },
+    "detail": {
+      "cta": "Umów demo",
+      "ctaTitle": "Gotowy rozwinąć swój biznes?",
+      "dashboard": {
+        "title": "Pełna kontrola w Twojej kieszeni",
+        "desc": "Zobacz, jak każda rezerwacja, zamówienie czy zgłoszenie natychmiast pojawia się w Twoim panelu administracyjnym."
+      },
+      "benefits": {
+        "title": "Dlaczego to się opłaca",
+        "item1": {
+          "title": "Oszczędzaj godziny każdego dnia",
+          "desc": "Zautomatyzuj zadania, które pożerają Twój czas — potwierdzenia, przypomnienia i aktualizacje."
+        },
+        "item2": {
+          "title": "Buduj bazę klientów",
+          "desc": "Automatycznie zbieraj emaile i numery telefonów do przyszłych działań marketingowych."
+        },
+        "item3": {
+          "title": "Ogranicz nieobecności",
+          "desc": "Automatyczne przypomnienia SMS sprawiają, że kalendarz jest pełny, a przychody przewidywalne."
+        }
+      }
+    }
   }
 }

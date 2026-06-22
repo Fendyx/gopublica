@@ -47,9 +47,10 @@ const tenantSettingsSchema = new mongoose.Schema({
   domain: { type: String, unique: true, sparse: true, default: null },
 
   // Ниша — определяет какой шаблон рендерить на фронте
+    // Ниша — определяет какой шаблон рендерить на фронте
   niche: {
     type: String,
-    enum: ['food', 'beauty', 'auto'],
+    enum: ['food', 'beauty', 'auto', 'ecommerce'], // <--- ДОБАВЬ СЮДА 'ecommerce'
     default: 'food',
   },
 
@@ -67,8 +68,25 @@ const tenantSettingsSchema = new mongoose.Schema({
     heroPosterUrl:     { type: String, default: '' },
     heroSliderImages:  [String],
     heroBgImage:       { type: String, default: '' },
+    heroSplitImage: { type: String, default: '' },
     menuStyle:   { type: String, enum: ['grid', 'list'],          default: 'grid' },
     galleryStyle:{ type: String, enum: ['bento', 'masonry'],      default: 'bento' },
+    ecommerceLayout: {
+      type: String,
+      enum: ['grid-3', 'grid-4', 'carousel', 'dynamic'],
+      default: 'grid-3'
+    },
+    radius: {
+      type: String,
+      enum: ['none', 'sm', 'md', 'lg', 'xl'],
+      default: 'lg'
+    },
+        productCardVariant: {
+      type: String,
+      enum: ['overlay', 'action-bar', 'minimal'],
+      default: 'action-bar'
+    },
+    categoryBgColor: { type: String, default: '' }, // <--- ДОБАВИТЬ ЭТО
   },
 
   // ─── НОВОЕ: Фичи клиента ────────────────────────────────────────────────────

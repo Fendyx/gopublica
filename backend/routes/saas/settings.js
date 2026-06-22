@@ -5,8 +5,6 @@ const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/authTenant');
 
 // ─── НОВЫЙ РОУТ: поиск тенанта по домену ────────────────────────────────────
-// GET /api/saas/settings/by-domain?domain=sushi-master.com
-// Публичный (без авторизации) — вызывается proxy.ts при каждом запросе
 router.get('/by-domain', async (req, res) => {
   try {
     const { domain } = req.query;
@@ -21,7 +19,6 @@ router.get('/by-domain', async (req, res) => {
       );
 
     if (!settings) return res.status(404).json({ error: 'Tenant not found' });
-
     res.json(settings);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -29,7 +26,6 @@ router.get('/by-domain', async (req, res) => {
 });
 
 // ─── СУЩЕСТВУЮЩИЙ РОУТ: получить настройки (глобальные или филиала) ──────────
-// GET /api/saas/settings?tenantId=xxx&branchId=yyy
 router.get('/', async (req, res) => {
   try {
     const { tenantId, branchId } = req.query;
@@ -42,9 +38,24 @@ router.get('/', async (req, res) => {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
       if (!branch) return res.status(404).json({ error: 'Branch not found' });
 
+      const globalObj = globalSettings.toObject?.() || {};
+      
+      // ГЛУБОКОЕ СЛИЯНИЕ ТЕМЫ (чтобы branch radius не затирал global primary)
+      const globalTheme = globalObj.theme || {};
+      const branchTheme = branch.settingsOverride?.theme || {};
+      const mergedTheme = { ...globalTheme, ...branchTheme };
+
       const merged = {
-        ...globalSettings.toObject?.(),
+        ...globalObj,
         ...branch.settingsOverride,
+        theme: mergedTheme, // <--- ПЕРЕЗАПИСЫВАЕМ СЛИТОЙ ТЕМОЙ
+        workingHours: branch.workingHours,
+        coordinates: branch.coordinates,
+        address: branch.address,
+        phone: branch.phone,
+        email: branch.email,
+        city: branch.city,
+        name: branch.name,
       };
       delete merged._id;
       delete merged.__v;
@@ -60,32 +71,90 @@ router.get('/', async (req, res) => {
 });
 
 // ─── СУЩЕСТВУЮЩИЙ РОУТ: обновить настройки (глобальные или филиала) ──────────
-// PUT /api/saas/settings
 router.put('/', authTenant, async (req, res) => {
   try {
-    const { branchId, ...settingsData } = req.body;
+    const { branchId, ...reqBody } = req.body;
     const tenantId = req.tenantId;
+
+    // 1. ВСЕГДА СОХРАНЯЕМ ТЕМУ ГЛОБАЛЬНО (чтобы не обрезалась схемой Branch)
+    if (reqBody.theme) {
+      const globalSettings = await TenantSettings.findOne({ tenantId });
+      if (globalSettings) {
+        globalSettings.theme = {
+          ...(globalSettings.theme?.toObject?.() || {}),
+          ...reqBody.theme
+        };
+        globalSettings.markModified('theme');
+        await globalSettings.save();
+      } else {
+        await TenantSettings.create({ tenantId, theme: reqBody.theme });
+      }
+      delete reqBody.theme; // Убираем theme из тела, чтобы не пытаться сохранить ее в Branch
+    }
 
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
       if (!branch) return res.status(404).json({ error: 'Branch not found' });
 
-      Object.assign(branch.settingsOverride, settingsData);
+      const { 
+        workingHours, 
+        coordinates, 
+        name, 
+        city, 
+        address, 
+        phone, 
+        email 
+      } = reqBody;
+
+      if (name !== undefined) branch.name = name;
+      if (city !== undefined) branch.city = city;
+      if (address !== undefined) branch.address = address;
+      if (phone !== undefined) branch.phone = phone;
+      if (email !== undefined) branch.email = email;
+      if (coordinates !== undefined) branch.coordinates = coordinates;
+      if (workingHours !== undefined) branch.workingHours = workingHours;
+
+      const {
+        workingHours: wh, 
+        coordinates: coords, 
+        name: n, 
+        city: c, 
+        address: a, 
+        phone: p, 
+        email: e, 
+        ...settingsOverrideData 
+      } = reqBody;
+
+      Object.assign(branch.settingsOverride, settingsOverrideData);
       await branch.save();
 
       const globalSettings = await TenantSettings.findOne({ tenantId }) || {};
-      const merged = { ...globalSettings.toObject?.(), ...branch.settingsOverride };
+      const globalObj = globalSettings.toObject?.() || {};
+      
+      const merged = {
+        ...globalObj,
+        ...branch.settingsOverride,
+        workingHours: branch.workingHours,
+        coordinates: branch.coordinates,
+        address: branch.address,
+        phone: branch.phone,
+        email: branch.email,
+        city: branch.city,
+        name: branch.name,
+      };
       delete merged._id;
       return res.json(merged);
+      
     } else {
       const updated = await TenantSettings.findOneAndUpdate(
         { tenantId },
-        settingsData,
+        { $set: reqBody },
         { upsert: true, returnDocument: 'after' }
       );
       return res.json(updated);
     }
   } catch (err) {
+    console.error('Error saving settings:', err);
     res.status(500).json({ error: err.message });
   }
 });

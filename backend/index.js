@@ -1,14 +1,18 @@
-const path     = require('path');
-const express  = require('express');
-const cors     = require('cors');
+const path = require('path');
+const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
-const fs       = require('fs');
+const fs = require('fs');
 require('dotenv').config();
 
-const webpush = require('web-push')
-webpush.setVapidDetails(process.env.VAPID_EMAIL, process.env.VAPID_PUBLIC_KEY, process.env.VAPID_PRIVATE_KEY)
+const webpush = require('web-push');
+webpush.setVapidDetails(
+  process.env.VAPID_EMAIL,
+  process.env.VAPID_PUBLIC_KEY,
+  process.env.VAPID_PRIVATE_KEY
+);
 
-const app  = express();
+const app = express();
 const PORT = 5000;
 
 // ── Настройки CORS ───────────────────────────────────
@@ -20,7 +24,8 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use('/api/stripe/webhook', require('./routes/stripe/webhook')); // важно: перед express.json() для вебхуков
+// Вебхук Страйпа должен быть ДО express.json(), чтобы получать сырой body
+app.use('/api/stripe/webhook', require('./routes/stripe/webhook'));
 
 app.use(express.json());
 
@@ -29,44 +34,71 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('❌ DB error:', err));
 
-// ── Импорт новых роутов для заявок ──────────────────
+// ── Импорт роутов ─────────────────────────────────────
 const jobsPublicRoutes = require('./routes/jobsPublic');
 const saasJobsRoutes = require('./routes/saas/jobs');
 
+// Заказы (Чекаут)
+const ordersPublicRoutes = require('./routes/orders/public');
+
+// Заказы (Личный кабинет клиента - НОВОЕ)
+const publicUserOrders = require('./routes/public/orders');
+
+const publicProfileRoutes = require('./routes/public/profile');
+
 // ── API Роуты ────────────────────────────────────────
-app.use('/api/auth',            require('./routes/auth'));
-app.use('/api/leads',           require('./routes/leads'));
-app.use('/api/users',           require('./routes/users'));      
-app.use('/api/clients',         require('./routes/clients'));
-app.use('/api/change-requests', require('./routes/changeRequests'));
-app.use('/api/portfolio',       require('./routes/portfolio'));
-app.use('/api/projects',        require('./routes/projects'));
-app.use('/api/saas/menu',       require('./routes/saas/menu'));
-app.use('/api/saas/auth',       require('./routes/saas/auth'));
-app.use('/api/saas/reservations', require('./routes/saas/reservations'));
-app.use('/api/saas/settings',   require('./routes/saas/settings'));
-app.use('/api/saas/gallery',    require('./routes/saas/gallery'));
-app.use('/api/saas/dashboard',  require('./routes/saas/dashboard'));
-app.use('/api/saas/news',       require('./routes/saas/news'));
+
+// Auth & Admins
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+
+// Leads & Clients
+app.use('/api/leads', require('./routes/leads'));
+app.use('/api/clients', require('./routes/clients'));
+
+// SaaS (Рестораны)
+app.use('/api/saas/auth', require('./routes/saas/auth'));
+app.use('/api/saas/settings', require('./routes/saas/settings'));
+app.use('/api/saas/dashboard', require('./routes/saas/dashboard'));
+app.use('/api/saas/menu', require('./routes/saas/menu'));
 app.use('/api/saas/categories', require('./routes/saas/categories'));
+app.use('/api/saas/reservations', require('./routes/saas/reservations'));
+app.use('/api/saas/orders', require('./routes/saas/orders'));
+app.use('/api/saas/gallery', require('./routes/saas/gallery'));
+app.use('/api/saas/news', require('./routes/saas/news'));
+app.use('/api/saas/branches', require('./routes/saas/branches'));
+app.use('/api/saas/analytics', require('./routes/saas/analytics'));
+app.use('/api/saas/push', require('./routes/saas/push'));
+app.use('/api/saas/jobs', saasJobsRoutes);
+
+// Stripe (SaaS подписки)
 app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
-app.use('/api/stripe', require('./routes/stripe/setupIntent'));
-app.use('/api/stripe', require('./routes/stripe/subscribe'));
+app.use('/api/stripe/setupIntent', require('./routes/stripe/setupIntent'));
+app.use('/api/stripe/subscribe', require('./routes/stripe/subscribe'));
+app.use('/api/stripe/cancel', require('./routes/stripe/cancel'));
+
+// Beauty (если используется)
 app.use('/api/beauty/services', require('./routes/beauty/services'));
 app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
 app.use('/api/beauty/masters', require('./routes/beauty/masters'));
 app.use('/api/beauty/categories', require('./routes/beauty/categories'));
-app.use('/api/saas/push', require('./routes/saas/push'))
-app.use('/api/saas/branches', require('./routes/saas/branches'));
-app.use('/api/stripe', require('./routes/stripe/cancel'));
-app.use('/api/saas/analytics', require('./routes/saas/analytics'));
-// после существующих роутов
-app.use('/api/orders/public', require('./routes/orders/public'));
-app.use('/api/saas/orders', require('./routes/saas/orders'));
 
-// ── Новые роуты для заявок ──────────────────────────
+// Другое
+app.use('/api/change-requests', require('./routes/changeRequests'));
+app.use('/api/portfolio', require('./routes/portfolio'));
+app.use('/api/projects', require('./routes/projects'));
+app.use('/api/public/auth', require('./routes/public/auth'));
+
+// ── Публичные роуты (Клиенты) ────────────────────────
+// Чекаут и оплата
+app.use('/api/orders/public', ordersPublicRoutes);
+// Личный кабинет и история заказов
+app.use('/api/public/orders', publicUserOrders);
+// Публичные вакансии
 app.use('/api/public/jobs', jobsPublicRoutes);
-app.use('/api/saas/jobs', saasJobsRoutes);
+
+app.use('/api/public/profile', publicProfileRoutes);
+
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
@@ -95,7 +127,11 @@ app.get(/.*/, (req, res) => {
 app.use((err, req, res, next) => {
   console.error('🔥 Ошибка на сервере:', err.message);
   if (req.path.startsWith('/api/')) {
-    return res.status(500).json({ success: false, message: 'Internal Server Error', error: err.message });
+    return res.status(500).json({ 
+      success: false, 
+      message: 'Internal Server Error', 
+      error: err.message 
+    });
   }
   next(err);
 });
