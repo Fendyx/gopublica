@@ -9,28 +9,18 @@ router.get('/', async (req, res) => {
   try {
     const tenantId = req.query.tenantId;
     const niche = req.query.niche || 'food';
-
     if (!tenantId) {
-      // Если тенант не указан, возвращаем только глобальные
       const globals = await CategoryTranslation.find({ tenantId: null, niche }).lean();
       return res.json(globals);
     }
-
-    // 1. Находим все категории, принадлежащие этому тенанту
     const tenantCats = await CategoryTranslation.find({ tenantId, niche }).lean();
     const tenantKeys = tenantCats.map(c => c.key);
-
-    // 2. Находим глобальные категории, ключей которых НЕТ у этого тенанта
     const globalCats = await CategoryTranslation.find({
       tenantId: null,
       niche,
-      key: { $nin: tenantKeys } // Исключаем ключи, которые уже есть у тенанта
+      key: { $nin: tenantKeys }
     }).lean();
-
-    // 3. Объединяем их (локальные + глобальные без дубликатов)
-    const result = [...tenantCats, ...globalCats];
-
-    res.json(result);
+    res.json([...tenantCats, ...globalCats]);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -39,11 +29,9 @@ router.get('/', async (req, res) => {
 // Создать категорию (всегда привязывается к тенанту)
 router.post('/', authTenant, async (req, res) => {
   try {
-    // ДОБАВЛЕНО cardBgColor
-    const { key, name, translations, icon, niche, layout, coverImage, cardBgColor } = req.body;
+    const { key, name, description, translations, icon, niche, layout, coverImage, cardBgColor } = req.body;
     const tenantId = req.tenantId;
 
-    // Проверяем, нет ли уже такой категории у этого тенанта
     let category = await CategoryTranslation.findOne({ key, tenantId });
     if (category) {
       return res.status(409).json({ error: 'Category with this key already exists for your tenant.' });
@@ -51,16 +39,19 @@ router.post('/', authTenant, async (req, res) => {
 
     category = new CategoryTranslation({
       key,
-      tenantId, // Привязываем к тенанту
+      tenantId,
       name: name || key,
+      description: description || '',
       translations: translations || {},
       icon: icon || '',
       niche: niche || 'food',
       layout: layout || 'grid-3',
       coverImage: coverImage || '',
-      cardBgColor: cardBgColor || '' // <--- СОХРАНЯЕМ ЦВЕТ
+      cardBgColor: cardBgColor || '',
+      imageAspectRatio: imageAspectRatio || '1/1',
+  productImageAspectRatio: productImageAspectRatio || '1/1',
     });
-    
+
     await category.save();
     res.status(201).json(category);
   } catch (err) {
@@ -71,53 +62,51 @@ router.post('/', authTenant, async (req, res) => {
 // Обновить категорию по ID
 router.put('/:id', authTenant, async (req, res) => {
   try {
-    // ДОБАВЛЕНО cardBgColor
-    const { name, icon, layout, niche, coverImage, cardBgColor } = req.body;
+    const { name, description, icon, layout, niche, coverImage, cardBgColor, imageAspectRatio, productImageAspectRatio } = req.body;
     const tenantId = req.tenantId;
 
     let category = await CategoryTranslation.findById(req.params.id);
     if (!category) return res.status(404).json({ error: 'Category not found' });
+    if (imageAspectRatio !== undefined) category.imageAspectRatio = imageAspectRatio;
+    if (productImageAspectRatio !== undefined) category.productImageAspectRatio = productImageAspectRatio;
 
-    // МАГИЯ КЛОНИРОВАНИЯ: Если категория глобальная (tenantId: null),
-    // мы должны найти или создать локальную копию для этого тенанта.
+    // Клонирование глобальной категории при редактировании
     if (category.tenantId === null || category.tenantId === undefined) {
-      
-      // Ищем, нет ли уже копии у этого тенанта
       let tenantCategory = await CategoryTranslation.findOne({ key: category.key, tenantId: tenantId });
-      
       if (!tenantCategory) {
-        // Если копии нет — создаем
         tenantCategory = new CategoryTranslation({
           key: category.key,
           tenantId: tenantId,
           name: name !== undefined ? name : category.name,
+          description: description !== undefined ? description : category.description,
           icon: icon !== undefined ? icon : category.icon,
           niche: niche !== undefined ? niche : category.niche,
           layout: layout !== undefined ? layout : category.layout,
           coverImage: coverImage !== undefined ? coverImage : category.coverImage,
-          cardBgColor: cardBgColor !== undefined ? cardBgColor : category.cardBgColor, // <--- СОХРАНЯЕМ ЦВЕТ
-          translations: category.translations
+          cardBgColor: cardBgColor !== undefined ? cardBgColor : category.cardBgColor,
+          translations: category.translations,
+          imageAspectRatio: imageAspectRatio || '1/1',
+          productImageAspectRatio : productImageAspectRatio || '1/1',
         });
         await tenantCategory.save();
         return res.json(tenantCategory);
       } else {
-        // Если копия уже есть — переключаемся на неё, чтобы просто обновить
         category = tenantCategory;
       }
     }
 
-    // Если категория принадлежит другому тенанту — запрет
     if (category.tenantId !== tenantId) {
       return res.status(403).json({ error: 'Forbidden: This category belongs to another tenant.' });
     }
 
     // Обновляем поля
     if (name !== undefined) category.name = name;
+    if (description !== undefined) category.description = description;   // <-- ВОТ ЭТО ДОБАВИЛИ
     if (icon !== undefined) category.icon = icon;
     if (layout !== undefined) category.layout = layout;
     if (niche !== undefined) category.niche = niche;
     if (coverImage !== undefined) category.coverImage = coverImage;
-    if (cardBgColor !== undefined) category.cardBgColor = cardBgColor; // <--- СОХРАНЯЕМ ЦВЕТ
+    if (cardBgColor !== undefined) category.cardBgColor = cardBgColor;
 
     await category.save();
     res.json(category);
@@ -131,13 +120,10 @@ router.put('/:id', authTenant, async (req, res) => {
 router.delete('/:id', authTenant, async (req, res) => {
   try {
     const tenantId = req.tenantId;
-    // Удаляем только если она принадлежит этому тенанту (нельзя удалить глобальную)
     const result = await CategoryTranslation.deleteOne({ _id: req.params.id, tenantId: tenantId });
-    
     if (result.deletedCount === 0) {
       return res.status(403).json({ error: 'Cannot delete global category or category not found.' });
     }
-    
     res.json({ message: 'Category deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -149,14 +135,12 @@ router.get('/suggest', authTenant, async (req, res) => {
   try {
     const { q, niche } = req.query;
     if (!q || q.length < 2) return res.json([]);
-
     const regex = new RegExp(q, 'i');
     const query = {
       $or: [{ key: regex }, { name: regex }],
-      tenantId: null, // При создании предлагаем только глобальные словарные категории
+      tenantId: null,
       niche: niche || 'food'
     };
-
     const categories = await CategoryTranslation.find(query).limit(8).lean();
     res.json(categories);
   } catch (err) {

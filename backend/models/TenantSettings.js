@@ -7,6 +7,8 @@ const tenantSettingsSchema = new mongoose.Schema({
     unique: true,
   },
 
+  businessName: { type: String, default: '' },
+
   // ─── Контактные данные (было) ───────────────────────────────────────────────
   phone:          { type: String, default: '' },
   address:        { type: String, default: '' },
@@ -83,10 +85,11 @@ const tenantSettingsSchema = new mongoose.Schema({
     },
         productCardVariant: {
       type: String,
-      enum: ['overlay', 'action-bar', 'minimal'],
+     enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay'],
       default: 'action-bar'
     },
-    categoryBgColor: { type: String, default: '' }, // <--- ДОБАВИТЬ ЭТО
+    categoryBgColor: { type: String, default: '' }, 
+    pageBgColor: { type: String, default: '' },
   },
 
   // ─── НОВОЕ: Фичи клиента ────────────────────────────────────────────────────

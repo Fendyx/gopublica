@@ -13,7 +13,7 @@ router.get('/by-domain', async (req, res) => {
     const settings = await TenantSettings
       .findOne({ domain })
       .select(
-        'tenantId niche theme features ' +
+        'tenantId niche theme features businessName ' +   // убрали дублирование
         'phone address email hours seoTitle seoDescription ' +
         'primaryLanguage primaryCurrency'
       );
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
       const merged = {
         ...globalObj,
         ...branch.settingsOverride,
-        theme: mergedTheme, // <--- ПЕРЕЗАПИСЫВАЕМ СЛИТОЙ ТЕМОЙ
+        theme: mergedTheme,
         workingHours: branch.workingHours,
         coordinates: branch.coordinates,
         address: branch.address,
@@ -76,7 +76,17 @@ router.put('/', authTenant, async (req, res) => {
     const { branchId, ...reqBody } = req.body;
     const tenantId = req.tenantId;
 
-    // 1. ВСЕГДА СОХРАНЯЕМ ТЕМУ ГЛОБАЛЬНО (чтобы не обрезалась схемой Branch)
+    // 1. Сохраняем businessName глобально (не зависит от филиала)
+    if (reqBody.businessName !== undefined) {
+      await TenantSettings.findOneAndUpdate(
+        { tenantId },
+        { $set: { businessName: reqBody.businessName } },
+        { upsert: true }
+      );
+      delete reqBody.businessName; // убираем, чтобы не мешало дальнейшей логике
+    }
+
+    // 2. ВСЕГДА СОХРАНЯЕМ ТЕМУ ГЛОБАЛЬНО (чтобы не обрезалась схемой Branch)
     if (reqBody.theme) {
       const globalSettings = await TenantSettings.findOne({ tenantId });
       if (globalSettings) {

@@ -5,6 +5,7 @@ const categoryTranslationSchema = new mongoose.Schema({
   key: { type: String, required: true }, // Убрали unique: true
   tenantId: { type: String, default: null, index: true }, // <--- НОВОЕ ПОЛЕ (null = глобальная)
   name: { type: String, default: '' },
+  description: { type: String, default: '' },
   translations: { type: Map, of: String, default: {} },
   addedByTenants: [{ type: String }], // Оставляем для совместимости со старыми глобальными
   icon: { type: String, default: '' },
@@ -19,7 +20,9 @@ const categoryTranslationSchema = new mongoose.Schema({
     default: 'grid-3'
   },
   coverImage: { type: String, default: '' },
-  cardBgColor: { type: String, default: '' } 
+  cardBgColor: { type: String, default: '' },
+  imageAspectRatio: { type: String, default: '1/1' },
+  productImageAspectRatio: { type: String, default: '1/1' },
 });
 
 // Составной индекс: ключ + тенант должны быть уникальными вместе
