@@ -3,23 +3,15 @@ const router = express.Router();
 const MenuItem = require('../../models/MenuItem');
 const authTenant = require('../../middleware/authTenant');
 
-// Публичный роут: получение меню по tenantId и опционально branchId
+// Публичный роут: получение меню
 router.get('/', async (req, res) => {
   try {
     const { tenantId, branchId } = req.query;
-    if (!tenantId) {
-      return res.status(400).json({ error: 'tenantId is required' });
-    }
+    if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
 
     let query = { tenantId };
     if (branchId) {
-      query = {
-        tenantId,
-        $or: [
-          { branchId: branchId },
-          { branchId: null }
-        ]
-      };
+      query = { tenantId, $or: [{ branchId }, { branchId: null }] };
     } else {
       query = { tenantId, branchId: null };
     }
@@ -35,44 +27,17 @@ router.get('/', async (req, res) => {
 router.post('/', authTenant, async (req, res) => {
   try {
     const {
-      name,
-      description,
-      price,
-      category,
-      categoryKey,
-      image,
-      isVegetarian,
-      isSpicy,
-      order,
-      translations,
-      branchId,
-      productType,
-      hasPersonalization,
-      modifierGroups,
-      // новые поля
-      sku,
-      stock,
-      compareAtPrice,
-      images,       // массив URL дополнительных картинок
-      weight,
-      weightUnit,
-      dimensions,
-      tags,
-      variants,
+      name, description, price, category, categoryKey, image,
+      isVegetarian, isSpicy, order, translations, branchId,
+      productType, hasPersonalization, modifierGroups,
+      sku, stock, compareAtPrice, images, weight, weightUnit,
+      dimensions, tags, variants, isFeatured   // 👈 добавлено
     } = req.body;
 
     const newItem = new MenuItem({
       tenantId: req.tenantId,
-      name,
-      description,
-      price,
-      category,
-      categoryKey,
-      image,
-      isVegetarian,
-      isSpicy,
-      order,
-      translations,
+      name, description, price, category, categoryKey, image,
+      isVegetarian, isSpicy, order, translations,
       branchId: branchId || null,
       productType: productType || 'food',
       hasPersonalization: hasPersonalization || false,
@@ -86,6 +51,7 @@ router.post('/', authTenant, async (req, res) => {
       dimensions: dimensions || { length: null, width: null, height: null, unit: 'cm' },
       tags: tags || [],
       variants: variants || [],
+      isFeatured: isFeatured || false   // 👈 добавлено
     });
 
     await newItem.save();
@@ -100,19 +66,15 @@ router.post('/', authTenant, async (req, res) => {
 router.put('/:id', authTenant, async (req, res) => {
   try {
     const item = await MenuItem.findById(req.params.id);
-    if (!item) {
-      return res.status(404).json({ error: 'Блюдо не найдено' });
-    }
-    if (item.tenantId !== req.tenantId) {
-      return res.status(403).json({ error: 'Доступ запрещён' });
-    }
+    if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
+    if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });
 
     const {
       name, description, price, category, categoryKey, image,
       isVegetarian, isSpicy, order, translations, branchId,
       productType, hasPersonalization, modifierGroups,
       sku, stock, compareAtPrice, images: imgs, weight, weightUnit,
-      dimensions, tags, variants
+      dimensions, tags, variants, isFeatured   // 👈 добавлено
     } = req.body;
 
     if (name !== undefined) item.name = name;
@@ -138,6 +100,7 @@ router.put('/:id', authTenant, async (req, res) => {
     if (dimensions !== undefined) item.dimensions = dimensions;
     if (tags !== undefined) item.tags = tags;
     if (variants !== undefined) item.variants = variants;
+    if (isFeatured !== undefined) item.isFeatured = isFeatured;   // 👈 добавлено
 
     await item.save();
     res.json(item);
@@ -146,16 +109,12 @@ router.put('/:id', authTenant, async (req, res) => {
   }
 });
 
-// Удаление (защищённый)
+// Удаление
 router.delete('/:id', authTenant, async (req, res) => {
   try {
     const item = await MenuItem.findById(req.params.id);
-    if (!item) {
-      return res.status(404).json({ error: 'Блюдо не найдено' });
-    }
-    if (item.tenantId !== req.tenantId) {
-      return res.status(403).json({ error: 'Доступ запрещён' });
-    }
+    if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
+    if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });
 
     await MenuItem.findByIdAndDelete(req.params.id);
     res.json({ message: 'Deleted' });

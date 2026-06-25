@@ -74,6 +74,7 @@ const menuItemSchema = new mongoose.Schema(
       of: new mongoose.Schema({ name: { type: String, default: "" }, description: { type: String, default: "" } }, { _id: false }),
       default: {},
     },
+    isFeatured: { type: Boolean, default: false },
   },
   { timestamps: true },
 );
