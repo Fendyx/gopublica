@@ -1,0 +1,409 @@
+[
+  {
+    "title": "Rolf at home",
+    "totalScore": 4.9,
+    "reviewsCount": 13,
+    "street": "Dreihornstraße 18",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 587778",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Rolf%20at%20home&query_place_id=ChIJDaaIUhAMsEcRk3YnjOKc3ng",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumerie",
+    "totalScore": 4.7,
+    "reviewsCount": 66,
+    "street": "Elmstraße 17B",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 6046100",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumerie&query_place_id=ChIJ9zgxmM8MsEcRKBrBpSkS-90",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumen Von Schoeneich",
+    "totalScore": 4.3,
+    "reviewsCount": 16,
+    "street": "Klein-Buchholzer Kirchweg 5",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 6479716",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumen%20Von%20Schoeneich&query_place_id=ChIJk3FG6OgMsEcRALHqPnYlaeY",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Klatschmohn Blumendesign",
+    "totalScore": 4.8,
+    "reviewsCount": 40,
+    "street": "Engelbosteler Damm 42",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 702547",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Klatschmohn%20Blumendesign&query_place_id=ChIJm9BnpKx1sEcRgyblTmhBUyU",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "BELLISSIMA Blumen-Schlie",
+    "totalScore": 4.5,
+    "reviewsCount": 38,
+    "street": "Vahrenheider Markt 39",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 636424",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=BELLISSIMA%20Blumen-Schlie&query_place_id=ChIJG7qSQTdzsEcRkssfarBl0DA",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "PauLina Blumenladen",
+    "totalScore": 5,
+    "reviewsCount": 26,
+    "street": "Roderbruchmarkt 10",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 177 7024061",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=PauLina%20Blumenladen&query_place_id=ChIJRyR72PQNsEcRqQ4EWn1kHK4",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumen am Wasserturm",
+    "totalScore": 4.4,
+    "reviewsCount": 44,
+    "street": "Hannoversche Str. 40",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1577 4400023",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumen%20am%20Wasserturm&query_place_id=ChIJHw0pk5YNsEcRzL2jgX6n94I",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Walter Szymczak",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Götzstraße 11",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 580238",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Walter%20Szymczak&query_place_id=ChIJETfzmGgMsEcRiHEwNdHcwQA",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Ecke Kiosk Misburg",
+    "totalScore": 4.1,
+    "reviewsCount": 41,
+    "street": "Hannoversche Str. 45",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 163 4846450",
+    "categories": [
+      "Kiosk"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ecke%20Kiosk%20Misburg&query_place_id=ChIJ9QJMQ0INsEcR0rzxyLqHAKg",
+    "categoryName": "Kiosk"
+  },
+  {
+    "title": "Lidano Natur",
+    "totalScore": 5,
+    "reviewsCount": 3,
+    "street": "Voßstraße 45",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1514 0330383",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lidano%20Natur&query_place_id=ChIJx68a-HhzsEcR_JWkTG_GrvE",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Unverblümt",
+    "totalScore": 4.8,
+    "reviewsCount": 71,
+    "street": "Limmerstraße 59",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 441421",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Unverbl%C3%BCmt&query_place_id=ChIJg8MTCo50sEcRigeUWOy4dw8",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Bines Blumenwerkstatt",
+    "totalScore": 4.4,
+    "reviewsCount": 91,
+    "street": "Badenstedter Str. 194",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 4735450",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bines%20Blumenwerkstatt&query_place_id=ChIJP9Cfw1F0sEcR-0WbdL7oGJk",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Jasmin Flower",
+    "totalScore": 4.4,
+    "reviewsCount": 40,
+    "street": "Badenstedter Str. 204",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 496119",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Jasmin%20Flower&query_place_id=ChIJsco_UOt1sEcRpH0CeYoTWR8",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumen Hesse",
+    "totalScore": 4.1,
+    "reviewsCount": 116,
+    "street": "Göttinger Ch 242",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 427301",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumen%20Hesse&query_place_id=ChIJ0ZGeQzt1sEcRO8_H0jennKE",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Badenstedter Kiosk",
+    "totalScore": 4.5,
+    "reviewsCount": 86,
+    "street": "Badenstedter Str. 205",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 163 9545825",
+    "categories": [
+      "Kiosk"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Badenstedter%20Kiosk&query_place_id=ChIJE5bx5xF1sEcRjwIrl797Fg4",
+    "categoryName": "Kiosk"
+  },
+  {
+    "title": "Blumerie Blumenladen Hannover Zentrum Hbf | Online Bestellung & Lieferung",
+    "totalScore": 4.8,
+    "reviewsCount": 148,
+    "street": "Joachimstraße 6",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 94067175",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumerie%20Blumenladen%20Hannover%20Zentrum%20Hbf%20%7C%20Online%20Bestellung%20%26%20Lieferung&query_place_id=ChIJ_8ptLFRzsEcRMoY_TsFTdPw",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumen Amel",
+    "totalScore": 5,
+    "reviewsCount": 102,
+    "street": "Blumenstraße 1 Navi:, Lavesstraße 12",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 1236970",
+    "categories": [
+      "Blumengeschäft",
+      "Blumenlieferant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumen%20Amel&query_place_id=ChIJn9YAANt1sEcRM39B5Fkr3Pg",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumenatelier Potempa",
+    "totalScore": 4.7,
+    "reviewsCount": 42,
+    "street": "Abelmannstraße 1A",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 8387339",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumenatelier%20Potempa&query_place_id=ChIJ0xwLKNwKsEcR2kLrDoKV_YY",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Hanschmann GbR",
+    "totalScore": 4.1,
+    "reviewsCount": 102,
+    "street": "Garkenburgstraße 40",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 864177",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hanschmann%20GbR&query_place_id=ChIJ06qlEzk4ZUERB0COonAMFrY",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumentürmchen Steintor",
+    "totalScore": 4.1,
+    "reviewsCount": 7,
+    "street": "Georgstraße 9a",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 17811",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blument%C3%BCrmchen%20Steintor&query_place_id=ChIJzynnJrt0sEcRN6PxkWHukoo",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Irene Strug Friedhofsgärtnerei Grabpflege",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "Garbsener Landstraße 12A",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 794101",
+    "categories": [
+      "Blumengeschäft",
+      "Friedhof"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Irene%20Strug%20Friedhofsg%C3%A4rtnerei%20Grabpflege&query_place_id=ChIJv-kZt0VxsEcRFQ2-aO2cPso",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Florasel",
+    "totalScore": 4.3,
+    "reviewsCount": 61,
+    "street": "Herrenhäuser Str. 67",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 76802890",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Florasel&query_place_id=ChIJVeQ0Gs47ZUERu-oIGg3ATkw",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Simon und Oppermann",
+    "totalScore": 4.7,
+    "reviewsCount": 89,
+    "street": "Lehrter Str. 57",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 520995",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Simon%20und%20Oppermann&query_place_id=ChIJBYEIGbs5ZUERq8MFIqzolyk",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Sondergärten",
+    "totalScore": 4.5,
+    "reviewsCount": 12,
+    "street": null,
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Garten"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sonderg%C3%A4rten&query_place_id=ChIJhb8a9qt1sEcRrUOLhyB2daU",
+    "categoryName": "Garten"
+  },
+  {
+    "title": "Blumenfach Geschäft",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": null,
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumenfach%20Gesch%C3%A4ft&query_place_id=ChIJASCDGOELsEcRGfil0XinFiw",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Fleurop bei Anna Stange",
+    "totalScore": 3.8,
+    "reviewsCount": 4,
+    "street": "Liebrechtstraße 63A",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 795571",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Fleurop%20bei%20Anna%20Stange&query_place_id=ChIJ4xb7HyYLsEcRMB4BHgwkux4",
+    "categoryName": "Blumengeschäft"
+  },
+  {
+    "title": "Blumen König",
+    "totalScore": 5,
+    "reviewsCount": 10,
+    "street": "Bemeroder Str. 56",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 173 6622394",
+    "categories": [
+      "Blumengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Blumen%20K%C3%B6nig&query_place_id=ChIJL1fTBbQ5ZUERnhLuDqO9jEc",
+    "categoryName": "Blumengeschäft"
+  }
+]

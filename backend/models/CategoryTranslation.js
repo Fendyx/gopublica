@@ -23,7 +23,17 @@ const categoryTranslationSchema = new mongoose.Schema({
   imageAspectRatio: { type: String, default: '1/1' },
   productImageAspectRatio: { type: String, default: '1/1' },
   order: { type: Number, default: 0 },
-  carouselAutoplay: { type: Boolean, default: false }   // ← новое поле
+  carouselAutoplay: { type: Boolean, default: false },
+  productCardVariant: {
+    type: String,
+    enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean', null],
+    default: null
+  },
+  productCardWidth: {
+    type: String,
+    enum: ['default', 'medium', 'large', 'xlarge', 'full'],
+    default: 'default'
+  }
 });
 
 categoryTranslationSchema.index({ key: 1, tenantId: 1 }, { unique: true });

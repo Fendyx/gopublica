@@ -85,7 +85,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     },
         productCardVariant: {
       type: String,
-     enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay'],
+     enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean'],
       default: 'action-bar'
     },
     categoryBgColor: { type: String, default: '' }, 

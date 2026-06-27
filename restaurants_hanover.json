@@ -1,0 +1,790 @@
+[
+  {
+    "title": "Dönikat",
+    "totalScore": 4.9,
+    "reviewsCount": 31,
+    "street": "Kurze-Kamp-Straße 16",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%C3%B6nikat&query_place_id=ChIJ9b5nAAANsEcRyBiWDYHa43A",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "Berliner Döner Noltemeyerbrücke",
+    "totalScore": 4.7,
+    "reviewsCount": 183,
+    "street": "Podbielskistraße 354",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 38877028",
+    "categories": [
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Berliner%20D%C3%B6ner%20Noltemeyerbr%C3%BCcke&query_place_id=ChIJ1UIedoANsEcRF_-ECxMgIow",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "Bistro Café Incontro",
+    "totalScore": 5,
+    "reviewsCount": 51,
+    "street": "Kurze-Kamp-Straße 13",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 67435286",
+    "categories": [
+      "Frühstückslokal"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bistro%20Caf%C3%A9%20Incontro&query_place_id=ChIJ5VwKk5ENsEcRv0emCdjxFUM",
+    "categoryName": "Frühstückslokal"
+  },
+  {
+    "title": "VALENTINO RESTAURANT",
+    "totalScore": 4.9,
+    "reviewsCount": 63,
+    "street": "Hoppelweg 2",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 21426137",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=VALENTINO%20RESTAURANT&query_place_id=ChIJ62k0ScENsEcRpwEVl2BH3DU",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Restaurant mit Biergarten am Blauen See",
+    "totalScore": 4.5,
+    "reviewsCount": 24,
+    "street": "Am Fahrhorstfelde 50",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 33648537",
+    "categories": [
+      "Familienrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20mit%20Biergarten%20am%20Blauen%20See&query_place_id=ChIJoyAED7wNsEcRCcP2k2jETBM",
+    "categoryName": "Familienrestaurant"
+  },
+  {
+    "title": "La Pelle Mir",
+    "totalScore": 4.5,
+    "reviewsCount": 120,
+    "street": "Roderbruchmarkt 12",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 52952511",
+    "categories": [
+      "Türkisches Restaurant",
+      "Döner-Restaurant",
+      "Halalrestaurant",
+      "Burgerrestaurant",
+      "Kebabimbiss",
+      "Restaurant mit Essen zum Mitnehmen",
+      "Restaurant für Fleischgerichte",
+      "Orientalisches Restaurant",
+      "Pizzeria",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=La%20Pelle%20Mir&query_place_id=ChIJX6UKPgANsEcRj_H7_F-vcQQ",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Taverna 99+4",
+    "totalScore": 4.6,
+    "reviewsCount": 194,
+    "street": "Bahnstrift 28",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 3307955",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Taverna%2099%2B4&query_place_id=ChIJcZk77Q4NsEcR7Fjbenif9NI",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Hansa Croque Hannover",
+    "totalScore": 4.1,
+    "reviewsCount": 380,
+    "street": "Hannoversche Str. 108",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 5198585",
+    "categories": [
+      "Burgerrestaurant",
+      "Fast-Food-Restaurant",
+      "Lebensmittel-Lieferservice",
+      "Restaurant mit Essen zum Mitnehmen",
+      "Pizza-Lieferdienst",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hansa%20Croque%20Hannover&query_place_id=ChIJqaIR3nAMsEcRCcjXoauRLPo",
+    "categoryName": "Burgerrestaurant"
+  },
+  {
+    "title": "Zilan",
+    "totalScore": 4.6,
+    "reviewsCount": 421,
+    "street": "Podbielskistraße 178",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 64692833",
+    "categories": [
+      "Restaurant",
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Zilan&query_place_id=ChIJz65cbroMsEcRy9QpbZ08Pfk",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Argo",
+    "totalScore": 4.4,
+    "reviewsCount": 315,
+    "street": "Am Großen Kampe 3",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 65588710",
+    "categories": [
+      "Griechisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Argo&query_place_id=ChIJ953r8GAMsEcRBQnNCkNZnBM",
+    "categoryName": "Griechisches Restaurant"
+  },
+  {
+    "title": "Mr. Chen",
+    "totalScore": 4,
+    "reviewsCount": 1499,
+    "street": "Hannoversche Str. 107",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 57000908",
+    "categories": [
+      "Chinesisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mr.%20Chen&query_place_id=ChIJwQ6wE3EMsEcRk5K_4A1Azyw",
+    "categoryName": "Chinesisches Restaurant"
+  },
+  {
+    "title": "Döner Treff Misburg",
+    "totalScore": 4.6,
+    "reviewsCount": 285,
+    "street": "Hannoversche Str. 5",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 56973753",
+    "categories": [
+      "Türkisches Restaurant",
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%C3%B6ner%20Treff%20Misburg&query_place_id=ChIJ65alQKoNsEcR7dm6u7RoIII",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Bothfeld City Döner",
+    "totalScore": 4.5,
+    "reviewsCount": 605,
+    "street": "Im Heidkampe 35",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 640099",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bothfeld%20City%20D%C3%B6ner&query_place_id=ChIJT6mfpu8MsEcR_sNhbiFqd8M",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Sultan Kebap Schnellrestaurant",
+    "totalScore": 4.8,
+    "reviewsCount": 755,
+    "street": "Podbielskistraße 348",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 95179867",
+    "categories": [
+      "Türkisches Restaurant",
+      "Grillrestaurant",
+      "Falafel-Restaurant",
+      "Fast-Food-Restaurant",
+      "Burgerrestaurant",
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sultan%20Kebap%20Schnellrestaurant&query_place_id=ChIJOe6E9uwMsEcR7aHHr82mU1A",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Berlin Döner",
+    "totalScore": 4.3,
+    "reviewsCount": 387,
+    "street": "Anderter Str. 55",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1525 4368452",
+    "categories": [
+      "Kebabimbiss",
+      "Fast-Food-Restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Berlin%20D%C3%B6ner&query_place_id=ChIJRTg0UQQMsEcRIgUzcLu8Q24",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Mephisto Pizzeria",
+    "totalScore": 3.5,
+    "reviewsCount": 8,
+    "street": "Anderter Str. 60",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 80766604",
+    "categories": [
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mephisto%20Pizzeria&query_place_id=ChIJrYoZhLQNsEcRtgu3QdnKzpw",
+    "categoryName": "Pizzeria"
+  },
+  {
+    "title": "König Restaurant",
+    "totalScore": 4.8,
+    "reviewsCount": 111,
+    "street": "Sahlkamp 13",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 37004186",
+    "categories": [
+      "Familienrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=K%C3%B6nig%20Restaurant&query_place_id=ChIJ6W0CNgBzsEcR6xfWevExhjA",
+    "categoryName": "Familienrestaurant"
+  },
+  {
+    "title": "MEDITERRANO RESTAURANT",
+    "totalScore": 4.9,
+    "reviewsCount": 109,
+    "street": "Perlstraße 2",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 49535927",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=MEDITERRANO%20RESTAURANT&query_place_id=ChIJXbcUoqh0sEcRxMfCd_Jzw-0",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Lezzet Uigurisches Restaurant",
+    "totalScore": 4.9,
+    "reviewsCount": 141,
+    "street": "Gustav-Adolf-Straße 6",
+    "city": null,
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant mit uigurischer Küche"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lezzet%20Uigurisches%20Restaurant&query_place_id=ChIJweGjI911sEcRgZBm_lTlZzQ",
+    "categoryName": "Restaurant mit uigurischer Küche"
+  },
+  {
+    "title": "CODO - Street Kitchen",
+    "totalScore": 4.6,
+    "reviewsCount": 1371,
+    "street": "Lister Meile 67",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 8993689",
+    "categories": [
+      "Vietnamesisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=CODO%20-%20Street%20Kitchen&query_place_id=ChIJqz0TB1ZzsEcRRl1QP26bQwA",
+    "categoryName": "Vietnamesisches Restaurant"
+  },
+  {
+    "title": "La Cantina",
+    "totalScore": 4.7,
+    "reviewsCount": 646,
+    "street": "Perlstraße 1",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 3880210",
+    "categories": [
+      "Spanisches Restaurant",
+      "Mediterranes Restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=La%20Cantina&query_place_id=ChIJedDaoah0sEcR7h1RIGRlqM8",
+    "categoryName": "Spanisches Restaurant"
+  },
+  {
+    "title": "Family Bistro caffe",
+    "totalScore": 4.9,
+    "reviewsCount": 14,
+    "street": "Körtingsdorf 34",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1578 1505929",
+    "categories": [
+      "Familienrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Family%20Bistro%20caffe&query_place_id=ChIJWXayUgB1sEcRrXJJ1uXtap0",
+    "categoryName": "Familienrestaurant"
+  },
+  {
+    "title": "Weißes Roß",
+    "totalScore": 4.5,
+    "reviewsCount": 90,
+    "street": "Alte Stöckener Str. 35",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 792211",
+    "categories": [
+      "Gastrokneipe"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Wei%C3%9Fes%20Ro%C3%9F&query_place_id=ChIJsylSWeFzsEcRGH9PhNv5LOY",
+    "categoryName": "Gastrokneipe"
+  },
+  {
+    "title": "Morava",
+    "totalScore": 4.4,
+    "reviewsCount": 304,
+    "street": "Wunstorfer Landstraße 52",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 409966",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Morava&query_place_id=ChIJD5jbrw10sEcR9Rhy_OQ3_-E",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Aydins Kebab",
+    "totalScore": 4.9,
+    "reviewsCount": 63,
+    "street": "Röhrbeinweg 4",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 21351548",
+    "categories": [
+      "Döner-Restaurant",
+      "Grillrestaurant",
+      "Fast-Food-Restaurant",
+      "Kebabimbiss",
+      "Köfte-Restaurant",
+      "Pizzeria",
+      "Imbiss",
+      "Türkisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Aydins%20Kebab&query_place_id=ChIJF94jAgB1sEcRcnFT6xb0pEs",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "Brauerei Herrenhausen - Stübchen",
+    "totalScore": 4.7,
+    "reviewsCount": 27,
+    "street": "Herrenhäuser Str. 85",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Brauerei%20Herrenhausen%20-%20St%C3%BCbchen&query_place_id=ChIJTW5Ja-VzsEcRQRIhN1-adaM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Bistro Balou Wettbergen",
+    "totalScore": 4.9,
+    "reviewsCount": 18,
+    "street": "Pastor-Bartels-Weg 2",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 433654",
+    "categories": [
+      "Bistro"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bistro%20Balou%20Wettbergen&query_place_id=ChIJiYcEiKx1sEcRaXVp7evsk0c",
+    "categoryName": "Bistro"
+  },
+  {
+    "title": "BrötchenBoxHannover",
+    "totalScore": 4.9,
+    "reviewsCount": 123,
+    "street": "Ikarussallee ecke, Lilienthalstraße",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 1523 3874853",
+    "categories": [
+      "Bistro",
+      "Bäckerei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Br%C3%B6tchenBoxHannover&query_place_id=ChIJ54ZlP5pzsEcR0FW0EcVhXZY",
+    "categoryName": "Bistro"
+  },
+  {
+    "title": "Antalya döner",
+    "totalScore": 4.2,
+    "reviewsCount": 147,
+    "street": "Anderter Str. 6",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 76695150",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Antalya%20d%C3%B6ner&query_place_id=ChIJzSOvrMINsEcRHmopDYyk0C4",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Café Creperie Oreo",
+    "totalScore": 4,
+    "reviewsCount": 100,
+    "street": "Paula-Nordhoff-Straße 2",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 21904057",
+    "categories": [
+      "Bistro",
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Caf%C3%A9%20Creperie%20Oreo&query_place_id=ChIJxSn3KSEMsEcR4Q0FnzRHHJA",
+    "categoryName": "Bistro"
+  },
+  {
+    "title": "Sprechzeit",
+    "totalScore": 4.9,
+    "reviewsCount": 54,
+    "street": "Hildesheimer Str. 76",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 162 3331192",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sprechzeit&query_place_id=ChIJlzeR5PALsEcRD1goSUfHomo",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Eleàna",
+    "totalScore": 4.7,
+    "reviewsCount": 100,
+    "street": "Lenther Str. 6",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 86647770",
+    "categories": [
+      "Italienisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ele%C3%A0na&query_place_id=ChIJ7RftPwB1sEcRK1CSUKI0OQE",
+    "categoryName": "Italienisches Restaurant"
+  },
+  {
+    "title": "KING HAUS",
+    "totalScore": 4.8,
+    "reviewsCount": 128,
+    "street": "Wegsfeld 36",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 54612059",
+    "categories": [
+      "Türkisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=KING%20HAUS&query_place_id=ChIJ6ZOfsQB1sEcR24G2gwpC5g4",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Sandwiches",
+    "totalScore": 5,
+    "reviewsCount": 9,
+    "street": "Badenstedter Str. 207",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 60680020",
+    "categories": [
+      "Türkisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sandwiches&query_place_id=ChIJXwQvl4B1sEcRMwtWVBGC0xM",
+    "categoryName": "Türkisches Restaurant"
+  },
+  {
+    "title": "Taverna Pegasos Hannover",
+    "totalScore": 4.5,
+    "reviewsCount": 647,
+    "street": "In d. Steinbreite 38",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 485113",
+    "categories": [
+      "Griechisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Taverna%20Pegasos%20Hannover&query_place_id=ChIJXfdRRWl0sEcRaGt0Bpt_3s4",
+    "categoryName": "Griechisches Restaurant"
+  },
+  {
+    "title": "Bono Pizza",
+    "totalScore": 3.5,
+    "reviewsCount": 8,
+    "street": "Am Lohgraben 9",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 179 4838894",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bono%20Pizza&query_place_id=ChIJwxJpPAB1sEcR5AefW71fWn4",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "Serways",
+    "totalScore": 3.2,
+    "reviewsCount": 5,
+    "street": null,
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Serways&query_place_id=ChIJyXul64IJsEcRXzCvyOP-lYk",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Brot Henke GmbH",
+    "totalScore": 3.4,
+    "reviewsCount": 31,
+    "street": "Badenstedter Str. 221",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 490630",
+    "categories": [
+      "Bäckerei",
+      "Bistro",
+      "Café",
+      "Tortenbäckerei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Brot%20Henke%20GmbH&query_place_id=ChIJ74gHCk50sEcRan0MryqiO7s",
+    "categoryName": "Bäckerei"
+  },
+  {
+    "title": "Bok Bok Chicken",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "Anderter Str. 115",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 9585808",
+    "categories": [
+      "Hähnchenrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bok%20Bok%20Chicken&query_place_id=ChIJ6xBKcwALsEcR5NwqAKWXgYA",
+    "categoryName": "Hähnchenrestaurant"
+  },
+  {
+    "title": "Vereinsgaststätte SF Anderten",
+    "totalScore": 4.6,
+    "reviewsCount": 12,
+    "street": "Eisteichweg 11",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 53367530",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Vereinsgastst%C3%A4tte%20SF%20Anderten&query_place_id=ChIJa9535tgLsEcRT0qeclfUV8I",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Burger Lust Halal",
+    "totalScore": 4.7,
+    "reviewsCount": 10,
+    "street": "Lehrter Str. 32",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 62666522",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Burger%20Lust%20Halal&query_place_id=ChIJKw-ELvgLsEcRFNWW95QgTfo",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "GoDumpling Hannover Misburg",
+    "totalScore": 2,
+    "reviewsCount": 9,
+    "street": "Anderter Str. 115",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 9585808",
+    "categories": [
+      "Asiatisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=GoDumpling%20Hannover%20Misburg&query_place_id=ChIJIVT0SAALsEcRtxfIsXQrZrw",
+    "categoryName": "Asiatisches Restaurant"
+  },
+  {
+    "title": "Enzos Sportsbar",
+    "totalScore": 4.5,
+    "reviewsCount": 13,
+    "street": "Eisteichweg 13",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Enzos%20Sportsbar&query_place_id=ChIJxy_pIwALsEcR54NgLagHfmE",
+    "categoryName": "Pizzeria"
+  },
+  {
+    "title": "Güney Urfa Kebap Haus",
+    "totalScore": 4.5,
+    "reviewsCount": 243,
+    "street": "Anderter Str. 128",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 54442585",
+    "categories": [
+      "Kebabimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=G%C3%BCney%20Urfa%20Kebap%20Haus&query_place_id=ChIJNZ_nxpcLsEcRQwtqOqhmOB4",
+    "categoryName": "Kebabimbiss"
+  },
+  {
+    "title": "Argos Grill",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Gollstraße 24",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 588004",
+    "categories": [
+      "Restaurant",
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Argos%20Grill&query_place_id=ChIJJ4ohNOILsEcR0VMGUFiR5o0",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Koco Chicken | Hanover Kleefeld",
+    "totalScore": 3,
+    "reviewsCount": 2,
+    "street": "Anderter Str. 115",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 511 9585808",
+    "categories": [
+      "Hähnchenimbiss"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Koco%20Chicken%20%7C%20Hanover%20Kleefeld&query_place_id=ChIJ0S5kPQALsEcRiQ5zn6qzGP4",
+    "categoryName": "Hähnchenimbiss"
+  },
+  {
+    "title": "Banjanski‘s",
+    "totalScore": 5,
+    "reviewsCount": 10,
+    "street": "Mardalstraße",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Banjanski%E2%80%98s&query_place_id=ChIJN7CNoBoLsEcRIkNJDQQZrkI",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Waldschänke",
+    "totalScore": 4.6,
+    "reviewsCount": 68,
+    "street": "Kirchröder Str. 47",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 179 7998618",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Waldsch%C3%A4nke&query_place_id=ChIJr1zEHgELsEcRrWn0m4JSAE8",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "BABOLA KEBAB-BURGER-MORE",
+    "totalScore": 4.5,
+    "reviewsCount": 51,
+    "street": "Tiergartenstraße 124",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "",
+    "categories": [
+      "Döner-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=BABOLA%20KEBAB-BURGER-MORE&query_place_id=ChIJk6H5RAALsEcRqB1ivf-8xUY",
+    "categoryName": "Döner-Restaurant"
+  },
+  {
+    "title": "Grillbar-Hannover",
+    "totalScore": 4,
+    "reviewsCount": 1,
+    "street": "Elmstraße 14",
+    "city": "Hannover",
+    "state": null,
+    "countryCode": "DE",
+    "phone": "+49 176 70968433",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Grillbar-Hannover&query_place_id=ChIJDeTXqsINsEcRDpGswWfRr5o",
+    "categoryName": "Restaurant"
+  }
+]

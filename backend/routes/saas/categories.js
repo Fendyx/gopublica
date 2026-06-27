@@ -35,7 +35,8 @@ router.get('/', async (req, res) => {
 router.post('/', authTenant, async (req, res) => {
   try {
     const { key, name, description, translations, icon, niche, layout, coverImage,
-            cardBgColor, imageAspectRatio, productImageAspectRatio, order, carouselAutoplay } = req.body;
+            cardBgColor, imageAspectRatio, productImageAspectRatio, order, carouselAutoplay,
+            productCardVariant, productCardWidth } = req.body;
     const tenantId = req.tenantId;
 
     let category = await CategoryTranslation.findOne({ key, tenantId });
@@ -54,7 +55,9 @@ router.post('/', authTenant, async (req, res) => {
       imageAspectRatio: imageAspectRatio || '1/1',
       productImageAspectRatio: productImageAspectRatio || '1/1',
       order: order || 0,
-      carouselAutoplay: carouselAutoplay || false
+      carouselAutoplay: carouselAutoplay || false,
+      productCardVariant: productCardVariant || null,
+      productCardWidth: productCardWidth || 'default'
     });
     await category.save();
     res.status(201).json(category);
@@ -84,7 +87,8 @@ router.put('/reorder', authTenant, async (req, res) => {
 router.put('/:id', authTenant, async (req, res) => {
   try {
     const { name, description, icon, layout, niche, coverImage, cardBgColor,
-            imageAspectRatio, productImageAspectRatio, order, carouselAutoplay } = req.body;
+            imageAspectRatio, productImageAspectRatio, order, carouselAutoplay,
+            productCardVariant, productCardWidth } = req.body;
     const tenantId = req.tenantId;
     let category = await CategoryTranslation.findById(req.params.id);
     if (!category) return res.status(404).json({ error: 'Category not found' });
@@ -93,6 +97,8 @@ router.put('/:id', authTenant, async (req, res) => {
     if (productImageAspectRatio !== undefined) category.productImageAspectRatio = productImageAspectRatio;
     if (order !== undefined) category.order = order;
     if (carouselAutoplay !== undefined) category.carouselAutoplay = carouselAutoplay;
+    if (productCardVariant !== undefined) category.productCardVariant = productCardVariant || null;
+    if (productCardWidth !== undefined) category.productCardWidth = productCardWidth;
 
     // Клонирование глобальной категории при редактировании
     if (category.tenantId === null || category.tenantId === undefined) {
@@ -111,7 +117,9 @@ router.put('/:id', authTenant, async (req, res) => {
           imageAspectRatio: imageAspectRatio || '1/1',
           productImageAspectRatio: productImageAspectRatio || '1/1',
           order: order !== undefined ? order : category.order,
-          carouselAutoplay: carouselAutoplay !== undefined ? carouselAutoplay : category.carouselAutoplay
+          carouselAutoplay: carouselAutoplay !== undefined ? carouselAutoplay : category.carouselAutoplay,
+          productCardVariant: productCardVariant !== undefined ? productCardVariant : category.productCardVariant,
+          productCardWidth: productCardWidth !== undefined ? productCardWidth : category.productCardWidth
         });
         await tenantCategory.save();
         return res.json(tenantCategory);
