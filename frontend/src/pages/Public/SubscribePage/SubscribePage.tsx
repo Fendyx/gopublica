@@ -111,7 +111,7 @@ export default function SubscribePage() {
   };
 
   if (!priceId) return null;
-  const isBasic = priceId === 'price_1TcswhLqSWMZrmileY2yjcHb';
+  const isBasic = priceId === 'price_1TomQcLqSWMZrmil5kIzRWDE';
 
   return (
     <div className="checkout-page">

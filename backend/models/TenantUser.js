@@ -46,6 +46,7 @@ const tenantUserSchema = new mongoose.Schema({
     default: 'none',
   },
   currentPeriodEnd: { type: Date, default: null },
+  subscriptionCurrency: { type: String, default: null },
   // внутри schema
   consents: {
     terms: { type: Boolean, default: false },

@@ -1,0 +1,494 @@
+[
+  {
+    "title": "Bud's Auto Repair",
+    "totalScore": 4.8,
+    "reviewsCount": 27,
+    "street": "408 Mast Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 624-1369",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bud's%20Auto%20Repair&query_place_id=ChIJ-zsPN1dI4okRPRl9Jxy5dQ8",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Don's Auto Body",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "74 Eddy Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 623-9375",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Don's%20Auto%20Body&query_place_id=ChIJcZJZAy1P4okRjlD6Wf0PDXo",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Dave's Auto Center",
+    "totalScore": 4.6,
+    "reviewsCount": 52,
+    "street": "116 S Main St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 644-2653",
+    "categories": [
+      "Auto repair shop",
+      "Auto electrical service",
+      "Auto radiator repair service",
+      "Auto tune up service",
+      "Oil change service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dave's%20Auto%20Center&query_place_id=ChIJb34v89JO4okRJKc-89oPDn8",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Douglas Automotive",
+    "totalScore": 4.6,
+    "reviewsCount": 39,
+    "street": "18 Main St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 625-5854",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Douglas%20Automotive&query_place_id=ChIJywcrmtNO4okRMkJAvmTvXiY",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Northeast Spraybooth & Equipment",
+    "totalScore": 3,
+    "reviewsCount": 2,
+    "street": "363 Bodwell Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 935-7486",
+    "categories": [
+      "Auto body shop",
+      "Professional services"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Northeast%20Spraybooth%20%26%20Equipment&query_place_id=ChIJn5V9cGlO4okRecBMbQFWBcE",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Canfield's Collision",
+    "totalScore": 4.8,
+    "reviewsCount": 19,
+    "street": "272 Sheffield Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 932-2117",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Canfield's%20Collision&query_place_id=ChIJn-qY_tZN4okR96TnkTOALSM",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Don Kennett Inc",
+    "totalScore": 4.8,
+    "reviewsCount": 17,
+    "street": "500 Willow St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 606-4246",
+    "categories": [
+      "Auto body shop",
+      "Professional services"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Don%20Kennett%20Inc&query_place_id=ChIJF8rjsNtO4okRHJr-R2NVLT8",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "New England Rust Repair",
+    "totalScore": 5,
+    "reviewsCount": 5,
+    "street": "55 Calef Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 942-0540",
+    "categories": [
+      "Auto bodywork mechanic"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=New%20England%20Rust%20Repair&query_place_id=ChIJbyqJgzZP4okRLDBaaJKvqOE",
+    "categoryName": "Auto bodywork mechanic"
+  },
+  {
+    "title": "Sincaster Motorsports - Classic & Muscle Car Specialty Services",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "454 Sheffield Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 703-1142",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sincaster%20Motorsports%20-%20Classic%20%26%20Muscle%20Car%20Specialty%20Services&query_place_id=ChIJo_jhn-lN4okR2Z9Y1_C3oG4",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "C K Auto Repair",
+    "totalScore": 4.6,
+    "reviewsCount": 65,
+    "street": "290 Clay St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 622-1431",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=C%20K%20Auto%20Repair&query_place_id=ChIJZ6SMS91O4okRLsfGyJpVu2M",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Ed's Auto service",
+    "totalScore": 4.3,
+    "reviewsCount": 4,
+    "street": "garage number two in the rear, 39 Walnut St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 785-6270",
+    "categories": [
+      "Auto machine shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ed's%20Auto%20service&query_place_id=ChIJT9DyuKJP4okR0wycmeyntMI",
+    "categoryName": "Auto machine shop"
+  },
+  {
+    "title": "Inner City Auto Repair",
+    "totalScore": 5,
+    "reviewsCount": 43,
+    "street": "560 Elm St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 623-0099",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Inner%20City%20Auto%20Repair&query_place_id=ChIJKcSLUNhO4okRjcIx8J10aZ8",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Best Union Auto Repair",
+    "totalScore": 4.9,
+    "reviewsCount": 281,
+    "street": "225 Silver St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 622-7990",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Best%20Union%20Auto%20Repair&query_place_id=ChIJ1-1z4ItP4okRWebP1Qg-MiA",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Perfect Auto Body",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Clay St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Perfect%20Auto%20Body&query_place_id=ChIJFyeS8cJO4okRvJYd4IN0YRE",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "D & P Undercar Inc",
+    "totalScore": 4.8,
+    "reviewsCount": 78,
+    "street": "55 Calef Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 627-3552",
+    "categories": [
+      "Auto repair shop",
+      "Brake shop",
+      "Transmission shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=D%20%26%20P%20Undercar%20Inc&query_place_id=ChIJJY_978RO4okRlTuFVgGEGcQ",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Coolo Auto Services",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "151 Elm St #4",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 609-0031",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Coolo%20Auto%20Services&query_place_id=ChIJ-dN-GHRP4okRmVMe7NtGuLQ",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Alex Auto Repair",
+    "totalScore": 4.6,
+    "reviewsCount": 117,
+    "street": "160 S Beech St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 792-1075",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Alex%20Auto%20Repair&query_place_id=ChIJc4TStMFO4okROmCpuWAwmls",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Consumer Auto Repair",
+    "totalScore": 4.8,
+    "reviewsCount": 4,
+    "street": "5 Alpheus St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 624-4446",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Consumer%20Auto%20Repair&query_place_id=ChIJy6Jka8BO4okRFWgfnTVRu_g",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Chad's Auto Body",
+    "totalScore": 4.7,
+    "reviewsCount": 91,
+    "street": "118 Maple St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 627-4250",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Chad's%20Auto%20Body&query_place_id=ChIJwUwzS8BO4okRZ8Lly2ikiBk",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Will's Auto Service of Manchester",
+    "totalScore": 5,
+    "reviewsCount": 28,
+    "street": "720 E Industrial Park Dr UNIT 10",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 222-9296",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Will's%20Auto%20Service%20of%20Manchester&query_place_id=ChIJ_6PH5rRP4okRN45lIgadXEw",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Sinclair's Automotive & Truck",
+    "totalScore": 4.9,
+    "reviewsCount": 14,
+    "street": "973 Candia Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 669-0100",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sinclair's%20Automotive%20%26%20Truck&query_place_id=ChIJRVfrHLdP4okR1Kdxiuy6ljQ",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "E&D automotive and welding",
+    "totalScore": 4.1,
+    "reviewsCount": 15,
+    "street": "720 E Industrial Park Dr Unit 18",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 406-9454",
+    "categories": [
+      "Car repair and maintenance service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=E%26D%20automotive%20and%20welding&query_place_id=ChIJLbZqqMFr4okRGMwswgPEaQA",
+    "categoryName": "Car repair and maintenance service"
+  },
+  {
+    "title": "Moonlight auto detailing LLC",
+    "totalScore": 4.6,
+    "reviewsCount": 79,
+    "street": "728 E Industrial Park Dr Unit 1",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(580) 825-0526",
+    "categories": [
+      "Car detailing service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Moonlight%20auto%20detailing%20LLC&query_place_id=ChIJJfyONbtP4okRYTkUg6T8g5w",
+    "categoryName": "Car detailing service"
+  },
+  {
+    "title": "Candia Road Auto",
+    "totalScore": 4.7,
+    "reviewsCount": 13,
+    "street": "220 Candia Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 669-5070",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Candia%20Road%20Auto&query_place_id=ChIJ9cBbYgBP4okRywFeg6c4b_g",
+    "categoryName": "Auto repair shop"
+  },
+  {
+    "title": "Mid City Body and Frame",
+    "totalScore": 4.6,
+    "reviewsCount": 23,
+    "street": "518 Silver St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 669-8331",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mid%20City%20Body%20and%20Frame&query_place_id=ChIJZ7s6OOZO4okREMTKVEeyFzs",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Alex Auto Body",
+    "totalScore": 4.5,
+    "reviewsCount": 38,
+    "street": "143 Wilson St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 622-1571",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Alex%20Auto%20Body&query_place_id=ChIJsZW4DuZO4okRqwHmtwROVBI",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Auto Tech Auto Body",
+    "totalScore": 4,
+    "reviewsCount": 4,
+    "street": "42 Russell St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 641-8331",
+    "categories": [
+      "Auto body shop",
+      "Auto dent removal service",
+      "Auto painting"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Auto%20Tech%20Auto%20Body&query_place_id=ChIJacyLo5dP4okRtOhlgwq3tEU",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Premier Auto Manchester",
+    "totalScore": 5,
+    "reviewsCount": 1,
+    "street": "403 Amherst St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 820-5071",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Premier%20Auto%20Manchester&query_place_id=ChIJVcPljz1P4okR77kuSdxO4jw",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Warnocks Auto",
+    "totalScore": 3.5,
+    "reviewsCount": 2,
+    "street": "220 Straw Rd",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 622-6743",
+    "categories": [
+      "Auto body shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Warnocks%20Auto&query_place_id=ChIJ171ykZdI4okRnirL1Al7G-I",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "Ashi Auto Repair Mijahd",
+    "totalScore": 4,
+    "reviewsCount": 50,
+    "street": "774 Somerville St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 264-1647",
+    "categories": [
+      "Auto machine shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ashi%20Auto%20Repair%20Mijahd&query_place_id=ChIJqVskFuVO4okRlLu8OTyTja4",
+    "categoryName": "Auto machine shop"
+  },
+  {
+    "title": "Castro's Complete Auto Repair",
+    "totalScore": 4.2,
+    "reviewsCount": 51,
+    "street": "320 Lincoln St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 935-7698",
+    "categories": [
+      "Auto body shop",
+      "Auto repair shop",
+      "Car detailing service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Castro's%20Complete%20Auto%20Repair&query_place_id=ChIJo9DE3uBO4okRsuX4ouWMsXg",
+    "categoryName": "Auto body shop"
+  },
+  {
+    "title": "JD Automotive LLC",
+    "totalScore": 4.3,
+    "reviewsCount": 7,
+    "street": "150 Wilson St",
+    "city": "Manchester",
+    "state": "New Hampshire",
+    "countryCode": "US",
+    "phone": "(603) 718-3700",
+    "categories": [
+      "Auto repair shop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=JD%20Automotive%20LLC&query_place_id=ChIJu5qMDr5P4okRTgCKgjrABoE",
+    "categoryName": "Auto repair shop"
+  }
+]

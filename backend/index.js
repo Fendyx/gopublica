@@ -76,6 +76,7 @@ app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
 app.use('/api/stripe/setupIntent', require('./routes/stripe/setupIntent'));
 app.use('/api/stripe/subscribe', require('./routes/stripe/subscribe'));
 app.use('/api/stripe/cancel', require('./routes/stripe/cancel'));
+app.use('/api/stripe/prices', require('./routes/stripe/prices'));
 
 // Beauty (если используется)
 app.use('/api/beauty/services', require('./routes/beauty/services'));

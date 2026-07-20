@@ -34,11 +34,22 @@ import ConsentCheckboxes from '@/shared/ui/ConsentCheckboxes';
 // ─── Config ──────────────────────────────────────────────────────────────────
 
 const HAS_TRIAL = true;
-const BASE_PRICE = 39.0;
 const TRIAL_DAYS = 30;
+
+// Базовые цены по валютам (должны совпадать со Stripe Dashboard)
+const PRICES: Record<string, number> = {
+  PLN: 169, EUR: 39, UAH: 899, USD: 39, GBP: 35, CZK: 899,
+};
 
 const VAT_RATES: Record<string, number> = {
   PL: 0.23, DE: 0.19, CZ: 0.21, ES: 0.21, FR: 0.20, IT: 0.22, NL: 0.21,
+  UA: 0.20, US: 0, GB: 0.20,
+};
+
+// Маппинг страна -> валюта
+const COUNTRY_CURRENCY: Record<string, string> = {
+  PL: 'PLN', DE: 'EUR', CZ: 'CZK', ES: 'EUR', FR: 'EUR', IT: 'EUR', NL: 'EUR',
+  UA: 'UAH', US: 'USD', GB: 'GBP',
 };
 
 // ─── Stripe element style ────────────────────────────────────────────────────
@@ -117,10 +128,9 @@ function OrDivider({ label = 'or pay with card' }: { label?: string }) {
   );
 }
 
-// ─── Card brand icons (SVG inline, no external dep) ──────────────────────────
+// ─── Card brand icons ────────────────────────────────────────────────────────
 
 const CARD_ICONS = [
-  // Visa
   <svg key="visa" width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Visa">
     <rect width="38" height="24" rx="4" fill="#1434CB"/>
     <path d="M15.2 16.5H12.8L14.3 7.5H16.7L15.2 16.5Z" fill="white"/>
@@ -129,14 +139,12 @@ const CARD_ICONS = [
     <path d="M13.2 7.5L10.8 13.3L10.5 11.9C10 10.4 8.6 8.8 7 7.9L9.2 16.5H11.8L15.8 7.5H13.2Z" fill="white"/>
     <path d="M8.4 7.5H4.4L4.4 7.7C7.4 8.5 9.4 10.3 10.2 12.3L9.4 8.4C9.2 7.8 8.9 7.5 8.4 7.5Z" fill="#F9A51A"/>
   </svg>,
-  // Mastercard
   <svg key="mc" width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mastercard">
     <rect width="38" height="24" rx="4" fill="#252525"/>
     <circle cx="14.5" cy="12" r="6" fill="#EB001B"/>
     <circle cx="23.5" cy="12" r="6" fill="#F79E1B"/>
     <path d="M19 7.8C20.4 8.8 21.5 10.3 21.5 12C21.5 13.7 20.4 15.2 19 16.2C17.6 15.2 16.5 13.7 16.5 12C16.5 10.3 17.6 8.8 19 7.8Z" fill="#FF5F00"/>
   </svg>,
-  // Amex
   <svg key="amex" width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="American Express">
     <rect width="38" height="24" rx="4" fill="#2557D6"/>
     <text x="5" y="16" fontFamily="Arial" fontSize="9" fontWeight="bold" fill="white">AMEX</text>
@@ -174,6 +182,10 @@ export default function SubscribeForm() {
   const [vatId, setVatId] = useState(user?.vatId || '');
   const [country, setCountry] = useState('PL');
 
+  // Динамическая валюта на основе страны
+  const currency = COUNTRY_CURRENCY[country] || 'EUR';
+  const basePrice = PRICES[currency] || 39.0;
+
   // Apple/Google Pay
   const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(null);
 
@@ -186,11 +198,11 @@ export default function SubscribeForm() {
     if (!stripe) return;
 
     const pr = stripe.paymentRequest({
-      country: 'PL',
-      currency: 'eur',
+      country: country,
+      currency: currency.toLowerCase(),
       total: {
         label: HAS_TRIAL ? `${TRIAL_DAYS}-day free trial` : 'Go Publica subscription',
-        amount: HAS_TRIAL ? 0 : Math.round(BASE_PRICE * 100),
+        amount: HAS_TRIAL ? 0 : Math.round(basePrice * 100),
       },
       requestPayerName: true,
       requestPayerEmail: true,
@@ -206,7 +218,6 @@ export default function SubscribeForm() {
       try {
         let currentToken = token;
         if (isGuest) {
-          // For wallet pay we get name/email from the wallet
           const walletName = ev.payerName || name;
           const walletEmail = ev.payerEmail || email;
           if (!walletName || !walletEmail) {
@@ -216,7 +227,7 @@ export default function SubscribeForm() {
           const regData = await tenantApi.register({
             name: walletName,
             email: walletEmail,
-            password: Math.random().toString(36).slice(-10), // temp; user sets later
+            password: Math.random().toString(36).slice(-10),
             companyName,
             vatId,
             termsAccepted,
@@ -238,7 +249,9 @@ export default function SubscribeForm() {
         }
 
         ev.complete('success');
-        await tenantApi.subscribeWithPaymentMethod(ev.paymentMethod.id, priceId!, companyName, vatId, country);
+        // Передаем currency на бэкенд
+        await tenantApi.subscribeWithPaymentMethod(ev.paymentMethod.id, priceId!, companyName, vatId, country, currency);
+        
         const updatedUser = await tenantApi.getMe();
         useTenantAuthStore.getState().updateUser(updatedUser);
         router.push('/dashboard?success=true');
@@ -248,20 +261,29 @@ export default function SubscribeForm() {
         setLoading(false);
       }
     });
-  }, [stripe]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [stripe, country, currency, basePrice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Pricing ───────────────────────────────────────────────────────────────
   const calculatePricing = useCallback(() => {
-    if (HAS_TRIAL) return { subtotal: BASE_PRICE, tax: 0, total: 0, rate: 0, isReverseCharge: false };
+    if (HAS_TRIAL) return { subtotal: basePrice, tax: 0, total: 0, rate: 0, isReverseCharge: false };
     const standardRate = VAT_RATES[country] || 0;
     const isReverseCharge = vatId.trim().length > 0 && country !== 'PL';
     const currentRate = isReverseCharge ? 0 : standardRate;
-    const tax = BASE_PRICE * currentRate;
-    return { subtotal: BASE_PRICE, tax, total: BASE_PRICE + tax, rate: currentRate * 100, isReverseCharge };
-  }, [country, vatId]);
+    const tax = basePrice * currentRate;
+    return { subtotal: basePrice, tax, total: basePrice + tax, rate: currentRate * 100, isReverseCharge };
+  }, [country, vatId, basePrice]);
 
   const pricing = calculatePricing();
-  const isBasic = priceId === 'price_1TcswhLqSWMZrmileY2yjcHb';
+  const isBasic = priceId === 'price_1TomQcLqSWMZrmil5kIzRWDE';
+
+  // Хелпер форматирования
+  const formatPrice = (amount: number) => {
+    try {
+      return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(amount);
+    } catch {
+      return `${amount} ${currency}`;
+    }
+  };
 
   // ── Submit (card) ─────────────────────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
@@ -299,7 +321,9 @@ export default function SubscribeForm() {
       if (setupError) throw new Error(setupError.message);
 
       const paymentMethodId = setupIntent.payment_method as string;
-      await tenantApi.subscribeWithPaymentMethod(paymentMethodId, priceId!, companyName, vatId, country);
+      
+      // Передаем currency на бэкенд
+      await tenantApi.subscribeWithPaymentMethod(paymentMethodId, priceId!, companyName, vatId, country, currency);
 
       const updatedUser = await tenantApi.getMe();
       useTenantAuthStore.getState().updateUser(updatedUser);
@@ -405,7 +429,7 @@ export default function SubscribeForm() {
                       className="w-full appearance-none rounded-lg border border-[var(--border)] bg-[var(--surface)]
                         pl-10 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] transition-shadow"
                     >
-                      {Object.keys(VAT_RATES).map((code) => (
+                      {Object.keys(COUNTRY_CURRENCY).map((code) => (
                         <option key={code} value={code}>
                           {t(`countries.${code}`)}
                         </option>
@@ -471,7 +495,7 @@ export default function SubscribeForm() {
                       <span>{TRIAL_DAYS}-day free trial</span>
                     </div>
                     <p className="text-xs text-[var(--text-muted)] pl-6">
-                      No charge today. €{BASE_PRICE.toFixed(2)}/mo after trial.{' '}
+                      No charge today. {formatPrice(basePrice)}/mo after trial.{' '}
                       Cancel anytime before day {TRIAL_DAYS}.
                     </p>
                   </div>
@@ -479,7 +503,7 @@ export default function SubscribeForm() {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span>{t('netPrice')}</span>
-                      <span>€{pricing.subtotal.toFixed(2)}</span>
+                      <span>{formatPrice(pricing.subtotal)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="flex items-center gap-1">
@@ -490,12 +514,12 @@ export default function SubscribeForm() {
                           </span>
                         )}
                       </span>
-                      <span>€{pricing.tax.toFixed(2)}</span>
+                      <span>{formatPrice(pricing.tax)}</span>
                     </div>
                     <hr className="border-[var(--border)]" />
                     <div className="flex justify-between font-extrabold text-base">
                       <span>{t('total')}</span>
-                      <span className="text-[var(--primary-color)]">€{pricing.total.toFixed(2)}</span>
+                      <span className="text-[var(--primary-color)]">{formatPrice(pricing.total)}</span>
                     </div>
                   </div>
                 )}
@@ -561,7 +585,7 @@ export default function SubscribeForm() {
                   ? t('processing')
                   : HAS_TRIAL
                     ? t('startTrialBtn')
-                    : `${t('payBtn')} €${pricing.total.toFixed(2)}`}
+                    : `${t('payBtn')} ${formatPrice(pricing.total)}`}
               </button>
 
               {/* Trust row */}

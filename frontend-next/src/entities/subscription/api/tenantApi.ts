@@ -45,11 +45,12 @@ export const tenantApi = {
     priceId: string,
     companyName?: string,
     vatId?: string,
-    country?: string
+    country?: string,
+    currency?: string // ДОБАВЛЕНО
   ) =>
     authFetch('/stripe/subscribe', {
       method: 'POST',
-      body: JSON.stringify({ paymentMethodId, priceId, companyName, vatId, country }),
+      body: JSON.stringify({ paymentMethodId, priceId, companyName, vatId, country, currency }),
     }),
 
   cancelSubscription: () =>

@@ -1,0 +1,777 @@
+[
+  {
+    "title": "Salem",
+    "totalScore": 4.5,
+    "reviewsCount": 55,
+    "street": "125 E Anaheim St N",
+    "city": "Wilmington",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 835-1665",
+    "categories": [
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salem&query_place_id=ChIJFQwHnM813YARnbs3h9ZPZvU",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Lovely Nail Boutique",
+    "totalScore": 3.4,
+    "reviewsCount": 21,
+    "street": "520 Palisades Dr",
+    "city": "Pacific Palisades",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 230-0056",
+    "categories": [
+      "Nail salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lovely%20Nail%20Boutique&query_place_id=ChIJMeWtcZSjwoARLU9p4zv9iqM",
+    "categoryName": "Nail salon"
+  },
+  {
+    "title": "A Cut Above",
+    "totalScore": 5,
+    "reviewsCount": 6,
+    "street": "861 Vía De La Paz C",
+    "city": "Pacific Palisades",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 600-7362",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=A%20Cut%20Above&query_place_id=ChIJp6cMinmjwoARl-eaE6A6MrI",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Naturella Beauty Center",
+    "totalScore": 4.3,
+    "reviewsCount": 6,
+    "street": "15220 Sunset Blvd",
+    "city": "Pacific Palisades",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 459-3446",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Naturella%20Beauty%20Center&query_place_id=ChIJtV51UXqjwoARdnbv0proWsI",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "RUBY Nails & Spa",
+    "totalScore": 4.4,
+    "reviewsCount": 31,
+    "street": "15228 Sunset Blvd",
+    "city": "Pacific Palisades",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(714) 592-9273",
+    "categories": [
+      "Nail salon",
+      "Waxing hair removal service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=RUBY%20Nails%20%26%20Spa&query_place_id=ChIJKwz4UHqjwoARDVPBLJo0p_8",
+    "categoryName": "Nail salon"
+  },
+  {
+    "title": "Lilese Skin Care",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "910 Vía De La Paz # 102",
+    "city": "Pacific Palisades",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 459-7921",
+    "categories": [
+      "Beauty salon",
+      "Skin care clinic",
+      "Waxing hair removal service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lilese%20Skin%20Care&query_place_id=ChIJp6cMinmjwoAR9ZN8taHDvLY",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Katie's Beauty Salon",
+    "totalScore": 4.7,
+    "reviewsCount": 86,
+    "street": "10118 San Fernando Rd #2",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 302-6032",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Katie's%20Beauty%20Salon&query_place_id=ChIJLe22DmmRwoARKOUaH-6MDSk",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Prostyle Hair Salon",
+    "totalScore": 4.8,
+    "reviewsCount": 16,
+    "street": "7226 Foothill Blvd",
+    "city": "Tujunga",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 352-3232",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Prostyle%20Hair%20Salon&query_place_id=ChIJPXRYok_rwoARTgQZBIsCH7Y",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "THE GLAMSTRIP BEAUTY BAR/ All beauty needs under one roof",
+    "totalScore": 4.8,
+    "reviewsCount": 48,
+    "street": "13066 Van Nuys Blvd",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 834-0356",
+    "categories": [
+      "Beauty salon",
+      "Body shaping class",
+      "Eyelash salon",
+      "Facial spa",
+      "Hair extension technician",
+      "Nail salon",
+      "Waxing hair removal service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=THE%20GLAMSTRIP%20BEAUTY%20BAR%2F%20All%20beauty%20needs%20under%20one%20roof&query_place_id=ChIJgddbraORwoARlM9ZafNJmOM",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Patty's Beauty Salon",
+    "totalScore": 4,
+    "reviewsCount": 41,
+    "street": "8731 Sunland Blvd",
+    "city": "Sun Valley",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 252-5772",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Patty's%20Beauty%20Salon&query_place_id=ChIJ5eeNZmyUwoARNAgO5-aWGPU",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Angie's Beauty Salon",
+    "totalScore": 4.7,
+    "reviewsCount": 29,
+    "street": "12411 Sheldon St #4",
+    "city": "Sun Valley",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 504-8204",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Angie's%20Beauty%20Salon&query_place_id=ChIJKXBKhKKRwoARgFIxXX77w90",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Salon Oh!",
+    "totalScore": 4.6,
+    "reviewsCount": 35,
+    "street": "8235 Foothill Blvd",
+    "city": "Sunland",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 404-1122",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salon%20Oh!&query_place_id=ChIJc1xcklmTwoAR0XrH_hkeq7w",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Patty's Salon",
+    "totalScore": 4.1,
+    "reviewsCount": 100,
+    "street": "12800 Van Nuys Blvd Unit 6",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 834-7900",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Patty's%20Salon&query_place_id=ChIJt1bpZp6RwoARlBtYcBCs9uY",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Zena's Beauty Salon",
+    "totalScore": 4.4,
+    "reviewsCount": 48,
+    "street": "10023 Commerce Ave",
+    "city": "Tujunga",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 352-2089",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Zena's%20Beauty%20Salon&query_place_id=ChIJ22F040_rwoARwUJR_wR-sn8",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Bonita's Beauty Salon",
+    "totalScore": 4.1,
+    "reviewsCount": 15,
+    "street": "8903 1/2 Laurel Canyon Blvd",
+    "city": "Sun Valley",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 768-1770",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bonita's%20Beauty%20Salon&query_place_id=ChIJ4emoE62WwoARd2abo8Rzhjo",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Tease Me Hair Salon",
+    "totalScore": 4.7,
+    "reviewsCount": 44,
+    "street": "7028 Foothill Blvd",
+    "city": "Tujunga",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 618-9179",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tease%20Me%20Hair%20Salon&query_place_id=ChIJ1bwJLkTrwoAR4gwyKQ2Hmcs",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Mary's Beauty",
+    "totalScore": 4.7,
+    "reviewsCount": 14,
+    "street": "8905 Glenoaks Blvd Unit C",
+    "city": "Sun Valley",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 967-2149",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mary's%20Beauty&query_place_id=ChIJJRqMQK6VwoARBmPp-ATqpZs",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Hair House",
+    "totalScore": 4.6,
+    "reviewsCount": 16,
+    "street": "7840 Foothill Blvd # C",
+    "city": "Sunland",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 271-7020",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hair%20House&query_place_id=ChIJTRHex1WTwoARcpkwChmVjSo",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Klara's Hair Cutters",
+    "totalScore": 4.6,
+    "reviewsCount": 32,
+    "street": "7502 Foothill Blvd #103",
+    "city": "Tujunga",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 951-8243",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Klara's%20Hair%20Cutters&query_place_id=ChIJwVl5pFPrwoARhDGOre5VsYs",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Sofia's Beauty Salon",
+    "totalScore": 4.2,
+    "reviewsCount": 16,
+    "street": "11203 Glenoaks Blvd #5",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 890-9100",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sofia's%20Beauty%20Salon&query_place_id=ChIJaxRQX56RwoARjzKLJ7peIKU",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Tabata's Beauty Salon",
+    "totalScore": 4.4,
+    "reviewsCount": 32,
+    "street": "11966 Foothill Blvd",
+    "city": "Kagel Canyon",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 686-6389",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tabata's%20Beauty%20Salon&query_place_id=ChIJbeDRxYGRwoAR3j_CvBGcxnU",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Maggie's Beauty Salon",
+    "totalScore": 4.6,
+    "reviewsCount": 14,
+    "street": "13630 Van Nuys Blvd",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 834-7670",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Maggie's%20Beauty%20Salon&query_place_id=ChIJfTIqvAWRwoARSD_ifpMaP5s",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Nueva Imagen Salon",
+    "totalScore": 4.9,
+    "reviewsCount": 96,
+    "street": "14538 Brand Blvd",
+    "city": "San Fernando",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 837-0200",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Nueva%20Imagen%20Salon&query_place_id=ChIJoQWPoE-QwoARR5pUW8c_HAU",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Perfect Beauty Salon",
+    "totalScore": 4.8,
+    "reviewsCount": 31,
+    "street": "8700 Woodman Ave",
+    "city": "Arleta",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 830-1370",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Perfect%20Beauty%20Salon&query_place_id=ChIJawYFjyuRwoARuZVCdlxvB-A",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Glamour Beauty Studio",
+    "totalScore": 4.6,
+    "reviewsCount": 28,
+    "street": "18126 Parthenia St #3302",
+    "city": "Northridge",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(747) 240-2998",
+    "categories": [
+      "Beauty salon",
+      "Day spa",
+      "Hair salon",
+      "Nail salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Glamour%20Beauty%20Studio&query_place_id=ChIJrUbbPUyawoARFYhz0sywCOM",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Extravaganza Beauty Salon",
+    "totalScore": 4.7,
+    "reviewsCount": 86,
+    "street": "19025 Parthenia St Ste 102",
+    "city": "Northridge",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(747) 241-0561",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Extravaganza%20Beauty%20Salon&query_place_id=ChIJO2SZ7qSbwoARUbwFAvL5on0",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Head to Toe Full Service Salon",
+    "totalScore": 4.8,
+    "reviewsCount": 31,
+    "street": "17509 Chatsworth St",
+    "city": "Granada Hills",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 360-6500",
+    "categories": [
+      "Beauty salon",
+      "Nail salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Head%20to%20Toe%20Full%20Service%20Salon&query_place_id=ChIJb7fX-emawoARmqNW9LlISzw",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Osborne Beauty Salon",
+    "totalScore": 4.7,
+    "reviewsCount": 47,
+    "street": "13215 Osborne St B",
+    "city": "Arleta",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 899-8466",
+    "categories": [
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Osborne%20Beauty%20Salon&query_place_id=ChIJx47nij6RwoARl8Df-Pxo1JQ",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Tokyo Mode",
+    "totalScore": 4.8,
+    "reviewsCount": 95,
+    "street": "17557 Chatsworth St",
+    "city": "Granada Hills",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 831-8314",
+    "categories": [
+      "Hair salon",
+      "Make-up artist"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tokyo%20Mode&query_place_id=ChIJ46QbLdyawoARrJqvtkZeDnw",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Magics Beauty Salon",
+    "totalScore": 5,
+    "reviewsCount": 14,
+    "street": "16208 Devonshire St",
+    "city": "Granada Hills",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 810-5554",
+    "categories": [
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Magics%20Beauty%20Salon&query_place_id=ChIJj2OKNTyRwoARYKxpH7XciRs",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Elegant's Beauty Salon",
+    "totalScore": 4.4,
+    "reviewsCount": 27,
+    "street": "13926 Nordhoff St",
+    "city": "Arleta",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 721-6599",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Elegant's%20Beauty%20Salon&query_place_id=ChIJ86VA87aRwoARDpFqRPIgrEw",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Green Hair Studio",
+    "totalScore": 4.8,
+    "reviewsCount": 92,
+    "street": "14072 Osborne St",
+    "city": "Panorama City",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 920-1851",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Green%20Hair%20Studio&query_place_id=ChIJj_rMWNiQwoAR3rH6sO3I8kY",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Beauty Studio",
+    "totalScore": 4.5,
+    "reviewsCount": 10,
+    "street": "13741 Foothill Blvd #170",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 792-0409",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Beauty%20Studio&query_place_id=ChIJlwLtdSmOwoARIA8E8Yicuv0",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Coco Look Beauty Salon",
+    "totalScore": 4.4,
+    "reviewsCount": 67,
+    "street": "13867 Foothill Blvd #102",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 364-0446",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Coco%20Look%20Beauty%20Salon&query_place_id=ChIJpTT2CyyOwoARmLUZBAWcITU",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Claudia’s Beauty Salón",
+    "totalScore": 5,
+    "reviewsCount": 11,
+    "street": "9458 Arleta Ave",
+    "city": "Arleta",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 686-8301",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Claudia%E2%80%99s%20Beauty%20Sal%C3%B3n&query_place_id=ChIJ66s9C3-RwoARqCMWyk_LfEk",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "The Showroom Beauty Salon",
+    "totalScore": 4.2,
+    "reviewsCount": 39,
+    "street": "8915 1/2 Woodman Ave",
+    "city": "Pacoima",
+    "state": "CA",
+    "countryCode": "US",
+    "phone": "(818) 892-4395",
+    "categories": [
+      "Beauty salon",
+      "Nail salon",
+      "Waxing hair removal service"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=The%20Showroom%20Beauty%20Salon&query_place_id=ChIJ8QkeyimRwoARkDz9Pzuxg18",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Dulce Beauty Salon",
+    "totalScore": 5,
+    "reviewsCount": 11,
+    "street": "13360 Van Nuys Blvd",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 890-2582",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dulce%20Beauty%20Salon&query_place_id=ChIJJ35gPgmRwoAR3yUCwZ7AdeY",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Beautiful Image Beauty Salon",
+    "totalScore": 4.6,
+    "reviewsCount": 51,
+    "street": "12641 San Fernando Rd",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 833-0311",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Beautiful%20Image%20Beauty%20Salon&query_place_id=ChIJZ6r07SCQwoARchko0NqWkf8",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Forever Young Beauty Salon",
+    "totalScore": 4.6,
+    "reviewsCount": 17,
+    "street": "6235 Foothill Blvd",
+    "city": "Tujunga",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 248-3661",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Forever%20Young%20Beauty%20Salon&query_place_id=ChIJX-sLgBHrwoAR95sW4SDaBYM",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Princess Beauty Salon",
+    "totalScore": 4,
+    "reviewsCount": 30,
+    "street": "13185 Gladstone Ave",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 833-9185",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Princess%20Beauty%20Salon&query_place_id=ChIJH-2meCiOwoARGqNtEzAmoUo",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Lidia's Beauty Salón",
+    "totalScore": 4.8,
+    "reviewsCount": 19,
+    "street": "13180 Van Nuys Blvd",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 834-9693",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lidia's%20Beauty%20Sal%C3%B3n&query_place_id=ChIJ_dzkLiqRwoARW8Gn32C5ZJA",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "LOTUS HAIR SALON",
+    "totalScore": 5,
+    "reviewsCount": 42,
+    "street": "Inside PHENIX SALON, 9301 Tampa Ave Ste suite#116",
+    "city": "Northridge",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 940-7845",
+    "categories": [
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=LOTUS%20HAIR%20SALON&query_place_id=ChIJuRpQBVObwoARdchoHdZj4yI",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Hair by Marina @ Le Salon Complet",
+    "totalScore": 5,
+    "reviewsCount": 12,
+    "street": "19300 Rinaldi St",
+    "city": "Porter Ranch",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 482-5347",
+    "categories": [
+      "Hair salon",
+      "Hairdresser"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hair%20by%20Marina%20%40%20Le%20Salon%20Complet&query_place_id=ChIJfXakDjWbwoARHgXZHJY0sTM",
+    "categoryName": "Hair salon"
+  },
+  {
+    "title": "Platinum Hair Studio",
+    "totalScore": 4.3,
+    "reviewsCount": 25,
+    "street": "13880 Foothill Blvd",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 833-9800",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Platinum%20Hair%20Studio&query_place_id=ChIJrSqUcCyOwoAR0j_l25ukoBw",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Diva Divine Hair Salon",
+    "totalScore": 4.5,
+    "reviewsCount": 40,
+    "street": "8940 Woodman Ave G",
+    "city": "Arleta",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 891-1999",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Diva%20Divine%20Hair%20Salon&query_place_id=ChIJMccdRCiRwoARs6l0AWU9SR4",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Olga's Beauty Salon",
+    "totalScore": 4.4,
+    "reviewsCount": 52,
+    "street": "12539 San Fernando Rd # H",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 367-3389",
+    "categories": [
+      "Beauty salon",
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Olga's%20Beauty%20Salon&query_place_id=ChIJf1G3JyGQwoARmw4ZsISH0es",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Lerita's Beauty Salon",
+    "totalScore": 5,
+    "reviewsCount": 3,
+    "street": "10423 Amboy Ave",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 809-6757",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lerita's%20Beauty%20Salon&query_place_id=ChIJEzGNrwWRwoARl_MIPUibz6E",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Juanita's",
+    "totalScore": 4.8,
+    "reviewsCount": 50,
+    "street": "10424 Laurel Canyon Blvd",
+    "city": "Pacoima",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 899-5235",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Juanita's&query_place_id=ChIJ2cpVagSRwoARoZn_7RQvChk",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Marylu Beauty Salon",
+    "totalScore": 4.3,
+    "reviewsCount": 24,
+    "street": "8923 Woodman Ave",
+    "city": "Hansen Hills",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 920-3799",
+    "categories": [
+      "Beauty salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Marylu%20Beauty%20Salon&query_place_id=ChIJxUnoNCiRwoARDgRy9REhWSM",
+    "categoryName": "Beauty salon"
+  },
+  {
+    "title": "Eklipse Hair Salon",
+    "totalScore": 4,
+    "reviewsCount": 4,
+    "street": "13746 Foothill Blvd #4",
+    "city": "Sylmar",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 470-6282",
+    "categories": [
+      "Hair salon"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Eklipse%20Hair%20Salon&query_place_id=ChIJ50xVl6CPwoARmpDNE6-ehlM",
+    "categoryName": "Hair salon"
+  }
+]

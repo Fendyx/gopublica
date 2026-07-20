@@ -1,4 +1,5 @@
 import HeroSection from "@/widgets/HomePage/HeroSection";
+import HeroSectionV2 from "@/widgets/HomePage/HeroSectionV2";
 import HomeSolutionsSection from "@/widgets/HomePage/HomeSolutionsSection";
 import TrustMarquee from "@/widgets/HomePage/TrustMarquee";
 
@@ -22,7 +23,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSection />
+      <HeroSectionV2 />
       <TrustMarquee />
       <HomeSolutionsSection />
     </>

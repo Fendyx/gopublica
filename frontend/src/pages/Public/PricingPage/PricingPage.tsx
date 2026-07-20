@@ -15,14 +15,14 @@ export default function PricingPage() {
       id:      'basic',
       name:    'Basic',
       price:   '39',
-      priceId: 'price_1TcswhLqSWMZrmileY2yjcHb', // ← заменить
+      priceId: 'price_1TomQcLqSWMZrmil5kIzRWDE', // ← заменить
       features: t('pricing.plans.basic.features', { returnObjects: true }) as string[],
     },
     {
       id:      'pro',
       name:    'Pro',
       price:   '69',
-      priceId: 'price_1TcsyDLqSWMZrmilWUKPEXnJ', // ← заменить
+      priceId: 'price_1TomP3LqSWMZrmilXXbMmfkd', // ← заменить
       popular: true,
       features: t('pricing.plans.pro.features', { returnObjects: true }) as string[],
     },

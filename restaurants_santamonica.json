@@ -1,0 +1,784 @@
+[
+  {
+    "title": "THE MEETUP LA",
+    "totalScore": 5,
+    "reviewsCount": 39,
+    "street": "2425 Michigan Ave",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 270-2726",
+    "categories": [
+      "Burgerrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=THE%20MEETUP%20LA&query_place_id=ChIJPYxZbAC5woAR1wJsescNrWk",
+    "categoryName": "Burgerrestaurant"
+  },
+  {
+    "title": "Emmy Squared Pizza",
+    "totalScore": 4,
+    "reviewsCount": 137,
+    "street": "1920 Colorado Ave Ste c",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 828-7629",
+    "categories": [
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Emmy%20Squared%20Pizza&query_place_id=ChIJITe6oHC7woARbx1QHW2JMEo",
+    "categoryName": "Pizzeria"
+  },
+  {
+    "title": "Campos Famous Burritos",
+    "totalScore": 4.2,
+    "reviewsCount": 880,
+    "street": "2008 Pico Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 450-4477",
+    "categories": [
+      "Burrito-Restaurant",
+      "Mexikanisches Restaurant",
+      "Taco-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Campos%20Famous%20Burritos&query_place_id=ChIJwXwegSS7woAR9igX92wJYPk",
+    "categoryName": "Burrito-Restaurant"
+  },
+  {
+    "title": "Suzie Snacks",
+    "totalScore": 4.8,
+    "reviewsCount": 4,
+    "street": "2020 Santa Monica Blvd #130",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 453-6643",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Suzie%20Snacks&query_place_id=ChIJmanhGza7woARrSpltsG-pQM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Dripp’d Coffee Company",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "123 POPup",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Dripp%E2%80%99d%20Coffee%20Company&query_place_id=ChIJB8AHsl67woARcuk6y0FdNh8",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Water Garden Underground Parking",
+    "totalScore": 3,
+    "reviewsCount": 2,
+    "street": "2425 Olympic Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 315-9800",
+    "categories": [
+      "Restaurant",
+      "Autowäsche",
+      "Fitnessstudio",
+      "Büroflächenvermietung",
+      "Parkhaus"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Water%20Garden%20Underground%20Parking&query_place_id=ChIJNXGlATm7woARFk12mmX96gM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Los Gatos Ukb",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "1638 19th St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 829-6800",
+    "categories": [
+      "Entertainer",
+      "Buchhaltung"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Los%20Gatos%20Ukb&query_place_id=ChIJo9XM0TC7woARTeGgTfj4o20",
+    "categoryName": "Entertainer"
+  },
+  {
+    "title": "SaMo Apartments Santa Monica",
+    "totalScore": 3.5,
+    "reviewsCount": 8,
+    "street": "2029 Olympic Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(424) 253-0707",
+    "categories": [
+      "Apartmenthaus",
+      "Wohnanlage/Wohnsiedlung",
+      "Wohnungsvermietungsagentur",
+      "Wohnanlage",
+      "Sozialwohnungsbau-Programm",
+      "Studentenwohnservice"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=SaMo%20Apartments%20Santa%20Monica&query_place_id=ChIJ25BxqjC7woARkeNPC_Jg_EI",
+    "categoryName": "Apartmenthaus"
+  },
+  {
+    "title": "Pico Pizza",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2121 Cloverfield Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 752-1155",
+    "categories": [
+      "Pizzeria"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pico%20Pizza&query_place_id=ChIJqSTx9xu7woARLmHyi_EMmuE",
+    "categoryName": "Pizzeria"
+  },
+  {
+    "title": "Market Cocina",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2121 Cloverfield Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 752-1155",
+    "categories": [
+      "Mexikanisches Restaurant",
+      "Fast-Food-Restaurant",
+      "Taco-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Market%20Cocina&query_place_id=ChIJaX4Gu3S7woARLabLNwNopTA",
+    "categoryName": "Mexikanisches Restaurant"
+  },
+  {
+    "title": "Jus Family Cafe Coffee Bar",
+    "totalScore": 5,
+    "reviewsCount": 18,
+    "street": "1819 Pico Blvd Unit A",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 310-8934",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Jus%20Family%20Cafe%20Coffee%20Bar&query_place_id=ChIJHWDo0sK7woARRL8p1981kz8",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Corsair Cafe",
+    "totalScore": 3.3,
+    "reviewsCount": 6,
+    "street": "Student Activities, 1900 Pico Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Café"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Corsair%20Cafe&query_place_id=ChIJBynzGiS7woARVlOugvmKc5M",
+    "categoryName": "Café"
+  },
+  {
+    "title": "Indo-Asian Foods Convenience Store",
+    "totalScore": 4.9,
+    "reviewsCount": 62,
+    "street": "1713 Pico Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 310-2856",
+    "categories": [
+      "Geschäft für indische Lebensmittel",
+      "Spirituosengeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Indo-Asian%20Foods%20Convenience%20Store&query_place_id=ChIJ_10Lksy7woAR6P3q5dwUKmY",
+    "categoryName": "Geschäft für indische Lebensmittel"
+  },
+  {
+    "title": "Little Bean Coffee",
+    "totalScore": 5,
+    "reviewsCount": 194,
+    "street": "707 Pico Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Little%20Bean%20Coffee&query_place_id=ChIJc71_CgS7woAR4E22DUDyVek",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Donut King",
+    "totalScore": 4.6,
+    "reviewsCount": 238,
+    "street": "1912 Lincoln Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 396-2220",
+    "categories": [
+      "Bäckerei"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Donut%20King&query_place_id=ChIJabvyoSu7woAR6NfQAQ_WHvU",
+    "categoryName": "Bäckerei"
+  },
+  {
+    "title": "Sidedoor Santa Monica",
+    "totalScore": 5,
+    "reviewsCount": 6,
+    "street": "2435 Main St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 403-6448",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sidedoor%20Santa%20Monica&query_place_id=ChIJMUok5tq7woARzNfaBZ5VqgA",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Pico Santa Monica",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "1002 Pico Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [],
+    "url": "https://www.google.com/maps/search/?api=1&query=Pico%20Santa%20Monica&query_place_id=ChIJM4KN-yu7woARWrjSnue6NOY",
+    "categoryName": null
+  },
+  {
+    "title": "M Street Kitchen",
+    "totalScore": 4.3,
+    "reviewsCount": 545,
+    "street": "2000 Main St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 396-9145",
+    "categories": [
+      "Amerikanisches Restaurant",
+      "Bar",
+      "Frühstückslokal",
+      "Brunch-Restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=M%20Street%20Kitchen&query_place_id=ChIJOT1kf9WkwoAR0IarL2jj198",
+    "categoryName": "Amerikanisches Restaurant"
+  },
+  {
+    "title": "Feasterly",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2219 Main St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 362-1225",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Feasterly&query_place_id=ChIJwV5ZLdW6woARujmahGMR-eM",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Kiley's Kitchen",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2625 4th St UNIT E",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(516) 582-3550",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Kiley's%20Kitchen&query_place_id=ChIJpf40p7S7woARzgkNeE5Fb-E",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "The Room Santa Monica",
+    "totalScore": 3.9,
+    "reviewsCount": 209,
+    "street": "1325 Santa Monica Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(866) 687-4499",
+    "categories": [
+      "Bar",
+      "Cocktailbar",
+      "Tanzclub"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=The%20Room%20Santa%20Monica&query_place_id=ChIJlWoctjS7woARE2BY-SoHors",
+    "categoryName": "Bar"
+  },
+  {
+    "title": "La condesa",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "1516 Wilshire Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=La%20condesa&query_place_id=ChIJpR7cdQClwoARPn5w87hhu-s",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Tacos Los Amigos",
+    "totalScore": 4.2,
+    "reviewsCount": 9,
+    "street": "1425 Santa Monica Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Mexikanisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tacos%20Los%20Amigos&query_place_id=ChIJZxV2Ct67woARCbXoBj2mHv0",
+    "categoryName": "Mexikanisches Restaurant"
+  },
+  {
+    "title": "Tehran Market",
+    "totalScore": 4.6,
+    "reviewsCount": 540,
+    "street": "1417 Wilshire Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 393-6719",
+    "categories": [
+      "Lebensmittelhändler"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tehran%20Market&query_place_id=ChIJu_OLYrWkwoARO6gQxW-wq3w",
+    "categoryName": "Lebensmittelhändler"
+  },
+  {
+    "title": "Lily’s Catering Taco Truck",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "1525 Broadway",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(323) 791-6047",
+    "categories": [
+      "Mexikanisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Lily%E2%80%99s%20Catering%20Taco%20Truck&query_place_id=ChIJsc98HwC7woARF1U9qapWu9k",
+    "categoryName": "Mexikanisches Restaurant"
+  },
+  {
+    "title": "Salivating Iguana",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "625 Montana Ave",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Gaststättenbedarf",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Salivating%20Iguana&query_place_id=ChIJc7ryW66lwoARR3gyphY6YvE",
+    "categoryName": "Gaststättenbedarf"
+  },
+  {
+    "title": "Santa monica",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "403 Santa Monica Pier",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Burgerrestaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Santa%20monica&query_place_id=ChIJUTxpKwClwoAROlcBZPLpPAs",
+    "categoryName": "Burgerrestaurant"
+  },
+  {
+    "title": "Cora's Coffee Shoppe",
+    "totalScore": 4.1,
+    "reviewsCount": 768,
+    "street": "1802 Ocean Ave",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 451-9562",
+    "categories": [
+      "Coffeeshop",
+      "Mexikanisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Cora's%20Coffee%20Shoppe&query_place_id=ChIJaSsrzNWkwoARHrR5HjSyuvM",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Meat & Grill",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "1721-1713 Ocean Front Walk",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Meat%20%26%20Grill&query_place_id=ChIJzeJ0FQClwoAR35mvhWJIQvU",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Sam's Bagels",
+    "totalScore": 4.1,
+    "reviewsCount": 189,
+    "street": "1305 Montana Ave",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "+1 310-392-6373",
+    "categories": [
+      "Bagelshop",
+      "Sandwichladen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sam's%20Bagels&query_place_id=ChIJtVelH9K6woARW-BWe7RkRHc",
+    "categoryName": "Bagelshop"
+  },
+  {
+    "title": "Mariscos Chameclas",
+    "totalScore": 4.8,
+    "reviewsCount": 26,
+    "street": "1636 11th St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 433-0222",
+    "categories": [
+      "Mexikanisches Restaurant",
+      "Meeresfrüchte-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Mariscos%20Chameclas&query_place_id=ChIJG0XsHoS7woARxHVLPfxRi9A",
+    "categoryName": "Mexikanisches Restaurant"
+  },
+  {
+    "title": "Beach Café",
+    "totalScore": 4,
+    "reviewsCount": 4,
+    "street": "930 Ocean Front Walk",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Beach%20Caf%C3%A9&query_place_id=ChIJoxcrCcGkwoARSJuZPBhNS-Q",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Gene's Cafe",
+    "totalScore": 3.2,
+    "reviewsCount": 21,
+    "street": "1111 2nd St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 394-5454",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Gene's%20Cafe&query_place_id=ChIJBWs6h7ulwoARaDimtTLw8Gw",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Bester's Coffee House",
+    "totalScore": 5,
+    "reviewsCount": 59,
+    "street": "1017 Ocean Ave",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(571) 442-1260",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Bester's%20Coffee%20House&query_place_id=ChIJh_lq1S2lwoARpVlONiGDL3I",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "Restaurant Bar",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": null,
+    "city": "Santa Monica",
+    "state": "Kalifornien",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Gebiet"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Restaurant%20Bar&query_place_id=ChIJW465L8SkwoARq8Nga3yye14",
+    "categoryName": "Gebiet"
+  },
+  {
+    "title": "Tacos mar vista",
+    "totalScore": 5,
+    "reviewsCount": 2,
+    "street": "2730 Santa Monica Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 904-7732",
+    "categories": [
+      "Taco-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Tacos%20mar%20vista&query_place_id=ChIJ_crdHwi7woARB96uOBsVQ-Q",
+    "categoryName": "Taco-Restaurant"
+  },
+  {
+    "title": "Hansrj",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "3000 31st St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Brunch-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Hansrj&query_place_id=ChIJUS0jXwC7woAR3MrvpNx4sro",
+    "categoryName": "Brunch-Restaurant"
+  },
+  {
+    "title": "Amina",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "3000 31st St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Brunch-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Amina&query_place_id=ChIJUzojewC7woAR9TqZZSHIk7I",
+    "categoryName": "Brunch-Restaurant"
+  },
+  {
+    "title": "Aaram ghar",
+    "totalScore": 2.3,
+    "reviewsCount": 7,
+    "street": "3000 31st St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Indisches Halal-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Aaram%20ghar&query_place_id=ChIJuZ-ufgC7woAR8-CSyJ_nn_c",
+    "categoryName": "Indisches Halal-Restaurant"
+  },
+  {
+    "title": "The Cutting Board",
+    "totalScore": 4.5,
+    "reviewsCount": 6,
+    "street": "3330 Ocean Park Blvd # 107",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Restaurant",
+      "Frühstückslokal",
+      "Brunch-Restaurant",
+      "Sandwichladen"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=The%20Cutting%20Board&query_place_id=ChIJv3SQQAO7woARuTHjjpRKC1o",
+    "categoryName": "Restaurant"
+  },
+  {
+    "title": "Catering Santa Monica",
+    "totalScore": 4.5,
+    "reviewsCount": 2,
+    "street": "728 Marine St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "+1 818-288-1357",
+    "categories": [
+      "Catering",
+      "Business-to-Business-Dienst",
+      "Unterhaltung",
+      "Italienisches Restaurant",
+      "Koscheres Restaurant",
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Catering%20Santa%20Monica&query_place_id=ChIJ30qz9tq6woARkiP_1FFuSrs",
+    "categoryName": "Catering"
+  },
+  {
+    "title": "Sinai Glatt Kosher Catering",
+    "totalScore": 3.8,
+    "reviewsCount": 6,
+    "street": "1537 Franklin St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "+1 310-820-0048",
+    "categories": [
+      "Catering"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Sinai%20Glatt%20Kosher%20Catering&query_place_id=ChIJ77UxT0K7woARdbGQekaHp_w",
+    "categoryName": "Catering"
+  },
+  {
+    "title": "Novel Cafe",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2720 Neilson Wy",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 396-8566",
+    "categories": [
+      "Amerikanisches Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Novel%20Cafe&query_place_id=ChIJo9BOAke7woAR-vIzWPB26N4",
+    "categoryName": "Amerikanisches Restaurant"
+  },
+  {
+    "title": "Wantacos",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "2500 Broadway",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(818) 370-0675",
+    "categories": [
+      "Catering"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Wantacos&query_place_id=ChIJk1Ki-Ee7woAROX9vaT8p5h8",
+    "categoryName": "Catering"
+  },
+  {
+    "title": "Haque's Bodega",
+    "totalScore": 4.7,
+    "reviewsCount": 56,
+    "street": "2225 4th St",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(424) 322-8182",
+    "categories": [
+      "Spirituosengeschäft",
+      "Weinhandlung"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Haque's%20Bodega&query_place_id=ChIJYyIpQr67woARHYjQ5vORBCE",
+    "categoryName": "Spirituosengeschäft"
+  },
+  {
+    "title": "1819 Ocean Ave Lounge",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Parking lot, 1819 Ocean Ave",
+    "city": "Santa Monica",
+    "state": "Kalifornien",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Gebiet"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=1819%20Ocean%20Ave%20Lounge&query_place_id=ChIJzaJLt9WkwoARt7rojHUsVlQ",
+    "categoryName": "Gebiet"
+  },
+  {
+    "title": "Ukraina Deli",
+    "totalScore": 3.6,
+    "reviewsCount": 137,
+    "street": "1207 Wilshire Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "(310) 393-2399",
+    "categories": [
+      "Feinkostgeschäft"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=Ukraina%20Deli&query_place_id=ChIJwQ9ya8qkwoAR6SlgVpeezzg",
+    "categoryName": "Feinkostgeschäft"
+  },
+  {
+    "title": "DOL Coffee & Tea",
+    "totalScore": 4.5,
+    "reviewsCount": 30,
+    "street": "1231 Wilshire Blvd",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Coffeeshop"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=DOL%20Coffee%20%26%20Tea&query_place_id=ChIJI6uOXAClwoARifvjR-Yn5sY",
+    "categoryName": "Coffeeshop"
+  },
+  {
+    "title": "The Chicken Shack",
+    "totalScore": 3.9,
+    "reviewsCount": 8,
+    "street": "380 Santa Monica Pier #4",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Fast-Food-Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=The%20Chicken%20Shack&query_place_id=ChIJy50dYAClwoARxuEw2PZqCPw",
+    "categoryName": "Fast-Food-Restaurant"
+  },
+  {
+    "title": "40/40 Fish Trap",
+    "totalScore": null,
+    "reviewsCount": null,
+    "street": "Santa Monica Pier",
+    "city": "Santa Monica",
+    "state": "California",
+    "countryCode": "US",
+    "phone": "",
+    "categories": [
+      "Restaurant"
+    ],
+    "url": "https://www.google.com/maps/search/?api=1&query=40%2F40%20Fish%20Trap&query_place_id=ChIJQ-1Wro-lwoAR9HdxgebrpaU",
+    "categoryName": "Restaurant"
+  }
+]
