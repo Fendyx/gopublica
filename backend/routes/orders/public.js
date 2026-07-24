@@ -81,9 +81,9 @@ router.post('/', getTenant, async (req, res) => {
       fulfillment,
       items,
       customer: customerInput,
-      password, // НОВОЕ ПОЛЕ
+      password,
       locale = 'pl',
-      consents // НОВОЕ ПОЛЕ
+      consents
     } = req.body;
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -131,7 +131,6 @@ router.post('/', getTenant, async (req, res) => {
         { expiresIn: '30d' }
       );
     }
-    // ------------------------------
 
     // CRM Логика (Customer модель)
     let customer = await Customer.findOne({ tenantId, email: customerInput.email });
@@ -174,22 +173,31 @@ router.post('/', getTenant, async (req, res) => {
       tenantId,
       branchId: branchId || null,
       customerId: customer._id,
-      customerUserId: customerUserId, // Связь с Auth юзером
+      customerUserId: customerUserId,
       fulfillment: {
         type: fulfillment?.type || 'pickup',
         scheduledFor: fulfillment?.scheduledFor || null,
-        address: fulfillment?.type === 'delivery' ? fulfillment.address : undefined,
+        address: fulfillment?.type === 'delivery' && !fulfillment.parcelLocker?.enabled ? fulfillment.address : undefined,
+        
+        // Поддержка пачкомата Фургонетки
+        parcelLocker: fulfillment?.parcelLocker ? {
+          enabled: true,
+          lockerId: fulfillment.parcelLocker.id,
+          network: fulfillment.parcelLocker.network,
+          address: fulfillment.parcelLocker.address || {},
+        } : { enabled: false },
+
         deliveryInstructions: fulfillment?.deliveryInstructions || '',
         deliveryFee,
       },
       items: items.map(i => ({
         menuItemId: i.menuItemId,
         name: i.name,
-        basePrice: i.basePrice || 0, // <--- Добавили
+        basePrice: i.basePrice || 0,
         price: i.price,
         quantity: i.quantity,
         notes: i.notes || '',
-        modifiers: i.modifiers || [], // <--- Добавили
+        modifiers: i.modifiers || [],
       })),
       customer: {
         name: customerInput.name,
@@ -221,7 +229,7 @@ router.post('/', getTenant, async (req, res) => {
 });
 
 // ==============================
-// 3. ОПЛАТА (PaymentIntent) - ЭТО ТО, ЧТО НЕ РАБОТАЛО
+// 3. ОПЛАТА (PaymentIntent)
 // ==============================
 router.post('/:id/pay', getTenant, async (req, res) => {
   try {

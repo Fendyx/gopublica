@@ -1,9 +1,11 @@
 const express    = require('express');
 const router     = express.Router();
 const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const TenantUser = require('../../models/TenantUser');   // было '../models/TenantUser' — неверно
+const TenantUser = require('../../models/TenantUser');
 const Order      = require('../../models/Order');
 const Customer   = require('../../models/Customer');
+const TenantSettings = require('../../models/TenantSettings');
+const { createFurgonetkaShipment } = require('../../services/furgonetkaService');
 
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -41,13 +43,20 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
 
             // Уведомление ресторану
             require('../../services/orderNotification').notifyNewOrder(order);
-            console.log(`✅ Order ${order._id} paid, waiting confirmation`);
+
+            // Автоматическое создание накладной Фургонетки
+            const tenant = await TenantSettings.findOne({ tenantId: order.tenantId });
+            if (tenant) {
+              await createFurgonetkaShipment(order, tenant);
+            }
+
+            console.log(`✅ Order ${order._id} paid and processed`);
           }
         }
         break;
       }
 
-      // ----------------- Подписки (существующая логика) -----------------
+      // ----------------- Подписки -----------------
       case 'checkout.session.completed': {
         const session = event.data.object;
         const sub     = await Stripe.subscriptions.retrieve(session.subscription);
@@ -66,8 +75,8 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
           await TenantUser.findByIdAndUpdate(user._id, {
             stripeSubscriptionId: sub.id,
             subscriptionStatus:   sub.status,
-            subscriptionPlan:     'basic',
-            currentPeriodEnd:     periodEnd,
+            subscriptionPlan:    'basic',
+            currentPeriodEnd:    periodEnd,
           });
           console.log(`✅ Subscription updated for user ${user.email}: ${sub.status}`);
         } else {
@@ -110,7 +119,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
           await TenantUser.findByIdAndUpdate(user._id, {
             subscriptionStatus:   'canceled',
             stripeSubscriptionId: null,
-            currentPeriodEnd:     null,
+            currentPeriodEnd:    null,
           });
           console.log(`✅ Subscription canceled for ${user.email}`);
         }

@@ -22,17 +22,30 @@ const orderSchema = new mongoose.Schema({
   branchId: { type: String, default: null, index: true },
   customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true, index: true },
 
-  fulfillment: {
+fulfillment: {
     type: { type: String, enum: ['pickup', 'delivery'], required: true },
     scheduledFor: { type: Date, default: null },
 
-    // для доставки
+    // для обычной доставки
     address: {
       street: String,
       city: String,
       zip: String,
       coordinates: { lat: Number, lng: Number },
     },
+    
+    // ─── НОВОЕ: Данные пачкомата Furgonetka ──────────────────────────────────
+    parcelLocker: {
+      enabled: { type: Boolean, default: false },
+      lockerId: String,       // код пачкомата, например "WAW01M"
+      network: String,        // сеть (inpost, orlen, etc.)
+      address: {
+        street: String,
+        city: String,
+        zip: String,
+      },
+    },
+
     deliveryInstructions: String,
     deliveryFee: { type: Number, default: 0 },   // стоимость доставки (злотые)
   },
@@ -73,11 +86,25 @@ const orderSchema = new mongoose.Schema({
     default: 'pending_payment',
   },
 
-  payment: {
+payment: {
     checkoutSessionId: String,
     paymentIntentId: String,
     refundId: String,
     stripeFee: Number,
+  },
+
+  // ─── НОВОЕ: Ссылка на отгрузку и этикетку Фургонетки ─────────────────────
+  shipping: {
+    provider: { type: String, default: 'furgonetka' },
+    packageId: String,       // ID посылки в системе Фургонетки
+    trackingNumber: String,  // трек-номер для отслеживания
+    labelUrl: String,        // ссылка на PDF-этикетку
+    status: { 
+      type: String, 
+      enum: ['pending', 'created', 'error'], 
+      default: 'pending' 
+    },
+    error: String,           // текст ошибки, если генерация не удалась
   },
 
   locale: { type: String, default: 'pl' },

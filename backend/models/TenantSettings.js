@@ -102,13 +102,38 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasJobApplications: { type: Boolean, default: false },
   },
 
-  payments: {
-  stripeAccountId:      { type: String, default: '' },
-  chargesEnabled:       { type: Boolean, default: false },
-  payoutsEnabled:       { type: Boolean, default: false },
-  onboardingComplete:   { type: Boolean, default: false },
-  platformFeePercent:   { type: Number, default: 5 },    // наша комиссия 5%
-},
+payments: {
+    stripeAccountId:      { type: String, default: '' },
+    chargesEnabled:       { type: Boolean, default: false },
+    payoutsEnabled:       { type: Boolean, default: false },
+    onboardingComplete:   { type: Boolean, default: false },
+    platformFeePercent:   { type: Number, default: 5 },    // наша комиссия 5%
+  },
+
+  // ─── НОВОЕ: Логистика и интеграция с Furgonetka ───────────────────────────
+  logistics: {
+    enabled: { type: Boolean, default: false },
+    provider: { type: String, enum: ['furgonetka', 'none'], default: 'none' },
+    
+    // Учетные данные API Фургонетки для этого магазина
+    auth: {
+      clientId: { type: String, default: '' },
+      clientSecret: { type: String, default: '' },
+      username: { type: String, default: '' },
+      password: { type: String, default: '' },
+    },
+    
+    // Автоматически обновляемые OAuth токены
+    tokens: {
+      accessToken: { type: String, default: '' },
+      refreshToken: { type: String, default: '' },
+      expiresAt: Date,
+    },
+    
+    defaults: {
+      carrier: { type: String, default: 'inpost' },
+    },
+  },
 
 }, { timestamps: true });
 
