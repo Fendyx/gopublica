@@ -63,6 +63,7 @@ app.use('/api/saas/dashboard', require('./routes/saas/dashboard'));
 app.use('/api/saas/menu', require('./routes/saas/menu'));
 app.use('/api/saas/categories', require('./routes/saas/categories'));
 app.use('/api/saas/reservations', require('./routes/saas/reservations'));
+app.use('/api/saas/appointments', require('./routes/saas/appointments'));
 app.use('/api/saas/orders', require('./routes/saas/orders'));
 app.use('/api/saas/gallery', require('./routes/saas/gallery'));
 app.use('/api/saas/news', require('./routes/saas/news'));

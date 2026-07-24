@@ -49,10 +49,9 @@ const tenantSettingsSchema = new mongoose.Schema({
   domain: { type: String, unique: true, sparse: true, default: null },
 
   // Ниша — определяет какой шаблон рендерить на фронте
-    // Ниша — определяет какой шаблон рендерить на фронте
   niche: {
     type: String,
-    enum: ['food', 'beauty', 'auto', 'ecommerce'], // <--- ДОБАВЬ СЮДА 'ecommerce'
+    enum: ['food', 'restaurant', 'beauty', 'auto', 'ecommerce'],
     default: 'food',
   },
 

@@ -10,7 +10,7 @@ const categoryTranslationSchema = new mongoose.Schema({
   icon: { type: String, default: '' },
   niche: {
     type: String,
-    enum: ['food', 'beauty', 'auto', 'ecommerce'],
+    enum: ['food', 'restaurant', 'beauty', 'auto', 'ecommerce'],
     default: 'food'
   },
   layout: {
