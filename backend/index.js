@@ -46,6 +46,22 @@ const publicUserOrders = require('./routes/public/orders');
 
 const publicProfileRoutes = require('./routes/public/profile');
 
+// ── Роут для пинга (Keep-Alive) ──────────────────────
+app.get('/api/ping', (req, res) => {
+  // Жестко отключаем любое кеширование на всех уровнях
+  res.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0',
+    'Surrogate-Control': 'no-store'
+  });
+  
+  res.status(200).json({ 
+    status: 'awake', 
+    timestamp: new Date().toISOString() 
+  });
+});
+
 // ── API Роуты ────────────────────────────────────────
 
 // Auth & Admins
