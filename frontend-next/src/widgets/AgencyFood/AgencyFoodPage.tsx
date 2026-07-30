@@ -10,6 +10,8 @@ const FEATURE_ICONS = {
   menuManagement: LayoutGrid,
 };
 
+const DEMO_URL = 'https://restaurant-gopublica.vercel.app/';
+
 export default function AgencyFoodPage() {
   const t = useTranslations('agencyFood');
 
@@ -60,6 +62,7 @@ export default function AgencyFoodPage() {
               <Button
                 size="lg"
                 className="gap-2 rounded-full bg-white px-7 text-black hover:bg-white/90"
+                onClick={() => window.open(DEMO_URL, '_blank', 'noopener,noreferrer')}
               >
                 <ExternalLink size={16} />
                 {t('visitDemo')}
@@ -154,7 +157,11 @@ export default function AgencyFoodPage() {
               <p className="mb-8 text-[var(--text-muted)]">
                 {t('ctaSubtitle', { defaultValue: 'Explore a fully working demo' })}
               </p>
-              <Button size="lg" className="gap-2 rounded-full px-8">
+              <Button
+                size="lg"
+                className="gap-2 rounded-full px-8"
+                onClick={() => window.open(DEMO_URL, '_blank', 'noopener,noreferrer')}
+              >
                 <ExternalLink size={16} />
                 {t('visitDemo')}
               </Button>

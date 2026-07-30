@@ -48,15 +48,15 @@ export default function ContactPage() {
         {
             name: 'Telegram',
             icon: <FaTelegramPlane size={22} />,
-            href: 'https://t.me/',
-            label: '@yourhandle',
+            href: 'https://t.me/andrzej_k1',
+            label: '@andrzej_k1',
             color: '#2AABEE',
         },
         {
             name: 'WhatsApp',
             icon: <FaWhatsapp size={22} />,
-            href: 'https://wa.me/4917612345678',
-            label: '+49 176 12 345 678',
+            href: 'https://wa.me/48792440346',
+            label: '+48 792 440 346',
             color: '#25D366',
         },
     ];

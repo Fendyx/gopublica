@@ -61,7 +61,7 @@ export default function OtherPage() {
             </p>
             <div className="flex flex-wrap items-center gap-3">
               {/* Ссылка на демо Other */}
-              <a href="https://demo-other.gopublica.com" target="_blank" rel="noreferrer">
+              <a href="https://twojpies-gopublica.vercel.app/" target="_blank" rel="noreferrer">
                 <Button size="lg" className="gap-2 rounded-full bg-white px-7 text-black hover:bg-white/90">
                   <ExternalLink size={16} />
                   {t('visitDemo')}

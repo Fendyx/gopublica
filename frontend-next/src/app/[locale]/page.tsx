@@ -23,7 +23,8 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSectionV2 />
+      <HeroSection />
+      {/* <HeroSectionV2 /> */}
       <TrustMarquee />
       <HomeSolutionsSection />
     </>

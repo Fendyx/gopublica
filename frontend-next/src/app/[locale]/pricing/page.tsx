@@ -32,9 +32,9 @@ const COUNTRY_CURRENCY: Record<string, string> = {
 
 // Базовые цены для каждого тарифа по валютам (должны совпадать со Stripe)
 const PLAN_PRICES: Record<string, Record<string, number>> = {
-  starter: { EUR: 39, PLN: 169, UAH: 899, USD: 39, GBP: 35, CZK: 899 },
-  growth:  { EUR: 69, PLN: 299, UAH: 1599, USD: 69, GBP: 59, CZK: 1599 },
-  scale:   { EUR: 129, PLN: 499, UAH: 2799, USD: 129, GBP: 109, CZK: 2799 },
+  starter: { EUR: 29, PLN: 59, UAH: 399, USD: 39},
+  growth:  { EUR: 39, PLN: 79, UAH: 599, USD: 59},
+  scale:   { EUR: 89, PLN: 199, UAH: 1599, USD: 99},
 };
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
