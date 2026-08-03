@@ -29,7 +29,7 @@
     "privacy": "Privacy Policy",
     "contactTitle": "Contact",
     "email": "support@gopublica.com",
-    "location": "Orlando, FL",
+    "location": "Kraków, Poland",
     "rights": "All rights reserved.",
     "socialAriaLabels": {
       "instagram": "Instagram",
@@ -517,5 +517,115 @@
       }
     }
   }
+  },
+  "demoQuiz": {
+    "meta": {
+      "title": "Get a Free Demo",
+      "description": "Answer 3 quick questions and we'll prepare a personalized demo for your business."
+    },
+    "hero": {
+      "eyebrow": "Free Demo",
+      "title": "Let's build something great together",
+      "subtitle": "3 quick questions — takes less than a minute. No credit card, no commitment."
+    },
+    "stepIndicator": {
+      "step": "Step",
+      "of": "of"
+    },
+    "step1": {
+      "title": "What's your business type?",
+      "subtitle": "Pick the closest match — you can type your own if it's not listed.",
+      "other": "Other",
+      "otherPlaceholder": "Type your business type…",
+      "options": {
+        "restaurant": "Restaurant / Café",
+        "ecommerce": "E-commerce / Retail",
+        "beautySalon": "Beauty Salon",
+        "barbershop": "Barbershop",
+        "gym": "Gym / Fitness",
+        "hotel": "Hotel / Hospitality",
+        "auto": "Auto Services",
+        "other": "Other"
+      }
+    },
+    "step2": {
+      "title": "What are your main goals?",
+      "subtitle": "Select all that apply — or add your own.",
+      "other": "Other",
+      "otherPlaceholder": "Type your goal…",
+      "options": {
+        "onlineSales": "Sell online",
+        "onlinePresence": "Build online presence",
+        "bookings": "Take bookings / appointments",
+        "leadGen": "Generate more leads",
+        "branding": "Improve branding",
+        "automation": "Automate operations",
+        "other": "Other"
+      }
+    },
+    "step3": {
+      "title": "How should we contact you?",
+      "subtitle": "Pick your preferred channel and share your details.",
+      "methods": {
+        "phone": "Phone call",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram"
+      },
+      "forms": {
+        "phone": {
+          "title": "We'll give you a quick call",
+          "name": "Full name",
+          "namePlaceholder": "John Doe",
+          "phone": "Phone number",
+          "phonePlaceholder": "+49 / +48…",
+          "language": "Preferred language",
+          "bestTime": "Best time to call",
+          "bestTimeOptions": {
+            "weekdayMorning": "Weekday mornings",
+            "weekdayAfternoon": "Weekday afternoons",
+            "weekdayEvening": "Weekday evenings",
+            "weekend": "Weekends",
+            "anytime": "Anytime"
+          }
+        },
+        "whatsapp": {
+          "title": "Message us on WhatsApp",
+          "name": "Full name",
+          "namePlaceholder": "John Doe",
+          "phone": "WhatsApp number",
+          "phonePlaceholder": "+49 / +48…"
+        },
+        "telegram": {
+          "title": "Chat with us on Telegram",
+          "name": "Full name",
+          "namePlaceholder": "John Doe",
+          "handle": "Telegram username",
+          "handlePlaceholder": "@yourname",
+          "phoneOptional": "Phone (optional)",
+          "phonePlaceholder": "+49 / +48…"
+        }
+      },
+      "consent": "I consent to being contacted about my demo request and accept the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>."
+    },
+    "buttons": {
+      "back": "Back",
+      "next": "Next",
+      "submit": "Request my demo",
+      "submitting": "Sending…",
+      "restart": "Start over"
+    },
+    "success": {
+      "title": "Thank you! 🎉",
+      "text": "Your request has been received. Our team will reach out shortly.",
+      "cta": "Back to home"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "rateLimited": "Too many requests. Please try again in a few minutes.",
+      "selectBusinessType": "Please select or type your business type.",
+      "selectGoal": "Please select at least one goal.",
+      "selectContactMethod": "Please choose a contact method.",
+      "acceptConsent": "Please accept the Terms and Privacy Policy to continue."
+    }
   }
 }

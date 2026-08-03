@@ -117,6 +117,9 @@ app.use('/api/public/jobs', jobsPublicRoutes);
 
 app.use('/api/public/profile', publicProfileRoutes);
 
+// Публичные заявки на демо ("Get a Free Demo" funnel)
+app.use('/api/public/demo-requests', require('./routes/public/demoRequests'));
+
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
