@@ -7,11 +7,10 @@ import type { Plan } from '@/app/[locale]/pricing/page';
 
 type Props = {
   plans: Plan[];
-  currency: string; // ДОБАВЛЕНО
+  currency: string;
   onSelect: (priceId: string) => void;
 };
 
-// Хелпер для форматирования цены
 const formatCurrency = (amount: number, currency: string) => {
   try {
     return new Intl.NumberFormat(undefined, {
@@ -46,12 +45,12 @@ export default function PricingCards({ plans, currency, onSelect }: Props) {
       <div
         ref={scrollRef}
         className={[
-          'flex gap-3 overflow-x-auto pb-2',
+          'flex gap-3 overflow-x-auto overflow-y-visible pb-2 pt-4',
           'snap-x snap-mandatory',
-          '-mx-6 px-6',
+          '-mx-6 px-6 -mt-4',
           'md:grid md:grid-cols-3 md:gap-5',
           'md:overflow-visible md:pb-0',
-          'md:mx-0 md:px-0',
+          'md:mx-0 md:px-0 md:mt-0',
           'md:max-w-4xl md:mx-auto',
           'md:items-stretch',
         ].join(' ')}
@@ -70,14 +69,14 @@ export default function PricingCards({ plans, currency, onSelect }: Props) {
                 'snap-center',
                 'rounded-xl',
                 isPopular
-                  ? 'ring-2 ring-[var(--primary-color)] shadow-xl shadow-blue-500/10 bg-[var(--surface)]'
+                  ? 'ring-2 ring-[var(--primary-color)] shadow-xl shadow-blue-500/10 bg-[var(--surface)] md:scale-[1.03] md:z-10'
                   : 'border border-[var(--border)] shadow-sm bg-[var(--surface)]',
               ].join(' ')}
             >
               {isPopular && (
-                <div className="absolute -top-3 left-0 right-0 flex justify-center pointer-events-none">
-                  <span className="flex items-center gap-1 rounded-full bg-[var(--primary-color)] px-3 py-0.5 text-[10px] font-bold text-white uppercase tracking-widest shadow">
-                    <Zap size={9} />
+                <div className="absolute -top-3 left-0 right-0 flex justify-center pointer-events-none z-20">
+                  <span className="flex items-center gap-1 rounded-full bg-[var(--primary-color)] px-3 py-1 text-[10px] font-bold text-white uppercase tracking-widest shadow-md whitespace-nowrap">
+                    <Zap size={9} className="shrink-0" />
                     {t('badge')}
                   </span>
                 </div>
@@ -91,7 +90,6 @@ export default function PricingCards({ plans, currency, onSelect }: Props) {
                   <h2 className="text-lg font-bold text-[var(--text)]">{plan.name}</h2>
                   <div className="flex items-baseline gap-1 shrink-0">
                     <span className="text-2xl font-extrabold text-[var(--text)] leading-none">
-                      {/* ДИНАМИЧЕСКОЕ ОТОБРАЖЕНИЕ ЦЕНЫ */}
                       {formatCurrency(plan.price, currency)}
                     </span>
                     <span className="text-xs text-[var(--text-muted)]">{t('period')}</span>

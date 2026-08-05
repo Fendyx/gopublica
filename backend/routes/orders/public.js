@@ -7,6 +7,7 @@ const CustomerUser = require('../../models/CustomerUser');
 const TenantSettings = require('../../models/TenantSettings');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { getModuleAccess } = require('../../services/moduleAccess');
 
 // ==============================
 // ЕДИНАЯ ФУНКЦИЯ РАСЧЁТА ЦЕНЫ
@@ -72,8 +73,9 @@ router.post('/estimate', getTenant, (req, res) => {
 router.post('/', getTenant, async (req, res) => {
   try {
     const { tenantId, tenant } = req;
-    if (!tenant.features?.hasOnlineOrdering) {
-      return res.status(403).json({ error: 'Online ordering is disabled' });
+    const access = getModuleAccess(tenant);
+    if (!tenant.features?.hasOnlineOrdering || !access.canManageOrders) {
+      return res.status(403).json({ error: 'Orders module is disabled for this tenant niche' });
     }
 
     const {

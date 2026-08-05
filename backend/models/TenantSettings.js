@@ -54,6 +54,22 @@ const tenantSettingsSchema = new mongoose.Schema({
     enum: ['food', 'restaurant', 'beauty', 'auto', 'ecommerce'],
     default: 'food',
   },
+  businessType: {
+    type: String,
+    enum: ['food', 'restaurant', 'beauty', 'auto', 'ecommerce'],
+    default: null,
+  },
+
+  // Разрешённые модули для данного тенанта. Если не заданы явно,
+  // используются значения по умолчанию для ниши.
+  moduleAccess: {
+    orders: { type: Boolean, default: null },
+    menu: { type: Boolean, default: null },
+    reservations: { type: Boolean, default: null },
+    gallery: { type: Boolean, default: null },
+    news: { type: Boolean, default: null },
+    jobs: { type: Boolean, default: null },
+  },
 
   // ─── НОВОЕ: Тема (вместо site.config.ts) ────────────────────────────────────
   theme: {

@@ -3,6 +3,7 @@ const router = express.Router();
 const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/authTenant');
+const { getModuleAccess } = require('../../services/moduleAccess');
 
 // ─── НОВЫЙ РОУТ: поиск тенанта по домену ────────────────────────────────────
 router.get('/by-domain', async (req, res) => {
@@ -13,13 +14,25 @@ router.get('/by-domain', async (req, res) => {
     const settings = await TenantSettings
       .findOne({ domain })
       .select(
-        'tenantId niche theme features businessName ' +   // убрали дублирование
+        'tenantId niche businessType moduleAccess theme features businessName ' +
         'phone address email hours seoTitle seoDescription ' +
         'primaryLanguage primaryCurrency'
       );
 
     if (!settings) return res.status(404).json({ error: 'Tenant not found' });
-    res.json(settings);
+
+    const access = getModuleAccess(settings.toObject ? settings.toObject() : settings);
+    res.json({
+      ...settings.toObject ? settings.toObject() : settings,
+      moduleAccess: access.moduleAccess,
+      availableModules: access.availableModules,
+      canManageOrders: access.canManageOrders,
+      canManageMenu: access.canManageMenu,
+      canManageReservations: access.canManageReservations,
+      canManageGallery: access.canManageGallery,
+      canManageNews: access.canManageNews,
+      canManageJobs: access.canManageJobs,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -33,6 +46,7 @@ router.get('/', async (req, res) => {
 
     let globalSettings = await TenantSettings.findOne({ tenantId });
     if (!globalSettings) globalSettings = {};
+    const access = getModuleAccess(globalSettings.toObject ? globalSettings.toObject() : globalSettings);
 
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
@@ -56,6 +70,14 @@ router.get('/', async (req, res) => {
         email: branch.email,
         city: branch.city,
         name: branch.name,
+        moduleAccess: access.moduleAccess,
+        availableModules: access.availableModules,
+        canManageOrders: access.canManageOrders,
+        canManageMenu: access.canManageMenu,
+        canManageReservations: access.canManageReservations,
+        canManageGallery: access.canManageGallery,
+        canManageNews: access.canManageNews,
+        canManageJobs: access.canManageJobs,
       };
       delete merged._id;
       delete merged.__v;
@@ -63,7 +85,17 @@ router.get('/', async (req, res) => {
       delete merged.updatedAt;
       return res.json(merged);
     } else {
-      return res.json(globalSettings);
+      return res.json({
+        ...(globalSettings.toObject ? globalSettings.toObject() : globalSettings),
+        moduleAccess: access.moduleAccess,
+        availableModules: access.availableModules,
+        canManageOrders: access.canManageOrders,
+        canManageMenu: access.canManageMenu,
+        canManageReservations: access.canManageReservations,
+        canManageGallery: access.canManageGallery,
+        canManageNews: access.canManageNews,
+        canManageJobs: access.canManageJobs,
+      });
     }
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -151,6 +183,14 @@ router.put('/', authTenant, async (req, res) => {
         email: branch.email,
         city: branch.city,
         name: branch.name,
+        moduleAccess: access.moduleAccess,
+        availableModules: access.availableModules,
+        canManageOrders: access.canManageOrders,
+        canManageMenu: access.canManageMenu,
+        canManageReservations: access.canManageReservations,
+        canManageGallery: access.canManageGallery,
+        canManageNews: access.canManageNews,
+        canManageJobs: access.canManageJobs,
       };
       delete merged._id;
       return res.json(merged);
@@ -161,7 +201,18 @@ router.put('/', authTenant, async (req, res) => {
         { $set: reqBody },
         { upsert: true, returnDocument: 'after' }
       );
-      return res.json(updated);
+      const updatedAccess = getModuleAccess(updated.toObject ? updated.toObject() : updated);
+      return res.json({
+        ...(updated.toObject ? updated.toObject() : updated),
+        moduleAccess: updatedAccess.moduleAccess,
+        availableModules: updatedAccess.availableModules,
+        canManageOrders: updatedAccess.canManageOrders,
+        canManageMenu: updatedAccess.canManageMenu,
+        canManageReservations: updatedAccess.canManageReservations,
+        canManageGallery: updatedAccess.canManageGallery,
+        canManageNews: updatedAccess.canManageNews,
+        canManageJobs: updatedAccess.canManageJobs,
+      });
     }
   } catch (err) {
     console.error('Error saving settings:', err);

@@ -2,14 +2,20 @@ const express = require('express');
 const router = express.Router();
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../../models/Order');
+const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/authTenant');
 const checkBranch = require('../../middleware/checkBranch'); // опционально
+const { enforceModuleAccess } = require('../../services/moduleAccess');
 
 router.use(authTenant);
 
 // Получить список заказов
 router.get('/', async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'orders', res)) return;
+
     const { status, branchId, from, to } = req.query;
     const filter = { tenantId: req.tenantId };
     if (status) filter.status = status;
@@ -33,6 +39,10 @@ router.get('/', async (req, res) => {
 // Детали заказа
 router.get('/:id', async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'orders', res)) return;
+
     const order = await Order.findOne({ _id: req.params.id, tenantId: req.tenantId })
       .populate('customerId')
       .lean();
@@ -46,6 +56,10 @@ router.get('/:id', async (req, res) => {
 // Подтвердить заказ (accept)
 router.post('/:id/accept', async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'orders', res)) return;
+
     const order = await Order.findOne({ _id: req.params.id, tenantId: req.tenantId });
     if (!order) return res.status(404).json({ error: 'Order not found' });
     if (order.confirmation.status !== 'pending') {
@@ -69,6 +83,10 @@ router.post('/:id/accept', async (req, res) => {
 // Отклонить заказ (decline) с возвратом денег
 router.post('/:id/decline', async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'orders', res)) return;
+
     const order = await Order.findOne({ _id: req.params.id, tenantId: req.tenantId });
     if (!order) return res.status(404).json({ error: 'Order not found' });
     if (order.confirmation.status !== 'pending') {
@@ -102,6 +120,10 @@ router.post('/:id/decline', async (req, res) => {
 // Изменить статус приготовления
 router.put('/:id/status', async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'orders', res)) return;
+
     const { status } = req.body;
     const allowed = ['preparing', 'ready', 'out_for_delivery', 'completed'];
     if (!allowed.includes(status)) {

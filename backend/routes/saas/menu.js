@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const MenuItem = require('../../models/MenuItem');
+const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/authTenant');
+const { enforceModuleAccess } = require('../../services/moduleAccess');
 
 // Публичный роут: получение меню
 router.get('/', async (req, res) => {
@@ -26,6 +28,10 @@ router.get('/', async (req, res) => {
 // Защищённый роут: добавление продукта
 router.post('/', authTenant, async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'menu', res)) return;
+
     const {
       name, description, price, category, categoryKey, image,
       isVegetarian, isSpicy, order, translations, branchId,
@@ -65,6 +71,10 @@ router.post('/', authTenant, async (req, res) => {
 // Обновление (защищённый)
 router.put('/:id', authTenant, async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'menu', res)) return;
+
     const item = await MenuItem.findById(req.params.id);
     if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
     if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });
@@ -112,6 +122,10 @@ router.put('/:id', authTenant, async (req, res) => {
 // Удаление
 router.delete('/:id', authTenant, async (req, res) => {
   try {
+    const tenant = await TenantSettings.findOne({ tenantId: req.tenantId }).lean();
+    if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
+    if (!enforceModuleAccess(tenant, 'menu', res)) return;
+
     const item = await MenuItem.findById(req.params.id);
     if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
     if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });

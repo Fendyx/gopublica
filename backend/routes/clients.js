@@ -17,6 +17,33 @@ router.get('/', auth, checkRole(ADMIN), async (req, res) => {
   }
 });
 
+// POST /api/clients — создать клиента
+router.post('/', auth, checkRole(ADMIN), async (req, res) => {
+  try {
+    const payload = {
+      name: req.body.name,
+      phone: req.body.phone,
+      email: req.body.email || '',
+      country: req.body.country || '',
+      businessType: req.body.businessType || 'Other',
+      websiteUrl: req.body.websiteUrl || '',
+      source: req.body.source || '',
+      assignedTo: req.body.assignedTo || '',
+      status: req.body.status || 'active',
+      notes: req.body.notes || '',
+    };
+
+    if (!payload.name || !payload.phone) {
+      return res.status(400).json({ message: 'Name and phone are required' });
+    }
+
+    const created = await Client.create(payload);
+    res.status(201).json(created);
+  } catch (err) {
+    res.status(400).json({ message: 'Error creating client', error: err.message });
+  }
+});
+
 // GET /api/clients/:id — один клиент
 router.get('/:id', auth, checkRole(ADMIN), async (req, res) => {
   try {

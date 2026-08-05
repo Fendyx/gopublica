@@ -4,13 +4,24 @@ const jwt        = require('jsonwebtoken');
 const bcrypt     = require('bcryptjs');
 const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const TenantUser = require('../../models/TenantUser');
+const auth = require('../../middleware/auth');
 const authTenant = require('../../middleware/authTenant');
+const checkRole = require('../../middleware/checkRole');
 const ConsentRecord = require('../../models/ConsentRecord');
+const { ensureTenantSettings } = require('../../services/tenantBootstrap');
+
+const ADMIN = ['admin', 'superadmin'];
+
+function sanitizeUser(user) {
+  const obj = user.toObject ? user.toObject() : user;
+  delete obj.passwordHash;
+  return obj;
+}
 
 // ── Регистрация (gopublica self-service) ──────────────────────
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, name, phone, companyName, vatId, termsAccepted, privacyAccepted, marketingConsent } = req.body;
+    const { email, password, name, phone, companyName, vatId, termsAccepted, privacyAccepted, marketingConsent, tenantId, niche } = req.body;
 
     if (!email || !password || !name) {
       return res.status(400).json({ error: 'email, password и name обязательны' });
@@ -43,7 +54,23 @@ router.post('/register', async (req, res) => {
       companyName:     companyName || '',
       vatId:           vatId || '',
       stripeCustomerId: customer.id,
+      tenantId:        tenantId || null,
     });
+
+    // ── Автоматическое создание базовых TenantSettings ──────────────
+    if (user.tenantId) {
+      try {
+        await ensureTenantSettings({
+          tenantId: user.tenantId,
+          businessName: user.companyName || user.name,
+          niche: niche || 'beauty',
+          phone: user.phone,
+          email: user.email,
+        });
+      } catch (settingsErr) {
+        console.error('⚠️ Failed to create TenantSettings:', settingsErr.message);
+      }
+    }
 
     // ── Фиксация согласий ─────────────────────────────────
     const consents = { terms: false, privacy: false, marketing: false };
@@ -139,6 +166,113 @@ router.post('/login', async (req, res) => {
         consents:           user.consents,   // <-- теперь возвращаем согласия
       },
     });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Список пользователей для админки ────────────────────────
+router.get('/users', auth, checkRole(ADMIN), async (req, res) => {
+  try {
+    const users = await TenantUser.find().select('-passwordHash').sort({ createdAt: -1 });
+    res.json(users.map(sanitizeUser));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Создание пользователя админом ───────────────────────────
+router.post('/users', auth, checkRole(ADMIN), async (req, res) => {
+  try {
+    const { email, password, name, phone, companyName, vatId, role, isActive, tenantId, niche } = req.body;
+
+    if (!email || !password || !name) {
+      return res.status(400).json({ error: 'email, password и name обязательны' });
+    }
+
+    const existing = await TenantUser.findOne({ email });
+    if (existing) {
+      return res.status(409).json({ error: 'Пользователь с таким email уже существует' });
+    }
+
+    const customer = await Stripe.customers.create({
+      email,
+      name: companyName || name,
+      phone,
+    });
+
+    if (vatId) {
+      await Stripe.customers.createTaxId(customer.id, { type: 'eu_vat', value: vatId });
+    }
+
+    const user = await TenantUser.create({
+      email,
+      passwordHash: await bcrypt.hash(password, 10),
+      name,
+      phone: phone || '',
+      companyName: companyName || '',
+      vatId: vatId || '',
+      stripeCustomerId: customer.id,
+      role: role || 'client_admin',
+      isActive: isActive !== undefined ? isActive : true,
+      tenantId: tenantId || null,
+    });
+
+    // ── Автоматическое создание базовых TenantSettings ──────────────
+    if (user.tenantId) {
+      try {
+        await ensureTenantSettings({
+          tenantId: user.tenantId,
+          businessName: user.companyName || user.name,
+          niche: niche || 'beauty',
+          phone: user.phone,
+          email: user.email,
+        });
+      } catch (settingsErr) {
+        console.error('⚠️ Failed to create TenantSettings:', settingsErr.message);
+      }
+    }
+
+    res.status(201).json(sanitizeUser(user));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Обновление пользователя админом ─────────────────────────
+router.put('/users/:id', auth, checkRole(ADMIN), async (req, res) => {
+  try {
+    const update = {};
+    if (req.body.email !== undefined) update.email = req.body.email;
+    if (req.body.name !== undefined) update.name = req.body.name;
+    if (req.body.phone !== undefined) update.phone = req.body.phone;
+    if (req.body.companyName !== undefined) update.companyName = req.body.companyName;
+    if (req.body.vatId !== undefined) update.vatId = req.body.vatId;
+    if (req.body.role !== undefined) update.role = req.body.role;
+    if (req.body.isActive !== undefined) update.isActive = req.body.isActive;
+    if (req.body.tenantId !== undefined) update.tenantId = req.body.tenantId;
+    if (req.body.subscriptionStatus !== undefined) update.subscriptionStatus = req.body.subscriptionStatus;
+    if (req.body.subscriptionPlan !== undefined) update.subscriptionPlan = req.body.subscriptionPlan;
+
+    if (req.body.password) {
+      update.passwordHash = await bcrypt.hash(req.body.password, 10);
+    }
+
+    const user = await TenantUser.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true });
+    if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
+
+    res.json(sanitizeUser(user));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Деактивация пользователя админом ────────────────────────
+router.delete('/users/:id', auth, checkRole(ADMIN), async (req, res) => {
+  try {
+    const user = await TenantUser.findByIdAndUpdate(req.params.id, { isActive: false }, { new: true });
+    if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
+    res.json({ message: 'Пользователь деактивирован', user: sanitizeUser(user) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

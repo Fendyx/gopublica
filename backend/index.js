@@ -100,6 +100,12 @@ app.use('/api/beauty/services', require('./routes/beauty/services'));
 app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
 app.use('/api/beauty/masters', require('./routes/beauty/masters'));
 app.use('/api/beauty/categories', require('./routes/beauty/categories'));
+app.use('/api/saas/beauty/services', require('./routes/saas/beauty/services'));
+app.use('/api/saas/beauty/masters', require('./routes/saas/beauty/masters'));
+app.use('/api/saas/beauty/appointments', require('./routes/saas/beauty/appointments'));
+app.use('/api/public/beauty/services', require('./routes/public/beauty/services'));
+app.use('/api/public/beauty/masters', require('./routes/public/beauty/masters'));
+app.use('/api/public/beauty', require('./routes/public/beauty/appointments'));
 
 // Другое
 app.use('/api/change-requests', require('./routes/changeRequests'));

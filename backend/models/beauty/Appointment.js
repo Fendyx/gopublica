@@ -1,27 +1,57 @@
 const mongoose = require('mongoose');
 
-const appointmentSchema = new mongoose.Schema({
-  tenantId: { type: String, required: true, index: true },
-  clientName: String,
-  clientPhone: String,
-  clientEmail: String,
-  date: String,            // "2026-06-05"
-  time: String,            // "14:30"
-  duration: Number,        // суммарная длительность в минутах
-  services: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BeautyService' }],
-  masterId: { type: mongoose.Schema.Types.ObjectId, ref: 'BeautyMaster', default: null },
-  notes: String,
-  // Поля питомца
-  petName: String,
-  petSpecies: String,      // dog, cat, etc.
-  petBreed: String,
-  petSize: String,         // small, medium, large
-  petNotes: String,
-  status: {
-    type: String,
-    enum: ['pending', 'confirmed', 'cancelled'],
-    default: 'pending',
+const appointmentSchema = new mongoose.Schema(
+  {
+    tenantId: { type: String, required: true, index: true },
+    branchId: { type: String, default: null, index: true },
+    serviceId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'BeautyService',
+      required: true,
+      index: true,
+    },
+    masterId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'BeautyMaster',
+      default: null,
+      index: true,
+    },
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Customer',
+      default: null,
+      index: true,
+    },
+    guestInfo: {
+      name: { type: String, default: '' },
+      phone: { type: String, default: '' },
+      email: { type: String, default: '' },
+    },
+    startAt: { type: Date, required: true, index: true },
+    endAt: { type: Date, required: true, index: true },
+    status: {
+      type: String,
+      enum: ['pending', 'confirmed', 'completed', 'cancelled', 'no_show'],
+      default: 'pending',
+      index: true,
+    },
+    paymentStatus: {
+      type: String,
+      enum: ['pay_now', 'pay_later', 'paid', 'refunded'],
+      default: 'pay_later',
+      index: true,
+    },
+    notes: { type: String, default: '' },
+    metadata: {
+      type: Map,
+      of: mongoose.Schema.Types.Mixed,
+      default: {},
+    },
   },
-}, { timestamps: true });
+  { timestamps: true },
+);
+
+appointmentSchema.index({ tenantId: 1, branchId: 1, startAt: 1 });
+appointmentSchema.index({ tenantId: 1, branchId: 1, status: 1 });
 
 module.exports = mongoose.model('BeautyAppointment', appointmentSchema);
