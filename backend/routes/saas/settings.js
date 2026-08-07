@@ -172,7 +172,8 @@ router.put('/', authTenant, async (req, res) => {
 
       const globalSettings = await TenantSettings.findOne({ tenantId }) || {};
       const globalObj = globalSettings.toObject?.() || {};
-      
+      const access = getModuleAccess(globalObj);
+
       const merged = {
         ...globalObj,
         ...branch.settingsOverride,

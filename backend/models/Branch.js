@@ -40,6 +40,24 @@ const branchSchema = new mongoose.Schema({
     lat: { type: Number, default: null },
     lng: { type: Number, default: null },
   },
+
+  // ─── НОВОЕ: "подфилии" ──────────────────────────────────────────────────────
+  // Если у филиала указан parentBranchId — это подфилия/под-заведение внутри
+  // того же здания, что и родительский филиал (например, веганское кафе
+  // в подвале того же дома, что и "Kocia Kawiarnia").
+  // venueType 'main'    — обычный самостоятельный филиал (по умолчанию)
+  // venueType 'concept' — под-заведение, отображается вложенно под родителем
+  parentBranchId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Branch',
+    default: null,
+  },
+  venueType: {
+    type: String,
+    enum: ['main', 'concept'],
+    default: 'main',
+  },
+
   // Переопределение настроек для конкретного филиала (поверх TenantSettings)
   settingsOverride: {
     phone: { type: String, default: '' },
@@ -54,11 +72,20 @@ const branchSchema = new mongoose.Schema({
     seoDescriptionI18n: { type: Map, of: String, default: {} },
     primaryLanguage: { type: String, default: '' },
     primaryCurrency: { type: String, default: '' },
+
+    // Фичи, специфичные для конкретного филиала.
+    // hasVeganTeaser — включает 2-й слайд Hero "скоро открытие" ТОЛЬКО
+    // для того филиала (Branch-документа), где этот флаг стоит true.
+    features: {
+      hasVeganTeaser: { type: Boolean, default: false },
+    },
   },
   isActive: {
     type: Boolean,
     default: true,
   },
 }, { timestamps: true });
+
+branchSchema.index({ parentBranchId: 1 });
 
 module.exports = mongoose.model('Branch', branchSchema);

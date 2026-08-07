@@ -78,7 +78,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     fontHeading:  { type: String, default: 'playfair' },
     heroStyle: {
       type: String,
-      enum: ['video', 'slider', 'centered', 'split', 'image-bg'],
+      enum: ['centered', 'split', 'video', 'slider', 'image-bg', 'compact'],
       default: 'video',
     },
     heroVideoUrl:      { type: String, default: '' },
