@@ -3,7 +3,7 @@
 
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Phone, MessageCircle, Send } from 'lucide-react';
+import { Phone, MessageCircle, Send, type LucideProps } from 'lucide-react';
 import Link from 'next/link';
 import { useDemoQuizStore } from '@/features/demoQuiz/model/demoQuizStore';
 import { CONTACT_METHODS } from '@/features/demoQuiz/model/schema';
@@ -13,10 +13,7 @@ import PhoneForm from '../forms/PhoneForm';
 import WhatsAppForm from '../forms/WhatsAppForm';
 import TelegramForm from '../forms/TelegramForm';
 
-const METHOD_ICONS: Record<
-  ContactMethod,
-  React.ComponentType<{ className?: string }>
-> = {
+const METHOD_ICONS: Record<ContactMethod, React.ComponentType<LucideProps>> = {
   phone: Phone,
   whatsapp: MessageCircle,
   telegram: Send,
