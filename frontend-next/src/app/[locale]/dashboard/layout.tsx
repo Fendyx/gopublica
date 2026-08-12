@@ -119,9 +119,9 @@ export default function DashboardLayout({
           >
             <Menu size={24} />
           </button>
-          <h1 className="text-xl font-semibold">
+          {/* <h1 className="text-xl font-semibold">
             {navItems.find((item) => isActive(item.href))?.label || t('title')}
-          </h1>
+          </h1> */}
         </header>
         <main className="flex-1 p-6 overflow-auto">{children}</main>
       </div>

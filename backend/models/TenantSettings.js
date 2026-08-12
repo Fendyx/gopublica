@@ -98,9 +98,9 @@ const tenantSettingsSchema = new mongoose.Schema({
       enum: ['none', 'sm', 'md', 'lg', 'xl'],
       default: 'lg'
     },
-        productCardVariant: {
+    productCardVariant: {
       type: String,
-     enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean'],
+      enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean'],
       default: 'action-bar'
     },
     categoryBgColor: { type: String, default: '' }, 
@@ -118,7 +118,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasJobApplications: { type: Boolean, default: false },
   },
 
-payments: {
+  payments: {
     stripeAccountId:      { type: String, default: '' },
     chargesEnabled:       { type: Boolean, default: false },
     payoutsEnabled:       { type: Boolean, default: false },
@@ -150,6 +150,17 @@ payments: {
       carrier: { type: String, default: 'inpost' },
     },
   },
+
+  // ─── НОВОЕ: Статус деплоя сайта (для обратной совместимости) ────────────────
+  deploymentStatus: {
+    type: String,
+    enum: ['pending', 'building', 'staging', 'live', 'error', 'paused'],
+    default: 'pending',
+  },
+  deploymentUrl: { type: String, default: '' },        // staging/preview URL
+  liveUrl: { type: String, default: '' },              // production URL (может отличаться от domain)
+  lastDeployedAt: { type: Date, default: null },
+  deploymentError: { type: String, default: '' },
 
 }, { timestamps: true });
 

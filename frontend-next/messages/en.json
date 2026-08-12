@@ -135,6 +135,7 @@
 
 "dashboard": {
   "nav": { "overview": "Overview", "billing": "Billing", "sites": "Sites", "settings": "Settings" },
+  "title": "Dashboard",
   "overviewTitle": "Welcome, {name}!",
   "profile": "Profile",
   "email": "Email",
@@ -154,6 +155,7 @@
 
 "billing": {
   "title": "Billing",
+  "upgradePlan": "Upgrade Plan",
   "currentPlan": "Current Plan",
   "upgradeToPro": "Upgrade to Pro",
   "proThanks": "You are on the best plan!",
@@ -168,6 +170,18 @@
 },
 "sites": {
   "title": "Your Sites",
+  "addSite": "Add Site",
+  "createFirstSite": "Create your first site",
+  "emptyTitle": "You don't have any sites yet",
+  "emptyDesc": "Get started by creating your first website. Choose a niche, customize the design, and publish in minutes.",
+  "visitLive": "Visit Live Site",
+  "visitStaging": "Visit Staging",
+  "viewError": "View Error",
+  "expand": "Expand details",
+  "collapse": "Collapse details",
+  "building": "Building...",
+  "errorTitle": "Failed to load sites",
+  "retry": "Try again",
   "siteInProgress": "Your website is being built",
   "siteInProgressDesc": "Our team is currently working on your website. As soon as it's ready, you'll see the link below and can visit it immediately.",
   "comingSoon": "Link will appear here",

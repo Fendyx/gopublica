@@ -1,4 +1,5 @@
 import { useTenantAuthStore } from '@/store/tenantAuthStore';
+import type { Site, SitesResponse, CreateSiteData, SiteLimitCheck } from '../model/types';
 
 const API = process.env.NEXT_PUBLIC_API_URL || '/api';
 
@@ -55,4 +56,24 @@ export const tenantApi = {
 
   cancelSubscription: () =>
     authFetch('/stripe/cancel-subscription', { method: 'POST' }),
+
+  // ─── Sites API ─────────────────────────────────────────────────────────────
+  
+  getSites: (): Promise<SitesResponse> => authFetch('/saas/sites'),
+
+  getSite: (siteId: string): Promise<Site> => authFetch(`/saas/sites/${siteId}`),
+
+  createSite: (data: CreateSiteData): Promise<Site> =>
+    authFetch('/saas/sites', { method: 'POST', body: JSON.stringify(data) }),
+
+  updateSite: (siteId: string, data: Partial<CreateSiteData>): Promise<Site> =>
+    authFetch(`/saas/sites/${siteId}`, { method: 'PATCH', body: JSON.stringify(data) }),
+
+  deleteSite: (siteId: string): Promise<{ message: string; site: Site }> =>
+    authFetch(`/saas/sites/${siteId}`, { method: 'DELETE' }),
+
+  triggerDeploy: (siteId: string): Promise<{ message: string; site: { id: string; status: string; lastDeployedAt: string } }> =>
+    authFetch(`/saas/sites/${siteId}/deploy`, { method: 'POST' }),
+
+  checkSiteLimit: (): Promise<SiteLimitCheck> => authFetch('/saas/sites/check-limit'),
 };

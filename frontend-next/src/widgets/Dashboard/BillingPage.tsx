@@ -10,7 +10,30 @@ import { Button } from '@/shared/ui/Button';
 import { ArrowUpCircle, AlertTriangle, X } from 'lucide-react';
 import Link from 'next/link';
 
-export default function BillingPage() {
+// ─── Shared Pricing Logic ──────────
+const PLAN_PRICES: Record<string, Record<string, number>> = {
+  starter: { EUR: 29, PLN: 59, UAH: 399, USD: 39 },
+  growth:  { EUR: 39, PLN: 79, UAH: 599, USD: 59 },
+  pro:     { EUR: 39, PLN: 79, UAH: 599, USD: 59 }, // Fallback для старых юзеров с 'pro'
+  scale:   { EUR: 89, PLN: 199, UAH: 1599, USD: 99 },
+};
+
+const formatCurrency = (amount: number, currency: string) => {
+  try {
+    return new Intl.NumberFormat(undefined, {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(amount);
+  } catch {
+    return `${amount} ${currency}`;
+  }
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Принимаем ipCurrency напрямую от сервера, как в Pricing
+export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: string }) {
   const t = useTranslations('billing');
   const router = useRouter();
   const { user, login, token } = useTenantAuthStore();
@@ -20,8 +43,13 @@ export default function BillingPage() {
 
   if (!user) return null;
 
-  const isPro = user.subscriptionPlan === 'pro';
+  // Берем чисто IP-валюту, никаких primaryCurrency из базы!
+  const userCurrency = ipCurrency; 
+  const planName = (user.subscriptionPlan || 'starter').toLowerCase();
+  const planPriceAmount = PLAN_PRICES[planName]?.[userCurrency] || 0;
+  
   const isCanceled = user.subscriptionStatus === 'canceled';
+  const isTopTier = ['growth', 'scale', 'pro'].includes(planName);
 
   const handleCancel = async () => {
     setLoading(true);
@@ -30,7 +58,7 @@ export default function BillingPage() {
       const updated = await tenantApi.cancelSubscription();
       login(token!, { ...user, subscriptionStatus: updated.subscriptionStatus });
       setShowCancelModal(false);
-      router.refresh(); // если нужно обновить серверные данные
+      router.refresh();
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -48,15 +76,18 @@ export default function BillingPage() {
           <CardTitle>{t('currentPlan')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <p className="text-2xl font-bold capitalize">{user.subscriptionPlan}</p>
-              <p className="text-sm text-[var(--text-muted)]">
-                {user.subscriptionPlan === 'pro' ? '€69/month' : '€39/month'}
-              </p>
+              <p className="text-2xl font-bold capitalize">{planName}</p>
+              {/* <p className="text-sm text-[var(--text-muted)]">
+                {planPriceAmount > 0 
+                  ? `${formatCurrency(planPriceAmount, userCurrency)} / ${t('month', { fallback: 'month' })}`
+                  : t('freePlan', { fallback: 'Free' })
+                }
+              </p> */}
             </div>
             <span
-              className={`px-3 py-1 rounded-full text-xs font-medium ${
+              className={`inline-flex px-3 py-1 rounded-full text-xs font-medium w-fit ${
                 isCanceled
                   ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'
                   : user.subscriptionStatus === 'active' || user.subscriptionStatus === 'trialing'
@@ -65,21 +96,22 @@ export default function BillingPage() {
               }`}
             >
               {user.subscriptionStatus}
-              {isCanceled ? ' (ends at period end)' : ''}
+              {isCanceled ? ` (${t('endsAtPeriodEnd', { fallback: 'ends at period end' })})` : ''}
             </span>
           </div>
 
-          {!isPro && !isCanceled && (
-            <Link href="/pricing">
+          {!isTopTier && !isCanceled && (
+            <Link href="/pricing" className="inline-block mt-4">
               <Button className="gap-2">
                 <ArrowUpCircle size={18} />
-                {t('upgradeToPro')}
+                {t('upgradePlan', { fallback: 'Upgrade Plan' })}
               </Button>
             </Link>
           )}
-          {isPro && (
-            <p className="text-sm text-[var(--text-muted)]">
-              {t('proThanks')}
+          
+          {isTopTier && !isCanceled && (
+            <p className="text-sm text-[var(--text-muted)] pt-2">
+              {t('proThanks', { fallback: 'Thank you for being a premium subscriber!' })}
             </p>
           )}
         </CardContent>
@@ -111,11 +143,11 @@ export default function BillingPage() {
 
       {/* Cancel Modal */}
       {showCancelModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-[var(--surface)] rounded-2xl shadow-xl p-6 w-full max-w-md mx-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-[var(--surface)] rounded-2xl shadow-xl p-6 w-full max-w-md animate-in fade-in zoom-in duration-200">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold">{t('confirmCancel')}</h3>
-              <button onClick={() => setShowCancelModal(false)} className="p-1">
+              <button onClick={() => setShowCancelModal(false)} className="p-1 hover:opacity-70 transition-opacity">
                 <X size={20} />
               </button>
             </div>
@@ -127,7 +159,7 @@ export default function BillingPage() {
                 {error}
               </div>
             )}
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
               <Button variant="outline" onClick={() => setShowCancelModal(false)}>
                 {t('keepPlan')}
               </Button>

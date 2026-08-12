@@ -87,6 +87,7 @@ app.use('/api/saas/branches', require('./routes/saas/branches'));
 app.use('/api/saas/analytics', require('./routes/saas/analytics'));
 app.use('/api/saas/push', require('./routes/saas/push'));
 app.use('/api/saas/jobs', saasJobsRoutes);
+app.use('/api/saas/sites', require('./routes/saas/sites'));
 
 // Stripe (SaaS подписки)
 app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
