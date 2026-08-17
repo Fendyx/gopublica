@@ -9,7 +9,7 @@ test('auto niche disables orders and menu', () => {
   assert.equal(access.menu, false);
   assert.equal(access.canManageOrders, false);
   assert.equal(access.canManageMenu, false);
-  assert.deepEqual(access.availableModules, ['reservations', 'gallery', 'news', 'jobs']);
+  assert.deepEqual(access.availableModules, ['reservations', 'gallery', 'news', 'jobs', 'sections']);
 });
 
 test('beauty niche disables orders but keeps menu', () => {

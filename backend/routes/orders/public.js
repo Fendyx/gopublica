@@ -1,13 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../../models/Order');
 const Customer = require('../../models/Customer');
 const CustomerUser = require('../../models/CustomerUser');
+const Branch = require('../../models/Branch');
 const TenantSettings = require('../../models/TenantSettings');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { getModuleAccess } = require('../../services/moduleAccess');
+
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
 
 // ==============================
 // ЕДИНАЯ ФУНКЦИЯ РАСЧЁТА ЦЕНЫ
@@ -74,12 +81,13 @@ router.post('/', getTenant, async (req, res) => {
   try {
     const { tenantId, tenant } = req;
     const access = getModuleAccess(tenant);
-    if (!tenant.features?.hasOnlineOrdering || !access.canManageOrders) {
-      return res.status(403).json({ error: 'Orders module is disabled for this tenant niche' });
+    if (!access.canManageOrders) {
+      return res.status(403).json({ error: 'Orders module is disabled for this tenant' });
     }
 
     const {
       branchId,
+      branchSlug,
       fulfillment,
       items,
       customer: customerInput,
@@ -93,6 +101,23 @@ router.post('/', getTenant, async (req, res) => {
     }
     if (!customerInput || !customerInput.email || !customerInput.phone || !customerInput.name) {
       return res.status(400).json({ error: 'Customer name, email and phone are required' });
+    }
+
+    // Resolve branchId from branchSlug if needed
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found for slug' });
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found for slug' });
+      resolvedBranchId = branch._id;
     }
 
     // --- Auth & GDPR Логика ---
@@ -173,7 +198,7 @@ router.post('/', getTenant, async (req, res) => {
 
     const order = new Order({
       tenantId,
-      branchId: branchId || null,
+      branchId: resolvedBranchId || null,
       customerId: customer._id,
       customerUserId: customerUserId,
       fulfillment: {

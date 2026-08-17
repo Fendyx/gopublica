@@ -46,6 +46,10 @@ const publicUserOrders = require('./routes/public/orders');
 
 const publicProfileRoutes = require('./routes/public/profile');
 
+// Branch Sections (SaaS admin + public)
+const saasBranchSectionsRoutes = require('./routes/saas/branchSections');
+const publicBranchSectionsRoutes = require('./routes/public/branchSections');
+
 // ── Роут для пинга (Keep-Alive) ──────────────────────
 app.get('/api/ping', (req, res) => {
   // Жестко отключаем любое кеширование на всех уровнях
@@ -88,6 +92,8 @@ app.use('/api/saas/analytics', require('./routes/saas/analytics'));
 app.use('/api/saas/push', require('./routes/saas/push'));
 app.use('/api/saas/jobs', saasJobsRoutes);
 app.use('/api/saas/sites', require('./routes/saas/sites'));
+app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
+app.use('/api/saas/articles', require('./middleware/authTenant'), require('./routes/saas/articles'));
 
 // Stripe (SaaS подписки)
 app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
@@ -127,6 +133,12 @@ app.use('/api/public/profile', publicProfileRoutes);
 // Публичные заявки на демо ("Get a Free Demo" funnel)
 app.use('/api/public/demo-requests', require('./routes/public/demoRequests'));
 
+// Branch Sections (public)
+app.use('/api/public/branch-sections', publicBranchSectionsRoutes);
+
+// Articles (public)
+app.use('/api/public/articles', require('./routes/public/articles'));
+
 
 // ── Раздача Фронтенда (прод) ─────────────────────────
 const frontendDistPath = path.join(__dirname, '../frontend/dist');
@@ -143,7 +155,8 @@ if (!fs.existsSync(frontendDistPath)) {
 app.use(express.static(frontendDistPath));
 
 // Для всех остальных запросов (роутинг React) отдаем index.html
-app.get(/.*/, (req, res) => {
+// Исключаем API-роуты, чтобы они обрабатывались роутерами выше
+app.get(/^(?!\/api\/).*$/, (req, res) => {
   const indexPath = path.join(frontendDistPath, 'index.html');
   if (!fs.existsSync(indexPath)) {
     return res.status(500).send('Frontend build not found on server');

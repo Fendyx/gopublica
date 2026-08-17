@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const ServiceAppointment = require('../../models/ServiceAppointment');
+const Branch = require('../../models/Branch');
 const resolveTenant = require('../../middleware/resolveTenant');
+
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
 
 /**
  * POST /api/saas/appointments/public
@@ -11,7 +18,7 @@ const resolveTenant = require('../../middleware/resolveTenant');
  * from the request Host header. No authentication required (guest bookings).
  *
  * Required body:
- *   - branchId:    String
+ *   - branchId:    String  (or branchSlug: String)
  *   - startAt:    ISO Date string
  *   - endAt:      ISO Date string
  *   - guestInfo:  { name: String, phone: String, email?: String }
@@ -27,6 +34,7 @@ router.post('/public', resolveTenant, async (req, res) => {
 
     const {
       branchId,
+      branchSlug,
       services,
       startAt,
       endAt,
@@ -35,9 +43,30 @@ router.post('/public', resolveTenant, async (req, res) => {
       notes,
     } = req.body;
 
+    // Resolve branchId from branchSlug if needed
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId }).lean();
+      if (!branch) {
+        return res.status(404).json({ success: false, message: 'Branch not found for slug' });
+      }
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId }).lean();
+      if (!branch) {
+        return res.status(404).json({ success: false, message: 'Branch not found for slug' });
+      }
+      resolvedBranchId = branch._id;
+    }
+
     // ─── Basic validation ───────────────────────────────────────────────────
-    if (!branchId) {
-      return res.status(400).json({ success: false, message: 'branchId is required' });
+    if (!resolvedBranchId) {
+      return res.status(400).json({ success: false, message: 'branchId or branchSlug is required' });
     }
     if (!startAt || !endAt) {
       return res
@@ -57,7 +86,7 @@ router.post('/public', resolveTenant, async (req, res) => {
     // ─── Create & persist ──────────────────────────────────────────────────
     const appointment = new ServiceAppointment({
       tenantId,
-      branchId,
+      branchId: resolvedBranchId,
       services: Array.isArray(services) ? services : [],
       startAt,
       endAt,

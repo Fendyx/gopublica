@@ -84,7 +84,37 @@ const branchSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
+  // ─── URL slug (for branch-based URL routing) ───────────────────────────────
+  // URL-safe identifier, unique per tenant. Used in frontend routes like
+  // /[tenantDomain]/[locale]/[branchSlug]/...
+  slug: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+    match: /^[a-z0-9-]+$/,
+    default: null,
+  },
+
+  // ─── Default branch flag ───────────────────────────────────────────────────
+  // Exactly one branch per tenant can be the default. When a visitor lands on
+  // /[tenantDomain]/[locale]/ with no branch segment, they are redirected to
+  // the default branch's URL.
+  isDefault: {
+    type: Boolean,
+    default: false,
+  },
 }, { timestamps: true });
+
+// Index for fast lookup by slug within a tenant
+branchSchema.index({ tenantId: 1, slug: 1 }, { unique: true, sparse: true });
+
+// Enforce exactly one default branch per tenant
+branchSchema.index(
+  { tenantId: 1, isDefault: 1 },
+  { unique: true, partialFilterExpression: { isDefault: true } }
+);
 
 branchSchema.index({ parentBranchId: 1 });
 

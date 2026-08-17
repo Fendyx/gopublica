@@ -1,11 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../../models/Order');
+const Branch = require('../../models/Branch');
 const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/authTenant');
 const checkBranch = require('../../middleware/checkBranch'); // опционально
 const { enforceModuleAccess } = require('../../services/moduleAccess');
+
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
 
 router.use(authTenant);
 
@@ -16,10 +23,27 @@ router.get('/', async (req, res) => {
     if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
     if (!enforceModuleAccess(tenant, 'orders', res)) return;
 
-    const { status, branchId, from, to } = req.query;
+    const { status, branchId, branchSlug, from, to } = req.query;
     const filter = { tenantId: req.tenantId };
     if (status) filter.status = status;
-    if (branchId) filter.branchId = branchId;
+
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found for slug' });
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found' });
+      resolvedBranchId = branch._id;
+    }
+
+    if (resolvedBranchId) filter.branchId = resolvedBranchId;
     if (from || to) {
       filter.createdAt = {};
       if (from) filter.createdAt.$gte = new Date(from);

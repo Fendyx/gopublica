@@ -1,27 +1,43 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const webpush = require('web-push');
 const Reservation = require('../../models/Reservation');
 const Branch = require('../../models/Branch');
 const PushSubscription = require('../../models/PushSubscription');
 const authTenant = require('../../middleware/authTenant');
 
-// Публичный: создание брони (теперь с branchId)
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
+
+// Публичный: создание брони (теперь с branchId или branchSlug)
 router.post('/', async (req, res) => {
   try {
     const { tenantId } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId обязателен' });
 
-    const { branchId, name, phone, email, date, time, guests, comment } = req.body;
-    if (!branchId) return res.status(400).json({ error: 'branchId обязателен' });
+    const { branchId, branchSlug, name, phone, email, date, time, guests, comment } = req.body;
+
+    let resolvedBranchId = branchId;
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId });
+      if (!branch) return res.status(403).json({ error: 'Филиал не найден или не принадлежит тенанту' });
+      resolvedBranchId = branch._id;
+    }
+
+    if (!resolvedBranchId) return res.status(400).json({ error: 'branchId или branchSlug обязателен' });
 
     // Проверяем, что филиал принадлежит этому тенанту
-    const branch = await Branch.findOne({ _id: branchId, tenantId });
+    const branch = await Branch.findOne({ _id: resolvedBranchId, tenantId });
     if (!branch) return res.status(403).json({ error: 'Филиал не найден или не принадлежит тенанту' });
 
     const reservation = new Reservation({
       tenantId,
-      branchId,
+      branchId: resolvedBranchId,
       name,
       phone,
       email,
@@ -62,12 +78,29 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Защищённый: список броней (с фильтром по branchId)
+// Защищённый: список броней (с фильтром по branchId или branchSlug)
 router.get('/', authTenant, async (req, res) => {
   try {
-    const { branchId } = req.query;
+    const { branchId, branchSlug } = req.query;
     const query = { tenantId: req.tenantId };
-    if (branchId) query.branchId = branchId;
+
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found for slug' });
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found' });
+      resolvedBranchId = branch._id;
+    }
+
+    if (resolvedBranchId) query.branchId = resolvedBranchId;
     const reservations = await Reservation.find(query).sort({ date: 1, time: 1 });
     res.json(reservations);
   } catch (err) {

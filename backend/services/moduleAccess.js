@@ -1,4 +1,4 @@
-const MODULE_KEYS = ['orders', 'menu', 'reservations', 'gallery', 'news', 'jobs'];
+const MODULE_KEYS = ['orders', 'menu', 'reservations', 'gallery', 'news', 'jobs', 'sections'];
 
 const DEFAULT_MODULES_BY_NICHE = {
   auto: {
@@ -8,6 +8,7 @@ const DEFAULT_MODULES_BY_NICHE = {
     gallery: true,
     news: true,
     jobs: true,
+    sections: true,
   },
   beauty: {
     orders: false,
@@ -16,6 +17,7 @@ const DEFAULT_MODULES_BY_NICHE = {
     gallery: true,
     news: true,
     jobs: true,
+    sections: true,
   },
   food: {
     orders: true,
@@ -24,6 +26,7 @@ const DEFAULT_MODULES_BY_NICHE = {
     gallery: true,
     news: true,
     jobs: true,
+    sections: true,
   },
   restaurant: {
     orders: true,
@@ -32,6 +35,7 @@ const DEFAULT_MODULES_BY_NICHE = {
     gallery: true,
     news: true,
     jobs: true,
+    sections: true,
   },
   ecommerce: {
     orders: true,
@@ -40,6 +44,7 @@ const DEFAULT_MODULES_BY_NICHE = {
     gallery: true,
     news: true,
     jobs: true,
+    sections: true,
   },
 };
 
@@ -62,6 +67,7 @@ function buildTenantModuleAccess(tenant = {}) {
     gallery: { enabled: resolved.gallery, canManage: resolved.gallery },
     news: { enabled: resolved.news, canManage: resolved.news },
     jobs: { enabled: resolved.jobs, canManage: resolved.jobs },
+    sections: { enabled: resolved.sections, canManage: resolved.sections },
   };
 
   return {
@@ -74,12 +80,14 @@ function buildTenantModuleAccess(tenant = {}) {
     gallery: resolved.gallery,
     news: resolved.news,
     jobs: resolved.jobs,
+    sections: resolved.sections,
     canManageOrders: resolved.orders,
     canManageMenu: resolved.menu,
     canManageReservations: resolved.reservations,
     canManageGallery: resolved.gallery,
     canManageNews: resolved.news,
     canManageJobs: resolved.jobs,
+    canManageSections: resolved.sections,
   };
 }
 

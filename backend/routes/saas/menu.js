@@ -1,19 +1,46 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const MenuItem = require('../../models/MenuItem');
 const TenantSettings = require('../../models/TenantSettings');
+const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/authTenant');
 const { enforceModuleAccess } = require('../../services/moduleAccess');
+
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
 
 // Публичный роут: получение меню
 router.get('/', async (req, res) => {
   try {
-    const { tenantId, branchId } = req.query;
+    const { tenantId, branchId, branchSlug } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
 
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId }).lean();
+      if (!branch) {
+        return res.status(404).json({ error: 'Branch not found for slug' });
+      }
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId }).lean();
+      if (!branch) {
+        return res.status(404).json({ error: 'Branch not found for slug' });
+      }
+      resolvedBranchId = branch._id;
+    }
+
     let query = { tenantId };
-    if (branchId) {
-      query = { tenantId, $or: [{ branchId }, { branchId: null }] };
+    if (resolvedBranchId) {
+      query = { tenantId, $or: [{ branchId: resolvedBranchId }, { branchId: null }] };
     } else {
       query = { tenantId, branchId: null };
     }

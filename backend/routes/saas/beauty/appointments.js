@@ -1,14 +1,38 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const BeautyAppointment = require('../../../models/beauty/Appointment');
+const Branch = require('../../../models/Branch');
 const authTenant = require('../../../middleware/authTenant');
 const checkBranch = require('../../../middleware/checkBranch');
 
+// Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
+function isValidObjectId(str) {
+  return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
+
 router.get('/', authTenant, async (req, res) => {
   try {
-    const { branchId, from, to, status } = req.query;
+    const { branchId, branchSlug, from, to, status } = req.query;
     const query = { tenantId: req.tenantId };
-    if (branchId) query.branchId = branchId;
+
+    let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found for slug' });
+      resolvedBranchId = branch._id;
+    }
+
+    // If branchSlug is provided, resolve it to a branchId
+    if (!resolvedBranchId && branchSlug) {
+      const branch = await Branch.findOne({ slug: branchSlug, tenantId: req.tenantId }).lean();
+      if (!branch) return res.status(404).json({ error: 'Branch not found' });
+      resolvedBranchId = branch._id;
+    }
+
+    if (resolvedBranchId) query.branchId = resolvedBranchId;
     if (status) query.status = status;
     if (from || to) {
       query.startAt = {};
@@ -27,10 +51,16 @@ router.get('/', authTenant, async (req, res) => {
 
 router.post('/', authTenant, checkBranch, async (req, res) => {
   try {
+    const { branchId, branchSlug, ...rest } = req.body;
+
+    // Use resolved branch from middleware (supports both branchId and branchSlug)
+    // checkBranch middleware already resolved branchId (even if it was a slug) or branchSlug
+    let resolvedBranchId = req.branch ? req.branch._id : (branchId || null);
+
     const appointment = new BeautyAppointment({
       tenantId: req.tenantId,
-      branchId: req.body.branchId || req.branch?._id || null,
-      ...req.body,
+      branchId: resolvedBranchId,
+      ...rest,
     });
     await appointment.save();
     res.status(201).json(appointment);
