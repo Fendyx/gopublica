@@ -79,4 +79,19 @@ const menuItemSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-module.exports = mongoose.model("MenuItem", menuItemSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(menuItemSchema, {
+  modelName: 'MenuItem',
+  getTags: (doc) => [
+    `menu:${doc.tenantId}`,
+    doc.branchId ? `menu:${doc.tenantId}:${doc.branchId}` : `menu:${doc.tenantId}:global`,
+  ],
+  getBranchId: (doc) => doc.branchId || null,
+  getEntityId: (doc) => doc._id.toString(),
+});
+
+const MenuItem = mongoose.model("MenuItem", menuItemSchema);
+
+module.exports = MenuItem;

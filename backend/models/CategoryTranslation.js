@@ -38,4 +38,19 @@ const categoryTranslationSchema = new mongoose.Schema({
 
 categoryTranslationSchema.index({ key: 1, tenantId: 1 }, { unique: true });
 
-module.exports = mongoose.model('CategoryTranslation', categoryTranslationSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(categoryTranslationSchema, {
+  modelName: 'CategoryTranslation',
+  getTags: (doc) => [
+    `categories:${doc.tenantId}`,
+    `menu:${doc.tenantId}`,
+  ],
+  getBranchId: () => null,
+  getEntityId: (doc) => doc.key,
+});
+
+const CategoryTranslation = mongoose.model('CategoryTranslation', categoryTranslationSchema);
+
+module.exports = CategoryTranslation;

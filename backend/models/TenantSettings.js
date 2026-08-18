@@ -168,4 +168,20 @@ const tenantSettingsSchema = new mongoose.Schema({
 // proxy.ts вызывает этот запрос при каждом входящем запросе
 tenantSettingsSchema.index({ domain: 1 });
 
-module.exports = mongoose.model('TenantSettings', tenantSettingsSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(tenantSettingsSchema, {
+  modelName: 'TenantSettings',
+  getTags: (doc) => [
+    `tenant:domain:${doc.domain}`,
+    `settings:${doc.tenantId}`,
+    `theme:${doc.tenantId}`,
+    `modules:${doc.tenantId}`,
+  ],
+  getEntityId: (doc) => doc.tenantId,
+});
+
+const TenantSettings = mongoose.model('TenantSettings', tenantSettingsSchema);
+
+module.exports = TenantSettings;

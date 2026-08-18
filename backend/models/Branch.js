@@ -118,4 +118,20 @@ branchSchema.index(
 
 branchSchema.index({ parentBranchId: 1 });
 
-module.exports = mongoose.model('Branch', branchSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(branchSchema, {
+  modelName: 'Branch',
+  getTags: (doc) => [
+    `branches:${doc.tenantId}`,
+    `branch:${doc.tenantId}:${doc.slug}`,
+    `menu:${doc.tenantId}:${doc._id}`,
+  ],
+  getBranchId: (doc) => doc._id.toString(),
+  getEntityId: (doc) => doc.slug,
+});
+
+const Branch = mongoose.model('Branch', branchSchema);
+
+module.exports = Branch;

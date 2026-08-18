@@ -102,4 +102,19 @@ const branchSectionSchema = new mongoose.Schema(
 branchSectionSchema.index({ tenantId: 1, branchId: 1, page: 1, order: 1 });
 branchSectionSchema.index({ tenantId: 1, branchId: 1, isActive: 1 });
 
-module.exports = mongoose.model('BranchSection', branchSectionSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(branchSectionSchema, {
+  modelName: 'BranchSection',
+  getTags: (doc) => [
+    `sections:${doc.tenantId}:${doc.branchId}`,
+    `page:${doc.tenantId}:${doc.branchId}:${doc.page}`,
+  ],
+  getBranchId: (doc) => doc.branchId,
+  getEntityId: (doc) => doc._id.toString(),
+});
+
+const BranchSection = mongoose.model('BranchSection', branchSectionSchema);
+
+module.exports = BranchSection;

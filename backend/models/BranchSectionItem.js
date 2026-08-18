@@ -92,4 +92,19 @@ const branchSectionItemSchema = new mongoose.Schema(
 branchSectionItemSchema.index({ tenantId: 1, branchId: 1, sectionId: 1, order: 1 });
 branchSectionItemSchema.index({ tenantId: 1, slug: 1 }, { unique: true }); // Unique slug per tenant
 
-module.exports = mongoose.model('BranchSectionItem', branchSectionItemSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(branchSectionItemSchema, {
+  modelName: 'BranchSectionItem',
+  getTags: (doc) => [
+    `sections:${doc.tenantId}:${doc.branchId}`,
+    `entity:${doc.tenantId}:${doc.slug || doc._id}`,
+  ],
+  getBranchId: (doc) => doc.branchId,
+  getEntityId: (doc) => doc.slug || doc._id.toString(),
+});
+
+const BranchSectionItem = mongoose.model('BranchSectionItem', branchSectionItemSchema);
+
+module.exports = BranchSectionItem;

@@ -25,4 +25,19 @@ const galleryItemSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('GalleryItem', galleryItemSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(galleryItemSchema, {
+  modelName: 'GalleryItem',
+  getTags: (doc) => [
+    `gallery:${doc.tenantId}`,
+    `gallery:${doc.tenantId}:${doc.branchId || 'global'}`,
+  ],
+  getBranchId: (doc) => doc.branchId || null,
+  getEntityId: (doc) => doc._id.toString(),
+});
+
+const GalleryItem = mongoose.model('GalleryItem', galleryItemSchema);
+
+module.exports = GalleryItem;

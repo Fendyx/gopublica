@@ -45,4 +45,18 @@ const articleSchema = new mongoose.Schema(
 // Ensure unique slug per tenant
 articleSchema.index({ tenantId: 1, slug: 1 }, { unique: true });
 
-module.exports = mongoose.model('Article', articleSchema);
+// ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
+const { registerRevalidationHooks } = require('../services/modelHooks');
+
+registerRevalidationHooks(articleSchema, {
+  modelName: 'Article',
+  getTags: (doc) => [
+    `articles:${doc.tenantId}`,
+    `article:${doc.tenantId}:${doc.slug}`,
+  ],
+  getEntityId: (doc) => doc.slug,
+});
+
+const Article = mongoose.model('Article', articleSchema);
+
+module.exports = Article;
