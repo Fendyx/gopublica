@@ -45,8 +45,23 @@ const tenantSettingsSchema = new mongoose.Schema({
   },
 
   // ─── НОВОЕ: Multi-tenant роутинг ────────────────────────────────────────────
-  // Домен клиента: "sushi-master.com" или "sushi.gopublica.com"
+  // Канонический (основной) домен клиента: "sushi-master.com" или "sushi.gopublica.com"
+  // Глобально уникален. Для локальной разработки или staging добавляются aliases.
   domain: { type: String, unique: true, sparse: true, default: null },
+
+  // Дополнительные домены (алиасы), по которым тенант должен отвечать.
+  // Используются для локальной разработки, staging, технических доменов платформы.
+  // Любой элемент массива глобально уникален во всей коллекции (см. pre('save') хук).
+  aliases: {
+    type: [String],
+    default: [],
+    validate: {
+      validator: function (arr) {
+        return arr && arr.length <= 10;
+      },
+      message: 'Aliases array must not exceed 10 items',
+    },
+  },
 
   // Ниша — определяет какой шаблон рендерить на фронте
   niche: {
@@ -167,18 +182,74 @@ const tenantSettingsSchema = new mongoose.Schema({
 // Индекс для быстрого поиска по домену
 // proxy.ts вызывает этот запрос при каждом входящем запросе
 tenantSettingsSchema.index({ domain: 1 });
+tenantSettingsSchema.index({ aliases: 1 });
+
+// ─── Pre-save hook: глобальная уникальность domain + aliases ──────────────────
+// Нельзя, чтобы два тенанта имели одинаковый domain ИЛИ одинаковый alias.
+// Проверяем пересечения как по domain, так и по aliases (в обе стороны).
+tenantSettingsSchema.pre('save', async function (next) {
+  if (!this.isModified('domain') && !this.isModified('aliases')) {
+    return next();
+  }
+
+  const Model = this.constructor;
+  const hostnames = new Set();
+  if (this.domain) hostnames.add(this.domain.toLowerCase().trim());
+  if (Array.isArray(this.aliases)) {
+    this.aliases.forEach(a => {
+      if (a) hostnames.add(a.toLowerCase().trim());
+    });
+  }
+
+  if (hostnames.size === 0) {
+    return next(); // ни домена, ни алисов — нечего проверять
+  }
+
+  const hostArray = Array.from(hostnames);
+
+  // Ищем другие документы, которые имеют пересечение по domain или aliases
+  const duplicate = await Model.countDocuments({
+    _id: { $ne: this._id },
+    $or: [
+      { domain: { $in: hostArray } },
+      { aliases: { $in: hostArray } },
+    ],
+  });
+
+  if (duplicate > 0) {
+    return next(new Error('Domain or alias is already in use by another tenant'));
+  }
+
+  // Нормализуем aliases (lowercase, trim, dedup)
+  if (Array.isArray(this.aliases)) {
+    this.aliases = [...new Set(this.aliases
+      .filter(a => a && typeof a === 'string')
+      .map(a => a.toLowerCase().trim())
+    )];
+  }
+
+  next();
+});
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/modelHooks');
 
 registerRevalidationHooks(tenantSettingsSchema, {
   modelName: 'TenantSettings',
-  getTags: (doc) => [
-    `tenant:domain:${doc.domain}`,
-    `settings:${doc.tenantId}`,
-    `theme:${doc.tenantId}`,
-    `modules:${doc.tenantId}`,
-  ],
+  getTags: (doc) => {
+    const tags = [
+      `settings:${doc.tenantId}`,
+      `theme:${doc.tenantId}`,
+      `modules:${doc.tenantId}`,
+    ];
+    if (doc.domain) tags.push(`tenant:domain:${doc.domain}`);
+    if (Array.isArray(doc.aliases)) {
+      doc.aliases.forEach(alias => {
+        if (alias) tags.push(`tenant:domain:${alias}`);
+      });
+    }
+    return tags;
+  },
   getEntityId: (doc) => doc.tenantId,
 });
 

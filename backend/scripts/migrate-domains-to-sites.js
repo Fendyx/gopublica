@@ -67,6 +67,16 @@ async function migrate() {
 
         console.log(`✅ Created site for ${tenantId}: ${settings.domain} (${site._id})`);
         created++;
+
+        // Обновляем TenantSettings: добавляем domain в aliases для резолвинга,
+        // если его там ещё нет (обратная совместимость)
+        const existingAliases = settings.aliases || [];
+        if (!existingAliases.includes(settings.domain)) {
+          await TenantSettings.findOneAndUpdate(
+            { tenantId },
+            { $set: { aliases: [...existingAliases, settings.domain] } }
+          );
+        }
       } catch (err) {
         console.error(`❌ Error migrating ${settings.tenantId}:`, err.message);
         errors++;

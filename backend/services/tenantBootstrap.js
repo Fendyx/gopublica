@@ -39,7 +39,8 @@ function buildDefaultTenantSettings({ tenantId, businessName = '', niche = 'beau
     businessName,
     phone,
     email,
-    domain: `${tenantId}.temp-domain.com`,
+    domain: null, // боевой домен задаётся вручную
+    aliases: [`${tenantId}.temp-domain.com`], // технический домен для разработки
     niche: normalizedNiche,
     businessType: normalizedNiche,
     moduleAccess: {

@@ -11,6 +11,20 @@ function isValidObjectId(str) {
   return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
 }
 
+// Helper: проверить, что домен/алиас не занят другим тенантом
+async function isDomainTaken(hostname, excludeTenantId) {
+  if (!hostname) return false;
+  const normalized = hostname.toLowerCase().trim();
+  const existing = await TenantSettings.findOne({
+    tenantId: { $ne: excludeTenantId },
+    $or: [
+      { domain: normalized },
+      { aliases: normalized },
+    ],
+  }).lean();
+  return !!existing;
+}
+
 // ─── НОВЫЙ РОУТ: поиск тенанта по домену ────────────────────────────────────
 router.get('/by-domain', async (req, res) => {
   try {
@@ -18,7 +32,7 @@ router.get('/by-domain', async (req, res) => {
     if (!domain) return res.status(400).json({ error: 'domain required' });
 
     const settings = await TenantSettings
-      .findOne({ domain })
+      .findOne({ $or: [{ domain }, { aliases: domain }] })
       .select(
         'tenantId niche businessType moduleAccess theme features businessName ' +
         'phone address email hours seoTitle seoDescription ' +
@@ -127,6 +141,20 @@ router.put('/', authTenant, async (req, res) => {
   try {
     const { branchId, ...reqBody } = req.body;
     const tenantId = req.tenantId;
+
+    // 0. Проверка уникальности domain/aliases (до сохранения)
+    if (reqBody.domain !== undefined) {
+      if (await isDomainTaken(reqBody.domain, tenantId)) {
+        return res.status(409).json({ error: 'Domain already in use' });
+      }
+    }
+    if (Array.isArray(reqBody.aliases)) {
+      for (const alias of reqBody.aliases) {
+        if (await isDomainTaken(alias, tenantId)) {
+          return res.status(409).json({ error: `Alias '${alias}' is already in use` });
+        }
+      }
+    }
 
     // 1. Сохраняем businessName глобально (не зависит от филиала)
     if (reqBody.businessName !== undefined) {

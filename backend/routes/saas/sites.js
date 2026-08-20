@@ -18,9 +18,10 @@ router.get('/', authTenant, async (req, res) => {
     // Also get legacy domain from TenantSettings for backward compatibility
     const settings = await TenantSettings.findOne({ tenantId }).lean();
 
-    res.json({ 
-      sites: sites || [], 
-      legacyDomain: settings?.domain || null 
+    res.json({
+      sites: sites || [],
+      legacyDomain: settings?.domain || null,
+      aliases: settings?.aliases || [],
     });
   } catch (err) {
     console.error('Error fetching sites:', err);
@@ -75,8 +76,13 @@ router.post('/', authTenant, async (req, res) => {
       if (existingDomain) {
         return res.status(409).json({ error: 'Domain already in use' });
       }
-      // Also check TenantSettings for legacy domains
-      const legacySettings = await TenantSettings.findOne({ domain: domain.toLowerCase() });
+      // Also check TenantSettings for legacy domains (domain + aliases)
+      const legacySettings = await TenantSettings.findOne({
+        $or: [
+          { domain: domain.toLowerCase() },
+          { aliases: domain.toLowerCase() },
+        ],
+      });
       if (legacySettings && legacySettings.tenantId !== tenantId) {
         return res.status(409).json({ error: 'Domain already in use' });
       }
@@ -111,10 +117,23 @@ router.post('/', authTenant, async (req, res) => {
 
     // If this is the first site and tenant has a legacy domain, link it
     if (domain && settings) {
-      await TenantSettings.findOneAndUpdate(
-        { tenantId },
-        { $set: { domain: domain.toLowerCase() } }
-      );
+      const normalizedDomain = domain.toLowerCase();
+      const existingAliases = settings.aliases || [];
+      const update = {};
+      // Устанавливаем domain, если он ещё не является alias этого же тенанта
+      if (!existingAliases.includes(normalizedDomain)) {
+        update.domain = normalizedDomain;
+      }
+      // Добавляем domain в aliases, если его там ещё нет (для резолвинга)
+      if (!existingAliases.includes(normalizedDomain) && !settings.domain) {
+        update.aliases = [...existingAliases, normalizedDomain];
+      }
+      if (Object.keys(update).length > 0) {
+        await TenantSettings.findOneAndUpdate(
+          { tenantId },
+          { $set: update }
+        );
+      }
     }
 
     res.status(201).json(site);
@@ -161,12 +180,22 @@ router.patch('/:id', authTenant, async (req, res) => {
 
     // Validate uniqueness if domain/subdomain changing
     if (update.domain) {
-      const existing = await Site.findOne({ 
-        domain: update.domain, 
+      const existing = await Site.findOne({
+        domain: update.domain,
         _id: { $ne: req.params.id },
-        isActive: true 
+        isActive: true
       });
       if (existing) {
+        return res.status(409).json({ error: 'Domain already in use' });
+      }
+      // Also check TenantSettings (domain + aliases)
+      const legacySettings = await TenantSettings.findOne({
+        $or: [
+          { domain: update.domain },
+          { aliases: update.domain },
+        ],
+      });
+      if (legacySettings) {
         return res.status(409).json({ error: 'Domain already in use' });
       }
     }
