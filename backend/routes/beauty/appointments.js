@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 // Защищённый: список записей
 router.get('/', authTenant, async (req, res) => {
   try {
-    const items = await BeautyAppointment.find({ tenantId: req.tenantId }).sort({ date: 1, time: 1 });
+    const items = await BeautyAppointment.find({ tenantId: req.tenantId }).sort({ date: 1, time: 1 }).lean();
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

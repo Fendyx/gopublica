@@ -33,7 +33,7 @@ router.get('/', authTenant, async (req, res) => {
     }
 
     if (resolvedBranchId) query.branchId = resolvedBranchId;
-    const masters = await BeautyMaster.find(query).populate('services').sort({ name: 1 });
+    const masters = await BeautyMaster.find(query).populate('services').sort({ name: 1 }).lean();
     res.json(masters);
   } catch (err) {
     res.status(500).json({ error: err.message });

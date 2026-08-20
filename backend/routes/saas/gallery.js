@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
       query = { tenantId, branchId: null };
     }
 
-    const items = await GalleryItem.find(query).sort({ order: 1, createdAt: -1 });
+    const items = await GalleryItem.find(query).sort({ order: 1, createdAt: -1 }).lean();
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

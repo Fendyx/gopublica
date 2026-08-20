@@ -92,6 +92,9 @@ const branchSectionItemSchema = new mongoose.Schema(
 branchSectionItemSchema.index({ tenantId: 1, branchId: 1, sectionId: 1, order: 1 });
 branchSectionItemSchema.index({ tenantId: 1, slug: 1 }, { unique: true }); // Unique slug per tenant
 
+// Index for public route: find({ sectionId: { $in: [...] }, isActive: true }).sort({ order: 1 })
+branchSectionItemSchema.index({ sectionId: 1, isActive: 1, order: 1 });
+
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/modelHooks');
 

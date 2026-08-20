@@ -71,12 +71,17 @@ router.put('/reorder', authTenant, async (req, res) => {
   try {
     const { orderedIds } = req.body;
     const tenantId = req.tenantId;
-    for (let i = 0; i < orderedIds.length; i++) {
-      await CategoryTranslation.findOneAndUpdate(
-        { _id: orderedIds[i], tenantId },
-        { order: i }
-      );
-    }
+
+    // Bulk update using a single bulkWrite (fixes N+1)
+    await CategoryTranslation.bulkWrite(
+      orderedIds.map((id, i) => ({
+        updateOne: {
+          filter: { _id: id, tenantId },
+          update: { order: i },
+        },
+      }))
+    );
+
     res.json({ message: 'Order updated' });
   } catch (err) {
     res.status(500).json({ error: err.message });

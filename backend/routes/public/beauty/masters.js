@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
     if (resolvedBranchId) query.branchId = resolvedBranchId;
     if (serviceId) query.services = serviceId;
 
-    const masters = await BeautyMaster.find(query).populate('services', 'name price durationMinutes').sort({ name: 1 });
+    const masters = await BeautyMaster.find(query).populate('services', 'name price durationMinutes').sort({ name: 1 }).lean();
     res.json(masters);
   } catch (err) {
     res.status(500).json({ error: err.message });

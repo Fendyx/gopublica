@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
     const query = { tenantId, isActive: true };
     if (resolvedBranchId) query.branchId = resolvedBranchId;
 
-    const services = await BeautyService.find(query).sort({ sortOrder: 1, createdAt: 1 });
+    const services = await BeautyService.find(query).sort({ sortOrder: 1, createdAt: 1 }).lean();
     res.json(services);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -42,7 +42,8 @@ router.get('/', authTenant, async (req, res) => {
     const appointments = await BeautyAppointment.find(query)
       .populate('serviceId', 'name price durationMinutes')
       .populate('masterId', 'name photo')
-      .sort({ startAt: 1 });
+      .sort({ startAt: 1 })
+      .lean();
     res.json(appointments);
   } catch (err) {
     res.status(500).json({ error: err.message });

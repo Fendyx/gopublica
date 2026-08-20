@@ -101,7 +101,7 @@ router.get('/', authTenant, async (req, res) => {
     }
 
     if (resolvedBranchId) query.branchId = resolvedBranchId;
-    const reservations = await Reservation.find(query).sort({ date: 1, time: 1 });
+    const reservations = await Reservation.find(query).sort({ date: 1, time: 1 }).lean();
     res.json(reservations);
   } catch (err) {
     res.status(500).json({ error: err.message });

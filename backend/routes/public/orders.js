@@ -38,7 +38,7 @@ router.get('/', authCustomer, async (req, res) => {
     const orders = await Order.find({
       tenantId: req.tenantId,
       customerUserId: req.customerUserId
-    }).sort({ createdAt: -1 });
+    }).sort({ createdAt: -1 }).lean();
 
     res.json(orders);
   } catch (err) {

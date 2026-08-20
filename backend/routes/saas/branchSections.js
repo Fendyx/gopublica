@@ -8,6 +8,7 @@ const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/authTenant');
 const checkBranch = require('../../middleware/checkBranch');
 const { enforceModuleAccess } = require('../../services/moduleAccess');
+const { validateSectionSettings } = require('../../services/branchSectionValidation');
 
 // ============================================================
 // MIDDLEWARE: Apply to all routes in this file
@@ -71,6 +72,13 @@ router.post('/', checkBranch, async (req, res) => {
     const branch = req.branch || await Branch.findOne({ _id: resolvedBranchId, tenantId: req.tenantId });
     if (!branch) return res.status(403).json({ error: 'Access denied to this branch' });
 
+    // Validate + sanitize settings against the section type
+    const validation = validateSectionSettings(type, settings);
+    if (!validation.ok) {
+      return res.status(400).json({ error: validation.errors.join('; ') });
+    }
+    const sanitizedSettings = validation.value;
+
     // Determine the next order value: use provided order, or append to the end
     let nextOrder;
     if (order !== undefined) {
@@ -86,7 +94,7 @@ router.post('/', checkBranch, async (req, res) => {
       page,
       type,
       order: nextOrder,
-      settings,
+      settings: sanitizedSettings,
       translations,
     });
 
@@ -111,12 +119,15 @@ router.put('/reorder', checkBranch, async (req, res) => {
     const branch = req.branch || await Branch.findOne({ _id: resolvedBranchId, tenantId: req.tenantId });
     if (!branch) return res.status(403).json({ error: 'Access denied to this branch' });
 
-    for (let i = 0; i < orderedIds.length; i++) {
-      await BranchSection.findOneAndUpdate(
-        { _id: orderedIds[i], tenantId: req.tenantId, branchId },
-        { order: i }
-      );
-    }
+    // Bulk update using a single bulkWrite (fixes N+1)
+    await BranchSection.bulkWrite(
+      orderedIds.map((id, i) => ({
+        updateOne: {
+          filter: { _id: id, tenantId: req.tenantId, branchId: resolvedBranchId },
+          update: { order: i },
+        },
+      }))
+    );
 
     res.json({ message: 'Order updated' });
   } catch (err) {
@@ -167,7 +178,17 @@ router.put('/:id', checkBranch, async (req, res) => {
     if (page !== undefined) section.page = page;
     if (type !== undefined) section.type = type;
     if (order !== undefined) section.order = order;
-    if (settings !== undefined) section.settings = settings;
+
+    // Validate + sanitize settings against the (possibly updated) section type
+    if (settings !== undefined) {
+      const effectiveType = type !== undefined ? type : section.type;
+      const validation = validateSectionSettings(effectiveType, settings);
+      if (!validation.ok) {
+        return res.status(400).json({ error: validation.errors.join('; ') });
+      }
+      section.settings = validation.value;
+    }
+
     if (translations !== undefined) section.translations = translations;
     if (isActive !== undefined) section.isActive = isActive;
 
@@ -195,12 +216,17 @@ router.delete('/:id', checkBranch, async (req, res) => {
       tenantId: req.tenantId,
       branchId: section.branchId,
       page: section.page,
-    }).sort({ order: 1 });
+    }).sort({ order: 1 }).lean();
 
-    for (let i = 0; i < remainingSections.length; i++) {
-      remainingSections[i].order = i;
-      await remainingSections[i].save();
-    }
+    // Bulk update using a single bulkWrite (fixes N+1)
+    await BranchSection.bulkWrite(
+      remainingSections.map((s, i) => ({
+        updateOne: {
+          filter: { _id: s._id },
+          update: { order: i },
+        },
+      }))
+    );
 
     res.json({ message: 'Deleted' });
   } catch (err) {
@@ -336,12 +362,15 @@ router.put('/:sectionId/items/reorder', checkBranch, async (req, res) => {
     if (!section) return res.status(404).json({ error: 'Section not found' });
     if (section.tenantId !== req.tenantId) return res.status(403).json({ error: 'Access denied' });
 
-    for (let i = 0; i < orderedIds.length; i++) {
-      await BranchSectionItem.findOneAndUpdate(
-        { _id: orderedIds[i], tenantId: req.tenantId, sectionId },
-        { order: i }
-      );
-    }
+    // Bulk update using a single bulkWrite (fixes N+1)
+    await BranchSectionItem.bulkWrite(
+      orderedIds.map((id, i) => ({
+        updateOne: {
+          filter: { _id: id, tenantId: req.tenantId, sectionId },
+          update: { order: i },
+        },
+      }))
+    );
 
     res.json({ message: 'Order updated' });
   } catch (err) {

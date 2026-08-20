@@ -25,6 +25,9 @@ const galleryItemSchema = new mongoose.Schema({
   },
 }, { timestamps: true });
 
+// Compound index for public route: find({ tenantId, $or: [{ branchId }, { branchId: null }] }).sort({ order: 1, createdAt: -1 })
+galleryItemSchema.index({ tenantId: 1, branchId: 1, order: 1 });
+
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/modelHooks');
 

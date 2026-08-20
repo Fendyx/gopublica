@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   try {
     const { tenantId } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
-    const items = await BeautyService.find({ tenantId }).sort({ categoryKey: 1, order: 1 });
+    const items = await BeautyService.find({ tenantId }).sort({ categoryKey: 1, order: 1 }).lean();
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

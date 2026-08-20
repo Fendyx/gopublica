@@ -38,7 +38,7 @@ async function generateUniqueSlug(tenantId, baseName, excludeBranchId = null) {
 // Получить все филиалы тенанта
 router.get('/', authTenant, async (req, res) => {
   try {
-    const branches = await Branch.find({ tenantId: req.tenantId, isActive: true }).sort({ city: 1, name: 1 });
+    const branches = await Branch.find({ tenantId: req.tenantId, isActive: true }).sort({ city: 1, name: 1 }).lean();
     res.json(branches);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -98,7 +98,7 @@ router.post('/', authTenant, async (req, res) => {
 router.get('/public/:tenantId', async (req, res) => {
   try {
     const { tenantId } = req.params;
-    const branches = await Branch.find({ tenantId, isActive: true }).sort({ city: 1, name: 1 });
+    const branches = await Branch.find({ tenantId, isActive: true }).sort({ city: 1, name: 1 }).lean();
     res.json(branches);
   } catch (err) {
     res.status(500).json({ error: err.message });

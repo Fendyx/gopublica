@@ -18,7 +18,7 @@ router.get('/', authTenant, async (req, res) => {
     const todayReservations = await Reservation.find({
       tenantId,
       date: today,
-    }).sort({ time: 1 });
+    }).sort({ time: 1 }).lean();
 
     // Всего бронирований
     const totalReservations = await Reservation.countDocuments({ tenantId });

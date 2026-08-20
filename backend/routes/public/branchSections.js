@@ -50,21 +50,32 @@ router.get('/', async (req, res) => {
       .sort({ order: 1 })
       .lean();
 
-    // For carousel sections, embed their active items
-    const sectionsWithItems = await Promise.all(
-      sections.map(async (section) => {
-        if (['entity_carousel', 'feature_carousel'].includes(section.type)) {
-          const items = await BranchSectionItem.find({
-            sectionId: section._id,
-            isActive: true,
-          })
-            .sort({ order: 1 })
-            .lean();
-          return { ...section, items };
-        }
-        return section;
-      })
-    );
+    // ── Fetch all carousel items in a single $in query (fixes N+1) ──
+    const carouselSectionIds = sections
+      .filter(s => ['entity_carousel', 'feature_carousel'].includes(s.type))
+      .map(s => s._id);
+
+    const allItems = carouselSectionIds.length > 0
+      ? await BranchSectionItem.find({
+          sectionId: { $in: carouselSectionIds },
+          isActive: true,
+        })
+          .sort({ sectionId: 1, order: 1 })
+          .lean()
+      : [];
+
+    // Group items by sectionId in memory
+    const itemsBySection = {};
+    for (const item of allItems) {
+      const sid = item.sectionId.toString();
+      if (!itemsBySection[sid]) itemsBySection[sid] = [];
+      itemsBySection[sid].push(item);
+    }
+
+    const sectionsWithItems = sections.map(section => ({
+      ...section,
+      items: itemsBySection[section._id.toString()] || [],
+    }));
 
     res.json(sectionsWithItems);
   } catch (err) {

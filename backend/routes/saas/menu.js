@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
       query = { tenantId, branchId: null };
     }
 
-    const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 });
+    const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 }).lean();
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

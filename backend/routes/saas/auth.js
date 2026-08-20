@@ -174,7 +174,7 @@ router.post('/login', async (req, res) => {
 // ── Список пользователей для админки ────────────────────────
 router.get('/users', auth, checkRole(ADMIN), async (req, res) => {
   try {
-    const users = await TenantUser.find().select('-passwordHash').sort({ createdAt: -1 });
+    const users = await TenantUser.find().select('-passwordHash').sort({ createdAt: -1 }).lean();
     res.json(users.map(sanitizeUser));
   } catch (err) {
     res.status(500).json({ error: err.message });

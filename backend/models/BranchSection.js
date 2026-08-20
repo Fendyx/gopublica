@@ -30,8 +30,14 @@ const mongoose = require('mongoose');
  *    No detail page link — purely presentational cards
  * 
  * 4. booking
- *    settings: { }                 // Reuses existing reservation/appointment endpoints
- *    No special settings needed yet
+ *    settings: {
+ *      sideContentType: 'none' | 'map' | 'text',  // default 'none'
+ *      address: String,                           // Display address (used when sideContentType === 'map')
+ *      customText: String,                        // Custom text (used when sideContentType === 'text')
+ *    }
+ *    Reuses existing reservation/appointment endpoints.
+ *    Validation: sideContentType must be one of the enum values; address and
+ *    customText are coerced to strings. Enforced by services/branchSectionValidation.js.
  * 
  * 5. map
  *    settings: {
@@ -101,6 +107,9 @@ const branchSectionSchema = new mongoose.Schema(
 // Compound indexes for common query patterns
 branchSectionSchema.index({ tenantId: 1, branchId: 1, page: 1, order: 1 });
 branchSectionSchema.index({ tenantId: 1, branchId: 1, isActive: 1 });
+
+// Index for public route: find({ branchId, page, isActive }).sort({ order: 1 })
+branchSectionSchema.index({ branchId: 1, page: 1, isActive: 1, order: 1 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/modelHooks');

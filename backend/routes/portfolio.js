@@ -10,7 +10,7 @@ console.log('📦 Portfolio routes loaded');
 
 router.get('/admin', auth, checkRole('admin', 'superadmin'), async (req, res) => {
   try {
-    const cases = await PortfolioCase.find().sort({ createdAt: -1 });
+    const cases = await PortfolioCase.find().sort({ createdAt: -1 }).lean();
     res.json(cases);
   } catch (err) {
     res.status(500).json({ error: err.message });
