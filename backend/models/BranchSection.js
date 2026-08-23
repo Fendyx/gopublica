@@ -5,9 +5,17 @@ const mongoose = require('mongoose');
  * 
  * SECTION TYPES & SETTINGS SHAPES:
  * 
- * 1. hero_video
+ * 1. hero_video / hero
  *    settings: {
- *      videoUrl: String,           // URL to video file (MP4/WebM)
+ *      mediaType: 'image' | 'video' | 'slider',  // default inferred from videoUrl
+ *                                                // (legacy docs: videoUrl → 'video', else 'image')
+ *      textAlignment: 'left' | 'center' | 'right', // default 'center'
+ *      slides: [{                                  // only when mediaType === 'slider'
+ *        imageUrl?: String,                        // at least one of the two
+ *        videoUrl?: String                         // is required per slide
+ *      }],                                         // max 10 items, unknown keys stripped
+ *      videoUrl: String,           // URL to video file (MP4/WebM), used when mediaType === 'video'
+ *      imageUrl: String,           // URL to background image, used when mediaType === 'image'
  *      primaryCta: {               // Primary call-to-action button
  *        label: String,            // Button text (localized via translations)
  *        targetSectionType: String // e.g. 'booking', 'menu_categories', 'entity_carousel'
@@ -17,15 +25,22 @@ const mongoose = require('mongoose');
  *        targetSectionType: String
  *      }
  *    }
+ *    Validation: mediaType/textAlignment must be one of the enum values; slides
+ *    are sanitized to { imageUrl?, videoUrl? } objects (at least one required)
+ *    only when mediaType === 'slider'.
+ *    All other keys are preserved. Enforced by services/branchSectionValidation.js.
  * 
  * 2. entity_carousel
  *    settings: {
- *      linkToDetailPage: Boolean   // If true, clicking item navigates to /entity/:slug
+ *      linkToDetailPage: Boolean,   // If true, clicking item navigates to /entity/:slug
+ *      desktopItemsPerRow: Number   // Items per row on desktop: 3, 4, or 5 (default: 3)
  *    }
  *    Items are stored in BranchSectionItem collection (referenced by sectionId)
- * 
+ *
  * 3. feature_carousel
- *    settings: { }                 // No special settings needed
+ *    settings: {
+ *      desktopItemsPerRow: Number   // Items per row on desktop: 3, 4, or 5 (default: 3)
+ *    }
  *    Items are stored in BranchSectionItem collection (referenced by sectionId)
  *    No detail page link — purely presentational cards
  * 

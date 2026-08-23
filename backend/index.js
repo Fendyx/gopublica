@@ -94,6 +94,7 @@ app.use('/api/saas/jobs', saasJobsRoutes);
 app.use('/api/saas/sites', require('./routes/saas/sites'));
 app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
 app.use('/api/saas/articles', require('./middleware/authTenant'), require('./routes/saas/articles'));
+app.use('/api/saas/events', require('./middleware/authTenant'), require('./routes/saas/events'));
 
 // Stripe (SaaS подписки)
 app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
@@ -138,6 +139,9 @@ app.use('/api/public/branch-sections', publicBranchSectionsRoutes);
 
 // Articles (public)
 app.use('/api/public/articles', require('./routes/public/articles'));
+
+// Events (public)
+app.use('/api/public/events', require('./routes/public/events'));
 
 
 // ── Раздача Фронтенда (прод) ─────────────────────────

@@ -6,6 +6,7 @@ const Order      = require('../../models/Order');
 const Customer   = require('../../models/Customer');
 const TenantSettings = require('../../models/TenantSettings');
 const { createFurgonetkaShipment } = require('../../services/furgonetkaService');
+const { reserveTickets } = require('../../services/ticketService');
 
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -41,13 +42,38 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
               $inc: { ordersCount: 1, totalSpent: order.pricing.total },
             });
 
+            // ── Pattern A: Atomic ticket stock deduction on payment success ───
+            for (const item of order.items) {
+              if (item.itemType === 'ticket' && item.ticketMeta?.eventId) {
+                const result = await reserveTickets(
+                  item.ticketMeta.eventId,
+                  item.quantity,
+                  order.tenantId
+                );
+                if (!result.success) {
+                  console.error(
+                    `❌ Failed to reserve tickets for order ${order._id}, event ${item.ticketMeta.eventId}: ${result.error}`
+                  );
+                  // Note: We don't fail the webhook here — the order is already paid.
+                  // Manual intervention or a reconciliation job would be needed.
+                } else {
+                  console.log(
+                    `✅ Reserved ${item.quantity} tickets for event ${item.ticketMeta.eventId} (order ${order._id})`
+                  );
+                }
+              }
+            }
+
             // Уведомление ресторану
             require('../../services/orderNotification').notifyNewOrder(order);
 
             // Автоматическое создание накладной Фургонетки
+            // (пропускаем цифровые заказы — физическая доставка им не нужна)
             const tenant = await TenantSettings.findOne({ tenantId: order.tenantId });
-            if (tenant) {
+            if (tenant && order.fulfillment?.type !== 'digital') {
               await createFurgonetkaShipment(order, tenant);
+            } else if (order.fulfillment?.type === 'digital') {
+              console.log(`⏭️ Skipping Furgonetka shipment for digital order ${order._id}`);
             }
 
             console.log(`✅ Order ${order._id} paid and processed`);

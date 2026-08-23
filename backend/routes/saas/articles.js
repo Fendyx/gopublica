@@ -1,6 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../../models/Article');
+const Event = require('../../models/Event');
+
+// ─── Helper: merge Event commerce fields into an Article object ──────────
+// Articles that have no linked Event remain unchanged (standard article).
+// Articles with a linked Event get their ticket fields injected inline so
+// the frontend receives a unified payload without a second request.
+async function mergeEventIntoArticle(article) {
+  if (!article) return article;
+
+  const event = await Event.findOne({
+    articleId: article._id,
+    tenantId: article.tenantId,
+  }).lean();
+
+  if (!event) return article;
+
+  return {
+    ...article,
+    isEvent: true,
+    ticketPrice: event.ticketPrice,
+    totalTickets: event.totalTickets,
+    ticketsSold: event.ticketsSold,
+    ticketsRemaining: event.ticketsRemaining,
+    eventDate: event.eventDate,
+    eventTime: event.eventTime,
+    venueName: event.venueName,
+    venueAddress: event.venueAddress,
+    maxPerOrder: event.maxPerOrder,
+    eventIsActive: event.isActive,
+  };
+}
 
 // GET / — list all articles for the authenticated tenant, sorted by publishedAt desc
 router.get('/', async (req, res) => {
@@ -8,7 +39,39 @@ router.get('/', async (req, res) => {
     const articles = await Article.find({ tenantId: req.tenantId })
       .sort({ publishedAt: -1 })
       .lean();
-    res.json(articles);
+
+    // Fetch all linked Events for this tenant in one query
+    const articleIds = articles.map(a => a._id);
+    const events = await Event.find({
+      articleId: { $in: articleIds },
+      tenantId: req.tenantId,
+    }).lean();
+
+    // Build a map of articleId → event for O(1) lookup
+    const eventMap = new Map(events.map(e => [e.articleId.toString(), e]));
+
+    // Merge event data into each article
+    const enriched = articles.map(article => {
+      const event = eventMap.get(article._id.toString());
+      if (!event) return article;
+
+      return {
+        ...article,
+        isEvent: true,
+        ticketPrice: event.ticketPrice,
+        totalTickets: event.totalTickets,
+        ticketsSold: event.ticketsSold,
+        ticketsRemaining: event.ticketsRemaining,
+        eventDate: event.eventDate,
+        eventTime: event.eventTime,
+        venueName: event.venueName,
+        venueAddress: event.venueAddress,
+        maxPerOrder: event.maxPerOrder,
+        eventIsActive: event.isActive,
+      };
+    });
+
+    res.json(enriched);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -90,6 +153,23 @@ router.delete('/:id', async (req, res) => {
     const article = await Article.findOneAndDelete({ _id: req.params.id, tenantId: req.tenantId });
     if (!article) return res.status(404).json({ error: 'Article not found' });
     res.json({ message: 'Article deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /:id — single article by ID with merged Event data
+router.get('/:id', async (req, res) => {
+  try {
+    const article = await Article.findOne({
+      _id: req.params.id,
+      tenantId: req.tenantId,
+    }).lean();
+
+    if (!article) return res.status(404).json({ error: 'Article not found' });
+
+    const enriched = await mergeEventIntoArticle(article);
+    res.json(enriched);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

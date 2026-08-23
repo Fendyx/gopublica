@@ -10,6 +10,7 @@ const TenantSettings = require('../../models/TenantSettings');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { getModuleAccess } = require('../../services/moduleAccess');
+const { checkAvailability } = require('../../services/ticketService');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -103,6 +104,30 @@ router.post('/', getTenant, async (req, res) => {
       return res.status(400).json({ error: 'Customer name, email and phone are required' });
     }
 
+    // ── Digital-only detection (ticket carts need no shipping) ──────────────
+    const hasPhysicalItems = items.some(i => i.itemType !== 'ticket');
+    const isDigitalOnly = !hasPhysicalItems;
+
+    // ── Fulfillment validation & normalization ─────────────────────────────
+    let fulfillmentType = fulfillment?.type || 'pickup';
+
+    if (isDigitalOnly) {
+      // Ticket-only cart: force digital, ignore any submitted shipping data
+      fulfillmentType = 'digital';
+    } else if (fulfillmentType === 'delivery') {
+      // Physical delivery requires a destination: full address OR parcel locker
+      const hasFullAddress = fulfillment?.address?.street && fulfillment?.address?.city && fulfillment?.address?.zip;
+      const hasLocker = fulfillment?.parcelLocker?.enabled && fulfillment?.parcelLocker?.id;
+      if (!hasFullAddress && !hasLocker) {
+        return res.status(400).json({
+          error: 'Delivery orders require a full shipping address or a parcel locker',
+        });
+      }
+    } else if (!['pickup', 'delivery'].includes(fulfillmentType)) {
+      // Reject unknown types on physical carts early with a clean 400
+      return res.status(400).json({ error: `Invalid fulfillment type: ${fulfillmentType}` });
+    }
+
     // Resolve branchId from branchSlug if needed
     let resolvedBranchId = branchId;
 
@@ -174,7 +199,7 @@ router.post('/', getTenant, async (req, res) => {
       if (customerInput.phone) customer.phone = customerInput.phone;
     }
 
-    if (fulfillment?.type === 'delivery' && fulfillment.address) {
+    if (!isDigitalOnly && fulfillmentType === 'delivery' && fulfillment.address) {
       const addr = fulfillment.address;
       const exists = customer.addresses.some(
         a => a.street === addr.street && a.city === addr.city && a.zip === addr.zip
@@ -192,8 +217,31 @@ router.post('/', getTenant, async (req, res) => {
     }
     await customer.save();
 
+    // ── Ticket stock pre-check (Pattern A: reserve on payment success) ──────
+    // We only CHECK availability here; actual deduction happens in the Stripe webhook
+    // on payment_intent.succeeded. This prevents overselling during checkout init.
+    for (const item of items) {
+      if (item.itemType === 'ticket' && item.ticketMeta?.eventId) {
+        const availability = await checkAvailability(
+          item.ticketMeta.eventId,
+          item.quantity,
+          tenantId
+        );
+        if (!availability.ok) {
+          return res.status(409).json({
+            error: `Ticket unavailable: ${availability.error}`,
+            eventId: item.ticketMeta.eventId,
+            remaining: availability.remaining,
+          });
+        }
+      }
+    }
+
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const deliveryFee = fulfillment?.type === 'delivery' ? (fulfillment.deliveryFee || 0) : 0;
+    // Digital-only orders never pay for shipping
+    const deliveryFee = (!isDigitalOnly && fulfillmentType === 'delivery')
+      ? (fulfillment.deliveryFee || 0)
+      : 0;
     const fees = calculateFees(subtotal, deliveryFee, tenant);
 
     const order = new Order({
@@ -202,29 +250,33 @@ router.post('/', getTenant, async (req, res) => {
       customerId: customer._id,
       customerUserId: customerUserId,
       fulfillment: {
-        type: fulfillment?.type || 'pickup',
+        type: fulfillmentType,
         scheduledFor: fulfillment?.scheduledFor || null,
-        address: fulfillment?.type === 'delivery' && !fulfillment.parcelLocker?.enabled ? fulfillment.address : undefined,
-        
+        address: !isDigitalOnly && fulfillmentType === 'delivery' && !fulfillment.parcelLocker?.enabled
+          ? fulfillment.address
+          : undefined,
+
         // Поддержка пачкомата Фургонетки
-        parcelLocker: fulfillment?.parcelLocker ? {
+        parcelLocker: !isDigitalOnly && fulfillment?.parcelLocker ? {
           enabled: true,
           lockerId: fulfillment.parcelLocker.id,
           network: fulfillment.parcelLocker.network,
           address: fulfillment.parcelLocker.address || {},
         } : { enabled: false },
 
-        deliveryInstructions: fulfillment?.deliveryInstructions || '',
+        deliveryInstructions: isDigitalOnly ? '' : (fulfillment?.deliveryInstructions || ''),
         deliveryFee,
       },
       items: items.map(i => ({
         menuItemId: i.menuItemId,
+        itemType: i.itemType || 'menu_item',
         name: i.name,
         basePrice: i.basePrice || 0,
         price: i.price,
         quantity: i.quantity,
         notes: i.notes || '',
         modifiers: i.modifiers || [],
+        ticketMeta: i.ticketMeta || undefined,
       })),
       customer: {
         name: customerInput.name,

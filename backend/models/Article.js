@@ -19,7 +19,16 @@ const articleSchema = new mongoose.Schema(
       type: String,
     },
     body: {
+      // Supports both legacy HTML strings and new block-based JSON
+      // (e.g. TipTap / Editor.js / Novel output: { blocks: [...], version: '...' })
+      type: mongoose.Schema.Types.Mixed,
+      required: true,
+    },
+    bodyFormat: {
+      // Explicit format hint for fast reads without parsing
       type: String,
+      enum: ['html', 'block', 'unknown'],
+      default: 'html',
     },
     author: {
       type: String,

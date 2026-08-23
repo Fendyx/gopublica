@@ -1,7 +1,17 @@
 const mongoose = require('mongoose');
 
 const orderItemSchema = new mongoose.Schema({
-  menuItemId: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem', required: true },
+  menuItemId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'MenuItem',
+    required: false, // optional — ticketed events have no MenuItem
+    index: true,
+  },
+  itemType: {
+    type: String,
+    enum: ['menu_item', 'ticket'],
+    default: 'menu_item',
+  },
   name:       { type: String, required: true },
   basePrice:  { type: Number, required: true }, // Базовая цена
   price:      { type: Number, required: true }, // Итоговая цена (с модификаторами)
@@ -15,6 +25,12 @@ const orderItemSchema = new mongoose.Schema({
     optionName: String,
     priceImpact: Number
   }],
+  // ── Ticket metadata (used when itemType === 'ticket') ──
+  ticketMeta: {
+    eventId:    { type: String, default: null },
+    articleId:  { type: String, default: null },
+    eventDate:  { type: Date, default: null },
+  },
 }, { _id: false });
 
 const orderSchema = new mongoose.Schema({
@@ -23,7 +39,8 @@ const orderSchema = new mongoose.Schema({
   customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true, index: true },
 
 fulfillment: {
-    type: { type: String, enum: ['pickup', 'delivery'], required: true },
+    // 'digital' = ticket-only orders (no physical shipping involved)
+    type: { type: String, enum: ['pickup', 'delivery', 'digital'], required: true },
     scheduledFor: { type: Date, default: null },
 
     // для обычной доставки
@@ -109,5 +126,23 @@ payment: {
 
   locale: { type: String, default: 'pl' },
 }, { timestamps: true });
+
+// ─── Conditional validation: delivery orders need a destination ──────────
+// Runs on the always-present `fulfillment.type` path so it fires even when
+// `address` itself is undefined (Mongoose skips validators on undefined paths).
+// Rules:
+//   - type === 'delivery'  → requires full address OR an enabled parcel locker
+//   - type === 'pickup' | 'digital' → no address needed
+orderSchema.path('fulfillment.type').validate(function (value) {
+  if (value !== 'delivery') return true;
+
+  const f = this.fulfillment || {};
+
+  // Parcel locker deliveries don't need a street address
+  if (f.parcelLocker?.enabled && f.parcelLocker?.lockerId) return true;
+
+  const addr = f.address;
+  return Boolean(addr && addr.street && addr.city && addr.zip);
+}, 'Delivery orders require a full shipping address (street, city, zip) or a parcel locker.');
 
 module.exports = mongoose.model('Order', orderSchema);
