@@ -64,7 +64,8 @@ router.post('/', authTenant, async (req, res) => {
       isVegetarian, isSpicy, order, translations, branchId,
       productType, hasPersonalization, modifierGroups,
       sku, stock, compareAtPrice, images, weight, weightUnit,
-      dimensions, tags, variants, isFeatured   // 👈 добавлено
+      dimensions, tags, variants, isFeatured,   // 👈 добавлено
+      attributes   // 👈 динамические характеристики продукта
     } = req.body;
 
     const newItem = new MenuItem({
@@ -84,7 +85,8 @@ router.post('/', authTenant, async (req, res) => {
       dimensions: dimensions || { length: null, width: null, height: null, unit: 'cm' },
       tags: tags || [],
       variants: variants || [],
-      isFeatured: isFeatured || false   // 👈 добавлено
+      isFeatured: isFeatured || false,   // 👈 добавлено
+      attributes: Array.isArray(attributes) ? attributes : []   // 👈 динамические характеристики
     });
 
     await newItem.save();
@@ -111,7 +113,8 @@ router.put('/:id', authTenant, async (req, res) => {
       isVegetarian, isSpicy, order, translations, branchId,
       productType, hasPersonalization, modifierGroups,
       sku, stock, compareAtPrice, images: imgs, weight, weightUnit,
-      dimensions, tags, variants, isFeatured   // 👈 добавлено
+      dimensions, tags, variants, isFeatured,   // 👈 добавлено
+      attributes   // 👈 динамические характеристики продукта
     } = req.body;
 
     if (name !== undefined) item.name = name;
@@ -138,6 +141,7 @@ router.put('/:id', authTenant, async (req, res) => {
     if (tags !== undefined) item.tags = tags;
     if (variants !== undefined) item.variants = variants;
     if (isFeatured !== undefined) item.isFeatured = isFeatured;   // 👈 добавлено
+    if (attributes !== undefined) item.attributes = attributes;   // 👈 динамические характеристики
 
     await item.save();
     res.json(item);

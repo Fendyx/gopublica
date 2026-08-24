@@ -42,6 +42,12 @@ const menuItemSchema = new mongoose.Schema(
     unit: { type: String, default: 'cm' }
   },
   tags: [String],
+  // ── Dynamic product specifications (admin-defined) ───────────────────────
+  // e.g. [{ key: "Author", value: "John Doe" }, { key: "ISBN", value: "12345" }]
+  attributes: [{
+    key:   { type: String, required: true, trim: true },
+    value: { type: String, default: '', trim: true },
+  }],
   variants: [variantSchema],
     modifierGroups: [{
       id: { type: String, required: true },
