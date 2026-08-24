@@ -131,15 +131,18 @@ payment: {
 // Runs on the always-present `fulfillment.type` path so it fires even when
 // `address` itself is undefined (Mongoose skips validators on undefined paths).
 // Rules:
-//   - type === 'delivery'  → requires full address OR an enabled parcel locker
+//   - type === 'delivery'  → requires full address OR an identified parcel locker
 //   - type === 'pickup' | 'digital' → no address needed
 orderSchema.path('fulfillment.type').validate(function (value) {
   if (value !== 'delivery') return true;
 
   const f = this.fulfillment || {};
 
-  // Parcel locker deliveries don't need a street address
-  if (f.parcelLocker?.enabled && f.parcelLocker?.lockerId) return true;
+  // Parcel locker deliveries don't need a street address.
+  // Accept BOTH payload shapes:
+  //   - incoming request: { id, network, address }
+  //   - stored document:  { enabled: true, lockerId, network, address }
+  if (f.parcelLocker?.id || f.parcelLocker?.lockerId) return true;
 
   const addr = f.address;
   return Boolean(addr && addr.street && addr.city && addr.zip);

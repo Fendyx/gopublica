@@ -117,7 +117,8 @@ router.post('/', getTenant, async (req, res) => {
     } else if (fulfillmentType === 'delivery') {
       // Physical delivery requires a destination: full address OR parcel locker
       const hasFullAddress = fulfillment?.address?.street && fulfillment?.address?.city && fulfillment?.address?.zip;
-      const hasLocker = fulfillment?.parcelLocker?.enabled && fulfillment?.parcelLocker?.id;
+      // Frontend sends parcelLocker as { id, network, address } — no `enabled` flag
+      const hasLocker = Boolean(fulfillment?.parcelLocker?.id || fulfillment?.parcelLocker?.lockerId);
       if (!hasFullAddress && !hasLocker) {
         return res.status(400).json({
           error: 'Delivery orders require a full shipping address or a parcel locker',
