@@ -90,6 +90,7 @@ app.use('/api/saas/news', require('./routes/saas/news'));
 app.use('/api/saas/branches', require('./routes/saas/branches'));
 app.use('/api/saas/analytics', require('./routes/saas/analytics'));
 app.use('/api/saas/push', require('./routes/saas/push'));
+app.use('/api/saas/customers', require('./routes/saas/customers'));
 app.use('/api/saas/jobs', saasJobsRoutes);
 app.use('/api/saas/sites', require('./routes/saas/sites'));
 app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
