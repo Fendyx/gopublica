@@ -40,6 +40,18 @@ const ALLOWED_TEXT_ALIGNMENTS = ['left', 'center', 'right'];
 const DEFAULT_TEXT_ALIGNMENT = 'center';
 const DEFAULT_MAX_SLIDES = 10;
 
+const ALLOWED_LAYOUT_MODES = ['grid', 'carousel'];
+const DEFAULT_LAYOUT_MODE = 'grid';
+
+const ALLOWED_ASPECT_RATIOS = ['16:9', '4:3', '1:1', '9:16'];
+const DEFAULT_ASPECT_RATIO = '16:9';
+
+const ALLOWED_CARD_VARIANTS = ['default', 'overlay'];
+const DEFAULT_CARD_VARIANT = 'default';
+
+const ALLOWED_ITEMS_PER_ROW = [2, 3, 4, 5];
+const DEFAULT_ITEMS_PER_ROW = 3;
+
 /**
  * Coerce a value to a string. Returns '' for null/undefined.
  * Objects/arrays are stringified; numbers/booleans become their String() form.
@@ -242,6 +254,81 @@ function validateHeroSettings(settings) {
 }
 
 /**
+ * Validate and sanitize article_grid settings.
+ *
+ * Enforces:
+ *   - layoutMode must be one of: 'grid', 'carousel' (default: 'grid')
+ *   - aspectRatio must be one of: '16:9', '4:3', '1:1' (default: '16:9')
+ *   - cardVariant must be one of: 'default', 'overlay' (default: 'default')
+ *
+ * All other existing keys are preserved as-is to avoid breaking
+ * dynamic article_grid configurations.
+ *
+ * @param {object} settings — the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateArticleGridSettings(settings) {
+  const errors = [];
+
+  // Preserve all existing settings — only override the fields we validate.
+  const value = { ...settings };
+
+  // layoutMode — default to 'grid' when absent/null/empty
+  let layoutMode = settings.layoutMode;
+  if (layoutMode === undefined || layoutMode === null || layoutMode === '') {
+    layoutMode = DEFAULT_LAYOUT_MODE;
+  } else if (
+    typeof layoutMode !== 'string' ||
+    !ALLOWED_LAYOUT_MODES.includes(layoutMode)
+  ) {
+    errors.push(`layoutMode must be one of: ${ALLOWED_LAYOUT_MODES.join(', ')}`);
+  }
+
+  // aspectRatio — default to '16:9' when absent/null/empty
+  let aspectRatio = settings.aspectRatio;
+  if (aspectRatio === undefined || aspectRatio === null || aspectRatio === '') {
+    aspectRatio = DEFAULT_ASPECT_RATIO;
+  } else if (
+    typeof aspectRatio !== 'string' ||
+    !ALLOWED_ASPECT_RATIOS.includes(aspectRatio)
+  ) {
+    errors.push(`aspectRatio must be one of: ${ALLOWED_ASPECT_RATIOS.join(', ')}`);
+  }
+
+  // cardVariant — default to 'default' when absent/null/empty
+  let cardVariant = settings.cardVariant;
+  if (cardVariant === undefined || cardVariant === null || cardVariant === '') {
+    cardVariant = DEFAULT_CARD_VARIANT;
+  } else if (
+    typeof cardVariant !== 'string' ||
+    !ALLOWED_CARD_VARIANTS.includes(cardVariant)
+  ) {
+    errors.push(`cardVariant must be one of: ${ALLOWED_CARD_VARIANTS.join(', ')}`);
+  }
+
+  // itemsPerRow — default to 3 when absent/null/empty, must be an allowed integer
+  let itemsPerRow = settings.itemsPerRow;
+  if (itemsPerRow === undefined || itemsPerRow === null || itemsPerRow === '') {
+    itemsPerRow = DEFAULT_ITEMS_PER_ROW;
+  } else if (typeof itemsPerRow !== 'number' || !Number.isInteger(itemsPerRow)) {
+    errors.push('itemsPerRow must be an integer');
+  } else if (!ALLOWED_ITEMS_PER_ROW.includes(itemsPerRow)) {
+    errors.push(`itemsPerRow must be one of: ${ALLOWED_ITEMS_PER_ROW.join(', ')}`);
+  }
+
+  value.layoutMode = layoutMode;
+  value.aspectRatio = aspectRatio;
+  value.cardVariant = cardVariant;
+  value.itemsPerRow = itemsPerRow;
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value };
+}
+
+/**
  * Validate and sanitize a settings object for a given section type.
  *
  * @param {string} type — the BranchSection.type value
@@ -267,6 +354,9 @@ function validateSectionSettings(type, settings) {
     case 'hero':
     case 'hero_video':
       return validateHeroSettings(settings);
+
+    case 'article_grid':
+      return validateArticleGridSettings(settings);
 
     default:
       // For all other section types we currently have no enforced shape.

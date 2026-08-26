@@ -18,6 +18,10 @@ const articleSchema = new mongoose.Schema(
     coverImage: {
       type: String,
     },
+    videoUrl: {
+      type: String,
+      default: '',
+    },
     body: {
       // Supports both legacy HTML strings and new block-based JSON
       // (e.g. TipTap / Editor.js / Novel output: { blocks: [...], version: '...' })

@@ -84,6 +84,7 @@ router.post('/', async (req, res) => {
       title,
       slug,
       coverImage,
+      videoUrl,
       body,
       author,
       publishedAt,
@@ -97,6 +98,7 @@ router.post('/', async (req, res) => {
       title,
       slug,
       coverImage,
+      videoUrl,
       body,
       author,
       publishedAt,
@@ -119,6 +121,7 @@ router.put('/:id', async (req, res) => {
       title,
       slug,
       coverImage,
+      videoUrl,
       body,
       author,
       publishedAt,
@@ -133,6 +136,7 @@ router.put('/:id', async (req, res) => {
     if (title !== undefined) article.title = title;
     if (slug !== undefined) article.slug = slug;
     if (coverImage !== undefined) article.coverImage = coverImage;
+    if (videoUrl !== undefined) article.videoUrl = videoUrl;
     if (body !== undefined) article.body = body;
     if (author !== undefined) article.author = author;
     if (publishedAt !== undefined) article.publishedAt = publishedAt;
