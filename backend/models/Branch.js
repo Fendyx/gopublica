@@ -118,6 +118,10 @@ branchSchema.index(
 
 branchSchema.index({ parentBranchId: 1 });
 
+// Single-field index for public lookups that query by slug alone
+// (e.g. routes/public/branchSections.js resolves branchSlug without tenantId)
+branchSchema.index({ slug: 1 });
+
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/modelHooks');
 

@@ -27,18 +27,23 @@ router.get('/', async (req, res) => {
       .sort({ eventDate: 1 })
       .lean();
 
-    // For each event, fetch the linked Article to get title, slug, coverImage, body
-    const eventsWithArticles = await Promise.all(
-      events.map(async (event) => {
-        const article = await Article.findOne({ _id: event.articleId, tenantId, isActive: true })
-          .select('title slug coverImage body bodyFormat author publishedAt')
-          .lean();
-        return {
-          ...event,
-          article: article || null,
-        };
-      })
-    );
+    // Fetch all linked Articles in a single batched query (fixes N+1)
+    const articleIds = events.map(e => e.articleId);
+    const articles = await Article.find({
+      _id: { $in: articleIds },
+      tenantId,
+      isActive: true,
+    })
+      .select('title slug coverImage body bodyFormat author publishedAt')
+      .lean();
+
+    // Build a map of articleId → article for O(1) lookup
+    const articleMap = new Map(articles.map(a => [a._id.toString(), a]));
+
+    const eventsWithArticles = events.map(event => ({
+      ...event,
+      article: articleMap.get(event.articleId.toString()) || null,
+    }));
 
     res.json(eventsWithArticles);
   } catch (err) {
