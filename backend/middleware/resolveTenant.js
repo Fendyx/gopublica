@@ -18,9 +18,7 @@ module.exports = async function resolveTenant(req, res, next) {
         { domain: cleanHost },
         { aliases: cleanHost },
       ],
-    })
-      .select('tenantId businessName domain aliases features primaryLanguage primaryCurrency')
-      .lean();
+    }).lean();
 
     if (!tenant) {
       console.warn('[resolveTenant] Tenant not found for domain:', cleanHost);
