@@ -40,6 +40,12 @@ const ALLOWED_TEXT_ALIGNMENTS = ['left', 'center', 'right'];
 const DEFAULT_TEXT_ALIGNMENT = 'center';
 const DEFAULT_MAX_SLIDES = 10;
 
+// ─── Dynamic Form (reuses JobFormSettings field contract) ──────────────
+const ALLOWED_FIELD_TYPES = [
+  'text', 'email', 'tel', 'textarea', 'select', 'file', 'checkbox', 'radio', 'date',
+];
+const DEFAULT_MAX_FORM_FIELDS = 30;
+
 const ALLOWED_LAYOUT_MODES = ['grid', 'carousel'];
 const DEFAULT_LAYOUT_MODE = 'grid';
 
@@ -358,6 +364,9 @@ function validateSectionSettings(type, settings) {
     case 'article_grid':
       return validateArticleGridSettings(settings);
 
+    case 'dynamic_form':
+      return validateDynamicFormSettings(settings);
+
     default:
       // For all other section types we currently have no enforced shape.
       // Return the settings as-is (shallow clone) to avoid mutating req.body.
@@ -365,4 +374,126 @@ function validateSectionSettings(type, settings) {
   }
 }
 
-module.exports = { validateSectionSettings, coerceString };
+/**
+ * Validate and sanitize settings for a 'dynamic_form' section type.
+ *
+ * Reuses the field contract from JobFormSettings (see models/JobFormSettings.js):
+ *   { id, label, labelI18n, type, required, options, optionsI18n,
+ *     placeholder, placeholderI18n, validation: { pattern, minLength, maxLength }, order }
+ *
+ * Enforces:
+ *   - fields must be an array (max DEFAULT_MAX_FORM_FIELDS items)
+ *   - each field is sanitized to the whitelisted keys above (unknown keys stripped)
+ *   - field ids must be unique and non-empty
+ *   - type must be one of ALLOWED_FIELD_TYPES
+ *   - options required for select/radio types
+ *
+ * Top-level presentation keys (title, description, submitButtonText, etc.)
+ * are preserved as-is to allow future additions.
+ *
+ * @param {object} settings — the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateDynamicFormSettings(settings) {
+  const errors = [];
+
+  // Preserve all top-level keys — only sanitize the fields array.
+  const value = { ...settings };
+
+  // fields — must be an array
+  let fields = settings.fields;
+  if (fields === undefined || fields === null) {
+    fields = [];
+  } else if (!Array.isArray(fields)) {
+    errors.push('fields must be an array');
+    fields = [];
+  } else {
+    if (fields.length > DEFAULT_MAX_FORM_FIELDS) {
+      errors.push(`fields must contain at most ${DEFAULT_MAX_FORM_FIELDS} items`);
+    }
+
+    const seenIds = new Set();
+    const sanitized = [];
+
+    fields.forEach((field, i) => {
+      if (!field || typeof field !== 'object' || Array.isArray(field)) {
+        errors.push(`fields[${i}] must be an object`);
+        return;
+      }
+
+      // id — required, unique, non-empty string
+      const id = typeof field.id === 'string' ? field.id.trim() : '';
+      if (!id) {
+        errors.push(`fields[${i}].id is required and must be a non-empty string`);
+        return;
+      }
+      if (seenIds.has(id)) {
+        errors.push(`fields[${i}].id must be unique (duplicate: '${id}')`);
+        return;
+      }
+      seenIds.add(id);
+
+      // type — must be one of the allowed enums
+      const type = field.type;
+      if (!ALLOWED_FIELD_TYPES.includes(type)) {
+        errors.push(
+          `fields[${i}].type must be one of: ${ALLOWED_FIELD_TYPES.join(', ')}`
+        );
+        return;
+      }
+
+      // options required for select/radio
+      if ((type === 'select' || type === 'radio') && !Array.isArray(field.options)) {
+        errors.push(`fields[${i}].options is required for type '${type}'`);
+      }
+
+      // Build sanitized field — whitelist only known keys
+      const cleanField = {
+        id,
+        label: coerceString(field.label),
+        type,
+        required: Boolean(field.required),
+        order: typeof field.order === 'number' ? field.order : i,
+      };
+
+      // Optional keys — only include if present
+      if (field.labelI18n && typeof field.labelI18n === 'object') {
+        cleanField.labelI18n = field.labelI18n;
+      }
+      if (Array.isArray(field.options)) {
+        cleanField.options = field.options;
+      }
+      if (field.optionsI18n && typeof field.optionsI18n === 'object') {
+        cleanField.optionsI18n = field.optionsI18n;
+      }
+      if (field.placeholder !== undefined) {
+        cleanField.placeholder = coerceString(field.placeholder);
+      }
+      if (field.placeholderI18n && typeof field.placeholderI18n === 'object') {
+        cleanField.placeholderI18n = field.placeholderI18n;
+      }
+      if (field.validation && typeof field.validation === 'object') {
+        const v = field.validation;
+        cleanField.validation = {
+          pattern: v.pattern !== undefined ? coerceString(v.pattern) : '',
+          minLength: typeof v.minLength === 'number' ? v.minLength : 0,
+          maxLength: typeof v.maxLength === 'number' ? v.maxLength : 0,
+        };
+      }
+
+      sanitized.push(cleanField);
+    });
+
+    fields = sanitized;
+  }
+
+  value.fields = fields;
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value };
+}
+
+module.exports = { validateSectionSettings, validateDynamicFormSettings, coerceString };

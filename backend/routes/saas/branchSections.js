@@ -33,7 +33,7 @@ router.use(verifyModuleAccess);
 // GET /?branchId=&branchSlug= — list all sections for a branch, sorted by order
 router.get('/', checkBranch, async (req, res) => {
   try {
-    const { branchId, branchSlug } = req.query;
+    const { branchId, branchSlug, page } = req.query;
     // Use resolved branch from middleware (supports both branchId and branchSlug)
     // If branchId is provided but is not a valid ObjectId, treat it as a slug
     let resolvedBranchId = branchId;
@@ -47,7 +47,13 @@ router.get('/', checkBranch, async (req, res) => {
     }
     if (!resolvedBranchId && !branchSlug) return res.status(400).json({ error: 'branchId or branchSlug is required' });
 
-    const sections = await BranchSection.find({ tenantId: req.tenantId, branchId: resolvedBranchId })
+    // Build the query filter — optionally scope by page
+    const filter = { tenantId: req.tenantId, branchId: resolvedBranchId };
+    if (page) {
+      filter.page = page;
+    }
+
+    const sections = await BranchSection.find(filter)
       .sort({ order: 1, createdAt: 1 })
       .lean();
 
@@ -80,11 +86,12 @@ router.post('/', checkBranch, async (req, res) => {
     const sanitizedSettings = validation.value;
 
     // Determine the next order value: use provided order, or append to the end
+    // Scope by page so orders don't collide across different pages
     let nextOrder;
     if (order !== undefined) {
       nextOrder = order;
     } else {
-      const lastSection = await BranchSection.findOne({ branchId: branch._id }).sort({ order: -1 });
+      const lastSection = await BranchSection.findOne({ branchId: branch._id, page }).sort({ order: -1 });
       nextOrder = lastSection ? lastSection.order + 1 : 0;
     }
 

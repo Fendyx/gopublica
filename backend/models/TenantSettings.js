@@ -17,6 +17,41 @@ const tenantSettingsSchema = new mongoose.Schema({
   hoursI18n:      { type: Map, of: String, default: {} },
   googleMapsUrl:  { type: String, default: '' },
 
+  // ─── НОВОЕ: Польские юридические данные (для автогенерации Regulamin / Polityka) ──
+  legal: {
+    legalCompanyName: { type: String, default: '' },
+    nip: {
+      type: String,
+      default: '',
+      validate: {
+        validator: v => !v || /^\d{10}$/.test(v),
+        message: 'NIP musi składać się z 10 cyfr',
+      },
+    },
+    regon: {
+      type: String,
+      default: '',
+      validate: {
+        validator: v => !v || /^\d{9}$/.test(v) || /^\d{14}$/.test(v),
+        message: 'REGON musi składać się z 9 lub 14 cyfr',
+      },
+    },
+    krs: {
+      type: String,
+      default: '',
+      validate: {
+        validator: v => !v || /^\d{10}$/.test(v),
+        message: 'KRS musi składać się z 10 cyfr',
+      },
+    },
+    representativeName: { type: String, default: '' },
+    representativeRole: { type: String, default: '' },
+    postalCode: { type: String, default: '' },
+    city: { type: String, default: '' },
+    showTerms:   { type: Boolean, default: true },
+    showPrivacy: { type: Boolean, default: true },
+  },
+
   // ─── SEO (было) ─────────────────────────────────────────────────────────────
   seoTitle:            { type: String, default: '' },
   seoTitleI18n:        { type: Map, of: String, default: {} },
@@ -187,9 +222,12 @@ tenantSettingsSchema.index({ aliases: 1 });
 // ─── Pre-save hook: глобальная уникальность domain + aliases ──────────────────
 // Нельзя, чтобы два тенанта имели одинаковый domain ИЛИ одинаковый alias.
 // Проверяем пересечения как по domain, так и по aliases (в обе стороны).
-tenantSettingsSchema.pre('save', async function (next) {
+// NOTE: This hook is declared as `async` (no `next` callback). Mongoose
+// automatically treats async middleware as promise-based — passing `next`
+// would make it undefined and crash with "next is not a function".
+tenantSettingsSchema.pre('save', async function () {
   if (!this.isModified('domain') && !this.isModified('aliases')) {
-    return next();
+    return;
   }
 
   const Model = this.constructor;
@@ -202,7 +240,7 @@ tenantSettingsSchema.pre('save', async function (next) {
   }
 
   if (hostnames.size === 0) {
-    return next(); // ни домена, ни алисов — нечего проверять
+    return; // ни домена, ни алисов — нечего проверять
   }
 
   const hostArray = Array.from(hostnames);
@@ -217,7 +255,7 @@ tenantSettingsSchema.pre('save', async function (next) {
   });
 
   if (duplicate > 0) {
-    return next(new Error('Domain or alias is already in use by another tenant'));
+    throw new Error('Domain or alias is already in use by another tenant');
   }
 
   // Нормализуем aliases (lowercase, trim, dedup)
@@ -227,8 +265,6 @@ tenantSettingsSchema.pre('save', async function (next) {
       .map(a => a.toLowerCase().trim())
     )];
   }
-
-  next();
 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──

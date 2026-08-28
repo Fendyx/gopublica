@@ -11,6 +11,14 @@ const jobApplicationSchema = new mongoose.Schema({
     default: null,
     index: true,
   },
+  // The BranchSection (dynamic_form) that this submission originated from.
+  // Sparse index so legacy job applications (no section) are not affected.
+  sourceSectionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BranchSection',
+    sparse: true,
+    index: true,
+  },
   // Динамические поля (сохраняем как Map, чтобы легко расширять)
   fields: {
     type: Map,

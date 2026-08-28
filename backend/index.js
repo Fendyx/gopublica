@@ -94,6 +94,9 @@ app.use('/api/saas/customers', require('./routes/saas/customers'));
 app.use('/api/saas/jobs', saasJobsRoutes);
 app.use('/api/saas/sites', require('./routes/saas/sites'));
 app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
+
+// Dynamic form submissions (SaaS admin)
+app.use('/api/saas/forms/submissions', require('./routes/saas/formSubmissions'));
 app.use('/api/saas/articles', require('./middleware/authTenant'), require('./routes/saas/articles'));
 app.use('/api/saas/events', require('./middleware/authTenant'), require('./routes/saas/events'));
 
@@ -137,6 +140,9 @@ app.use('/api/public/demo-requests', require('./routes/public/demoRequests'));
 
 // Branch Sections (public)
 app.use('/api/public/branch-sections', publicBranchSectionsRoutes);
+
+// Dynamic form submissions (public)
+app.use('/api/public/forms', require('./routes/public/formSubmissions'));
 
 // Articles (public)
 app.use('/api/public/articles', require('./routes/public/articles'));

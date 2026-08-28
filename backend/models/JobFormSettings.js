@@ -21,7 +21,7 @@ const jobFormSettingsSchema = new mongoose.Schema({
       labelI18n: i18nSchema,                      // переводы метки: { "pl": "...", "de": "..." }
       type: {
         type: String,
-        enum: ['text', 'email', 'tel', 'textarea', 'select', 'file', 'checkbox', 'radio'],
+        enum: ['text', 'email', 'tel', 'textarea', 'select', 'file', 'checkbox', 'radio', 'date'],
         required: true,
       },
       required: { type: Boolean, default: false },

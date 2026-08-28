@@ -65,6 +65,37 @@ const mongoose = require('mongoose');
  *    settings: {
  *      categoryKeys: [String]      // Array of CategoryTranslation.key values to display
  *    }
+ *
+ * 7. dynamic_form
+ *    settings: {
+ *      title: String,                                   // Form heading (base language)
+ *      titleI18n: { [lang]: String },                    // Localized headings
+ *      description: String,                             // Form description
+ *      descriptionI18n: { [lang]: String },
+ *      submitButtonText: String,
+ *      submitButtonTextI18n: { [lang]: String },
+ *      successMessage: String,
+ *      successMessageI18n: { [lang]: String },
+ *      notificationEmail: String,                       // Where submissions are emailed (stripped from public responses)
+ *      storageTarget: 'job_application' | 'lead',       // Where submissions are stored (default: 'job_application')
+ *      fields: [{                                       // Reuses the JobFormSettings field contract
+ *        id: String,                                   // unique key
+ *        label: String,                                 // base-language label
+ *        labelI18n: { [lang]: String },
+ *        type: 'text'|'email'|'tel'|'textarea'|'select'|'file'|'checkbox'|'radio',
+ *        required: Boolean,
+ *        options: [String],                              // for select/radio
+ *        optionsI18n: { [lang]: [String] },
+ *        placeholder: String,
+ *        placeholderI18n: { [lang]: String },
+ *        validation: { pattern: String, minLength: Number, maxLength: Number },
+ *        order: Number
+ *      }]  // max 30 items
+ *    }
+ *    Validation: fields must be an array; each field is sanitized to the
+ *    whitelisted keys above; field ids must be unique and non-empty; type must
+ *    be one of the allowed enums; options required for select/radio.
+ *    Enforced by services/branchSectionValidation.js.
  */
 
 const branchSectionSchema = new mongoose.Schema(
@@ -84,6 +115,15 @@ const branchSectionSchema = new mongoose.Schema(
       type: String,
       default: 'home',
       trim: true,
+      validate: {
+        validator: function (v) {
+          // Allow empty (uses default) or lowercase slug format: 'home', 'partners', 'about-us'
+          if (!v) return true;
+          return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v);
+        },
+        message: props =>
+          `page must be a lowercase slug (e.g. 'home', 'partners', 'about-us'), got: '${props.value}'`,
+      },
     },
     type: {
       type: String,
@@ -97,6 +137,7 @@ const branchSectionSchema = new mongoose.Schema(
         'map',
         'menu_categories',
         'article_grid',
+        'dynamic_form',
       ],
     },
     order: {

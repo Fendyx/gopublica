@@ -72,10 +72,14 @@ router.get('/', async (req, res) => {
       itemsBySection[sid].push(item);
     }
 
-    const sectionsWithItems = sections.map(section => ({
-      ...section,
-      items: itemsBySection[section._id.toString()] || [],
-    }));
+    // Strip sensitive fields (e.g. notificationEmail) from public responses
+    const sectionsWithItems = sections.map(section => {
+      const { notificationEmail, ...publicSection } = section;
+      return {
+        ...publicSection,
+        items: itemsBySection[section._id.toString()] || [],
+      };
+    });
 
     res.json(sectionsWithItems);
   } catch (err) {

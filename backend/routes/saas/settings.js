@@ -25,6 +25,18 @@ async function isDomainTaken(hostname, excludeTenantId) {
   return !!existing;
 }
 
+// Helper: очистить польские идентификаторы (NIP/REGON/KRS) от пробелов и дефисов
+function sanitizeLegal(legal) {
+  if (!legal || typeof legal !== 'object') return legal;
+  const clean = { ...legal };
+  for (const key of ['nip', 'regon', 'krs']) {
+    if (typeof clean[key] === 'string') {
+      clean[key] = clean[key].replace(/[\s-]/g, '');
+    }
+  }
+  return clean;
+}
+
 // ─── НОВЫЙ РОУТ: поиск тенанта по домену ────────────────────────────────────
 router.get('/by-domain', async (req, res) => {
   try {
@@ -36,7 +48,7 @@ router.get('/by-domain', async (req, res) => {
       .select(
         'tenantId niche businessType moduleAccess theme features businessName ' +
         'phone address email hours seoTitle seoDescription ' +
-        'primaryLanguage primaryCurrency'
+        'primaryLanguage primaryCurrency legal'
       );
 
     if (!settings) return res.status(404).json({ error: 'Tenant not found' });
@@ -138,11 +150,20 @@ router.get('/', async (req, res) => {
 
 // ─── СУЩЕСТВУЮЩИЙ РОУТ: обновить настройки (глобальные или филиала) ──────────
 router.put('/', authTenant, async (req, res) => {
+  console.log('1. PUT /settings - Request received, branchId:', req.body?.branchId);
+
   try {
     const { branchId, ...reqBody } = req.body;
     const tenantId = req.tenantId;
 
-    // 0. Проверка уникальности domain/aliases (до сохранения)
+    // 0a. Очистим NIP/REGON/KRS от пробелов и тире, чтобы Mongoose не ругался
+    if (reqBody.legal) {
+      if (typeof reqBody.legal.nip === 'string') reqBody.legal.nip = reqBody.legal.nip.replace(/[\s-]/g, '');
+      if (typeof reqBody.legal.regon === 'string') reqBody.legal.regon = reqBody.legal.regon.replace(/[\s-]/g, '');
+      if (typeof reqBody.legal.krs === 'string') reqBody.legal.krs = reqBody.legal.krs.replace(/[\s-]/g, '');
+    }
+
+    // 0. Проверка уникальности domain/aliases
     if (reqBody.domain !== undefined) {
       if (await isDomainTaken(reqBody.domain, tenantId)) {
         return res.status(409).json({ error: 'Domain already in use' });
@@ -156,46 +177,48 @@ router.put('/', authTenant, async (req, res) => {
       }
     }
 
-    // 1. Сохраняем businessName глобально (не зависит от филиала)
+    // 1. Сохраняем businessName глобально
     if (reqBody.businessName !== undefined) {
       await TenantSettings.findOneAndUpdate(
         { tenantId },
         { $set: { businessName: reqBody.businessName } },
         { upsert: true }
       );
-      delete reqBody.businessName; // убираем, чтобы не мешало дальнейшей логике
+      delete reqBody.businessName;
     }
 
-    // 2. ВСЕГДА СОХРАНЯЕМ ТЕМУ ГЛОБАЛЬНО (чтобы не обрезалась схемой Branch)
+    // 2. Сохраняем тему глобально
     if (reqBody.theme) {
-      const globalSettings = await TenantSettings.findOne({ tenantId });
-      if (globalSettings) {
-        globalSettings.theme = {
-          ...(globalSettings.theme?.toObject?.() || {}),
-          ...reqBody.theme
-        };
-        globalSettings.markModified('theme');
-        await globalSettings.save();
-      } else {
-        await TenantSettings.create({ tenantId, theme: reqBody.theme });
-      }
-      delete reqBody.theme; // Убираем theme из тела, чтобы не пытаться сохранить ее в Branch
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+      globalSettings.theme = { ...(globalSettings.theme?.toObject?.() || {}), ...reqBody.theme };
+      globalSettings.markModified('theme');
+      await globalSettings.save();
+      delete reqBody.theme;
     }
 
+    // 3. ИСПРАВЛЕНИЕ: Сохраняем LEGAL глобально ВСЕГДА!
+    if (reqBody.legal) {
+      console.log('-> Saving legal globally...');
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+      
+      const existingLegal = globalSettings.legal?.toObject?.() || globalSettings.legal || {};
+      globalSettings.legal = { ...existingLegal, ...reqBody.legal };
+      globalSettings.markModified('legal');
+      await globalSettings.save();
+      
+      // УДАЛЯЕМ из тела запроса, чтобы legal не сохранился по ошибке в настройки филиала!
+      delete reqBody.legal; 
+      console.log('-> Legal saved successfully');
+    }
+
+    // 4. Если есть branchId -> сохраняем остатки в филиал
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
       if (!branch) return res.status(404).json({ error: 'Branch not found' });
 
-      const { 
-        workingHours, 
-        coordinates, 
-        name, 
-        city, 
-        address, 
-        phone, 
-        email 
-      } = reqBody;
-
+      const { workingHours, coordinates, name, city, address, phone, email } = reqBody;
       if (name !== undefined) branch.name = name;
       if (city !== undefined) branch.city = city;
       if (address !== undefined) branch.address = address;
@@ -204,20 +227,18 @@ router.put('/', authTenant, async (req, res) => {
       if (coordinates !== undefined) branch.coordinates = coordinates;
       if (workingHours !== undefined) branch.workingHours = workingHours;
 
-      const {
-        workingHours: wh, 
-        coordinates: coords, 
-        name: n, 
-        city: c, 
-        address: a, 
-        phone: p, 
-        email: e, 
-        ...settingsOverrideData 
-      } = reqBody;
-
+      // Всё остальное летит в settingsOverride филиала
+      const { workingHours: wh, coordinates: coords, name: n, city: c, address: a, phone: p, email: e, ...settingsOverrideData } = reqBody;
       Object.assign(branch.settingsOverride, settingsOverrideData);
-      await branch.save();
 
+      try {
+        await branch.save();
+      } catch (err) {
+        if (err instanceof mongoose.Error.ValidationError) return res.status(400).json({ message: err.message });
+        throw err;
+      }
+
+      // Возвращаем склеенный объект
       const globalSettings = await TenantSettings.findOne({ tenantId }) || {};
       const globalObj = globalSettings.toObject?.() || {};
       const access = getModuleAccess(globalObj);
@@ -245,14 +266,22 @@ router.put('/', authTenant, async (req, res) => {
       return res.json(merged);
       
     } else {
-      const updated = await TenantSettings.findOneAndUpdate(
-        { tenantId },
-        { $set: reqBody },
-        { upsert: true, returnDocument: 'after' }
-      );
-      const updatedAccess = getModuleAccess(updated.toObject ? updated.toObject() : updated);
-      return res.json({
-        ...(updated.toObject ? updated.toObject() : updated),
+      // 5. Глобальное обновление (если нет branchId)
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+
+      Object.assign(globalSettings, reqBody);
+
+      try {
+        await globalSettings.save();
+      } catch (err) {
+        if (err instanceof mongoose.Error.ValidationError) return res.status(400).json({ message: err.message });
+        throw err;
+      }
+
+      const updatedAccess = getModuleAccess(globalSettings.toObject ? globalSettings.toObject() : globalSettings);
+      const responseObj = {
+        ...(globalSettings.toObject ? globalSettings.toObject() : globalSettings),
         moduleAccess: updatedAccess.moduleAccess,
         availableModules: updatedAccess.availableModules,
         canManageOrders: updatedAccess.canManageOrders,
@@ -261,11 +290,12 @@ router.put('/', authTenant, async (req, res) => {
         canManageGallery: updatedAccess.canManageGallery,
         canManageNews: updatedAccess.canManageNews,
         canManageJobs: updatedAccess.canManageJobs,
-      });
+      };
+      return res.json(responseObj);
     }
   } catch (err) {
-    console.error('Error saving settings:', err);
-    res.status(500).json({ error: err.message });
+    console.error('CRASH IN SETTINGS PUT:', err);
+    return res.status(500).json({ message: err.message, stack: err.stack });
   }
 });
 
