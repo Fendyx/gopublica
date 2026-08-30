@@ -1,150 +1,121 @@
-export const privacyEn = `
-# PRIVACY POLICY
+export const privacyPl = `
+# POLITYKA PRYWATNOŚCI
 
-**Last Updated: June 10, 2026**
+**Ostatnia aktualizacja: 10 czerwca 2026 r.**
 
-At GoPublica, we are committed to protecting the privacy and security of your personal data. This Privacy Policy describes how we collect, use, store, and share personal data in connection with our SaaS platform, in compliance with the General Data Protection Regulation (GDPR / RODO) and applicable Polish law.
+W GoPublica zobowiązujemy się do ochrony prywatności i bezpieczeństwa Twoich danych osobowych. Niniejsza Polityka Prywatności opisuje, w jaki sposób zbieramy, wykorzystujemy, przechowujemy i udostępniamy dane osobowe w związku z naszą platformą SaaS, zgodnie z Ogólnym Rozporządzeniem o Ochronie Danych (RODO) oraz obowiązującym prawem polskim.
 
 ---
 
-## 1. DATA CONTROLLER
+**1. ADMINISTRATOR DANYCH**
 
-The Data Controller responsible for your personal data is:
+Administratorem Twoich danych osobowych jest:
 
 **GoPublica Andrii Knapp**
 NIP: 6772525332
-Republic of Poland
-Email: **support@gopublica.com**
+Rzeczpospolita Polska
+E-mail: **support@gopublica.com**
 
-For any data protection inquiries, please contact us at the email above.
-
----
-
-## 2. ROLES IN DATA PROCESSING (GDPR / RODO)
-
-**GoPublica as a Data Controller:** We control the personal data of our registered Merchants (you), including your name, email address, business details, billing information, and IP address. We collect this data to provide you with access to our platform, process subscription fees, and deliver customer support.
-
-**GoPublica as a Data Processor:** When your end-customers (e.g., restaurant guests, salon clients) submit booking information through your GoPublica-powered widget or storefront, you act as the **Data Controller** for their personal data. GoPublica acts solely as a **Data Processor**, storing and processing that data strictly on your behalf and according to your instructions. You bear full responsibility as the Data Controller for ensuring a legal basis for processing your customers' data and for meeting all applicable GDPR obligations toward them, including providing appropriate privacy notices.
+W przypadku jakichkolwiek pytań dotyczących ochrony danych prosimy o kontakt pod powyższym adresem e-mail.
 
 ---
 
-## 3. WHAT DATA WE COLLECT
+**2. ROLE W PRZETWARZANIU DANYCH (RODO)**
 
-**Data you provide directly:**
-- Full name and business name
-- Email address
-- NIP / VAT number (if applicable)
-- Payment card details (processed and stored exclusively by Stripe — we do not store raw card data)
-- Business address and contact information
+**GoPublica jako Administrator:** Jesteśmy administratorem danych osobowych naszych zarejestrowanych Klientów biznesowych (Ciebie), w tym imienia i nazwiska, adresu e-mail, danych firmowych, informacji rozliczeniowych oraz adresu IP. Zbieramy te dane, aby zapewnić Ci dostęp do platformy, przetwarzać opłaty subskrypcyjne i świadczyć wsparcie techniczne.
 
-**Data collected automatically:**
-- IP address and browser/device information
-- Usage data and activity logs within the Admin Panel
-- Cookie identifiers and session tokens
-
-**Data of your end-customers (processed on your behalf):**
-- Names, phone numbers, and email addresses submitted via booking forms
-- Reservation details (date, time, service, party size)
-- Any additional fields you configure in your booking widget
+**GoPublica jako Podmiot Przetwarzający (Procesor):** Kiedy Twoi klienci końcowi (np. goście restauracji, klienci salonu) przesyłają informacje rezerwacyjne przez Twój widget lub stronę opartą na GoPublica, to Ty działasz jako **Administrator** ich danych osobowych. GoPublica działa wyłącznie jako **Podmiot Przetwarzający**, przechowując i przetwarzając te dane ściśle w Twoim imieniu i zgodnie z Twoimi instrukcjami. Ponosisz pełną odpowiedzialność jako Administrator za zapewnienie podstawy prawnej do przetwarzania danych swoich klientów oraz za spełnienie wobec nich wszystkich obowiązków wynikających z RODO.
 
 ---
 
-## 4. LEGAL BASIS FOR PROCESSING
+**3. JAKIE DANE ZBIERAMY**
 
-We process personal data on the following legal bases under GDPR Article 6:
+**Dane podawane bezpośrednio przez Ciebie:**
+- Imię, nazwisko i nazwa firmy
+- Adres e-mail
+- NIP
+- Dane karty płatniczej (przetwarzane i przechowywane wyłącznie przez Stripe — nie przechowujemy surowych danych kart)
+- Adres firmy i dane kontaktowe
 
-- **Article 6(1)(b) — Performance of a Contract:** Processing your account data, billing information, and usage data to provide the platform and fulfill our contractual obligations to you.
-- **Article 6(1)(c) — Legal Obligation:** Retaining invoicing and transaction records as required by Polish tax and accounting law.
-- **Article 6(1)(f) — Legitimate Interests:** Monitoring platform security, preventing fraud, and improving platform performance.
-- **Article 6(1)(a) — Consent:** Using Google Analytics cookies for website analytics, where you have given consent via our cookie banner.
+**Dane zbierane automatycznie:**
+- Adres IP oraz informacje o przeglądarce/urządzeniu
+- Dane o użytkowaniu i logi aktywności w Panelu Administratora
+- Identyfikatory plików cookie i tokeny sesji
 
----
-
-## 5. DATA STORAGE AND INFRASTRUCTURE
-
-**5.1.** Our core backend server infrastructure is hosted on **Hetzner** (Germany, European Union).
-
-**5.2.** All database storage is powered by **MongoDB Atlas**, deployed on **Amazon Web Services (AWS)** data centers located in **Frankfurt, Germany (EU-West-1)**, ensuring that your data and your customers' data remain within the European Union.
-
-**5.3.** Client-facing storefronts, booking widgets, and front-end assets are deployed via **Vercel**. Please note that Vercel, Inc. is a company headquartered in the United States. GoPublica relies on Vercel's compliance with Standard Contractual Clauses (SCCs) approved by the European Commission for any personal data that may transit through Vercel's global CDN network. Vercel's data processing terms can be reviewed at vercel.com/legal/dpa.
-
----
-
-## 6. THIRD-PARTY SUBPROCESSORS
-
-To operate our platform, GoPublica shares limited personal data with the following trusted subprocessors:
-
-| Subprocessor | Purpose | Data Location |
-|---|---|---|
-| **Stripe, Inc. / Stripe Payments Europe Ltd** | Payment processing and billing | EU / US (SCCs) |
-| **EmailJS Ltd** | Transactional email delivery (booking confirmations, system alerts) | EU / US (SCCs) |
-| **Vercel, Inc.** | Frontend hosting and global CDN delivery | EU / US (SCCs) |
-| **MongoDB Atlas (AWS Frankfurt)** | Database storage | Germany (EU) |
-| **Hetzner Online GmbH** | Backend server infrastructure | Germany (EU) |
-| **Google LLC (Google Analytics)** | Website traffic analytics | EU / US (SCCs) |
-
-We do not sell your personal data or your customers' personal data to any third party.
+**Dane Twoich klientów końcowych (przetwarzane w Twoim imieniu):**
+- Imię, nazwisko, numery telefonów i adresy e-mail przesyłane przez formularze rezerwacji
+- Szczegóły rezerwacji (data, czas, usługa, liczba osób)
+- Wszelkie dodatkowe pola skonfigurowane przez Ciebie w widgecie
 
 ---
 
-## 7. INTERNATIONAL DATA TRANSFERS
+**4. PODSTAWA PRAWNA PRZETWARZANIA**
 
-Some of our subprocessors (Stripe, EmailJS, Vercel, Google Analytics) are headquartered outside the European Economic Area, including in the United States. For all such transfers, GoPublica ensures that appropriate safeguards are in place, specifically **Standard Contractual Clauses (SCCs)** as approved by the European Commission under GDPR Article 46(2)(c). These contractual safeguards ensure that your personal data receives an equivalent level of protection to that afforded within the EU.
+Przetwarzamy dane osobowe na następujących podstawach prawnych zgodnie z art. 6 RODO:
 
----
-
-## 8. DATA RETENTION
-
-**Merchant account data:** We retain your personal data for the duration of your active subscription. If your account is canceled or permanently terminated, we will retain your data for a period of **60 days** to allow for potential account reactivation, after which it will be permanently deleted from our active systems, unless longer retention is required by applicable law (e.g., Polish tax and accounting regulations, which may require retention of financial records for up to 5 years).
-
-**End-customer booking data:** Stored and retained according to your configuration as the Data Controller. Upon account termination, this data is deleted alongside your Merchant account data within the same 60-day window.
+- **Art. 6 ust. 1 lit. b — Wykonanie umowy:** Przetwarzanie danych konta, informacji rozliczeniowych i danych o użytkowaniu w celu udostępnienia platformy.
+- **Art. 6 ust. 1 lit. c — Obowiązek prawny:** Przechowywanie faktur i rejestrów transakcji zgodnie z polskim prawem podatkowym i rachunkowym.
+- **Art. 6 ust. 1 lit. f — Prawnie uzasadniony interes:** Monitorowanie bezpieczeństwa platformy, zapobieganie oszustwom i ulepszanie działania platformy.
+- **Art. 6 ust. 1 lit. a — Zgoda:** Wykorzystywanie plików cookie Google Analytics do analityki strony (jeśli wyrażono zgodę).
 
 ---
 
-## 9. YOUR GDPR RIGHTS
+**5. PRZECHOWYWANIE DANYCH I INFRASTRUKTURA**
 
-As a data subject under the GDPR, you have the following rights regarding your personal data:
-
-- **Right of Access:** The right to request a copy of the personal data we hold about you.
-- **Right to Rectification:** The right to request correction of inaccurate or incomplete data.
-- **Right to Erasure ("Right to be Forgotten"):** The right to request deletion of your personal data, subject to our legal retention obligations.
-- **Right to Restriction:** The right to request that we limit the processing of your personal data in certain circumstances.
-- **Right to Data Portability:** The right to receive your data in a structured, machine-readable format.
-- **Right to Object:** The right to object to processing based on legitimate interests.
-- **Right to Withdraw Consent:** Where processing is based on your consent, you may withdraw it at any time without affecting the lawfulness of prior processing.
-
-To exercise any of these rights, please contact us at **support@gopublica.com**. We will respond within **30 days** as required by GDPR Article 12.
-
-**Right to Lodge a Complaint:** If you believe your data protection rights have been violated, you have the right to lodge a complaint with the Polish supervisory authority:
-
-> **Urząd Ochrony Danych Osobowych (UODO)**
-> ul. Stawki 2, 00-193 Warsaw, Poland
-> Website: uodo.gov.pl
-> Email: kancelaria@uodo.gov.pl
+**5.1.** Główna infrastruktura naszych serwerów (backend) hostowana jest w **Hetzner** (Niemcy, Unia Europejska).
+**5.2.** Wszystkie bazy danych obsługiwane są przez **MongoDB Atlas**, w centrach danych **Amazon Web Services (AWS)** zlokalizowanych we **Frankfurcie, Niemcy**, co gwarantuje, że dane pozostają w Unii Europejskiej.
+**5.3.** Strony klientów oraz widgety są wdrażane przez **Vercel**. GoPublica opiera się na zgodności Vercel ze Standardowymi Klauzulami Umownymi (SCC) zatwierdzonymi przez Komisję Europejską.
 
 ---
 
-## 10. COOKIES
+**6. ZEWNĘTRZNE PODMIOTY PRZETWARZAJĄCE (SUBPROCESORZY)**
 
-**Essential cookies:** We use strictly necessary cookies to manage your login session and Admin Panel authentication. These cookies are required for the platform to function and cannot be disabled.
+W celu obsługi platformy udostępniamy ograniczone dane następującym podmiotom:
 
-**Analytics cookies (Google Analytics):** We use Google Analytics to understand general website usage patterns (e.g., page visits, traffic sources). These cookies are only activated after you accept them via our cookie consent banner. You may withdraw your consent at any time by updating your cookie preferences or by using Google's opt-out tool at tools.google.com/dlpage/gaoptout.
+*   **Stripe, Inc.** — Przetwarzanie płatności (UE / USA)
+*   **EmailJS Ltd** — Wysyłka e-maili transakcyjnych (UE / USA)
+*   **Vercel, Inc.** — Hosting frontendu (UE / USA)
+*   **MongoDB Atlas (AWS)** — Przechowywanie baz danych (Niemcy, UE)
+*   **Hetzner Online GmbH** — Infrastruktura serwerowa (Niemcy, UE)
+*   **Google LLC** — Analityka ruchu (UE / USA)
 
-We do not use cookies for advertising or tracking across third-party websites.
-
----
-
-## 11. SECURITY
-
-GoPublica implements industry-standard technical and organizational security measures to protect your personal data against unauthorized access, loss, destruction, or alteration. These include encrypted data transmission (HTTPS/TLS), access controls, and regular security monitoring. However, no method of transmission over the internet or electronic storage is 100% secure, and GoPublica cannot guarantee absolute data security.
-
----
-
-## 12. UPDATES TO THIS POLICY
-
-We may update this Privacy Policy from time to time. If changes are material, we will notify you via email or through a notice in your Admin Panel at least 14 days before the changes take effect. The most current version will always be available on our website.
+Nie sprzedajemy danych Twoich ani Twoich klientów żadnym stronom trzecim.
 
 ---
 
-*GoPublica Andrii Knapp | NIP: 6772525332 | support@gopublica.com | Poland*
+**7. MIĘDZYNARODOWE TRANSFERY DANYCH**
+
+W przypadku transferu danych poza Europejski Obszar Gospodarczy (np. do USA), GoPublica zapewnia odpowiednie zabezpieczenia, w szczególności **Standardowe Klauzule Umowne (SCC)** zatwierdzone przez Komisję Europejską zgodnie z art. 46 ust. 2 lit. c RODO.
+
+---
+
+**8. RETENCJA DANYCH**
+
+**Dane konta Klienta biznesowego:** Przechowujemy Twoje dane przez okres aktywnej subskrypcji. Po anulowaniu konta dane są przechowywane przez **60 dni** (aby umożliwić ewentualną reaktywację), a następnie trwale usuwane z naszych systemów, chyba że prawo (np. ustawa o rachunkowości) wymaga dłuższego przechowywania.
+**Dane rezerwacji klientów końcowych:** Przechowywane zgodnie z Twoją konfiguracją. Po usunięciu konta dane te są usuwane wraz z Twoimi danymi w tym samym oknie 60 dni.
+
+---
+
+**9. TWOJE PRAWA WYNIKAJĄCE Z RODO**
+
+Masz prawo do dostępu do danych, ich sprostowania, usunięcia ("prawo do bycia zapomnianym"), ograniczenia przetwarzania, przenoszenia danych, sprzeciwu oraz cofnięcia zgody. Aby skorzystać z tych praw, napisz na **support@gopublica.com**.
+Masz również prawo wnieść skargę do **Urzędu Ochrony Danych Osobowych (UODO)** w Warszawie.
+
+---
+
+**10. PLIKI COOKIE**
+
+Używamy niezbędnych plików cookie do zarządzania sesją logowania (nie można ich wyłączyć) oraz analitycznych plików cookie (Google Analytics) — wyłącznie po wyrażeniu przez Ciebie zgody.
+
+---
+
+**11. BEZPIECZEŃSTWO**
+
+Wdrażamy standardowe w branży zabezpieczenia (szyfrowanie HTTPS/TLS, kontrole dostępu), aby chronić dane przed nieautoryzowanym dostępem lub utratą.
+
+---
+
+**12. ZMIANY POLITYKI**
+
+Zastrzegamy prawo do aktualizacji tej Polityki. O istotnych zmianach powiadomimy Cię z co najmniej 14-dniowym wyprzedzeniem.
 `;
