@@ -274,7 +274,7 @@ export default function SubscribeForm() {
   }, [country, vatId, basePrice]);
 
   const pricing = calculatePricing();
-  const isBasic = priceId === 'price_1TomQcLqSWMZrmil5kIzRWDE';
+  const isBasic = priceId === 'price_1U9yDVLymxkOnND529G82eDy';
 
   // Хелпер форматирования
   const formatPrice = (amount: number) => {

@@ -86,7 +86,7 @@ export default async function PricingPage() {
       name: t('plans.starter.name'),
       tagline: t('plans.starter.tagline'),
       price: PLAN_PRICES.starter[userCurrency] || 39,
-      priceId: 'price_1TomQcLqSWMZrmil5kIzRWDE',
+      priceId: 'price_1U9yDVLymxkOnND529G82eDy',
       features: [
         { text: t('features.adminPanel'),        included: true },
         { text: t('features.booking'),            included: true },
@@ -105,7 +105,7 @@ export default async function PricingPage() {
       name: t('plans.growth.name'),
       tagline: t('plans.growth.tagline'),
       price: PLAN_PRICES.growth[userCurrency] || 69,
-      priceId: 'price_1TomP3LqSWMZrmilXXbMmfkd',
+      priceId: 'price_1U9yBMLymxkOnND54hXzckIt',
       popular: true,
       features: [
         { text: t('features.adminPanel'),          included: true },
