@@ -1,34 +1,11 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const JobApplication = require('../models/JobApplication');
-const JobFormSettings = require('../models/JobFormSettings');
+const { resumeUpload } = require('../middleware/common/upload');
+const JobApplication = require('../models/hr/JobApplication');
+const JobFormSettings = require('../models/hr/JobFormSettings');
 const TenantSettings = require('../models/TenantSettings');
 
-// Настройка multer для загрузки резюме
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../../uploads/resumes');
-    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, `resume-${unique}${ext}`);
-  },
-});
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(new Error('Только PDF, DOC, DOCX'), false);
-  },
-});
+const upload = resumeUpload.single('resume');
 
 // GET /api/public/jobs/settings
 router.get('/settings', async (req, res) => {
@@ -178,7 +155,10 @@ router.post('/apply', upload.single('resume'), async (req, res) => {
     await application.save();
 
     console.log(`📩 Новая заявка от ${formData.fullName || 'Аноним'} для тенанта ${tenantId}`);
-
+    // Fire-and-forget tenant Telegram notification
+    require('../../services/notifications/tenantTelegram')
+      .notifyNewJobApplication(tenantId, application.branchId, application)
+      .catch(err => console.error('Tenant Telegram job notification failed:', err.message));
     // Получаем корректное сообщение об успехе на нужном языке (опционально: можно передавать locale с фронта, 
     // но проще оставить это фронту - возвращаем базовое сообщение, фронт сам покажет нужное)
     res.status(201).json({

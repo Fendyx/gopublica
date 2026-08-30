@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { cancelSubscription } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.post('/cancel-subscription', authTenant, async (req, res) => {
   try {
@@ -13,9 +13,7 @@ router.post('/cancel-subscription', authTenant, async (req, res) => {
     }
 
     // Отменяем по окончании текущего оплаченного периода
-    await Stripe.subscriptions.update(user.stripeSubscriptionId, {
-      cancel_at_period_end: true,
-    });
+    await cancelSubscription(user.stripeSubscriptionId);
 
     // Обновим локально (вебхук потом тоже обновит статус)
     user.subscriptionStatus = 'canceled'; // или оставить 'active' до конца периода?

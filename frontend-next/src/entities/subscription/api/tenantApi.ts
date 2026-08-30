@@ -16,7 +16,17 @@ async function authFetch(endpoint: string, options: RequestInit = {}) {
     window.location.href = '/login-client';
     throw new Error('Unauthorized');
   }
-  const data = await res.json();
+
+  // Safely parse response — handle non-JSON error pages (404 HTML, proxy errors, etc.)
+  let data: any;
+  const contentType = res.headers.get('content-type') || '';
+  if (contentType.includes('application/json')) {
+    data = await res.json();
+  } else {
+    const text = await res.text();
+    throw new Error(text || `Server returned ${res.status}`);
+  }
+
   if (!res.ok) throw new Error(data.error || 'Request failed');
   return data;
 }

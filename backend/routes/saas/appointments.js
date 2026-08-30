@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 
-const ServiceAppointment = require('../../models/ServiceAppointment');
+const ServiceAppointment = require('../../models/booking/ServiceAppointment');
 const Branch = require('../../models/Branch');
-const resolveTenant = require('../../middleware/resolveTenant');
+const resolveTenant = require('../../middleware/tenant/resolve');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {

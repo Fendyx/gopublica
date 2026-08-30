@@ -55,7 +55,32 @@ const tenantUserSchema = new mongoose.Schema({
     lastUpdated: Date
   },
 
+  // ─── Telegram Bot Integration ───────────────────────────────────────────────
+  telegramChatId: {
+    type: String,
+    default: null,
+    index: true,
+    sparse: true,
+  },
+  telegramLinkedAt: {
+    type: Date,
+    default: null,
+  },
+  telegramLinkToken: {
+    type: String,
+    default: null,
+    sparse: true,
+  },
+  telegramLinkTokenExpiresAt: {
+    type: Date,
+    default: null,
+  },
+
 }, { timestamps: true });
+
+// Compound indexes for Telegram
+tenantUserSchema.index({ tenantId: 1, telegramChatId: 1 });
+// telegramLinkToken index is created by field definition (sparse: true)
 
 tenantUserSchema.methods.comparePassword = async function(candidate) {
   return bcrypt.compare(candidate, this.passwordHash);

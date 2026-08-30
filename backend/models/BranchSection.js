@@ -168,7 +168,7 @@ branchSectionSchema.index({ tenantId: 1, branchId: 1, isActive: 1 });
 branchSectionSchema.index({ branchId: 1, page: 1, isActive: 1, order: 1 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
-const { registerRevalidationHooks } = require('../services/modelHooks');
+const { registerRevalidationHooks } = require('../services/content/modelHooks');
 
 registerRevalidationHooks(branchSectionSchema, {
   modelName: 'BranchSection',

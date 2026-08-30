@@ -1,12 +1,12 @@
 const express    = require('express');
 const router     = express.Router();
-const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { updateCustomer, createCheckoutSession } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.post('/create-checkout-session', authTenant, async (req, res) => {
   try {
-    const { priceId } = req.body;
+    const { priceId, currency } = req.body;
 
     const user = await TenantUser.findById(req.userId);
     if (!user) return res.status(404).json({ error: 'Пользователь не найден' });
@@ -17,24 +17,17 @@ router.post('/create-checkout-session', authTenant, async (req, res) => {
 
     // Если tenantId уже назначен — обновляем метадату в Stripe
     if (user.tenantId) {
-      await Stripe.customers.update(user.stripeCustomerId, {
+      await updateCustomer(user.stripeCustomerId, {
         metadata: { tenantId: user.tenantId, userId: user._id.toString() },
       });
     }
 
-    const session = await Stripe.checkout.sessions.create({
-      customer:  user.stripeCustomerId,
-      line_items: [{ price: priceId, quantity: 1 }],
-      mode:      'subscription',
-      subscription_data: {
-        trial_period_days: 30,
-        metadata: {
-          userId:   user._id.toString(),
-          tenantId: user.tenantId || '',
-        },
-      },
-      success_url: `${process.env.FRONTEND_URL}/dashboard?success=true`,
-      cancel_url:  `${process.env.FRONTEND_URL}/pricing?canceled=true`,
+    const session = await createCheckoutSession({
+      customer: user.stripeCustomerId,
+      priceId,
+      userId: user._id.toString(),
+      tenantId: user.tenantId,
+      currency,
     });
 
     res.json({ url: session.url });

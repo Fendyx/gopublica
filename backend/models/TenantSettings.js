@@ -65,6 +65,26 @@ const tenantSettingsSchema = new mongoose.Schema({
       message:   { type: Boolean, default: true },
       soundFile: { type: String,  default: '' },
     },
+    // ─── Telegram Bot Notifications ───────────────────────────────────────────
+    telegram: {
+      enabled: { type: Boolean, default: false },
+      events: {
+        newOrder: { type: Boolean, default: true },
+        newReservation: { type: Boolean, default: true },
+        newJobApplication: { type: Boolean, default: true },
+        newPartnerRequest: { type: Boolean, default: true },
+      },
+      // Per-branch override (optional, for multi-branch tenants)
+      branchOverrides: [{
+        branchId: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' },
+        events: {
+          newOrder: Boolean,
+          newReservation: Boolean,
+          newJobApplication: Boolean,
+          newPartnerRequest: Boolean,
+        }
+      }]
+    },
   },
 
   // ─── Локализация (было) ─────────────────────────────────────────────────────
@@ -189,6 +209,12 @@ const tenantSettingsSchema = new mongoose.Schema({
       password: { type: String, default: '' },
     },
     
+    // API-ключ для фронтенд-виджета карты (JWT, отдельный от OAuth-учетных данных)
+    mapApiKey: { type: String, default: '' },
+    
+    // Окружение: sandbox (тестовое) или production (боевое)
+    env: { type: String, enum: ['sandbox', 'production'], default: 'sandbox' },
+    
     // Автоматически обновляемые OAuth токены
     tokens: {
       accessToken: { type: String, default: '' },
@@ -268,7 +294,7 @@ tenantSettingsSchema.pre('save', async function () {
 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
-const { registerRevalidationHooks } = require('../services/modelHooks');
+const { registerRevalidationHooks } = require('../services/content/modelHooks');
 
 registerRevalidationHooks(tenantSettingsSchema, {
   modelName: 'TenantSettings',

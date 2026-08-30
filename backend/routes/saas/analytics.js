@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
-const Analytics = require('../../models/Analytics');
-const authTenant = require('../../middleware/authTenant');
+const Analytics = require('../../models/analytics/Analytics');
+const authTenant = require('../../middleware/auth/tenant');
 
 // POST /api/saas/analytics/track  — публичный, вызывается из Next.js API route
 router.post('/track', async (req, res) => {

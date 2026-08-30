@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const MenuItem = require('../../models/MenuItem');
-const Reservation = require('../../models/Reservation');
-const authTenant = require('../../middleware/authTenant');
+const MenuItem = require('../../models/food/MenuItem');
+const Reservation = require('../../models/food/Reservation');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.get('/', authTenant, async (req, res) => {
   try {

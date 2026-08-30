@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const GalleryItem = require('../../models/GalleryItem');
+const GalleryItem = require('../../models/content/GalleryItem');
 const Branch = require('../../models/Branch');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Публичный: получить галерею по tenantId и опционально branchId/branchSlug
 router.get('/', async (req, res) => {

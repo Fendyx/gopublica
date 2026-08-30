@@ -1,8 +1,8 @@
 const express    = require('express');
 const router     = express.Router();
-const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { createSetupIntent } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.post('/setup-intent', authTenant, async (req, res) => {
   try {
@@ -12,13 +12,7 @@ router.post('/setup-intent', authTenant, async (req, res) => {
       return res.status(400).json({ error: 'Stripe customer не найден' });
     }
 
-    const setupIntent = await Stripe.setupIntents.create({
-      customer: user.stripeCustomerId,
-      usage: 'off_session', // чтобы можно было списывать позже
-      metadata: {
-        userId: user._id.toString(),
-      },
-    });
+    const setupIntent = await createSetupIntent(user.stripeCustomerId, user._id.toString());
 
     res.json({ clientSecret: setupIntent.client_secret });
   } catch (err) {

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Order = require('../../models/Order');
+const { Stripe } = require('../../services/payments/stripe');
+const Order = require('../../models/food/Order');
 const Branch = require('../../models/Branch');
 const TenantSettings = require('../../models/TenantSettings');
-const authTenant = require('../../middleware/authTenant');
-const checkBranch = require('../../middleware/checkBranch'); // опционально
-const { enforceModuleAccess } = require('../../services/moduleAccess');
+const authTenant = require('../../middleware/auth/tenant');
+const checkBranch = require('../../middleware/tenant/branch'); // опционально
+const { enforceModuleAccess } = require('../../services/tenant/moduleAccess');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {

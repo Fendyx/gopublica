@@ -1,8 +1,8 @@
-const express   = require('express');
+﻿const express   = require('express');
 const router    = express.Router();
-const Client    = require('../models/client');
-const auth      = require('../middleware/auth');
-const checkRole = require('../middleware/checkRole');
+const Client    = require('../models/sales/Client');
+const auth      = require('../middleware/auth/jwt');
+const checkRole = require('../middleware/auth/role');
 
 const ADMIN = ['admin', 'superadmin'];
 

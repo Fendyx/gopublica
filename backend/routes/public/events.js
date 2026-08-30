@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../../models/Event');
-const Article = require('../../models/Article');
+const Event = require('../../models/content/Event');
+const Article = require('../../models/content/Article');
 
 // ─── GET /api/public/events — list active events for a tenant ─────────────
 // Query params: tenantId (required), upcomingOnly (optional, default true)

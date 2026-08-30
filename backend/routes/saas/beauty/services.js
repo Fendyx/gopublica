@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const BeautyService = require('../../../models/beauty/ServiceItem');
 const Branch = require('../../../models/Branch');
-const authTenant = require('../../../middleware/authTenant');
-const checkBranch = require('../../../middleware/checkBranch');
+const authTenant = require('../../../middleware/auth/tenant');
+const checkBranch = require('../../../middleware/tenant/branch');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {

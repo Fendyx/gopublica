@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 const Customer = require('../../models/Customer');
-const Order = require('../../models/Order');
-const authTenant = require('../../middleware/authTenant');
+const Order = require('../../models/food/Order');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.use(authTenant);
 

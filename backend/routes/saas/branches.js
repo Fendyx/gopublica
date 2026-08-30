@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Branch = require('../../models/Branch');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 /**
  * Slugify a string: lowercase, replace non-alphanumeric runs with hyphens,

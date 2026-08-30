@@ -1,21 +1,19 @@
 const express    = require('express');
 const router     = express.Router();
-const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { Stripe, constructWebhookEvent } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const Order      = require('../../models/Order');
+const Order      = require('../../models/food/Order');
 const Customer   = require('../../models/Customer');
 const TenantSettings = require('../../models/TenantSettings');
-const { createFurgonetkaShipment } = require('../../services/furgonetkaService');
-const { reserveTickets } = require('../../services/ticketService');
+const { createFurgonetkaShipment } = require('../../services/external/furgonetka');
+const { reserveTickets } = require('../../services/booking/tickets');
 
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
   let event;
 
   try {
-    event = Stripe.webhooks.constructEvent(
-      req.body, sig, process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = await constructWebhookEvent(req.body, sig);
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Article = require('../../models/Article');
-const Event = require('../../models/Event');
+const Article = require('../../models/content/Article');
+const Event = require('../../models/content/Event');
 
 // ─── Helper: merge Event commerce fields into an Article object ──────────
 // Articles that have no linked Event remain unchanged (standard article).

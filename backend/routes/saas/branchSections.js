@@ -5,10 +5,10 @@ const BranchSection = require('../../models/BranchSection');
 const BranchSectionItem = require('../../models/BranchSectionItem');
 const Branch = require('../../models/Branch');
 const TenantSettings = require('../../models/TenantSettings');
-const authTenant = require('../../middleware/authTenant');
-const checkBranch = require('../../middleware/checkBranch');
-const { enforceModuleAccess } = require('../../services/moduleAccess');
-const { validateSectionSettings } = require('../../services/branchSectionValidation');
+const authTenant = require('../../middleware/auth/tenant');
+const checkBranch = require('../../middleware/tenant/branch');
+const { enforceModuleAccess } = require('../../services/tenant/moduleAccess');
+const { validateSectionSettings } = require('../../services/validation/branchSection');
 
 // ============================================================
 // MIDDLEWARE: Apply to all routes in this file

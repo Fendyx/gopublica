@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const webpush = require('web-push')
-const PushSubscription = require('../../models/PushSubscription')
-const authTenant = require('../../middleware/authTenant')
+const PushSubscription = require('../../models/communication/PushSubscription')
+const authTenant = require('../../middleware/auth/tenant')
 
 // Сохранить push-подписку браузера
 router.post('/subscribe', authTenant, async (req, res) => {

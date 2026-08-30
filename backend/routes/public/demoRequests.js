@@ -1,10 +1,10 @@
 // backend/routes/public/demoRequests.js
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const DemoRequest = require('../../models/DemoRequest');
-const auth = require('../../middleware/auth');
-const checkRole = require('../../middleware/checkRole');
-const { notifyNewDemoRequest } = require('../../services/adminNotification');
+const DemoRequest = require('../../models/sales/DemoRequest');
+const auth = require('../../middleware/auth/jwt');
+const checkRole = require('../../middleware/auth/role');
+const { notifyNewDemoRequest } = require('../../services/notifications/adminTelegram');
 
 const router = express.Router();
 

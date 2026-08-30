@@ -2,13 +2,13 @@ const express    = require('express');
 const router     = express.Router();
 const jwt        = require('jsonwebtoken');
 const bcrypt     = require('bcryptjs');
-const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { createCustomer, createTaxId } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const auth = require('../../middleware/auth');
-const authTenant = require('../../middleware/authTenant');
-const checkRole = require('../../middleware/checkRole');
-const ConsentRecord = require('../../models/ConsentRecord');
-const { ensureTenantSettings } = require('../../services/tenantBootstrap');
+const auth = require('../../middleware/auth/jwt');
+const authTenant = require('../../middleware/auth/tenant');
+const checkRole = require('../../middleware/auth/role');
+const ConsentRecord = require('../../models/payments/ConsentRecord');
+const { ensureTenantSettings } = require('../../services/tenant/bootstrap');
 
 const ADMIN = ['admin', 'superadmin'];
 
@@ -33,14 +33,14 @@ router.post('/register', async (req, res) => {
     }
 
     // Создаём Stripe Customer с именем компании (или физлица)
-    const customer = await Stripe.customers.create({
+    const customer = await createCustomer({
       email,
       name: companyName || name,
       phone,
     });
 
     if (vatId) {
-      await Stripe.customers.createTaxId(customer.id, {
+      await createTaxId(customer.id, {
         type: 'eu_vat',
         value: vatId,
       });

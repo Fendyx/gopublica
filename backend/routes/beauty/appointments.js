@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BeautyAppointment = require('../../models/beauty/Appointment');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Публичный: создание записи
 router.post('/', async (req, res) => {

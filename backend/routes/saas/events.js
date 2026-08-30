@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Event = require('../../models/Event');
-const Article = require('../../models/Article');
+const Event = require('../../models/content/Event');
+const Article = require('../../models/content/Article');
 
 // ─── Helper: validate tenant scope ──────────────────────────────────────
 function ensureTenant(req, res, next) {

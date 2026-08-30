@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BeautyCategory = require('../../models/beauty/Category');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Получить категории для тенанта с учётом businessType
 router.get('/', authTenant, async (req, res) => {

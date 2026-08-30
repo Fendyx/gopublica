@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const MenuItem = require('../../models/MenuItem');
+const MenuItem = require('../../models/food/MenuItem');
 const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
-const authTenant = require('../../middleware/authTenant');
-const { enforceModuleAccess } = require('../../services/moduleAccess');
+const authTenant = require('../../middleware/auth/tenant');
+const { enforceModuleAccess } = require('../../services/tenant/moduleAccess');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {

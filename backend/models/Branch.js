@@ -123,7 +123,7 @@ branchSchema.index({ parentBranchId: 1 });
 branchSchema.index({ slug: 1 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
-const { registerRevalidationHooks } = require('../services/modelHooks');
+const { registerRevalidationHooks } = require('../services/content/modelHooks');
 
 registerRevalidationHooks(branchSchema, {
   modelName: 'Branch',

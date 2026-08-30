@@ -1,192 +1,39 @@
 const path = require('path');
 const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
 const fs = require('fs');
 require('dotenv').config();
 
-const webpush = require('web-push');
-webpush.setVapidDetails(
-  process.env.VAPID_EMAIL,
-  process.env.VAPID_PUBLIC_KEY,
-  process.env.VAPID_PRIVATE_KEY
-);
+// ── Global process error handlers (prevent silent crashes) ──
+process.on('unhandledRejection', (reason) => {
+  console.error('🔴 Unhandled Rejection:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('🔴 Uncaught Exception:', err);
+  process.exit(1);
+});
 
 const app = express();
 const PORT = 5000;
 
-// ── Настройки CORS ───────────────────────────────────
-app.use(cors({
-  origin: (origin, callback) => {
-    // В SaaS-архитектуре мы динамически разрешаем ЛЮБЫЕ домены
-    callback(null, true);
-  },
-  credentials: true,
-}));
+// ── Config modules ───────────────────────────────────
+const configureApp = require('./config/app');
+const connectDB = require('./config/db');
+const initPush = require('./config/push');
 
-// Вебхук Страйпа должен быть ДО express.json(), чтобы получать сырой body
-app.use('/api/stripe/webhook', require('./routes/stripe/webhook'));
+// ── Initialize config ────────────────────────────────
+configureApp(app);
+initPush();
 
-app.use(express.json());
+// ── Database connection ──────────────────────────────
+connectDB();
 
-// ── База данных ──────────────────────────────────────
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ DB error:', err));
+// ── Initialize Tenant Telegram Bot Webhook ───────────
+const { setWebhook } = require('./services/notifications/tenantTelegram');
+setWebhook().catch(err => console.error('❌ Failed to set Tenant Telegram webhook:', err.message));
 
-// ── Импорт роутов ─────────────────────────────────────
-const jobsPublicRoutes = require('./routes/jobsPublic');
-const saasJobsRoutes = require('./routes/saas/jobs');
-
-// Заказы (Чекаут)
-const ordersPublicRoutes = require('./routes/orders/public');
-
-// Заказы (Личный кабинет клиента - НОВОЕ)
-const publicUserOrders = require('./routes/public/orders');
-
-const publicProfileRoutes = require('./routes/public/profile');
-
-// Branch Sections (SaaS admin + public)
-const saasBranchSectionsRoutes = require('./routes/saas/branchSections');
-const publicBranchSectionsRoutes = require('./routes/public/branchSections');
-
-// ── Роут для пинга (Keep-Alive) ──────────────────────
-app.get('/api/ping', (req, res) => {
-  // Жестко отключаем любое кеширование на всех уровнях
-  res.set({
-    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-    'Pragma': 'no-cache',
-    'Expires': '0',
-    'Surrogate-Control': 'no-store'
-  });
-  
-  res.status(200).json({ 
-    status: 'awake', 
-    timestamp: new Date().toISOString() 
-  });
-});
-
-// ── API Роуты ────────────────────────────────────────
-
-// Auth & Admins
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-
-// Leads & Clients
-app.use('/api/leads', require('./routes/leads'));
-app.use('/api/clients', require('./routes/clients'));
-
-// SaaS (Рестораны)
-app.use('/api/saas/auth', require('./routes/saas/auth'));
-app.use('/api/saas/settings', require('./routes/saas/settings'));
-app.use('/api/saas/dashboard', require('./routes/saas/dashboard'));
-app.use('/api/saas/menu', require('./routes/saas/menu'));
-app.use('/api/saas/categories', require('./routes/saas/categories'));
-app.use('/api/saas/reservations', require('./routes/saas/reservations'));
-app.use('/api/saas/appointments', require('./routes/saas/appointments'));
-app.use('/api/saas/orders', require('./routes/saas/orders'));
-app.use('/api/saas/gallery', require('./routes/saas/gallery'));
-app.use('/api/saas/news', require('./routes/saas/news'));
-app.use('/api/saas/branches', require('./routes/saas/branches'));
-app.use('/api/saas/analytics', require('./routes/saas/analytics'));
-app.use('/api/saas/push', require('./routes/saas/push'));
-app.use('/api/saas/customers', require('./routes/saas/customers'));
-app.use('/api/saas/jobs', saasJobsRoutes);
-app.use('/api/saas/sites', require('./routes/saas/sites'));
-app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
-
-// Dynamic form submissions (SaaS admin)
-app.use('/api/saas/forms/submissions', require('./routes/saas/formSubmissions'));
-app.use('/api/saas/articles', require('./middleware/authTenant'), require('./routes/saas/articles'));
-app.use('/api/saas/events', require('./middleware/authTenant'), require('./routes/saas/events'));
-
-// Stripe (SaaS подписки)
-app.use('/api/stripe/checkout', require('./routes/stripe/checkout'));
-app.use('/api/stripe/setupIntent', require('./routes/stripe/setupIntent'));
-app.use('/api/stripe/subscribe', require('./routes/stripe/subscribe'));
-app.use('/api/stripe/cancel', require('./routes/stripe/cancel'));
-app.use('/api/stripe/prices', require('./routes/stripe/prices'));
-
-// Beauty (если используется)
-app.use('/api/beauty/services', require('./routes/beauty/services'));
-app.use('/api/beauty/appointments', require('./routes/beauty/appointments'));
-app.use('/api/beauty/masters', require('./routes/beauty/masters'));
-app.use('/api/beauty/categories', require('./routes/beauty/categories'));
-app.use('/api/saas/beauty/services', require('./routes/saas/beauty/services'));
-app.use('/api/saas/beauty/masters', require('./routes/saas/beauty/masters'));
-app.use('/api/saas/beauty/appointments', require('./routes/saas/beauty/appointments'));
-app.use('/api/public/beauty/services', require('./routes/public/beauty/services'));
-app.use('/api/public/beauty/masters', require('./routes/public/beauty/masters'));
-app.use('/api/public/beauty', require('./routes/public/beauty/appointments'));
-
-// Другое
-app.use('/api/change-requests', require('./routes/changeRequests'));
-app.use('/api/portfolio', require('./routes/portfolio'));
-app.use('/api/projects', require('./routes/projects'));
-app.use('/api/public/auth', require('./routes/public/auth'));
-
-// ── Публичные роуты (Клиенты) ────────────────────────
-// Чекаут и оплата
-app.use('/api/orders/public', ordersPublicRoutes);
-// Личный кабинет и история заказов
-app.use('/api/public/orders', publicUserOrders);
-// Публичные вакансии
-app.use('/api/public/jobs', jobsPublicRoutes);
-
-app.use('/api/public/profile', publicProfileRoutes);
-
-// Публичные заявки на демо ("Get a Free Demo" funnel)
-app.use('/api/public/demo-requests', require('./routes/public/demoRequests'));
-
-// Branch Sections (public)
-app.use('/api/public/branch-sections', publicBranchSectionsRoutes);
-
-// Dynamic form submissions (public)
-app.use('/api/public/forms', require('./routes/public/formSubmissions'));
-
-// Articles (public)
-app.use('/api/public/articles', require('./routes/public/articles'));
-
-// Events (public)
-app.use('/api/public/events', require('./routes/public/events'));
-
-
-// ── Раздача Фронтенда (прод) ─────────────────────────
-const frontendDistPath = path.join(__dirname, '../frontend/dist');
-
-// Проверяем, существует ли папка при запуске сервера
-if (!fs.existsSync(frontendDistPath)) {
-  console.error(`\n❌ ВНИМАНИЕ: Папка ${frontendDistPath} НЕ НАЙДЕНА!`);
-  console.error('❌ Скорее всего, поле "Root Directory" в Render не пустое!\n');
-} else {
-  console.log(`\n✅ Папка с фронтендом успешно найдена: ${frontendDistPath}\n`);
-}
-
-// Раздаем статику (CSS, JS, картинки)
-app.use(express.static(frontendDistPath));
-
-// Для всех остальных запросов (роутинг React) отдаем index.html
-// Исключаем API-роуты, чтобы они обрабатывались роутерами выше
-app.get(/^(?!\/api\/).*$/, (req, res) => {
-  const indexPath = path.join(frontendDistPath, 'index.html');
-  if (!fs.existsSync(indexPath)) {
-    return res.status(500).send('Frontend build not found on server');
-  }
-  res.sendFile(indexPath);
-});
-
-// ── Глобальный обработчик ошибок API (Защита от падений) ──
-app.use((err, req, res, next) => {
-  console.error('🔥 Ошибка на сервере:', err.message);
-  if (req.path.startsWith('/api/')) {
-    return res.status(500).json({ 
-      success: false, 
-      message: 'Internal Server Error', 
-      error: err.message 
-    });
-  }
-  next(err);
-});
+// ── Register all routes ──────────────────────────────
+const { registerRoutes } = require('./routes');
+registerRoutes(app);
 
 // ── Запуск сервера ───────────────────────────────────
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

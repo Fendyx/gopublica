@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { retrievePrice } = require('../../services/payments/stripe');
 
 // GET /api/stripe/prices/:priceId
 router.get('/:priceId', async (req, res) => {
   try {
-    const price = await Stripe.prices.retrieve(req.params.priceId);
+    const price = await retrievePrice(req.params.priceId);
     const result = {
       id: price.id,
       default: {

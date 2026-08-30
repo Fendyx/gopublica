@@ -3,7 +3,7 @@ const router = express.Router();
 const Site = require('../../models/Site');
 const TenantSettings = require('../../models/TenantSettings');
 const TenantUser = require('../../models/TenantUser');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // GET /saas/sites - Get all sites for the authenticated tenant
 router.get('/', authTenant, async (req, res) => {

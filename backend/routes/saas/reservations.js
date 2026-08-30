@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const webpush = require('web-push');
-const Reservation = require('../../models/Reservation');
+const Reservation = require('../../models/food/Reservation');
 const Branch = require('../../models/Branch');
-const PushSubscription = require('../../models/PushSubscription');
-const authTenant = require('../../middleware/authTenant');
+const PushSubscription = require('../../models/communication/PushSubscription');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -47,6 +47,11 @@ router.post('/', async (req, res) => {
       comment,
     });
     await reservation.save();
+
+    // Fire-and-forget tenant Telegram notification
+    require('../../services/notifications/tenantTelegram')
+      .notifyNewReservation(tenantId, resolvedBranchId, reservation)
+      .catch(err => console.error('Tenant Telegram reservation notification failed:', err.message));
 
     // Push-уведомления (без изменений, можно при желании добавить branchId в payload)
     const subs = await PushSubscription.find({ tenantId });

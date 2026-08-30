@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BeautyService = require('../../models/beauty/ServiceItem');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Публичный: получение услуг для сайта
 router.get('/', async (req, res) => {

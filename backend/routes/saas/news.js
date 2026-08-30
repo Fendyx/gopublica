@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const NewsPost = require('../../models/NewsPost');
-const Client = require('../../models/client'); // твоя модель клиента — убедись, что путь правильный
-const authTenant = require('../../middleware/authTenant');
+const NewsPost = require('../../models/content/NewsPost');
+const Client = require('../../models/sales/Client'); // твоя модель клиента — убедись, что путь правильный
+const authTenant = require('../../middleware/auth/tenant');
 
 // Публичный (для клиента): получить новости с учётом таргетинга
 router.get('/', async (req, res) => {

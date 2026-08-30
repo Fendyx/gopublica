@@ -1,0 +1,227 @@
+﻿//backend\routes\gopublica\leads.js
+const express = require('express');
+const router  = express.Router();
+const Lead    = require('../../models/sales/Lead');
+const auth    = require('../../middleware/auth/jwt');
+const checkRole = require('../../middleware/auth/role');
+
+const ADMIN_ROLES = ['admin', 'superadmin'];
+
+const canEdit = (user, lead) => {
+  if (user.role === 'superadmin') return true;
+  return lead.assignedTo?.toString() === user.id;
+};
+
+// GET /api/leads — все лиды
+router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
+  try {
+    const leads = await Lead.find({})
+      .populate('createdBy',  'name email')
+      .populate('assignedTo', 'name email')
+      .sort({ createdAt: -1 });
+    res.json(leads);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching leads', error: err.message });
+  }
+});
+
+// POST /api/leads — создать лид
+router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
+  try {
+    const {
+      name, phone, source, comment,
+      city, businessHours,
+      price, businessType, servicesRequested,
+      priority, followUpAt,
+      assignedTo,
+    } = req.body;
+
+    if (!name?.trim() || !phone?.trim()) {
+      return res.status(400).json({ message: 'Name and phone are required' });
+    }
+
+    const lead = await Lead.create({
+      name:    name.trim(),
+      phone:   phone.trim(),
+      source:  source?.trim()  || '',
+      comment: comment?.trim() || '',
+      city:    city?.trim()    || '',
+      businessHours: businessHours?.trim() || '',
+      price:   Number(price)   || 0,
+      businessType: businessType || 'Other',
+      servicesRequested: Array.isArray(servicesRequested) ? servicesRequested : [],
+      priority:   priority   || 'Medium',
+      followUpAt: followUpAt || null,
+      createdBy:  req.user.id,
+      assignedTo: assignedTo || req.user.id,
+    });
+
+    await lead.populate('createdBy',  'name email');
+    await lead.populate('assignedTo', 'name email');
+    res.status(201).json(lead);
+  } catch (err) {
+    res.status(400).json({ message: 'Error creating lead', error: err.message });
+  }
+});
+
+// PUT /api/leads/:id — обновить лид
+router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
+  try {
+    const lead = await Lead.findById(req.params.id);
+    if (!lead) return res.status(404).json({ message: 'Lead not found' });
+
+    if (!canEdit(req.user, lead)) {
+      return res.status(403).json({ message: 'You can only edit leads assigned to you' });
+    }
+
+    const {
+      status, priority, assignedTo, comment, followUpAt,
+      name, phone, source, price, businessType, servicesRequested,
+      city, businessHours,
+    } = req.body;
+
+    const update = {};
+    if (status             !== undefined) update.status             = status;
+    if (priority           !== undefined) update.priority           = priority;
+    if (comment            !== undefined) update.comment            = comment;
+    if (followUpAt         !== undefined) update.followUpAt         = followUpAt;
+    if (name               !== undefined) update.name               = name.trim();
+    if (phone              !== undefined) update.phone              = phone.trim();
+    if (source             !== undefined) update.source             = source?.trim() ?? '';
+    if (price              !== undefined) update.price              = Number(price) || 0;
+    if (businessType       !== undefined) update.businessType       = businessType;
+    if (servicesRequested  !== undefined) update.servicesRequested  = servicesRequested;
+    if (city               !== undefined) update.city               = city?.trim() ?? '';
+    if (businessHours      !== undefined) update.businessHours      = businessHours?.trim() ?? '';
+
+    if (assignedTo !== undefined && req.user.role === 'superadmin') {
+      update.assignedTo = assignedTo;
+    }
+
+    const updated = await Lead.findByIdAndUpdate(
+      req.params.id, update, { new: true, runValidators: true }
+    )
+      .populate('createdBy',  'name email')
+      .populate('assignedTo', 'name email');
+
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ message: 'Error updating lead', error: err.message });
+  }
+});
+
+// DELETE /api/leads/:id
+router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
+  try {
+    const lead = await Lead.findById(req.params.id);
+    if (!lead) return res.status(404).json({ message: 'Lead not found' });
+
+    if (!canEdit(req.user, lead)) {
+      return res.status(403).json({ message: 'You can only delete leads assigned to you' });
+    }
+
+    await Lead.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Lead deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting lead', error: err.message });
+  }
+});
+
+// ============================================================
+// POST /api/leads/import — массовый импорт лидов из Apify JSON
+// ============================================================
+// POST /api/leads/import — массовый импорт лидов из Apify JSON
+router.post('/import', auth, async (req, res) => {
+  try {
+    const userId = req.user?._id || req.user?.id || req.user?.userId;
+    if (!userId) {
+      return res.status(400).json({ message: 'Cannot determine user ID from token' });
+    }
+
+    const { leads, assignedTo, businessType } = req.body;
+
+    if (!Array.isArray(leads)) {
+      return res.status(400).json({ message: 'leads must be an array' });
+    }
+
+    // ------------------------ ДИАГНОСТИКА ------------------------
+    const totalBefore = await Lead.countDocuments();
+    console.log('=== DIAGNOSTIC START ===');
+    console.log('Total leads in DB before import:', totalBefore);
+    if (totalBefore > 0) {
+      const sample = await Lead.find({}).limit(5).select('phone name');
+      console.log('Sample leads in DB:');
+      sample.forEach(l => console.log(`  ${l.phone} — ${l.name}`));
+    } else {
+      console.log('DB is completely empty.');
+    }
+    // -------------------------------------------------------------
+
+    const toInsert = [];
+    const skipped = [];
+
+    for (const item of leads) {
+      // 1. Обязательное наличие телефона
+      if (!item.phone || item.phone.trim() === '') {
+        skipped.push({ title: item.title, reason: 'Missing phone' });
+        continue;
+      }
+
+      const phoneTrimmed = item.phone.trim();
+      console.log(`Checking phone: "${phoneTrimmed}"`);
+
+      // 2. Поиск дубликата по телефону
+      const existingByPhone = await Lead.findOne({ phone: phoneTrimmed });
+      if (existingByPhone) {
+        console.log(`  -> DUPLICATE FOUND: existing lead "${existingByPhone.name}"`);
+        skipped.push({ title: item.title, reason: 'Duplicate phone' });
+        continue;
+      }
+
+      // 3. Определяем businessType
+      const finalBusinessType = businessType
+        ? businessType
+        : (item.categoryName || 'Other');
+
+      // 4. Приводим assignedTo
+      const assignedToId = (assignedTo && assignedTo !== '') ? assignedTo : null;
+
+      const newLead = {
+        name: item.title,
+        phone: phoneTrimmed,
+        source: item.url || '',
+        city: item.city || '',
+        businessType: finalBusinessType,
+        servicesRequested: item.categories || [],
+        comment: `Imported from Apify. Rating: ${item.totalScore}, reviews: ${item.reviewsCount}`,
+        status: 'New',
+        price: 0,
+        priority: 'Medium',
+        createdBy: userId,
+        assignedTo: assignedToId,
+        businessHours: '',
+      };
+
+      toInsert.push(newLead);
+    }
+
+    if (toInsert.length > 0) {
+      await Lead.insertMany(toInsert);
+      console.log(`Inserted ${toInsert.length} documents.`);
+    }
+
+    console.log(`Skipped ${skipped.length} documents.`);
+    console.log('=== DIAGNOSTIC END ===');
+
+    res.json({
+      inserted: toInsert.length,
+      skipped: skipped.length,
+      skippedDetails: skipped,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+module.exports = router;

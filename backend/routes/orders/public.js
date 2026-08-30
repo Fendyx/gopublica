@@ -1,45 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Order = require('../../models/Order');
+const { Stripe } = require('../../services/payments/stripe');
+const { calculateFees } = require('../../services/payments/fees');
+const Order = require('../../models/food/Order');
 const Customer = require('../../models/Customer');
 const CustomerUser = require('../../models/CustomerUser');
 const Branch = require('../../models/Branch');
 const TenantSettings = require('../../models/TenantSettings');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { getModuleAccess } = require('../../services/moduleAccess');
-const { checkAvailability } = require('../../services/ticketService');
+const { getModuleAccess } = require('../../services/tenant/moduleAccess');
+const { checkAvailability } = require('../../services/booking/tickets');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
   return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
 }
 
-// ==============================
-// ЕДИНАЯ ФУНКЦИЯ РАСЧЁТА ЦЕНЫ
-// ==============================
-function calculateFees(subtotal, deliveryFee, tenant) {
-  const platformFeePercent = (tenant?.payments?.platformFeePercent ?? 5) / 100;
-  const stripePct = (tenant?.payments?.stripeFeePercent ?? 3.25) / 100;
-  const stripeFix = tenant?.payments?.stripeFeeFixed ?? 1.0;
-
-  const baseAmount = subtotal + deliveryFee;
-  const platformFee = Math.round(subtotal * platformFeePercent * 100) / 100;
-  const stripeFee = Math.round((baseAmount * stripePct + stripeFix) * 100) / 100;
-  const serviceFee = Math.round((platformFee + stripeFee) * 100) / 100;
-  const total = Math.round((baseAmount + serviceFee) * 100) / 100;
-
-  return {
-    subtotal,
-    deliveryFee,
-    platformFee,
-    stripeFee,
-    serviceFee,
-    total,
-  };
-}
+// calculateFees is imported from ../../services/payments/fees
 
 // ==============================
 // MIDDLEWARE: определение тенанта
@@ -292,6 +271,11 @@ router.post('/', getTenant, async (req, res) => {
     });
 
     await order.save();
+
+    // Fire-and-forget tenant Telegram notification
+    require('../../services/notifications/tenantTelegram')
+      .notifyNewOrder(tenantId, resolvedBranchId, order)
+      .catch(err => console.error('Tenant Telegram order notification failed:', err.message));
 
     res.status(201).json({
       orderId: order._id,

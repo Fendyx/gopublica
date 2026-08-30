@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const BeautyMaster = require('../../models/beauty/Master');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // Публичный: список мастеров (с фильтром по услугам)
 router.get('/', async (req, res) => {

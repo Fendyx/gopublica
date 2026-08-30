@@ -3,8 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
-const authTenant = require('../../middleware/authTenant');
-const { getModuleAccess } = require('../../services/moduleAccess');
+const authTenant = require('../../middleware/auth/tenant');
+const { getModuleAccess } = require('../../services/tenant/moduleAccess');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -48,7 +48,8 @@ router.get('/by-domain', async (req, res) => {
       .select(
         'tenantId niche businessType moduleAccess theme features businessName ' +
         'phone address email hours seoTitle seoDescription ' +
-        'primaryLanguage primaryCurrency legal'
+        'primaryLanguage primaryCurrency legal ' +
+        'logistics.enabled logistics.provider logistics.mapApiKey logistics.env'
       );
 
     if (!settings) return res.status(404).json({ error: 'Tenant not found' });

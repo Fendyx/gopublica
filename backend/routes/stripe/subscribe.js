@@ -1,8 +1,18 @@
 const express    = require('express');
 const router     = express.Router();
-const Stripe     = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const {
+  attachPaymentMethod,
+  updateCustomer,
+  retrieveCustomer,
+  createCustomer,
+  setDefaultPaymentMethod,
+  listTaxIds,
+  deleteTaxId,
+  createTaxId,
+  retrievePrice,
+} = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 router.post('/subscribe', authTenant, async (req, res) => {
   try {
@@ -28,9 +38,7 @@ router.post('/subscribe', authTenant, async (req, res) => {
     }
 
     // Привязываем PaymentMethod к Customer
-    await Stripe.paymentMethods.attach(paymentMethodId, {
-      customer: user.stripeCustomerId,
-    });
+    await attachPaymentMethod(paymentMethodId, user.stripeCustomerId);
 
     // 2. ОБНОВЛЯЕМ ДАННЫЕ CUSTOMER (Добавляем адрес/страну для налогов)
     const customerUpdateData = {};
@@ -43,26 +51,24 @@ router.post('/subscribe', authTenant, async (req, res) => {
     }
 
     if (Object.keys(customerUpdateData).length > 0) {
-      await Stripe.customers.update(user.stripeCustomerId, customerUpdateData);
+      await updateCustomer(user.stripeCustomerId, customerUpdateData);
     }
 
     // Устанавливаем PaymentMethod как дефолтный
-    await Stripe.customers.update(user.stripeCustomerId, {
-      invoice_settings: { default_payment_method: paymentMethodId },
-    });
+    await setDefaultPaymentMethod(user.stripeCustomerId, paymentMethodId);
 
     // 3. БЕЗОПАСНО ОБНОВЛЯЕМ VAT ID
     if (vatId !== undefined && vatId !== user.vatId) {
-      const existingTaxIds = await Stripe.customers.listTaxIds(user.stripeCustomerId);
+      const existingTaxIds = await listTaxIds(user.stripeCustomerId);
       for (const tax of existingTaxIds.data) {
         if (tax.type === 'eu_vat') {
-          await Stripe.customers.deleteTaxId(user.stripeCustomerId, tax.id);
+          await deleteTaxId(user.stripeCustomerId, tax.id);
         }
       }
       
       if (vatId) {
         try {
-          await Stripe.customers.createTaxId(user.stripeCustomerId, {
+          await createTaxId(user.stripeCustomerId, {
             type: 'eu_vat',
             value: vatId.toUpperCase().replace(/\s/g, ''),
           });
@@ -73,7 +79,7 @@ router.post('/subscribe', authTenant, async (req, res) => {
     }
 
     // 4. ПРОВЕРЯЕМ, ДОСТУПНА ЛИ ВАЛЮТА ДЛЯ ЭТОГО PRICE ID
-    const price = await Stripe.prices.retrieve(priceId);
+    const price = await retrievePrice(priceId);
     const availableCurrencies = [
       price.currency,
       ...Object.keys(price.currency_options || {})
@@ -83,9 +89,38 @@ router.post('/subscribe', authTenant, async (req, res) => {
       return res.status(400).json({ error: `Валюта ${normalizedCurrency.toUpperCase()} недоступна для этого тарифа` });
     }
 
-    // 5. СОЗДАЁМ ПОДПИСКУ С ПЕРЕДАЧЕЙ ВАЛЮТЫ
+    // 5. ОПРЕДЕЛЯЕМ STRIPE CUSTOMER ДЛЯ ПОДПИСКИ
+    //    Stripe Customer currency is immutable once set by an invoice/payment.
+    //    If the existing customer is locked to a different currency, we must
+    //    create a fresh customer so that the subscription can use the desired currency.
+    let subscriptionCustomerId = user.stripeCustomerId;
+
+    const stripeCustomer = await retrieveCustomer(user.stripeCustomerId);
+    if (stripeCustomer.currency && stripeCustomer.currency !== normalizedCurrency) {
+      console.log(
+        `⚠️ Customer ${user.stripeCustomerId} locked to ${stripeCustomer.currency.toUpperCase()}, ` +
+        `creating new customer for ${normalizedCurrency.toUpperCase()}`
+      );
+
+      const newCustomer = await createCustomer({
+        email: user.email,
+        name: companyName || user.companyName || user.name,
+        metadata: { userId: user._id.toString(), tenantId: user.tenantId || '' },
+      });
+      subscriptionCustomerId = newCustomer.id;
+
+      // Migrate payment method to the new customer
+      await attachPaymentMethod(paymentMethodId, newCustomer.id);
+      await setDefaultPaymentMethod(newCustomer.id, paymentMethodId);
+
+      // Update the local user record to point to the new Stripe customer
+      user.stripeCustomerId = newCustomer.id;
+    }
+
+    // 6. СОЗДАЁМ ПОДПИСКУ С ПЕРЕДАЧЕЙ ВАЛЮТЫ
+    const { Stripe } = require('../../services/payments/stripe');
     const subscription = await Stripe.subscriptions.create({
-      customer: user.stripeCustomerId,
+      customer: subscriptionCustomerId,
       items: [{ price: priceId }],
       currency: normalizedCurrency, // <-- КЛЮЧЕВАЯ СТРОКА МУЛЬТИВАЛЮТНОСТИ
       trial_period_days: 30,

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const JobApplication = require('../../models/JobApplication');
-const JobFormSettings = require('../../models/JobFormSettings');
+const JobApplication = require('../../models/hr/JobApplication');
+const JobFormSettings = require('../../models/hr/JobFormSettings');
 const TenantSettings = require('../../models/TenantSettings');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // ---- Заявки ----
 

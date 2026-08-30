@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const JobApplication = require('../../models/JobApplication');
+const JobApplication = require('../../models/hr/JobApplication');
 const TenantSettings = require('../../models/TenantSettings');
-const authTenant = require('../../middleware/authTenant');
+const authTenant = require('../../middleware/auth/tenant');
 
 // ============================================================
 // Dynamic Form Submissions (SaaS admin)

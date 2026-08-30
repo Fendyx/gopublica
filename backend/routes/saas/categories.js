@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const CategoryTranslation = require('../../models/CategoryTranslation');
-const authTenant = require('../../middleware/authTenant');
+const CategoryTranslation = require('../../models/food/CategoryTranslation');
+const authTenant = require('../../middleware/auth/tenant');
 
 // ПУБЛИЧНЫЙ РОУТ: Получить доступные категории (свои + глобальные)
 router.get('/', async (req, res) => {

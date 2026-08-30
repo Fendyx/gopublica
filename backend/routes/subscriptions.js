@@ -1,8 +1,8 @@
-const express      = require('express');
+﻿const express      = require('express');
 const router       = express.Router();
-const Subscription = require('../models/Subscription');
-const auth         = require('../middleware/auth');
-const checkRole    = require('../middleware/checkRole');
+const Subscription = require('../models/payments/Subscription');
+const auth         = require('../middleware/auth/jwt');
+const checkRole    = require('../middleware/auth/role');
 
 const ADMIN = ['admin', 'superadmin'];
 

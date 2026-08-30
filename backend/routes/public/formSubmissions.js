@@ -1,40 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
-const fs = require('fs');
-const multer = require('multer');
+const { resumeUpload } = require('../../middleware/common/upload');
 const BranchSection = require('../../models/BranchSection');
 const Branch = require('../../models/Branch');
-const JobApplication = require('../../models/JobApplication');
+const JobApplication = require('../../models/hr/JobApplication');
 const TenantSettings = require('../../models/TenantSettings');
-
-// ── Multer config (reused from jobsPublic.js) ─────────────────────────
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../../uploads/resumes');
-    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, `resume-${unique}${ext}`);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    const allowed = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    ];
-    if (allowed.includes(file.mimetype)) cb(null, true);
-    else cb(new Error('Только PDF, DOC, DOCX'), false);
-  },
-});
 
 // ── Lightweight in-memory rate limiter (no external dependency) ──────
 // Sliding-window counter keyed by IP + sectionId. 5 submissions per 60s.
@@ -94,7 +64,7 @@ function coerceString(value) {
  *   - validates required fields against section.settings.fields
  *   - stores the submission as a JobApplication with sourceSectionId
  */
-router.post('/:sectionId/submit', rateLimit, upload.any(), async (req, res) => {
+router.post('/:sectionId/submit', rateLimit, resumeUpload.single('resume'), async (req, res) => {
   try {
     const { sectionId } = req.params;
 
@@ -140,7 +110,7 @@ router.post('/:sectionId/submit', rateLimit, upload.any(), async (req, res) => {
       if (!field.required) continue;
 
       if (field.type === 'file') {
-        const uploaded = (req.files || []).find(f => f.fieldname === field.id);
+        const uploaded = req.file && req.file.fieldname === field.id ? req.file : null;
         if (!uploaded) {
           return res.status(400).json({ error: `Поле "${field.label}" обязательно` });
         }
@@ -159,10 +129,10 @@ router.post('/:sectionId/submit', rateLimit, upload.any(), async (req, res) => {
       fieldsMap.set(key, value);
     }
 
-    // Attach uploaded files by field id
+    // Attach uploaded file by field id
     const files = {};
-    for (const file of req.files || []) {
-      files[file.fieldname] = `/uploads/resumes/${file.filename}`;
+    if (req.file) {
+      files[req.file.fieldname] = `/uploads/resumes/${req.file.filename}`;
     }
 
     const application = new JobApplication({
@@ -178,6 +148,11 @@ router.post('/:sectionId/submit', rateLimit, upload.any(), async (req, res) => {
     console.log(
       `📩 Новая заявка из формы "${section._id}" для тенанта ${tenantId}`
     );
+
+    // Fire-and-forget tenant Telegram notification
+    require('../../services/notifications/tenantTelegram')
+      .notifyNewPartnerRequest(tenantId, branchId, application)
+      .catch(err => console.error('Tenant Telegram partner request notification failed:', err.message));
 
     res.status(201).json({
       success: true,
