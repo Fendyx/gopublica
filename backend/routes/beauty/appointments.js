@@ -2,12 +2,29 @@ const express = require('express');
 const router = express.Router();
 const BeautyAppointment = require('../../models/beauty/Appointment');
 const authTenant = require('../../middleware/auth/tenant');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // Публичный: создание записи
 router.post('/', async (req, res) => {
   try {
-    const { tenantId, name, phone, email, date, time, guests, comment, serviceId } = req.body;
+    const { tenantId, name, phone, email, date, time, guests, comment, serviceId, consents } = req.body;
     const appointment = new BeautyAppointment({ tenantId, name, phone, email, date, time, guests, comment, serviceId });
+
+    // ── GDPR: Record consent (best-effort — never block appointment) ──
+    if (consents) {
+      try {
+        appointment._consent = await writeConsentLog({
+          entityType: 'BeautyAppointment',
+          entityId: appointment._id,
+          tenantId,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for BeautyAppointment:', consentErr.message);
+      }
+    }
+
     await appointment.save();
     res.status(201).json(appointment);
   } catch (err) {

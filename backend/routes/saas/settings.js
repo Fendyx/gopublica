@@ -46,7 +46,7 @@ router.get('/by-domain', async (req, res) => {
     const settings = await TenantSettings
       .findOne({ $or: [{ domain }, { aliases: domain }] })
       .select(
-        'tenantId niche businessType moduleAccess theme features businessName ' +
+        'tenantId niche businessType moduleAccess theme features businessName logoUrl faviconUrl ' +
         'phone address email hours seoTitle seoDescription ' +
         'primaryLanguage primaryCurrency legal ' +
         'logistics.enabled logistics.provider logistics.mapApiKey logistics.env'
@@ -186,6 +186,20 @@ router.put('/', authTenant, async (req, res) => {
         { upsert: true }
       );
       delete reqBody.businessName;
+    }
+
+    // 1b. Сохраняем логотип и фавикон глобально (tenant-level branding)
+    const brandingFields = {};
+    if (reqBody.logoUrl !== undefined) brandingFields.logoUrl = reqBody.logoUrl;
+    if (reqBody.faviconUrl !== undefined) brandingFields.faviconUrl = reqBody.faviconUrl;
+    if (Object.keys(brandingFields).length > 0) {
+      await TenantSettings.findOneAndUpdate(
+        { tenantId },
+        { $set: brandingFields },
+        { upsert: true }
+      );
+      delete reqBody.logoUrl;
+      delete reqBody.faviconUrl;
     }
 
     // 2. Сохраняем тему глобально

@@ -24,6 +24,27 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
       // ----------------- Заказы (онлайн-меню) -----------------
       case 'payment_intent.succeeded': {
         const paymentIntent = event.data.object;
+
+        // ── Platform Marketplace Orders ──
+        if (paymentIntent.metadata?.type === 'platform_order' && paymentIntent.metadata?.platformOrderId) {
+          const PlatformOrder = require('../../models/platform/PlatformOrder');
+          const { createPlatformFurgonetkaShipment } = require('../../services/platform/furgonetka');
+          const platformOrder = await PlatformOrder.findById(paymentIntent.metadata.platformOrderId);
+          if (platformOrder && platformOrder.paymentStatus !== 'paid') {
+            platformOrder.paymentStatus = 'paid';
+            platformOrder.stripePaymentIntentId = paymentIntent.id;
+            await platformOrder.save();
+            console.log(`✅ Platform order ${platformOrder._id} marked as paid`);
+
+            // Create Furgonetka shipment for parcel locker deliveries
+            if (platformOrder.fulfillment?.parcelLocker?.enabled) {
+              await createPlatformFurgonetkaShipment(platformOrder);
+            }
+          }
+          break;
+        }
+
+        // ── Tenant food/beauty orders ──
         if (paymentIntent.metadata?.orderId) {
           const order = await Order.findById(paymentIntent.metadata.orderId);
           if (order && order.status === 'pending_payment') {
@@ -80,7 +101,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
         break;
       }
 
-      // ----------------- Подписки -----------------
+      // ----------------- Subscriptions -----------------
       case 'checkout.session.completed': {
         const session = event.data.object;
         const sub     = await Stripe.subscriptions.retrieve(session.subscription);

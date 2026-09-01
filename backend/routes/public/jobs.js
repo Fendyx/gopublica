@@ -4,6 +4,7 @@ const { resumeUpload } = require('../../middleware/common/upload');
 const JobApplication = require('../../models/hr/JobApplication');
 const JobFormSettings = require('../../models/hr/JobFormSettings');
 const TenantSettings = require('../../models/TenantSettings');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 const upload = resumeUpload.single('resume');
 
@@ -145,6 +146,12 @@ router.post('/apply', upload, async (req, res) => {
       resumeUrl = `/uploads/resumes/${req.file.filename}`;
     }
 
+    // Parse consent from FormData (sent as JSON string)
+    let consents = null;
+    if (req.body.consents) {
+      try { consents = JSON.parse(req.body.consents); } catch {}
+    }
+
     const application = new JobApplication({
       tenantId,
       branchId: req.body.branchId || null,
@@ -152,6 +159,22 @@ router.post('/apply', upload, async (req, res) => {
       resumeUrl,
       status: 'new',
     });
+
+    // ── GDPR: Record consent (best-effort — never block application) ──
+    if (consents) {
+      try {
+        application._consent = await writeConsentLog({
+          entityType: 'JobApplication',
+          entityId: application._id,
+          tenantId,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for JobApplication:', consentErr.message);
+      }
+    }
+
     await application.save();
 
     console.log(`📩 Новая заявка от ${formData.fullName || 'Аноним'} для тенанта ${tenantId}`);

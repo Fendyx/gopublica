@@ -6,6 +6,7 @@ const Reservation = require('../../models/food/Reservation');
 const Branch = require('../../models/Branch');
 const PushSubscription = require('../../models/communication/PushSubscription');
 const authTenant = require('../../middleware/auth/tenant');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -16,16 +17,21 @@ function isValidObjectId(str) {
 router.post('/', async (req, res) => {
   try {
     const { tenantId } = req.query;
-    if (!tenantId) return res.status(400).json({ error: 'tenantId обязателен' });
-
-    const { branchId, branchSlug, name, phone, email, date, time, guests, comment } = req.body;
+    const { branchId, branchSlug, name, phone, email, date, time, guests, comment, consents } = req.body;
 
     let resolvedBranchId = branchId;
+
+    // If branchId is provided but is NOT a valid ObjectId, treat it as a slug
+    if (resolvedBranchId && !isValidObjectId(resolvedBranchId)) {
+      const branch = await Branch.findOne({ slug: resolvedBranchId, tenantId });
+      if (!branch) return res.status(404).json({ error: 'Филиал не найден или не принадлежит тенанту' });
+      resolvedBranchId = branch._id;
+    }
 
     // If branchSlug is provided, resolve it to a branchId
     if (!resolvedBranchId && branchSlug) {
       const branch = await Branch.findOne({ slug: branchSlug, tenantId });
-      if (!branch) return res.status(403).json({ error: 'Филиал не найден или не принадлежит тенанту' });
+      if (!branch) return res.status(404).json({ error: 'Филиал не найден или не принадлежит тенанту' });
       resolvedBranchId = branch._id;
     }
 
@@ -33,7 +39,7 @@ router.post('/', async (req, res) => {
 
     // Проверяем, что филиал принадлежит этому тенанту
     const branch = await Branch.findOne({ _id: resolvedBranchId, tenantId });
-    if (!branch) return res.status(403).json({ error: 'Филиал не найден или не принадлежит тенанту' });
+    if (!branch) return res.status(404).json({ error: 'Филиал не найден или не принадлежит тенанту' });
 
     const reservation = new Reservation({
       tenantId,
@@ -46,7 +52,29 @@ router.post('/', async (req, res) => {
       guests,
       comment,
     });
+    console.log('🟢 [RESERVATION] Reservation created (unsaved), _id:', reservation._id);
+
+    // ── GDPR: Record consent (best-effort — never block reservation) ──
+    if (consents) {
+      console.log('🟢 [RESERVATION] Writing consent log...', consents);
+      try {
+        reservation._consent = await writeConsentLog({
+          entityType: 'Reservation',
+          entityId: reservation._id,
+          tenantId,
+          consents,
+          context: req.consentContext,
+        });
+        console.log('🟢 [RESERVATION] Consent log written:', JSON.stringify(reservation._consent));
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for Reservation:', consentErr.message);
+        console.error('⚠️ Consent logging error stack:', consentErr.stack);
+      }
+    }
+
+    console.log('🟢 [RESERVATION] Calling reservation.save()...');
     await reservation.save();
+    console.log('🟢 [RESERVATION] Reservation saved successfully, _id:', reservation._id);
 
     // Fire-and-forget tenant Telegram notification
     require('../../services/notifications/tenantTelegram')
@@ -77,8 +105,15 @@ router.post('/', async (req, res) => {
       }
     }
 
+    console.log('🟢 [RESERVATION] Sending 201 response...');
     res.status(201).json(reservation);
   } catch (err) {
+    console.error('🔴 [RESERVATION] POST /api/saas/reservations error:');
+    console.error('🔴 error name:', err.name);
+    console.error('🔴 error message:', err.message);
+    console.error('🔴 error stack:', err.stack);
+    console.error('🔴 error object keys:', Object.keys(err));
+    if (err.errors) console.error('🔴 validation errors:', JSON.stringify(err.errors, null, 2));
     res.status(500).json({ error: err.message });
   }
 });

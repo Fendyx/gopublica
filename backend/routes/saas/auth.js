@@ -9,6 +9,7 @@ const authTenant = require('../../middleware/auth/tenant');
 const checkRole = require('../../middleware/auth/role');
 const ConsentRecord = require('../../models/payments/ConsentRecord');
 const { ensureTenantSettings } = require('../../services/tenant/bootstrap');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 const ADMIN = ['admin', 'superadmin'];
 
@@ -72,24 +73,24 @@ router.post('/register', async (req, res) => {
       }
     }
 
-    // ── Фиксация согласий ─────────────────────────────────
+    // ── Фиксация согласий (via shared GDPR utility) ──────────
     const consents = { terms: false, privacy: false, marketing: false };
-    if (termsAccepted) {
-      consents.terms = true;
-      await ConsentRecord.create({ userId: user._id, type: 'terms', granted: true, ip: req.ip, userAgent: req.get('User-Agent') });
-    }
-    if (privacyAccepted) {
-      consents.privacy = true;
-      await ConsentRecord.create({ userId: user._id, type: 'privacy', granted: true, ip: req.ip, userAgent: req.get('User-Agent') });
-    }
-    if (marketingConsent !== undefined) {
-      consents.marketing = marketingConsent;
-      await ConsentRecord.create({ userId: user._id, type: 'marketing', granted: marketingConsent, ip: req.ip, userAgent: req.get('User-Agent') });
-    }
-    user.consents = {
-      ...consents,
-      lastUpdated: new Date()
-    };
+    if (termsAccepted) consents.terms = true;
+    if (privacyAccepted) consents.privacy = true;
+    if (marketingConsent !== undefined) consents.marketing = marketingConsent;
+
+    user.consents = { ...consents, lastUpdated: new Date() };
+
+    // Unified GDPR consent logging (replaces manual ConsentRecord.create calls)
+    await writeConsentLog({
+      entityType: 'TenantUser',
+      entityId: user._id,
+      tenantId: user.tenantId || 'gopublica',
+      userId: user._id,
+      consents,
+      context: req.consentContext,
+    });
+
     await user.save();
 
     const token = jwt.sign(

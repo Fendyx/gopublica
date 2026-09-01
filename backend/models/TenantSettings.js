@@ -9,6 +9,10 @@ const tenantSettingsSchema = new mongoose.Schema({
 
   businessName: { type: String, default: '' },
 
+  // ─── Branding: логотип и фавикон ──────────────────────────────────────────────
+  logoUrl:    { type: String, default: '' },
+  faviconUrl: { type: String, default: '' },
+
   // ─── Контактные данные (было) ───────────────────────────────────────────────
   phone:          { type: String, default: '' },
   address:        { type: String, default: '' },

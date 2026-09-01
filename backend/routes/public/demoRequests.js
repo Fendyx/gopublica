@@ -135,8 +135,8 @@ router.post('/', demoLimiter, async (req, res) => {
       locale: typeof locale === 'string' ? locale : 'en',
       source: typeof source === 'string' && source ? source : 'website-demo-funnel',
       consentAccepted: !!consentAccepted,
-      userAgent: req.headers['user-agent'] || '',
-      ip: req.ip || req.socket?.remoteAddress || '',
+      userAgent: req.consentContext?.userAgent || req.headers['user-agent'] || '',
+      ip: req.consentContext?.ip || req.ip || '',
     });
 
     // Fire-and-forget notification — never block the response on it.

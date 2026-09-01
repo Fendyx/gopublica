@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { getModuleAccess } = require('../../services/tenant/moduleAccess');
 const { checkAvailability } = require('../../services/booking/tickets');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -269,6 +270,22 @@ router.post('/', getTenant, async (req, res) => {
       },
       locale,
     });
+
+    // ── GDPR: Record consent (best-effort — never block order creation) ──
+    if (consents) {
+      try {
+        order._consent = await writeConsentLog({
+          entityType: 'Order',
+          entityId: order._id,
+          tenantId,
+          userId: customerUserId,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for Order:', consentErr.message);
+      }
+    }
 
     await order.save();
 

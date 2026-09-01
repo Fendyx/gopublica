@@ -3,11 +3,12 @@ const router = express.Router();
 const CustomerUser = require('../../models/CustomerUser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // Роут: POST /api/public/auth/register
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, phone, password, tenantId } = req.body;
+    const { name, email, phone, password, tenantId, consents } = req.body;
 
     // Проверяем, есть ли tenantId (откуда пришел пользователь)
     // Если его нет в body, можно попытаться взять из хедера (X-Tenant-ID), 
@@ -34,6 +35,28 @@ router.post('/register', async (req, res) => {
       tenantId: finalTenantId,
     });
 
+    // ── GDPR: Record consent (best-effort — never block registration) ──
+    if (consents?.terms && consents?.privacy) {
+      newUser.consents = {
+        terms: true,
+        privacy: true,
+        marketing: Boolean(consents.marketing),
+        acceptedAt: new Date(),
+      };
+      try {
+        newUser._consent = await writeConsentLog({
+          entityType: 'CustomerUser',
+          entityId: newUser._id,
+          tenantId: finalTenantId,
+          userId: newUser._id,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for CustomerUser:', consentErr.message);
+      }
+    }
+
     await newUser.save();
 
     // Генерируем токен для автологина после регистрации
@@ -45,6 +68,10 @@ router.post('/register', async (req, res) => {
 
     res.status(201).json({ token, user: { id: newUser._id, name, email, phone } });
   } catch (err) {
+    // Handle duplicate email gracefully (unique index on email field)
+    if (err.code === 11000) {
+      return res.status(409).json({ error: 'A user with this email already exists' });
+    }
     console.error('Register error:', err);
     res.status(500).json({ error: 'Server error during registration' });
   }

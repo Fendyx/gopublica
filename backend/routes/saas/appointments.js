@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const ServiceAppointment = require('../../models/booking/ServiceAppointment');
 const Branch = require('../../models/Branch');
 const resolveTenant = require('../../middleware/tenant/resolve');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -41,6 +42,7 @@ router.post('/public', resolveTenant, async (req, res) => {
       guestInfo,
       metadata,
       notes,
+      consents,
     } = req.body;
 
     // Resolve branchId from branchSlug if needed
@@ -94,6 +96,21 @@ router.post('/public', resolveTenant, async (req, res) => {
       metadata: metadata || {},
       notes: notes || '',
     });
+
+    // ── GDPR: Record consent (best-effort — never block appointment) ──
+    if (consents) {
+      try {
+        appointment._consent = await writeConsentLog({
+          entityType: 'ServiceAppointment',
+          entityId: appointment._id,
+          tenantId,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for ServiceAppointment:', consentErr.message);
+      }
+    }
 
     const savedAppointment = await appointment.save();
 

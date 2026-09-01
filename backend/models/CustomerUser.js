@@ -27,12 +27,23 @@ const customerUserSchema = new mongoose.Schema({
     index: true,
   },
   
-  // GDPR: Согласия
+  // GDPR: Согласия (snapshot на аккаунте)
   consents: {
     terms: { type: Boolean, default: false },
     privacy: { type: Boolean, default: false },
     marketing: { type: Boolean, default: false },
     acceptedAt: { type: Date }, // Когда принял условия
+  },
+
+  // GDPR: Proof-of-consent snapshot (embedded for immutable audit)
+  _consent: {
+    terms:     { type: Boolean, default: null },
+    privacy:   { type: Boolean, default: null },
+    marketing: { type: Boolean, default: false },
+    ip:        { type: String, default: '' },
+    userAgent: { type: String, default: '' },
+    timestamp: { type: Date, default: null },
+    version:   { type: String, default: '1.0' },
   },
 }, { timestamps: true });
 

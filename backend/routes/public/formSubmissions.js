@@ -5,6 +5,7 @@ const BranchSection = require('../../models/BranchSection');
 const Branch = require('../../models/Branch');
 const JobApplication = require('../../models/hr/JobApplication');
 const TenantSettings = require('../../models/TenantSettings');
+const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 // ── Lightweight in-memory rate limiter (no external dependency) ──────
 // Sliding-window counter keyed by IP + sectionId. 5 submissions per 60s.
@@ -13,7 +14,7 @@ const RATE_LIMIT_MAX = 5;
 const rateLimitMap = new Map();
 
 function rateLimit(req, res, next) {
-  const ip = req.ip || req.socket.remoteAddress || 'unknown';
+  const ip = req.consentContext?.ip || req.ip || 'unknown';
   const sectionId = req.params.sectionId || 'unknown';
   const key = `${ip}:${sectionId}`;
   const now = Date.now();
@@ -135,6 +136,12 @@ router.post('/:sectionId/submit', rateLimit, resumeUpload.single('resume'), asyn
       files[req.file.fieldname] = `/uploads/resumes/${req.file.filename}`;
     }
 
+    // Parse consent from FormData (sent as JSON string)
+    let consents = null;
+    if (req.body.consents) {
+      try { consents = JSON.parse(req.body.consents); } catch {}
+    }
+
     const application = new JobApplication({
       tenantId,
       branchId,
@@ -143,6 +150,22 @@ router.post('/:sectionId/submit', rateLimit, resumeUpload.single('resume'), asyn
       resumeUrl: files.resume || '',
       status: 'new',
     });
+
+    // ── GDPR: Record consent (best-effort — never block application) ──
+    if (consents) {
+      try {
+        application._consent = await writeConsentLog({
+          entityType: 'JobApplication',
+          entityId: application._id,
+          tenantId,
+          consents,
+          context: req.consentContext,
+        });
+      } catch (consentErr) {
+        console.error('⚠️ Consent logging failed for FormSubmission:', consentErr.message);
+      }
+    }
+
     await application.save();
 
     console.log(

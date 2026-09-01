@@ -48,7 +48,6 @@ function registerRoutes(app) {
   app.use('/api/saas/appointments', require('./saas/appointments'));
   app.use('/api/saas/orders', require('./saas/orders'));
   app.use('/api/saas/gallery', require('./saas/gallery'));
-  app.use('/api/saas/news', require('./saas/news'));
   app.use('/api/saas/branches', require('./saas/branches'));
   app.use('/api/saas/analytics', require('./saas/analytics'));
   app.use('/api/saas/push', require('./saas/push'));
@@ -73,6 +72,11 @@ function registerRoutes(app) {
   app.use('/api/stripe', require('./stripe/subscribe'));
   app.use('/api/stripe', require('./stripe/cancel'));
   app.use('/api/stripe', require('./stripe/prices'));
+
+  // Platform Marketplace (products, orders, news)
+  app.use('/api/platform/products', require('./platform/products'));
+  app.use('/api/platform/orders', require('./platform/orders'));
+  app.use('/api/platform/news', require('./platform/news'));
 
   // Beauty (legacy standalone)
   app.use('/api/beauty/services', require('./beauty/services'));
