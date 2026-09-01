@@ -1,4 +1,4 @@
-export const termsPl = `
+export const termsEn = `
 # REGULAMIN ŚWIADCZENIA USŁUG (TERMS OF SERVICE)
 
 **Ostatnia aktualizacja: 10 czerwca 2026 r.**

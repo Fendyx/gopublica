@@ -1,4 +1,4 @@
-export const privacyPl = `
+export const privacyEn = `
 # POLITYKA PRYWATNOŚCI
 
 **Ostatnia aktualizacja: 10 czerwca 2026 r.**

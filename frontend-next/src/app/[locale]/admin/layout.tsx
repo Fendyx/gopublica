@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl';
 import { useAuthStore } from '@/store/authStore';
 import {
   LayoutDashboard, Users, FileText, Settings, Menu, X, LogOut,
-  Target,
+  Target, Package, ShoppingCart, Megaphone,
 } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 
@@ -43,6 +43,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: `/${locale}/admin/leads`, label: 'Leads', icon: Target },
     { href: `/${locale}/admin/clients`, label: 'Clients', icon: Users },
     { href: `/${locale}/admin/news`, label: 'Newsletters', icon: FileText },
+    { href: `/${locale}/admin/platform-products`, label: 'Platform Products', icon: Package },
+    { href: `/${locale}/admin/platform-orders`, label: 'Platform Orders', icon: ShoppingCart },
+    { href: `/${locale}/admin/platform-news`, label: 'Platform News', icon: Megaphone },
     { href: `/${locale}/admin/settings`, label: 'Settings', icon: Settings },
   ];
 
