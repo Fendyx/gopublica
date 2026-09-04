@@ -44,6 +44,7 @@ function registerRoutes(app) {
   app.use('/api/saas/dashboard', require('./saas/dashboard'));
   app.use('/api/saas/menu', require('./saas/menu'));
   app.use('/api/saas/categories', require('./saas/categories'));
+  app.use('/api/saas/product-attributes', require('./saas/productAttributes'));
   app.use('/api/saas/reservations', require('./saas/reservations'));
   app.use('/api/saas/appointments', require('./saas/appointments'));
   app.use('/api/saas/orders', require('./saas/orders'));
@@ -104,6 +105,10 @@ function registerRoutes(app) {
   app.use('/api/public/auth', require('./public/auth'));
 
   // ── Публичные роуты (Клиенты) ────────────────────────
+  // Product search & related
+  app.use('/api/public/products/search', require('./public/productSearch'));
+  app.use('/api/public/products/related', require('./public/relatedProducts'));
+
   // Чекаут и оплата
   app.use('/api/orders/public', ordersPublicRoutes);
   // Личный кабинет и история заказов

@@ -41,6 +41,12 @@ const articleSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    contentType: {
+      // 'article' = full article with metadata; 'infoPage' = simple info page (no author/date)
+      type: String,
+      enum: ['article', 'infoPage'],
+      default: 'article',
+    },
     isActive: {
       type: Boolean,
       default: true,
@@ -50,6 +56,13 @@ const articleSchema = new mongoose.Schema(
     },
     seoDescription: {
       type: String,
+    },
+    // ── Sidebar type: what to display alongside the article ──
+    // 'none' = no sidebar, 'tickets' = TicketCard, 'direction' = DirectionCard
+    sidebarType: {
+      type: String,
+      enum: ['none', 'tickets', 'direction'],
+      default: 'none',
     },
   },
   { timestamps: true }

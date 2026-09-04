@@ -97,6 +97,33 @@ const branchSchema = new mongoose.Schema({
     default: null,
   },
 
+  // ─── Custom Pages (page-builder landing pages) ──────────────────────────
+  // Arbitrary landing pages created by the tenant via the Admin Page Builder.
+  // Each entry maps to a storefront route /[locale]/[branchSlug]/p/[slug]
+  // and stores BranchSection documents with page === slug.
+  customPages: [{
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true,
+      match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  }],
+
   // ─── Default branch flag ───────────────────────────────────────────────────
   // Exactly one branch per tenant can be the default. When a visitor lands on
   // /[tenantDomain]/[locale]/ with no branch segment, they are redirected to
@@ -121,6 +148,13 @@ branchSchema.index({ parentBranchId: 1 });
 // Single-field index for public lookups that query by slug alone
 // (e.g. routes/public/branchSections.js resolves branchSlug without tenantId)
 branchSchema.index({ slug: 1 });
+
+// Ensure custom page slugs are unique across all branches of a tenant
+// Uses a partial index: only enforces uniqueness where customPages.slug exists
+branchSchema.index(
+  { tenantId: 1, 'customPages.slug': 1 },
+  { unique: true, sparse: true }
+);
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/content/modelHooks');

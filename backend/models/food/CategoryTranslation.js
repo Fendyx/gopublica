@@ -33,7 +33,9 @@ const categoryTranslationSchema = new mongoose.Schema({
     type: String,
     enum: ['default', 'medium', 'large', 'xlarge', 'full'],
     default: 'default'
-  }
+  },
+  // ── Hierarchical categories ────────────────────────────────────────────────
+  parentCategoryKey: { type: String, default: null, index: true },
 });
 
 categoryTranslationSchema.index({ key: 1, tenantId: 1 }, { unique: true });

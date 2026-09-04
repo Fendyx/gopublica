@@ -3,17 +3,33 @@ const router = express.Router();
 const CategoryTranslation = require('../../models/food/CategoryTranslation');
 const authTenant = require('../../middleware/auth/tenant');
 
+// ── Helper: build nested category tree from flat list ──
+function buildTree(categories, parentKey = null) {
+  return categories
+    .filter(c => (c.parentCategoryKey || null) === parentKey)
+    .sort((a, b) => (a.order || 0) - (b.order || 0) || a.name.localeCompare(b.name))
+    .map(c => ({
+      ...c,
+      children: buildTree(categories, c.key),
+    }));
+}
+
 // ПУБЛИЧНЫЙ РОУТ: Получить доступные категории (свои + глобальные)
 router.get('/', async (req, res) => {
   try {
     const tenantId = req.query.tenantId;
     const niche = req.query.niche || 'food';
+    const parentKey = req.query.parentKey || null;
+    const treeMode = req.query.tree === 'true';
+
     if (!tenantId) {
       const globals = await CategoryTranslation.find({ tenantId: null, niche })
         .sort({ order: 1, name: 1 })
         .lean();
+      if (treeMode) return res.json(buildTree(globals));
       return res.json(globals);
     }
+
     const tenantCats = await CategoryTranslation.find({ tenantId, niche })
       .sort({ order: 1, name: 1 })
       .lean();
@@ -25,7 +41,16 @@ router.get('/', async (req, res) => {
     })
       .sort({ order: 1, name: 1 })
       .lean();
-    res.json([...tenantCats, ...globalCats]);
+
+    const allCats = [...tenantCats, ...globalCats];
+
+    // Filter by parentKey if provided
+    if (parentKey) {
+      return res.json(allCats.filter(c => (c.parentCategoryKey || null) === parentKey));
+    }
+
+    if (treeMode) return res.json(buildTree(allCats));
+    res.json(allCats);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -36,7 +61,7 @@ router.post('/', authTenant, async (req, res) => {
   try {
     const { key, name, description, translations, icon, niche, layout, coverImage,
             cardBgColor, imageAspectRatio, productImageAspectRatio, order, carouselAutoplay,
-            productCardVariant, productCardWidth } = req.body;
+            productCardVariant, productCardWidth, parentCategoryKey } = req.body;
     const tenantId = req.tenantId;
 
     let category = await CategoryTranslation.findOne({ key, tenantId });
@@ -57,7 +82,8 @@ router.post('/', authTenant, async (req, res) => {
       order: order || 0,
       carouselAutoplay: carouselAutoplay || false,
       productCardVariant: productCardVariant || null,
-      productCardWidth: productCardWidth || 'default'
+      productCardWidth: productCardWidth || 'default',
+      parentCategoryKey: parentCategoryKey || null,
     });
     await category.save();
     res.status(201).json(category);
@@ -93,7 +119,7 @@ router.put('/:id', authTenant, async (req, res) => {
   try {
     const { name, description, icon, layout, niche, coverImage, cardBgColor,
             imageAspectRatio, productImageAspectRatio, order, carouselAutoplay,
-            productCardVariant, productCardWidth } = req.body;
+            productCardVariant, productCardWidth, parentCategoryKey } = req.body;
     const tenantId = req.tenantId;
     let category = await CategoryTranslation.findById(req.params.id);
     if (!category) return res.status(404).json({ error: 'Category not found' });
@@ -142,6 +168,7 @@ router.put('/:id', authTenant, async (req, res) => {
     if (niche !== undefined) category.niche = niche;
     if (coverImage !== undefined) category.coverImage = coverImage;
     if (cardBgColor !== undefined) category.cardBgColor = cardBgColor;
+    if (parentCategoryKey !== undefined) category.parentCategoryKey = parentCategoryKey || null;
 
     await category.save();
     res.json(category);

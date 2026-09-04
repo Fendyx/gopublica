@@ -70,6 +70,7 @@ router.post('/', ensureTenant, async (req, res) => {
       isActive = true,
       seoTitle,
       seoDescription,
+      sidebarType,
       // Event fields
       ticketPrice,
       totalTickets,
@@ -107,6 +108,7 @@ router.post('/', ensureTenant, async (req, res) => {
       isActive,
       seoTitle,
       seoDescription,
+      sidebarType: sidebarType || 'tickets',
     });
     await article.save({ session });
 
@@ -175,6 +177,7 @@ router.put('/:id', ensureTenant, async (req, res) => {
       isActive,
       seoTitle,
       seoDescription,
+      sidebarType,
       // Event fields
       ticketPrice,
       totalTickets,
@@ -205,6 +208,7 @@ router.put('/:id', ensureTenant, async (req, res) => {
     if (isActive !== undefined) article.isActive = isActive;
     if (seoTitle !== undefined) article.seoTitle = seoTitle;
     if (seoDescription !== undefined) article.seoDescription = seoDescription;
+    if (sidebarType !== undefined) article.sidebarType = sidebarType;
 
     await article.save({ session });
 

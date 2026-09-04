@@ -91,6 +91,8 @@ router.post('/', async (req, res) => {
       isActive,
       seoTitle,
       seoDescription,
+      sidebarType,
+      contentType,
     } = req.body;
 
     const article = new Article({
@@ -105,6 +107,8 @@ router.post('/', async (req, res) => {
       isActive,
       seoTitle,
       seoDescription,
+      sidebarType: sidebarType || 'none',
+      contentType: contentType || 'article',
     });
 
     await article.save();
@@ -128,6 +132,8 @@ router.put('/:id', async (req, res) => {
       isActive,
       seoTitle,
       seoDescription,
+      sidebarType,
+      contentType,
     } = req.body;
 
     const article = await Article.findOne({ _id: req.params.id, tenantId: req.tenantId });
@@ -143,6 +149,8 @@ router.put('/:id', async (req, res) => {
     if (isActive !== undefined) article.isActive = isActive;
     if (seoTitle !== undefined) article.seoTitle = seoTitle;
     if (seoDescription !== undefined) article.seoDescription = seoDescription;
+    if (sidebarType !== undefined) article.sidebarType = sidebarType;
+    if (contentType !== undefined) article.contentType = contentType;
 
     await article.save();
     res.json(article);

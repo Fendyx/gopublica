@@ -10,6 +10,45 @@ const checkBranch = require('../../middleware/tenant/branch');
 const { enforceModuleAccess } = require('../../services/tenant/moduleAccess');
 const { validateSectionSettings } = require('../../services/validation/branchSection');
 
+// ─── System Section Mapping ─────────────────────────────────
+const SYSTEM_SECTION_MAP = {
+  catalog: 'system_catalog',
+  menu: 'system_menu',
+  articles: 'system_articles',
+  gallery: 'system_gallery',
+  contacts: 'system_contacts',
+  reservations: 'system_booking_checkout',
+};
+
+/** Ensure a system section exists for the given page. Auto-creates if missing. */
+async function ensureSystemSection(tenantId, branchId, page) {
+  const systemType = SYSTEM_SECTION_MAP[page];
+  if (!systemType) return null;
+
+  let systemSection = await BranchSection.findOne({
+    branchId,
+    page,
+    systemType,
+    isSystem: true,
+  });
+
+  if (!systemSection) {
+    systemSection = new BranchSection({
+      tenantId,
+      branchId,
+      page,
+      type: systemType,
+      order: 0,
+      isSystem: true,
+      systemType,
+      settings: {},
+    });
+    await systemSection.save();
+  }
+
+  return systemSection;
+}
+
 // ============================================================
 // MIDDLEWARE: Apply to all routes in this file
 // ============================================================
@@ -106,6 +145,10 @@ router.post('/', checkBranch, async (req, res) => {
     });
 
     await section.save();
+
+    // Auto-create system section for this page if it doesn't exist yet
+    await ensureSystemSection(req.tenantId, branch._id, page);
+
     res.status(201).json(section);
   } catch (err) {
     console.error('--- BRANCH SECTION SAVE ERROR ---', err);
@@ -180,10 +223,15 @@ router.put('/:id', checkBranch, async (req, res) => {
     if (!section) return res.status(404).json({ error: 'Section not found' });
     if (section.tenantId !== req.tenantId) return res.status(403).json({ error: 'Access denied' });
 
+    // Guard: system sections cannot change their type
+    if (section.isSystem && type !== undefined && type !== section.type) {
+      return res.status(400).json({ error: 'System sections cannot change their type' });
+    }
+
     const { page, type, order, settings, translations, isActive } = req.body;
 
     if (page !== undefined) section.page = page;
-    if (type !== undefined) section.type = type;
+    if (type !== undefined && !section.isSystem) section.type = type;
     if (order !== undefined) section.order = order;
 
     // Validate + sanitize settings against the (possibly updated) section type
@@ -213,6 +261,11 @@ router.delete('/:id', checkBranch, async (req, res) => {
     const section = await BranchSection.findById(req.params.id);
     if (!section) return res.status(404).json({ error: 'Section not found' });
     if (section.tenantId !== req.tenantId) return res.status(403).json({ error: 'Access denied' });
+
+    // Guard: system sections cannot be deleted
+    if (section.isSystem) {
+      return res.status(400).json({ error: 'System sections cannot be deleted' });
+    }
 
     // Cascade delete items
     await BranchSectionItem.deleteMany({ sectionId: section._id, tenantId: req.tenantId });

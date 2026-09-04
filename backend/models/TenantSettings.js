@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { LOCALE_CODES } = require('../config/locales');
 
 const tenantSettingsSchema = new mongoose.Schema({
   tenantId: {
@@ -91,12 +92,46 @@ const tenantSettingsSchema = new mongoose.Schema({
     },
   },
 
-  // ─── Локализация (было) ─────────────────────────────────────────────────────
+  // ─── Локализация ──────────────────────────────────────────────────────────
+  // @deprecated Use `activeLocales` + `defaultLocale` instead. Kept for backward compat.
   primaryLanguage: {
     type: String,
     default: 'pl',
-    enum: ['pl', 'en', 'de', 'ru', 'es', 'ua'],
+    enum: LOCALE_CODES,
   },
+
+  /**
+   * Locales that this tenant has enabled for content translation.
+   * Admin forms render tabs / inputs only for the codes in this array.
+   * Must contain at least one entry; every entry must be a valid global locale code.
+   */
+  activeLocales: {
+    type: [String],
+    default: ['pl', 'en'],
+    validate: {
+      validator: function (arr) {
+        if (!arr || arr.length === 0) return false;
+        return arr.every((code) => LOCALE_CODES.includes(code));
+      },
+      message: 'activeLocales must be a non-empty array of valid locale codes',
+    },
+  },
+
+  /**
+   * The primary / fallback locale for this tenant. Must be one of `activeLocales`.
+   * Used for fallback resolution when a translation is missing.
+   */
+  defaultLocale: {
+    type: String,
+    default: 'pl',
+    validate: {
+      validator: function (code) {
+        return LOCALE_CODES.includes(code);
+      },
+      message: 'defaultLocale must be a valid locale code',
+    },
+  },
+
   primaryCurrency: {
     type: String,
     default: 'PLN',
@@ -192,6 +227,20 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasJobApplications: { type: Boolean, default: false },
   },
 
+  // ─── НОВОЕ: Конфигурация навигации (порядок ссылок, видимость, primary/dropdown) ──
+  navigation: {
+    items: [{
+      id:    { type: String, required: true },
+      type:  { type: String, enum: ['home', 'system', 'custom', 'external'], required: true },
+      slug:  { type: String, required: true },
+      label: { type: String, default: '' },
+      isVisible:  { type: Boolean, default: true },
+      placement:  { type: String, enum: ['primary', 'dropdown'], default: 'primary' },
+      order:      { type: Number, default: 0 },
+    }],
+    dropdownLabel: { type: String, default: '' },
+  },
+
   payments: {
     stripeAccountId:      { type: String, default: '' },
     chargesEnabled:       { type: Boolean, default: false },
@@ -248,6 +297,18 @@ const tenantSettingsSchema = new mongoose.Schema({
 // proxy.ts вызывает этот запрос при каждом входящем запросе
 tenantSettingsSchema.index({ domain: 1 });
 tenantSettingsSchema.index({ aliases: 1 });
+
+// ─── Pre-validate hook: defaultLocale must be one of activeLocales ──────────
+tenantSettingsSchema.pre('validate', function () {
+  if (this.isModified('activeLocales') || this.isModified('defaultLocale')) {
+    if (this.activeLocales && this.activeLocales.length > 0) {
+      if (!this.activeLocales.includes(this.defaultLocale)) {
+        // Auto-correct: if defaultLocale is not in activeLocales, use the first active locale
+        this.defaultLocale = this.activeLocales[0];
+      }
+    }
+  }
+});
 
 // ─── Pre-save hook: глобальная уникальность domain + aliases ──────────────────
 // Нельзя, чтобы два тенанта имели одинаковый domain ИЛИ одинаковый alias.

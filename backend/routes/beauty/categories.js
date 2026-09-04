@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const BeautyCategory = require('../../models/beauty/Category');
 const authTenant = require('../../middleware/auth/tenant');
+const { LOCALE_CODES } = require('../../config/locales');
 
 // Получить категории для тенанта с учётом businessType
 router.get('/', authTenant, async (req, res) => {
@@ -64,11 +65,10 @@ router.get('/suggest', authTenant, async (req, res) => {
     if (!q || q.length < 2) return res.json([]);
 
     const regex = new RegExp(q, 'i');
-    const LANGS = ['pl', 'en', 'de', 'ru', 'es', 'ua'];
     const orConditions = [
       { key: regex },
       { name: regex },
-      ...LANGS.map(lang => ({ [`translations.${lang}`]: regex }))
+      ...LOCALE_CODES.map(lang => ({ [`translations.${lang}`]: regex }))
     ];
 
     let filter = { $or: orConditions };

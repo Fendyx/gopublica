@@ -42,6 +42,18 @@ const menuItemSchema = new mongoose.Schema(
     unit: { type: String, default: 'cm' }
   },
   tags: [String],
+  // ── Product status ─────────────────────────────────────────────────────────
+  status: {
+    type: String,
+    enum: ['published', 'draft', 'hidden'],
+    default: 'published'
+  },
+  // ── Managed attribute references (links to ProductAttribute entities) ─────
+  // e.g. [{ type: 'author', attributeId: '...' }, { type: 'genre', attributeId: '...' }]
+  attributeRefs: [{
+    type: { type: String, required: true },
+    attributeId: { type: String, required: true },
+  }],
   // ── Dynamic product specifications (admin-defined) ───────────────────────
   // e.g. [{ key: "Author", value: "John Doe" }, { key: "ISBN", value: "12345" }]
   attributes: [{

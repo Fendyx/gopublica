@@ -9,6 +9,11 @@ const analyticsSchema = new mongoose.Schema({
   cities:          { type: Map, of: Number, default: {} },
   devices:         { type: Map, of: Number, default: {} },
   clicks:          { type: Map, of: Number, default: {} },
+
+  // ── Business metrics (aggregated from Order model) ──────────────────
+  totalRevenue:    { type: Number, default: 0 },  // sum of pricing.total for paid/completed orders
+  orderCount:      { type: Number, default: 0 },  // count of paid/completed orders
+  itemQuantity:    { type: Number, default: 0 },  // total items sold
 });
 
 // Ключевой индекс — быстрый поиск и защита от дублей

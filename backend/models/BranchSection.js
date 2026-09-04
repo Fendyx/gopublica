@@ -10,9 +10,14 @@ const mongoose = require('mongoose');
  *      mediaType: 'image' | 'video' | 'slider',  // default inferred from videoUrl
  *                                                // (legacy docs: videoUrl → 'video', else 'image')
  *      textAlignment: 'left' | 'center' | 'right', // default 'center'
+ *      preset: 'classic_with_buttons' | 'banner_link' | 'gallery_slider', // optional preset
+ *      clickableUrl: String,        // clickable background URL (wraps media in Link)
+ *      sliderShowArrows: Boolean,   // show prev/next arrows in slider
+ *      sliderPauseOnInteraction: Boolean, // pause autoplay on swipe/arrow click
  *      slides: [{                                  // only when mediaType === 'slider'
  *        imageUrl?: String,                        // at least one of the two
- *        videoUrl?: String                         // is required per slide
+ *        videoUrl?: String,                        // is required per slide
+ *        clickableUrl?: String                     // optional per-slide link
  *      }],                                         // max 10 items, unknown keys stripped
  *      videoUrl: String,           // URL to video file (MP4/WebM), used when mediaType === 'video'
  *      imageUrl: String,           // URL to background image, used when mediaType === 'image'
@@ -47,6 +52,7 @@ const mongoose = require('mongoose');
  * 4. booking
  *    settings: {
  *      sideContentType: 'none' | 'map' | 'text',  // default 'none'
+ *      checkoutFlow: 'inline' | 'redirect',       // default 'inline'
  *      address: String,                           // Display address (used when sideContentType === 'map')
  *      customText: String,                        // Custom text (used when sideContentType === 'text')
  *    }
@@ -64,6 +70,12 @@ const mongoose = require('mongoose');
  * 6. menu_categories
  *    settings: {
  *      categoryKeys: [String]      // Array of CategoryTranslation.key values to display
+ *    }
+ *
+ * 8. rich_text
+ *    settings: {
+ *      content: String,            // Base-language HTML content (TipTap output)
+ *      contentI18n: { [lang]: String }, // Localized HTML content per locale
  *    }
  *
  * 7. dynamic_form
@@ -138,6 +150,16 @@ const branchSectionSchema = new mongoose.Schema(
         'menu_categories',
         'article_grid',
         'dynamic_form',
+        'contact_block',
+        'category_list',
+        'rich_text',
+        // System section types (auto-created, not manually creatable)
+        'system_catalog',
+        'system_menu',
+        'system_articles',
+        'system_gallery',
+        'system_contacts',
+        'system_booking_checkout',
       ],
     },
     order: {
@@ -147,6 +169,16 @@ const branchSectionSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    isSystem: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+    systemType: {
+      type: String,
+      enum: ['system_catalog', 'system_menu', 'system_articles', 'system_gallery', 'system_contacts', 'system_booking_checkout', null],
+      default: null,
     },
     settings: {
       type: mongoose.Schema.Types.Mixed,
@@ -163,9 +195,10 @@ const branchSectionSchema = new mongoose.Schema(
 // Compound indexes for common query patterns
 branchSectionSchema.index({ tenantId: 1, branchId: 1, page: 1, order: 1 });
 branchSectionSchema.index({ tenantId: 1, branchId: 1, isActive: 1 });
-
-// Index for public route: find({ branchId, page, isActive }).sort({ order: 1 })
 branchSectionSchema.index({ branchId: 1, page: 1, isActive: 1, order: 1 });
+
+// Unique index: one system section per branch+page+systemType
+branchSectionSchema.index({ branchId: 1, page: 1, systemType: 1 }, { unique: true, partialFilterExpression: { isSystem: true } });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../services/content/modelHooks');

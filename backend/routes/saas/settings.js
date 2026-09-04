@@ -5,6 +5,7 @@ const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/auth/tenant');
 const { getModuleAccess } = require('../../services/tenant/moduleAccess');
+const { LOCALE_CODES, isValidLocale } = require('../../config/locales');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -48,7 +49,8 @@ router.get('/by-domain', async (req, res) => {
       .select(
         'tenantId niche businessType moduleAccess theme features businessName logoUrl faviconUrl ' +
         'phone address email hours seoTitle seoDescription ' +
-        'primaryLanguage primaryCurrency legal ' +
+        'primaryLanguage activeLocales defaultLocale primaryCurrency legal ' +
+        'navigation ' +
         'logistics.enabled logistics.provider logistics.mapApiKey logistics.env'
       );
 
@@ -228,6 +230,64 @@ router.put('/', authTenant, async (req, res) => {
       console.log('-> Legal saved successfully');
     }
 
+    // 3b. Сохраняем activeLocales / defaultLocale / primaryLanguage глобально!
+    //     These are tenant-level settings, NOT branch-level. Without this extraction
+    //     they fall into branch.settingsOverride (step 4) where Mongoose silently
+    //     drops them because the Branch schema has no such fields.
+    const localeFields = {};
+    if (reqBody.activeLocales !== undefined) {
+      const locales = Array.isArray(reqBody.activeLocales) ? reqBody.activeLocales : [];
+      const valid = locales.filter((code) => LOCALE_CODES.includes(code));
+      if (valid.length === 0) {
+        return res.status(400).json({ error: 'activeLocales must contain at least one valid locale code' });
+      }
+      localeFields.activeLocales = valid;
+    }
+    if (reqBody.defaultLocale !== undefined) {
+      if (!isValidLocale(reqBody.defaultLocale)) {
+        return res.status(400).json({ error: 'defaultLocale must be a valid locale code' });
+      }
+      localeFields.defaultLocale = reqBody.defaultLocale;
+    }
+    if (reqBody.primaryLanguage !== undefined) {
+      localeFields.primaryLanguage = reqBody.primaryLanguage;
+    }
+    if (Object.keys(localeFields).length > 0) {
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+
+      // Ensure defaultLocale is within activeLocales
+      if (localeFields.activeLocales && localeFields.defaultLocale) {
+        if (!localeFields.activeLocales.includes(localeFields.defaultLocale)) {
+          localeFields.defaultLocale = localeFields.activeLocales[0];
+        }
+      } else if (localeFields.activeLocales && !localeFields.defaultLocale) {
+        if (!globalSettings.activeLocales?.includes(globalSettings.defaultLocale)) {
+          globalSettings.defaultLocale = localeFields.activeLocales[0];
+        }
+      }
+
+      Object.assign(globalSettings, localeFields);
+      await globalSettings.save();
+      console.log('-> Locale fields saved globally:', Object.keys(localeFields));
+
+      // Remove from reqBody so they don't end up in branch.settingsOverride
+      delete reqBody.activeLocales;
+      delete reqBody.defaultLocale;
+      delete reqBody.primaryLanguage;
+    }
+
+    // 3c. Сохраняем navigation глобально (tenant-wide nav config)
+    if (reqBody.navigation !== undefined) {
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+      globalSettings.navigation = reqBody.navigation;
+      globalSettings.markModified('navigation');
+      await globalSettings.save();
+      console.log('-> Navigation config saved globally');
+      delete reqBody.navigation;
+    }
+
     // 4. Если есть branchId -> сохраняем остатки в филиал
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });
@@ -282,6 +342,8 @@ router.put('/', authTenant, async (req, res) => {
       
     } else {
       // 5. Глобальное обновление (если нет branchId)
+      //    NOTE: activeLocales / defaultLocale / primaryLanguage are already saved
+      //    globally in step 3b and removed from reqBody, so no duplicate handling needed.
       let globalSettings = await TenantSettings.findOne({ tenantId });
       if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
 

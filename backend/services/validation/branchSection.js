@@ -31,6 +31,7 @@
  */
 
 const ALLOWED_SIDE_CONTENT_TYPES = ['none', 'map', 'text'];
+const ALLOWED_CHECKOUT_FLOWS = ['inline', 'redirect'];
 
 const ALLOWED_DESKTOP_ITEMS_PER_ROW = [3, 4, 5];
 const DEFAULT_DESKTOP_ITEMS_PER_ROW = 3;
@@ -39,6 +40,7 @@ const ALLOWED_HERO_MEDIA_TYPES = ['image', 'video', 'slider'];
 const ALLOWED_TEXT_ALIGNMENTS = ['left', 'center', 'right'];
 const DEFAULT_TEXT_ALIGNMENT = 'center';
 const DEFAULT_MAX_SLIDES = 10;
+const ALLOWED_HERO_PRESETS = ['classic_with_buttons', 'banner_link', 'gallery_slider'];
 
 // ─── Dynamic Form (reuses JobFormSettings field contract) ──────────────
 const ALLOWED_FIELD_TYPES = [
@@ -87,6 +89,14 @@ function validateBookingSettings(settings) {
     errors.push(`sideContentType must be one of: ${ALLOWED_SIDE_CONTENT_TYPES.join(', ')}`);
   }
 
+  // checkoutFlow — must be 'inline' or 'redirect' (default 'inline')
+  let checkoutFlow = settings.checkoutFlow;
+  if (checkoutFlow === undefined || checkoutFlow === null || checkoutFlow === '') {
+    checkoutFlow = 'inline';
+  } else if (typeof checkoutFlow !== 'string' || !ALLOWED_CHECKOUT_FLOWS.includes(checkoutFlow)) {
+    errors.push(`checkoutFlow must be one of: ${ALLOWED_CHECKOUT_FLOWS.join(', ')}`);
+  }
+
   // address — coerce to string
   const address = coerceString(settings.address);
 
@@ -102,6 +112,7 @@ function validateBookingSettings(settings) {
     errors: [],
     value: {
       sideContentType,
+      checkoutFlow,
       address,
       customText,
     },
@@ -238,6 +249,9 @@ function validateHeroSettings(settings) {
           const cleanSlide = {};
           if (imageUrl) cleanSlide.imageUrl = imageUrl;
           if (videoUrl) cleanSlide.videoUrl = videoUrl;
+          // clickableUrl — optional per-slide link
+          const clickableUrl = typeof slide.clickableUrl === 'string' ? slide.clickableUrl.trim() : '';
+          if (clickableUrl) cleanSlide.clickableUrl = clickableUrl;
           sanitized.push(cleanSlide);
         });
         slides = sanitized;
@@ -251,6 +265,41 @@ function validateHeroSettings(settings) {
 
   value.mediaType = mediaType;
   value.textAlignment = textAlignment;
+
+  // preset — must be one of allowed values or undefined
+  if (settings.preset !== undefined && settings.preset !== null && settings.preset !== '') {
+    if (typeof settings.preset !== 'string' || !ALLOWED_HERO_PRESETS.includes(settings.preset)) {
+      errors.push(`preset must be one of: ${ALLOWED_HERO_PRESETS.join(', ')}`);
+    } else {
+      value.preset = settings.preset;
+    }
+  } else {
+    delete value.preset;
+  }
+
+  // clickableUrl — optional string for clickable background
+  if (settings.clickableUrl !== undefined && settings.clickableUrl !== null) {
+    const clickableUrl = typeof settings.clickableUrl === 'string' ? settings.clickableUrl.trim() : '';
+    if (clickableUrl) {
+      value.clickableUrl = clickableUrl;
+    } else {
+      delete value.clickableUrl;
+    }
+  }
+
+  // sliderShowArrows — optional boolean
+  if (typeof settings.sliderShowArrows === 'boolean') {
+    value.sliderShowArrows = settings.sliderShowArrows;
+  } else {
+    delete value.sliderShowArrows;
+  }
+
+  // sliderPauseOnInteraction — optional boolean
+  if (typeof settings.sliderPauseOnInteraction === 'boolean') {
+    value.sliderPauseOnInteraction = settings.sliderPauseOnInteraction;
+  } else {
+    delete value.sliderPauseOnInteraction;
+  }
 
   if (errors.length > 0) {
     return { ok: false, errors, value: null };
@@ -366,6 +415,9 @@ function validateSectionSettings(type, settings) {
 
     case 'dynamic_form':
       return validateDynamicFormSettings(settings);
+
+    case 'rich_text':
+      return validateRichTextSettings(settings);
 
     default:
       // For all other section types we currently have no enforced shape.
@@ -497,3 +549,35 @@ function validateDynamicFormSettings(settings) {
 }
 
 module.exports = { validateSectionSettings, validateDynamicFormSettings, coerceString };
+
+/**
+ * Validate and sanitize settings for a 'rich_text' section type.
+ *
+ * Enforces:
+ *   - content must be a string (coerced from truthy non-string values)
+ *   - contentI18n must be an object with string values
+ *
+ * @param {object} settings — the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateRichTextSettings(settings) {
+  const errors = [];
+
+  const content = coerceString(settings.content);
+
+  const value = { content };
+
+  if (settings.contentI18n && typeof settings.contentI18n === 'object' && !Array.isArray(settings.contentI18n)) {
+    const sanitized = {};
+    for (const [lang, text] of Object.entries(settings.contentI18n)) {
+      sanitized[lang] = coerceString(text);
+    }
+    value.contentI18n = sanitized;
+  }
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value };
+}

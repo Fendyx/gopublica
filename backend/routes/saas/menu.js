@@ -15,7 +15,7 @@ function isValidObjectId(str) {
 // Публичный роут: получение меню
 router.get('/', async (req, res) => {
   try {
-    const { tenantId, branchId, branchSlug } = req.query;
+    const { tenantId, branchId, branchSlug, status, attributeRefType, attributeRefId } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
 
     let resolvedBranchId = branchId;
@@ -45,6 +45,18 @@ router.get('/', async (req, res) => {
       query = { tenantId, branchId: null };
     }
 
+    // Filter by status (admin can fetch all, public gets published by default)
+    if (status) {
+      query.status = status;
+    }
+
+    // Filter by attribute ref (for entity pages like /catalog/author/serhiy-zhadan)
+    if (attributeRefType && attributeRefId) {
+      query['attributeRefs'] = {
+        $elemMatch: { type: attributeRefType, attributeId: attributeRefId },
+      };
+    }
+
     const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 }).lean();
     res.json(items);
   } catch (err) {
@@ -64,8 +76,8 @@ router.post('/', authTenant, async (req, res) => {
       isVegetarian, isSpicy, order, translations, branchId,
       productType, hasPersonalization, modifierGroups,
       sku, stock, compareAtPrice, images, weight, weightUnit,
-      dimensions, tags, variants, isFeatured,   // 👈 добавлено
-      attributes   // 👈 динамические характеристики продукта
+      dimensions, tags, variants, isFeatured,
+      attributes, attributeRefs, status
     } = req.body;
 
     const newItem = new MenuItem({
@@ -85,8 +97,10 @@ router.post('/', authTenant, async (req, res) => {
       dimensions: dimensions || { length: null, width: null, height: null, unit: 'cm' },
       tags: tags || [],
       variants: variants || [],
-      isFeatured: isFeatured || false,   // 👈 добавлено
-      attributes: Array.isArray(attributes) ? attributes : []   // 👈 динамические характеристики
+      isFeatured: isFeatured || false,
+      attributes: Array.isArray(attributes) ? attributes : [],
+      attributeRefs: Array.isArray(attributeRefs) ? attributeRefs : [],
+      status: status || 'published',
     });
 
     await newItem.save();
@@ -113,8 +127,8 @@ router.put('/:id', authTenant, async (req, res) => {
       isVegetarian, isSpicy, order, translations, branchId,
       productType, hasPersonalization, modifierGroups,
       sku, stock, compareAtPrice, images: imgs, weight, weightUnit,
-      dimensions, tags, variants, isFeatured,   // 👈 добавлено
-      attributes   // 👈 динамические характеристики продукта
+      dimensions, tags, variants, isFeatured,
+      attributes, attributeRefs, status
     } = req.body;
 
     if (name !== undefined) item.name = name;
@@ -140,8 +154,10 @@ router.put('/:id', authTenant, async (req, res) => {
     if (dimensions !== undefined) item.dimensions = dimensions;
     if (tags !== undefined) item.tags = tags;
     if (variants !== undefined) item.variants = variants;
-    if (isFeatured !== undefined) item.isFeatured = isFeatured;   // 👈 добавлено
-    if (attributes !== undefined) item.attributes = attributes;   // 👈 динамические характеристики
+    if (isFeatured !== undefined) item.isFeatured = isFeatured;
+    if (attributes !== undefined) item.attributes = attributes;
+    if (attributeRefs !== undefined) item.attributeRefs = attributeRefs;
+    if (status !== undefined) item.status = status;
 
     await item.save();
     res.json(item);

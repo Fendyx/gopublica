@@ -234,4 +234,165 @@ router.delete('/:id', authTenant, async (req, res) => {
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════════════
+// CUSTOM PAGES — sub-resource of Branch
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** Slugs that map to hardcoded storefront routes and must never be reused */
+const RESERVED_PAGE_SLUGS = [
+  'home', 'catalog', 'menu', 'contacts', 'gallery', 'articles',
+  'reservations', 'partners', 'order', 'login', 'profile', 'admin',
+];
+
+// GET /saas/branches/:branchId/custom-pages — list all custom pages for a branch
+router.get('/:branchId/custom-pages', authTenant, async (req, res) => {
+  try {
+    const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId })
+      .select('customPages')
+      .lean();
+    if (!branch) return res.status(404).json({ error: 'Branch not found' });
+    res.json(branch.customPages || []);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /saas/branches/:branchId/custom-pages — create a custom page
+router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
+  try {
+    const { title } = req.body;
+    if (!title || !title.trim()) {
+      return res.status(400).json({ error: 'Title is required' });
+    }
+
+    const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId });
+    if (!branch) return res.status(404).json({ error: 'Branch not found' });
+
+    // Auto-generate slug from title
+    const baseSlug = slugify(title);
+    if (!baseSlug) {
+      return res.status(400).json({ error: 'Could not generate a valid slug from the title' });
+    }
+
+    // Check reserved slugs
+    if (RESERVED_PAGE_SLUGS.includes(baseSlug)) {
+      return res.status(400).json({ error: `Slug "${baseSlug}" is reserved and cannot be used` });
+    }
+
+    // Ensure slug uniqueness across all branches of this tenant
+    const slugExists = await Branch.findOne({
+      tenantId: req.tenantId,
+      'customPages.slug': baseSlug,
+    }).lean();
+    if (slugExists) {
+      return res.status(409).json({ error: `A custom page with slug "${baseSlug}" already exists` });
+    }
+
+    // Ensure slug uniqueness within this branch
+    const duplicateInBranch = (branch.customPages || []).some(cp => cp.slug === baseSlug);
+    if (duplicateInBranch) {
+      return res.status(409).json({ error: `A custom page with slug "${baseSlug}" already exists in this branch` });
+    }
+
+    branch.customPages = branch.customPages || [];
+    branch.customPages.push({
+      title: title.trim(),
+      slug: baseSlug,
+      isActive: true,
+      createdAt: new Date(),
+    });
+    await branch.save();
+
+    const created = branch.customPages[branch.customPages.length - 1];
+    res.status(201).json(created);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /saas/branches/:branchId/custom-pages/:slug — update a custom page
+router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
+  try {
+    const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId });
+    if (!branch) return res.status(404).json({ error: 'Branch not found' });
+
+    const cp = (branch.customPages || []).find(p => p.slug === req.params.slug);
+    if (!cp) return res.status(404).json({ error: 'Custom page not found' });
+
+    const { title, isActive, slug: newSlug } = req.body;
+
+    if (title !== undefined) {
+      cp.title = title.trim();
+    }
+    if (isActive !== undefined) {
+      cp.isActive = isActive;
+    }
+
+    // Handle slug rename
+    if (newSlug && newSlug !== cp.slug) {
+      const renamedSlug = slugify(newSlug);
+      if (!renamedSlug) {
+        return res.status(400).json({ error: 'Could not generate a valid slug' });
+      }
+      if (RESERVED_PAGE_SLUGS.includes(renamedSlug)) {
+        return res.status(400).json({ error: `Slug "${renamedSlug}" is reserved` });
+      }
+      // Check uniqueness across tenant (excluding this branch)
+      const slugConflict = await Branch.findOne({
+        tenantId: req.tenantId,
+        _id: { $ne: branch._id },
+        'customPages.slug': renamedSlug,
+      }).lean();
+      if (slugConflict) {
+        return res.status(409).json({ error: `Slug "${renamedSlug}" is already in use` });
+      }
+      // Also check within this branch (excluding current entry)
+      const conflictInBranch = (branch.customPages || []).some(
+        p => p.slug === renamedSlug && p.slug !== cp.slug
+      );
+      if (conflictInBranch) {
+        return res.status(409).json({ error: `Slug "${renamedSlug}" is already used in this branch` });
+      }
+
+      const oldSlug = cp.slug;
+      cp.slug = renamedSlug;
+
+      // Rename the `page` field on all BranchSection documents for this branch
+      const BranchSection = require('../../models/BranchSection');
+      await BranchSection.updateMany(
+        { branchId: branch._id, page: oldSlug },
+        { $set: { page: renamedSlug } }
+      );
+    }
+
+    await branch.save();
+    res.json(cp);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /saas/branches/:branchId/custom-pages/:slug — delete a custom page
+router.delete('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
+  try {
+    const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId });
+    if (!branch) return res.status(404).json({ error: 'Branch not found' });
+
+    const idx = (branch.customPages || []).findIndex(p => p.slug === req.params.slug);
+    if (idx === -1) return res.status(404).json({ error: 'Custom page not found' });
+
+    const removedSlug = branch.customPages[idx].slug;
+    branch.customPages.splice(idx, 1);
+    await branch.save();
+
+    // Optionally clean up orphaned BranchSection docs for the deleted page
+    const BranchSection = require('../../models/BranchSection');
+    await BranchSection.deleteMany({ branchId: branch._id, page: removedSlug, isSystem: false });
+
+    res.json({ message: 'Custom page deleted', slug: removedSlug });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
