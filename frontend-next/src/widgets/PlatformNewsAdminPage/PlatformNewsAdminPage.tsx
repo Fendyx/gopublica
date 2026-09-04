@@ -11,11 +11,11 @@ import {
 } from '@/entities/platformNews/api/newsApi';
 import type { PlatformNews, PlatformNewsFormData } from '@/entities/platformNews/model/types';
 import { EMPTY_NEWS_FORM } from '@/entities/platformNews/model/types';
+import { LOCALE_CODES } from '@/shared/lib/locales';
 import {
   Plus, Search, Trash2, Edit3, Save, X, Megaphone, Clock,
 } from 'lucide-react';
 
-const LOCALES = ['en', 'de', 'pl', 'uk'];
 const TYPE_OPTIONS = ['info', 'update', 'announcement', 'promo'] as const;
 const TYPE_COLORS: Record<string, string> = {
   info: 'bg-blue-100 text-blue-700',
@@ -285,7 +285,7 @@ export default function PlatformNewsAdminPage() {
                 <div>
                   <label className="block text-xs font-medium mb-2">Translations</label>
                   <div className="flex gap-1 mb-2">
-                    {LOCALES.map((l) => (
+                    {LOCALE_CODES.map((l) => (
                       <button
                         key={l}
                         type="button"

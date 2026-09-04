@@ -15,11 +15,11 @@ import type {
   ProductSpec,
 } from '@/entities/platformProduct/model/types';
 import { EMPTY_PRODUCT_FORM } from '@/entities/platformProduct/model/types';
+import { LOCALE_CODES } from '@/shared/lib/locales';
 import {
   Plus, Search, Trash2, Edit3, Save, X, Package,
 } from 'lucide-react';
 
-const LOCALES = ['en', 'de', 'pl', 'uk'];
 const NICHE_OPTIONS = ['all', 'food', 'restaurant', 'beauty', 'auto', 'ecommerce'];
 const CATEGORY_OPTIONS = ['hardware', 'digital', 'service'];
 
@@ -366,7 +366,7 @@ export default function PlatformProductsAdminPage() {
                 <div>
                   <label className="block text-xs font-medium mb-2">Translations</label>
                   <div className="flex gap-1 mb-2">
-                    {LOCALES.map((l) => (
+                    {LOCALE_CODES.map((l) => (
                       <button
                         key={l}
                         type="button"

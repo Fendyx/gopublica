@@ -4,17 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { LANGUAGE_NAMES } from "@/shared/lib/locales";
 import { Globe, ChevronDown } from "lucide-react";
-
-// Сопоставление кода языка с полным названием
-const LANGUAGE_NAMES: Record<string, string> = {
-  de: "Deutsch",
-  ua: "Українська",
-  en: "English",
-  pl: "Polski",
-  ru: "Русский",
-  es: "Español",
-};
 
 export default function LanguageSelector() {
   const locale = useLocale();

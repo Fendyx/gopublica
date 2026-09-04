@@ -8,7 +8,7 @@ export async function apiFetch(endpoint: string, options: RequestInit = {}): Pro
     ...(options.headers as Record<string, string> ?? {}),
   };
 
-  const res = await fetch(`/api${endpoint}`, { ...options, headers });
+  const res = await fetch(`/api${endpoint}`, { ...options, headers, cache: 'no-store' });
   if (res.status === 401) {
     useAuthStore.getState().logout();
     window.location.href = '/admin/login'; // или '/admin/login' — поправим позже

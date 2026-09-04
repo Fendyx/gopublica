@@ -8,16 +8,8 @@ import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { phoneFormSchema, SUPPORTED_LANGUAGES } from '@/features/demoQuiz/model/schema';
 import { useDemoQuizStore } from '@/features/demoQuiz/model/demoQuizStore';
+import { LANGUAGE_NAMES } from '@/shared/lib/locales';
 import { cn } from '@/shared/lib/utils';
-
-const LANGUAGE_NAMES: Record<string, string> = {
-  en: 'English',
-  de: 'Deutsch',
-  pl: 'Polski',
-  ru: 'Русский',
-  ua: 'Українська',
-  es: 'Español',
-};
 
 export default function PhoneForm() {
   const t = useTranslations('demoQuiz');

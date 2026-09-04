@@ -1,5 +1,6 @@
 // src/features/demoQuiz/model/schema.ts
 import { z } from 'zod';
+import { LOCALE_CODES } from '@/shared/lib/locales';
 
 export const BUSINESS_TYPE_PRESETS = [
   'restaurant',
@@ -32,7 +33,7 @@ export const BEST_TIME_OPTIONS = [
   'anytime',
 ] as const;
 
-export const SUPPORTED_LANGUAGES = ['en', 'de', 'pl', 'ru', 'ua', 'es'] as const;
+export const SUPPORTED_LANGUAGES = LOCALE_CODES as readonly string[];
 
 const telegramHandleRegex = /^@?[A-Za-z0-9_]{5,32}$/;
 

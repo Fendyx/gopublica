@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navbar from "@/widgets/Layout/Navbar";
 import Footer from "@/widgets/Layout/Footer";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "../globals.css";
 
 const geistSans = Geist({
@@ -85,6 +87,8 @@ export default async function RootLayout({
             <Footer />
           </div>
         </NextIntlClientProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
