@@ -75,6 +75,12 @@ export const tenantApi = {
 
   getPaymentMethod: () => authFetch('/stripe/payment-method'),
 
+  updatePaymentMethod: (paymentMethodId: string) =>
+    authFetch('/stripe/set-payment-method', {
+      method: 'POST',
+      body: JSON.stringify({ paymentMethodId }),
+    }),
+
   getInvoices: () => authFetch('/stripe/invoices'),
 
   // ─── Sites API ─────────────────────────────────────────────────────────────

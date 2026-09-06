@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card } from '@/shared/ui/Card';
-import { CreditCard, Plus } from 'lucide-react';
+import { CreditCard, Plus, Settings } from 'lucide-react';
 import type { PaymentMethod } from '@/entities/subscription/model/types';
+import AddPaymentMethodModal from './AddPaymentMethodModal';
 
 // ─── Inline SVG Card Brand Logos ──────────
 function VisaLogo({ className }: { className?: string }) {
@@ -70,34 +72,49 @@ function formatExpiry(expMonth: number | null, expYear: number | null) {
 interface PaymentMethodCardProps {
   paymentMethod: PaymentMethod | null;
   userName: string;
+  onPaymentMethodUpdated?: (pm?: PaymentMethod) => void;
 }
 
-export default function PaymentMethodCard({ paymentMethod, userName }: PaymentMethodCardProps) {
+export default function PaymentMethodCard({ paymentMethod, userName, onPaymentMethodUpdated }: PaymentMethodCardProps) {
   const t = useTranslations('billing');
+  const [showModal, setShowModal] = useState(false);
   const brand = paymentMethod?.brand ?? null;
   const last4 = paymentMethod?.last4 ?? null;
   const expiry = formatExpiry(paymentMethod?.expMonth ?? null, paymentMethod?.expYear ?? null);
   const cardholderName = paymentMethod?.cardholderName || userName;
 
+  const handleSuccess = (pm: PaymentMethod) => {
+    setShowModal(false);
+    onPaymentMethodUpdated?.(pm);
+  };
+
   if (!last4) {
     return (
-      <Card premium className="border-dashed">
-        <div className="flex flex-col items-center justify-center py-8 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-[var(--bg)] flex items-center justify-center mb-4">
-            <CreditCard className="w-7 h-7 text-[var(--text-muted)]" />
+      <>
+        <Card premium className="border-dashed">
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--bg)] flex items-center justify-center mb-4">
+              <CreditCard className="w-7 h-7 text-[var(--text-muted)]" />
+            </div>
+            <p className="text-sm font-medium text-[var(--text)] mb-1">
+              {t('noPaymentMethod')}
+            </p>
+            <p className="text-xs text-[var(--text-muted)] mb-4">
+              {t('addPaymentMethodDesc')}
+            </p>
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[var(--primary-color)] text-white hover:opacity-90 transition-opacity"
+            >
+              <Plus className="w-4 h-4" />
+              {t('addPaymentMethod')}
+            </button>
           </div>
-          <p className="text-sm font-medium text-[var(--text)] mb-1">
-            {t('noPaymentMethod')}
-          </p>
-          <p className="text-xs text-[var(--text-muted)] mb-4">
-            {t('addPaymentMethodDesc')}
-          </p>
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-[var(--primary-color)] text-white hover:opacity-90 transition-opacity">
-            <Plus className="w-4 h-4" />
-            {t('addPaymentMethod')}
-          </button>
-        </div>
-      </Card>
+        </Card>
+        {showModal && (
+          <AddPaymentMethodModal onClose={() => setShowModal(false)} onSuccess={handleSuccess} />
+        )}
+      </>
     );
   }
 
@@ -130,18 +147,31 @@ export default function PaymentMethodCard({ paymentMethod, userName }: PaymentMe
             </p>
           </div>
 
-          {expiry && (
-            <div className="text-right">
-              <p className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] mb-0.5">
-                {t('expires')}
-              </p>
-              <p className="text-sm font-medium text-[var(--text)] font-mono">
-                {expiry}
-              </p>
-            </div>
-          )}
+          <div className="flex items-end gap-4">
+            {expiry && (
+              <div className="text-right">
+                <p className="text-[10px] uppercase tracking-wider text-[var(--text-muted)] mb-0.5">
+                  {t('expires')}
+                </p>
+                <p className="text-sm font-medium text-[var(--text)] font-mono">
+                  {expiry}
+                </p>
+              </div>
+            )}
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-[var(--border)] text-[var(--text-muted)] hover:bg-[var(--bg)] hover:text-[var(--text)] transition-colors"
+            >
+              <Settings size={12} />
+              {t('updateCard')}
+            </button>
+          </div>
         </div>
       </div>
+
+      {showModal && (
+        <AddPaymentMethodModal onClose={() => setShowModal(false)} onSuccess={handleSuccess} />
+      )}
     </Card>
   );
 }

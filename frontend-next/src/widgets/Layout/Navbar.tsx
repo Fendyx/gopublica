@@ -22,9 +22,14 @@ export default function Navbar() {
   const t = useTranslations(); // ✅ теперь работает, если есть провайдер
   const [isOpen, setIsOpen] = useState(false);
   const [solutionsAccordionOpen, setSolutionsAccordionOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { token } = useTenantAuthStore();
+
+  // Prevent SSR/client hydration mismatch: always render the same
+  // thing on server and first client paint, then re-render after mount.
+  useEffect(() => { setMounted(true); }, []);
 
   const categoryIcons: Record<string, any> = {
     food: Utensils,
@@ -258,7 +263,7 @@ export default function Navbar() {
             </Link>
 
             {/* Авторизация */}
-            {token ? (
+            {mounted && token ? (
               <Link
                 href="/dashboard"
                 className="text-sm font-medium text-[var(--primary-color)] hover:underline transition-colors"

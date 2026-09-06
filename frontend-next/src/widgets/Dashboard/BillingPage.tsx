@@ -12,12 +12,29 @@ import BillingHistory from './BillingPage/BillingHistory';
 export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: string }) {
   const t = useTranslations('billing');
   const { user } = useTenantAuthStore();
+  const [mounted, setMounted] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loadingData, setLoadingData] = useState(true);
 
+  // Prevent SSR/client hydration mismatch: server and initial client render
+  // are identical (empty wrapper). Actual content only appears after mount.
+  useEffect(() => { setMounted(true); }, []);
+
+  const fetchPaymentMethod = async () => {
+    try {
+      const pm = await tenantApi.getPaymentMethod();
+      setPaymentMethod(pm);
+    } catch {
+      // Silently fail — component handles empty state
+    }
+  };
+
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setLoadingData(false);
+      return;
+    }
 
     const fetchData = async () => {
       try {
@@ -38,7 +55,11 @@ export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: strin
     fetchData();
   }, [user]);
 
-  if (!user) return null;
+  // Server and initial client render: empty wrapper (matches hydration).
+  // After mount, user is hydrated from localStorage and content appears.
+  if (!mounted || !user) {
+    return <div className="max-w-3xl space-y-8" />;
+  }
 
   return (
     <div className="max-w-3xl space-y-8">
@@ -65,6 +86,7 @@ export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: strin
         <PaymentMethodCard
           paymentMethod={loadingData ? null : paymentMethod}
           userName={user.name}
+          onPaymentMethodUpdated={() => fetchPaymentMethod()}
         />
       </section>
 
