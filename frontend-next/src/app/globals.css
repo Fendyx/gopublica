@@ -192,3 +192,15 @@ body {
 }
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Safe area insets for mobile bottom nav */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Bottom nav safe area on mobile */
+@media (max-width: 767.98px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}

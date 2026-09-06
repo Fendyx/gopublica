@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { SiInstagram, SiTiktok, SiTelegram, SiYoutube } from 'react-icons/si';
 import { solutions } from '@/content/solutions/modules';
 
-export default async function Footer() {
+export default async function Footer({ className }: { className?: string } = {}) {
   const t = await getTranslations();
 
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,7 @@ export default async function Footer() {
   ];
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--surface)] mt-auto">
+    <footer className={`border-t border-[var(--border)] bg-[var(--surface)] mt-auto ${className ?? ''}`}>
       <div className="max-w-7xl mx-auto py-16 px-6">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10 mb-12">
           {/* Колонка 1: Бренд */}

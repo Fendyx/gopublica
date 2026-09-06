@@ -3,50 +3,19 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card } from '@/shared/ui/Card';
-import { CreditCard, Plus, Settings } from 'lucide-react';
+import { Plus, Settings } from 'lucide-react';
+import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCreditCard } from 'react-icons/fa';
 import type { PaymentMethod } from '@/entities/subscription/model/types';
 import AddPaymentMethodModal from './AddPaymentMethodModal';
 
-// ─── Inline SVG Card Brand Logos ──────────
-function VisaLogo({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="48" height="32" rx="4" fill="white" fillOpacity="0.15" />
-      <path
-        d="M19.5 21.5h-3.2l2-11.5h3.2l-2 11.5zm10.8-11.2c-.6-.3-1.6-.5-2.8-.5-3.1 0-5.3 1.6-5.3 3.9 0 1.7 1.6 2.6 2.7 3.2 1.2.6 1.6 1 1.6 1.5 0 .8-1 1.2-1.9 1.2-1.3 0-2-.2-3-.7l-.4-.2-.5 2.8c.7.3 2 .6 3.3.6 3.3 0 5.4-1.6 5.4-4 0-1.4-.8-2.4-2.6-3.3l-.1-.1-.4-.2zm4.3-3.3h-2.5c-.8 0-1.4.2-1.7 1l-4.8 10.5h3.4l.7-1.9h4.1l.4 1.9H37l-2.4-11.5zm-4 7.4l1.6-4.4.9 4.4h-2.5zm8.5-7.4l-3.3 8.2-.3-1.7c-.6-2-2.5-4.2-4.6-5.3l2.9 10h3.5l5.2-11.2h-3.4z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function MastercardLogo({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="48" height="32" rx="4" fill="white" fillOpacity="0.15" />
-      <circle cx="19" cy="16" r="8" fill="#EB001B" fillOpacity="0.9" />
-      <circle cx="29" cy="16" r="8" fill="#F79E1B" fillOpacity="0.9" />
-      <path
-        d="M24 10.3a8 8 0 010 11.4 8 8 0 000-11.4z"
-        fill="#FF5F00"
-        fillOpacity="0.9"
-      />
-    </svg>
-  );
-}
-
-function DefaultCardLogo({ className }: { className?: string }) {
-  return (
-    <CreditCard className={className} />
-  );
-}
-// ─────────────────────────────────────────────────────────────────────────────
-
+// ─── Brand Icon Helper ──────────────────────────────────────────────
 function getBrandLogo(brand: string | null) {
+  const size = 32;
   switch (brand) {
-    case 'visa': return <VisaLogo className="h-8 w-auto" />;
-    case 'mastercard': return <MastercardLogo className="h-8 w-auto" />;
-    default: return <DefaultCardLogo className="w-8 h-8 text-[var(--text-muted)]" />;
+    case 'visa': return <FaCcVisa size={size} className="text-[var(--text-muted)]" />;
+    case 'mastercard': return <FaCcMastercard size={size} className="text-[var(--text-muted)]" />;
+    case 'amex': return <FaCcAmex size={size} className="text-[var(--text-muted)]" />;
+    default: return <FaCreditCard size={size} className="text-[var(--text-muted)]" />;
   }
 }
 
@@ -94,7 +63,7 @@ export default function PaymentMethodCard({ paymentMethod, userName, onPaymentMe
         <Card premium className="border-dashed">
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <div className="w-14 h-14 rounded-2xl bg-[var(--bg)] flex items-center justify-center mb-4">
-              <CreditCard className="w-7 h-7 text-[var(--text-muted)]" />
+              <FaCreditCard size={28} className="text-[var(--text-muted)]" />
             </div>
             <p className="text-sm font-medium text-[var(--text)] mb-1">
               {t('noPaymentMethod')}

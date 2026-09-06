@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -124,7 +125,9 @@ export default function AddPaymentMethodModal({
     return () => { cancelled = true; };
   }, []);
 
-  return (
+  // Render via Portal so the modal mounts at <body> level,
+  // avoiding inline flash inside the parent card.
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-md bg-[var(--surface)] border border-[var(--border)] rounded-3xl shadow-2xl p-6 space-y-5">
         {/* Close button */}
@@ -175,6 +178,7 @@ export default function AddPaymentMethodModal({
           </Elements>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

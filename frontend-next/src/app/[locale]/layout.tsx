@@ -5,7 +5,8 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navbar from "@/widgets/Layout/Navbar";
-import Footer from "@/widgets/Layout/Footer";import { GoogleOAuthProvider } from '@react-oauth/google';import { Analytics } from '@vercel/analytics/react';
+import Footer from "@/widgets/Layout/Footer";
+import MobileBottomNav from "@/widgets/Layout/MobileBottomNav";import { GoogleOAuthProvider } from '@react-oauth/google';import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import "../globals.css";
 
@@ -83,8 +84,9 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)]">
             <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
+            <main className="flex-1 pb-20 md:pb-0">{children}</main>
+            <Footer className="pb-20 md:pb-0" />
+            <MobileBottomNav />
           </div>
         </NextIntlClientProvider>
         </GoogleOAuthProvider>

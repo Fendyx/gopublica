@@ -3,82 +3,151 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Utensils, Scissors, Wrench, Globe, ArrowRight } from 'lucide-react';
+import { solutions as allSolutions, categories } from '@/content/solutions/modules';
 
-const solutions = [
-  {
-    key: 'food',
-    href: '/agency-food',
-    mediaType: 'video',
-    mediaSrc: '/videos/food-demo.mp4',
-  },
-  {
-    key: 'grooming',
-    href: '/agency-beauty-grooming',
-    mediaType: 'video',
-    mediaSrc: '/videos/grooming-demo.mp4',
-  },
-  {
-    key: 'salon',
-    href: '/agency-beauty-salon',
-    mediaType: 'video',
-    mediaSrc: '/videos/beautysalon-demo.mp4',
-  },
-  {
-    key: 'other',
-    href: '/agency-other',
-    mediaType: 'image',
-    mediaSrc:
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
-  },
-];
+/* ── Category data ────────────────────────────────────────────────────────── */
 
-function SolutionCard({
-  href,
-  mediaType,
-  mediaSrc,
-  title,
-  desc,
+const categoryMeta: Record<
+  string,
+  { icon: typeof Utensils; videoSrc: string; gradient: string }
+> = {
+  food: {
+    icon: Utensils,
+    videoSrc: '/videos/food-demo.mp4',
+    gradient: 'from-orange-500/80 to-red-500/80',
+  },
+  beauty: {
+    icon: Scissors,
+    videoSrc: '/videos/grooming-demo.mp4',
+    gradient: 'from-pink-500/80 to-purple-500/80',
+  },
+  auto: {
+    icon: Wrench,
+    videoSrc: '/videos/beautysalon-demo.mp4',
+    gradient: 'from-blue-500/80 to-cyan-500/80',
+  },
+  universal: {
+    icon: Globe,
+    videoSrc: '',
+    gradient: 'from-slate-600/80 to-slate-800/80',
+  },
+};
+
+/* ── CategoryCard ─────────────────────────────────────────────────────────── */
+
+function CategoryCard({
+  catId,
+  index,
 }: {
-  href: string;
-  mediaType: string;
-  mediaSrc: string;
-  title: string;
-  desc: string;
+  catId: string;
+  index: number;
 }) {
+  const t = useTranslations('solutions');
+  const meta = categoryMeta[catId];
+  const Icon = meta.icon;
+  const modules = allSolutions.filter((m) => m.category === catId);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Link
+        href="/solutions"
+        className="group relative block overflow-hidden rounded-2xl aspect-[4/3] bg-[var(--bg)] border border-[var(--border)] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      >
+        {/* Media background */}
+        <div className="absolute inset-0 w-full h-full">
+          {catId === 'universal' ? (
+            <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
+          ) : (
+            <video
+              src={meta.videoSrc}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+          )}
+        </div>
+
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-75 group-hover:opacity-90 transition-opacity duration-500" />
+
+        {/* Content */}
+        <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
+          {/* Top: icon + badge */}
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
+              <Icon size={20} className="text-white" />
+            </div>
+            <span className="text-xs font-medium text-white/70 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1">
+              {modules.length} {modules.length === 1 ? 'module' : 'modules'}
+            </span>
+          </div>
+
+          {/* Bottom: title + modules list + CTA */}
+          <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+            <h3 className="font-bold text-xl md:text-2xl text-white mb-2">
+              {t(`categories.${catId}`)}
+            </h3>
+            <p className="text-sm text-gray-200/80 line-clamp-2 mb-3">
+              {modules.map((m) => t(`modules.${m.id}.title`)).join(' · ')}
+            </p>
+            <div className="flex items-center gap-1.5 text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-400 delay-100">
+              <span>{t('card.learnMore')}</span>
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+/* ── Mobile Category Card (simpler, for carousel) ────────────────────────── */
+
+function MobileCategoryCard({ catId }: { catId: string }) {
+  const t = useTranslations('solutions');
+  const meta = categoryMeta[catId];
+  const Icon = meta.icon;
+  const modules = allSolutions.filter((m) => m.category === catId);
+
   return (
     <Link
-      href={href}
-      className="group relative block overflow-hidden rounded-3xl aspect-[4/3] lg:aspect-[16/10] bg-[var(--bg)] border border-[var(--border)] transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      href="/solutions"
+      className="group relative block overflow-hidden rounded-2xl aspect-[4/3] bg-[var(--bg)] border border-[var(--border)] transition-all duration-500 hover:-translate-y-1 hover:shadow-xl snap-start shrink-0 w-[85%]"
     >
       <div className="absolute inset-0 w-full h-full">
-        {mediaType === 'video' ? (
+        {catId === 'universal' ? (
+          <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
+        ) : (
           <video
-            src={mediaSrc}
+            src={meta.videoSrc}
             autoPlay
             loop
             muted
             playsInline
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-        ) : (
-          <img
-            src={mediaSrc}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
         )}
       </div>
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
-
-      <div className="absolute inset-0 p-8 flex flex-col justify-end">
-        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-          <h3 className="font-semibold text-2xl md:text-3xl text-white mb-3">
-            {title}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-75" />
+      <div className="absolute inset-0 p-6 flex flex-col justify-between">
+        <div className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-sm flex items-center justify-center">
+          <Icon size={18} className="text-white" />
+        </div>
+        <div>
+          <h3 className="font-bold text-lg text-white mb-1">
+            {t(`categories.${catId}`)}
           </h3>
-          <p className="text-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-3">
-            {desc}
+          <p className="text-xs text-gray-200/80 line-clamp-1">
+            {modules.length} modules
           </p>
         </div>
       </div>
@@ -86,10 +155,16 @@ function SolutionCard({
   );
 }
 
+/* ── Main Section ─────────────────────────────────────────────────────────── */
+
 export default function HomeSolutionsSection() {
-  const t = useTranslations('home');
+  const tHome = useTranslations('home');
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-80px' });
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const displayCategories = categories.filter((c) => c.id !== 'all');
 
   const scrollToIndex = (index: number) => {
     const el = scrollerRef.current;
@@ -100,15 +175,9 @@ export default function HomeSolutionsSection() {
     }
   };
 
-  const handlePrev = () => scrollToIndex(Math.max(activeIndex - 1, 0));
-  const handleNext = () =>
-    scrollToIndex(Math.min(activeIndex + 1, solutions.length - 1));
-
-  // Отслеживаем какая карточка сейчас в центре видимости, чтобы подсвечивать точки
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
-
     const onScroll = () => {
       const scrollLeft = el.scrollLeft;
       const children = Array.from(el.children) as HTMLElement[];
@@ -123,91 +192,73 @@ export default function HomeSolutionsSection() {
       });
       setActiveIndex(closestIndex);
     };
-
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <section className="py-24 px-6 bg-[var(--surface)]">
-      <div className="max-w-6xl mx-auto text-center mb-16">
+    <section ref={sectionRef} className="py-24 px-6 bg-[var(--surface)]">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-6xl mx-auto text-center mb-16"
+      >
         <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
-          {t('solutionsTitle')}
+          {tHome('solutionsTitle')}
         </h2>
         <p className="text-[var(--text-muted)] max-w-2xl mx-auto text-lg">
-          {t('solutionsSubtitle')}
+          {tHome('solutionsSubtitle')}
         </p>
-      </div>
+      </motion.div>
 
-      {/* Десктоп: обычная сетка */}
-      <div className="hidden md:grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-        {solutions.map(({ key, href, mediaType, mediaSrc }) => (
-          <SolutionCard
-            key={key}
-            href={href}
-            mediaType={mediaType}
-            mediaSrc={mediaSrc}
-            title={t(`solutions.${key}.title`)}
-            desc={t(`solutions.${key}.desc`)}
-          />
+      {/* Desktop: 4-column grid */}
+      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+        {displayCategories.map((cat, i) => (
+          <CategoryCard key={cat.id} catId={cat.id} index={i} />
         ))}
       </div>
 
-      {/* Мобилка: карусель со свайпом + стрелки + точки */}
+      {/* Mobile: horizontal carousel */}
       <div className="md:hidden relative -mx-6">
         <div
           ref={scrollerRef}
           className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide px-6 gap-4 pb-2"
           style={{ scrollPaddingLeft: '1.5rem' }}
         >
-          {solutions.map(({ key, href, mediaType, mediaSrc }) => (
-            <div
-              key={key}
-              className="snap-start shrink-0 w-[85%]"
-            >
-              <SolutionCard
-                href={href}
-                mediaType={mediaType}
-                mediaSrc={mediaSrc}
-                title={t(`solutions.${key}.title`)}
-                desc={t(`solutions.${key}.desc`)}
-              />
-            </div>
+          {displayCategories.map((cat) => (
+            <MobileCategoryCard key={cat.id} catId={cat.id} />
           ))}
         </div>
 
-        {/* Стрелки поверх карусели, чтобы явно намекнуть что можно листать */}
+        {/* Arrows */}
         <button
-          type="button"
-          onClick={handlePrev}
-          disabled={activeIndex === 0}
+          onClick={() => scrollToIndex(Math.max(activeIndex - 1, 0))}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[var(--surface)]/90 backdrop-blur border border-[var(--border)] shadow-md flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
           aria-label="Previous"
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm disabled:opacity-0 transition-opacity"
         >
           <ChevronLeft size={18} />
         </button>
         <button
-          type="button"
-          onClick={handleNext}
-          disabled={activeIndex === solutions.length - 1}
+          onClick={() => scrollToIndex(Math.min(activeIndex + 1, displayCategories.length - 1))}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[var(--surface)]/90 backdrop-blur border border-[var(--border)] shadow-md flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
           aria-label="Next"
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-sm disabled:opacity-0 transition-opacity"
         >
           <ChevronRight size={18} />
         </button>
 
-        {/* Точки-индикатор */}
+        {/* Dot indicators */}
         <div className="flex justify-center gap-2 mt-4">
-          {solutions.map((_, i) => (
+          {displayCategories.map((_, i) => (
             <button
               key={i}
               onClick={() => scrollToIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 i === activeIndex
-                  ? 'w-6 bg-[var(--primary-color)]'
-                  : 'w-1.5 bg-[var(--text-muted)]/40'
+                  ? 'bg-[var(--primary-color)] w-5'
+                  : 'bg-[var(--text-muted)]/30'
               }`}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>
