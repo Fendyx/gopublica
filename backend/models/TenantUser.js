@@ -15,11 +15,15 @@ const tenantUserSchema = new mongoose.Schema({
   name:  { type: String, default: '' },
 
   // ─── Google OAuth ──────────────────────────────────────────────
+  // IMPORTANT: Do NOT use `default: null` here. In MongoDB, `sparse: true`
+  // only omits documents where the field is completely absent from the doc.
+  // If default is null, the field IS stored as null and the unique sparse
+  // index treats multiple nulls as duplicates → E11000 duplicate key error.
   googleId: {
     type:    String,
-    default: null,
-    sparse: true,
     unique: true,
+    sparse: true,
+    // No default → field absent for email/password users → sparse index skips them
   },
   avatarUrl: { type: String, default: '' },
   phone: { type: String, default: '' },

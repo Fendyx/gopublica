@@ -73,13 +73,17 @@ function registerRoutes(app) {
   // Stripe (SaaS подписки) — mount all at /api/stripe so that
   // each router's own path segments form the correct final URL
   // e.g. router.post('/subscribe') → POST /api/stripe/subscribe
+  //
+  // IMPORTANT: `prices` has a /:priceId wildcard — it MUST be registered
+  // LAST so it doesn't shadow specific routes like /payment-method or /invoices.
   app.use('/api/stripe', require('./stripe/checkout'));
   app.use('/api/stripe', require('./stripe/setupIntent'));
   app.use('/api/stripe', require('./stripe/subscribe'));
   app.use('/api/stripe', require('./stripe/cancel'));
-  app.use('/api/stripe', require('./stripe/prices'));
   app.use('/api/stripe', require('./stripe/paymentMethod'));
   app.use('/api/stripe', require('./stripe/invoices'));
+  app.use('/api/stripe', require('./stripe/setPaymentMethod'));
+  app.use('/api/stripe', require('./stripe/prices'));
 
   // Platform Marketplace (products, orders, news)
   app.use('/api/platform/products', require('./platform/products'));
