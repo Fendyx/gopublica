@@ -12,6 +12,11 @@ const fs = require('fs');
  * @param {express.Express} app
  */
 function registerRoutes(app) {
+  // ── Health check (public, no auth — used by external cron) ──
+  app.get('/api/ping', (_req, res) => {
+    res.json({ status: 'ok', message: 'pong', timestamp: new Date().toISOString() });
+  });
+
   // ── Импорт роутов ─────────────────────────────────────
   const jobsPublicRoutes = require('./public/jobs');
   const saasJobsRoutes = require('./saas/jobs');
