@@ -80,6 +80,35 @@ async function setDefaultPaymentMethod(customerId, paymentMethodId) {
  * @param {object} params - { customer, priceId, userId, tenantId, currency }
  * @returns {Promise<object>} Checkout session
  */
+/**
+ * Ensure a Stripe customer exists, creating a new one if the stored ID is stale.
+ * @param {string} customerId - Stripe Customer ID from the database
+ * @param {object} userData - User data for creating a new customer if needed
+ * @returns {Promise<{ customer: object, isNew: boolean }>} The (possibly new) Stripe customer and a flag
+ */
+async function ensureValidCustomer(customerId, userData) {
+  try {
+    const customer = await Stripe.customers.retrieve(customerId);
+    return { customer, isNew: false };
+  } catch (err) {
+    if (err.type === 'StripeInvalidRequestError' && err.statusCode === 404) {
+      console.warn(
+        `⚠️ Stripe customer ${customerId} not found — creating a new customer for ${userData.email}`
+      );
+      const customer = await Stripe.customers.create({
+        email: userData.email,
+        name: userData.companyName || userData.name,
+        metadata: {
+          userId: userData._id?.toString() || '',
+          tenantId: userData.tenantId || '',
+        },
+      });
+      return { customer, isNew: true };
+    }
+    throw err;
+  }
+}
+
 async function createCheckoutSession(params) {
   const { customer, priceId, userId, tenantId, currency } = params;
 
@@ -158,6 +187,7 @@ async function constructWebhookEvent(rawBody, signature) {
 
 module.exports = {
   Stripe,
+  ensureValidCustomer,
   createCustomer,
   updateCustomer,
   retrieveCustomer,

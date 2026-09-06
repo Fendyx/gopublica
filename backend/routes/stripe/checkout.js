@@ -1,6 +1,6 @@
 const express    = require('express');
 const router     = express.Router();
-const { updateCustomer, createCheckoutSession } = require('../../services/payments/stripe');
+const { updateCustomer, createCheckoutSession, ensureValidCustomer } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
 const authTenant = require('../../middleware/auth/tenant');
 
@@ -15,15 +15,23 @@ router.post('/create-checkout-session', authTenant, async (req, res) => {
       return res.status(400).json({ error: 'Stripe customer не найден' });
     }
 
+    // Verify the Stripe customer still exists; if deleted, auto-create a new one
+    const { customer: stripeCustomer, isNew } = await ensureValidCustomer(user.stripeCustomerId, user);
+    if (isNew) {
+      user.stripeCustomerId = stripeCustomer.id;
+      await user.save();
+    }
+    const customerId = stripeCustomer.id;
+
     // Если tenantId уже назначен — обновляем метадату в Stripe
     if (user.tenantId) {
-      await updateCustomer(user.stripeCustomerId, {
+      await updateCustomer(customerId, {
         metadata: { tenantId: user.tenantId, userId: user._id.toString() },
       });
     }
 
     const session = await createCheckoutSession({
-      customer: user.stripeCustomerId,
+      customer: customerId,
       priceId,
       userId: user._id.toString(),
       tenantId: user.tenantId,

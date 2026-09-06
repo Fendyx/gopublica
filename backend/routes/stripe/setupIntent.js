@@ -1,6 +1,6 @@
 const express    = require('express');
 const router     = express.Router();
-const { createSetupIntent } = require('../../services/payments/stripe');
+const { createSetupIntent, ensureValidCustomer } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
 const authTenant = require('../../middleware/auth/tenant');
 
@@ -12,7 +12,14 @@ router.post('/setup-intent', authTenant, async (req, res) => {
       return res.status(400).json({ error: 'Stripe customer не найден' });
     }
 
-    const setupIntent = await createSetupIntent(user.stripeCustomerId, user._id.toString());
+    // Verify the Stripe customer still exists; if deleted, auto-create a new one
+    const { customer: stripeCustomer, isNew } = await ensureValidCustomer(user.stripeCustomerId, user);
+    if (isNew) {
+      user.stripeCustomerId = stripeCustomer.id;
+      await user.save();
+    }
+
+    const setupIntent = await createSetupIntent(stripeCustomer.id, user._id.toString());
 
     res.json({ clientSecret: setupIntent.client_secret });
   } catch (err) {

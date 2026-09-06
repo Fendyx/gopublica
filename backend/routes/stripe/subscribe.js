@@ -3,7 +3,7 @@ const router     = express.Router();
 const {
   attachPaymentMethod,
   updateCustomer,
-  retrieveCustomer,
+  ensureValidCustomer,
   createCustomer,
   setDefaultPaymentMethod,
   listTaxIds,
@@ -37,8 +37,16 @@ router.post('/subscribe', authTenant, async (req, res) => {
       });
     }
 
+    // Verify the Stripe customer still exists; if deleted, auto-create a new one
+    const { customer: stripeCustomer, isNew } = await ensureValidCustomer(user.stripeCustomerId, user);
+    if (isNew) {
+      user.stripeCustomerId = stripeCustomer.id;
+      await user.save();
+    }
+    const customerId = stripeCustomer.id;
+
     // Привязываем PaymentMethod к Customer
-    await attachPaymentMethod(paymentMethodId, user.stripeCustomerId);
+    await attachPaymentMethod(paymentMethodId, customerId);
 
     // 2. ОБНОВЛЯЕМ ДАННЫЕ CUSTOMER (Добавляем адрес/страну для налогов)
     const customerUpdateData = {};
@@ -51,24 +59,24 @@ router.post('/subscribe', authTenant, async (req, res) => {
     }
 
     if (Object.keys(customerUpdateData).length > 0) {
-      await updateCustomer(user.stripeCustomerId, customerUpdateData);
+      await updateCustomer(customerId, customerUpdateData);
     }
 
     // Устанавливаем PaymentMethod как дефолтный
-    await setDefaultPaymentMethod(user.stripeCustomerId, paymentMethodId);
+    await setDefaultPaymentMethod(customerId, paymentMethodId);
 
     // 3. БЕЗОПАСНО ОБНОВЛЯЕМ VAT ID
     if (vatId !== undefined && vatId !== user.vatId) {
-      const existingTaxIds = await listTaxIds(user.stripeCustomerId);
+      const existingTaxIds = await listTaxIds(customerId);
       for (const tax of existingTaxIds.data) {
         if (tax.type === 'eu_vat') {
-          await deleteTaxId(user.stripeCustomerId, tax.id);
+          await deleteTaxId(customerId, tax.id);
         }
       }
       
       if (vatId) {
         try {
-          await createTaxId(user.stripeCustomerId, {
+          await createTaxId(customerId, {
             type: 'eu_vat',
             value: vatId.toUpperCase().replace(/\s/g, ''),
           });
@@ -93,9 +101,9 @@ router.post('/subscribe', authTenant, async (req, res) => {
     //    Stripe Customer currency is immutable once set by an invoice/payment.
     //    If the existing customer is locked to a different currency, we must
     //    create a fresh customer so that the subscription can use the desired currency.
-    let subscriptionCustomerId = user.stripeCustomerId;
+    let subscriptionCustomerId = customerId;
 
-    const stripeCustomer = await retrieveCustomer(user.stripeCustomerId);
+    // stripeCustomer was already retrieved by ensureValidCustomer above
     if (stripeCustomer.currency && stripeCustomer.currency !== normalizedCurrency) {
       console.log(
         `⚠️ Customer ${user.stripeCustomerId} locked to ${stripeCustomer.currency.toUpperCase()}, ` +
