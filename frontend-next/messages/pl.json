@@ -133,6 +133,7 @@
     "nav": {
       "overview": "Przegląd",
       "billing": "Płatności",
+      "customServices": "Usługi niestandardowe",
       "sites": "Strony",
       "settings": "Ustawienia"
     },
@@ -146,6 +147,36 @@
     "currentPeriodEnd": "Odnowienie",
     "logout": "Wyloguj się"
   },
+
+  "customServices": {
+    "title": "Usługi niestandardowe",
+    "subtitle": "Przeglądaj i opłacaj zadania niestandardowego rozwoju.",
+    "yourServices": "Twoje usługi",
+    "includedInSubscription": "Wliczone w subskrypcję",
+    "payNow": "Zapłać teraz",
+    "paid": "Opłacono",
+    "created": "Utworzono",
+    "empty": "Nie znaleziono usług niestandardowych.",
+    "stats": {
+      "pending": "Oczekujące",
+      "inProgress": "W toku",
+      "totalDue": "Do zapłaty"
+    },
+    "status": {
+      "pending": "Oczekujące",
+      "inProgress": "W toku",
+      "completed": "Zakończone",
+      "cancelled": "Anulowane"
+    },
+    "payment": {
+      "title": "Potwierdź płatność",
+      "confirm": "Zapłać {amount}",
+      "processing": "Przetwarzanie…",
+      "success": "Płatność zakończona pomyślnie!",
+      "error": "Płatność nie powiodła się. Spróbuj ponownie."
+    }
+  },
+
   "login": {
     "title": "Logowanie klienta",
     "comingSoon": "Strona logowania wkrótce dostępna.",
@@ -153,6 +184,7 @@
   },
   "billing": {
     "title": "Płatności",
+    "subtitle": "Zarządzaj subskrypcją, metodą płatności i fakturami.",
     "upgradePlan": "Przejdź na wyższy plan",
     "currentPlan": "Aktualny plan",
     "upgradeToPro": "Przejdź na Pro",
@@ -164,7 +196,23 @@
     "cancelWarning": "Twoja subskrypcja pozostanie aktywna do końca opłaconego okresu, a następnie zostanie anulowana.",
     "keepPlan": "Zachowaj mój plan",
     "confirmCancelBtn": "Tak, anuluj",
-    "cancelling": "Anulowanie..."
+    "cancelling": "Anulowanie...",
+    "endsAtPeriodEnd": "kończy się z okresem",
+    "perMonth": "/ miesiąc",
+    "nextBilling": "Następne rozliczenie",
+    "paymentMethod": "Metoda płatności",
+    "noPaymentMethod": "Brak metody płatności",
+    "addPaymentMethod": "Dodaj metodę płatności",
+    "addPaymentMethodDesc": "Dodaj metodę płatności, aby utrzymać subskrypcję po okresie próbnym.",
+    "cardholderName": "Właściciel karty",
+    "expires": "Wygasa",
+    "billingHistory": "Historia płatności",
+    "noInvoices": "Brak historii płatności",
+    "invoiceDate": "Data",
+    "invoiceAmount": "Kwota",
+    "invoiceStatus": "Status",
+    "viewReceipt": "Zobacz potwierdzenie",
+    "subscription": "Subskrypcja"
   },
   "sites": {
     "title": "Twoje strony",

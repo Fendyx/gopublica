@@ -47,6 +47,12 @@ export const tenantApi = {
   login: (data: { email: string; password: string }) =>
     authFetch('/saas/auth/login', { method: 'POST', body: JSON.stringify(data) }),
 
+  googleAuth: (credential: string, tenantId?: string) =>
+    authFetch('/saas/auth/google', {
+      method: 'POST',
+      body: JSON.stringify({ credential, tenantId }),
+    }),
+
   getMe: () => authFetch('/saas/auth/me'),
 
   createSetupIntent: () => authFetch('/stripe/setup-intent', { method: 'POST' }),
@@ -66,6 +72,10 @@ export const tenantApi = {
 
   cancelSubscription: () =>
     authFetch('/stripe/cancel-subscription', { method: 'POST' }),
+
+  getPaymentMethod: () => authFetch('/stripe/payment-method'),
+
+  getInvoices: () => authFetch('/stripe/invoices'),
 
   // ─── Sites API ─────────────────────────────────────────────────────────────
   

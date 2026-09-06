@@ -133,6 +133,7 @@
     "nav": {
       "overview": "Resumen",
       "billing": "Facturación",
+      "customServices": "Servicios personalizados",
       "sites": "Sitios",
       "settings": "Configuración"
     },
@@ -146,6 +147,36 @@
     "currentPeriodEnd": "Renovación",
     "logout": "Cerrar sesión"
   },
+
+  "customServices": {
+    "title": "Servicios personalizados",
+    "subtitle": "Consulta y paga tareas de desarrollo personalizadas.",
+    "yourServices": "Tus servicios",
+    "includedInSubscription": "Incluido en la suscripción",
+    "payNow": "Pagar ahora",
+    "paid": "Pagado",
+    "created": "Creado",
+    "empty": "No se encontraron servicios personalizados.",
+    "stats": {
+      "pending": "Pendiente",
+      "inProgress": "En progreso",
+      "totalDue": "Total a pagar"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "inProgress": "En progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado"
+    },
+    "payment": {
+      "title": "Confirmar pago",
+      "confirm": "Pagar {amount}",
+      "processing": "Procesando…",
+      "success": "¡Pago exitoso!",
+      "error": "El pago falló. Por favor, inténtalo de nuevo."
+    }
+  },
+
   "login": {
     "title": "Inicio de sesión de cliente",
     "comingSoon": "La página de inicio de sesión estará disponible pronto.",
@@ -153,6 +184,7 @@
   },
   "billing": {
     "title": "Facturación",
+    "subtitle": "Gestiona tu suscripción, método de pago e facturas.",
     "upgradePlan": "Actualizar plan",
     "currentPlan": "Plan actual",
     "upgradeToPro": "Actualizar a Pro",
@@ -164,7 +196,23 @@
     "cancelWarning": "Tu suscripción permanecerá activa hasta el final del período pagado, luego se cancelará.",
     "keepPlan": "Mantener mi plan",
     "confirmCancelBtn": "Sí, cancelar",
-    "cancelling": "Cancelando..."
+    "cancelling": "Cancelando...",
+    "endsAtPeriodEnd": "termina con el período",
+    "perMonth": "/ mes",
+    "nextBilling": "Próxima facturación",
+    "paymentMethod": "Método de pago",
+    "noPaymentMethod": "Sin método de pago registrado",
+    "addPaymentMethod": "Añadir método de pago",
+    "addPaymentMethodDesc": "Añade un método de pago para mantener tu suscripción después del período de prueba.",
+    "cardholderName": "Titular de la tarjeta",
+    "expires": "Vence",
+    "billingHistory": "Historial de facturación",
+    "noInvoices": "Aún no hay facturas",
+    "invoiceDate": "Fecha",
+    "invoiceAmount": "Importe",
+    "invoiceStatus": "Estado",
+    "viewReceipt": "Ver recibo",
+    "subscription": "Suscripción"
   },
   "sites": {
     "title": "Tus sitios",

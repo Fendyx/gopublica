@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { useTenantAuthStore } from '@/store/tenantAuthStore';
 import { tenantApi } from '@/entities/subscription/api/tenantApi';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function LoginClientForm() {
   const t = useTranslations('auth');
@@ -29,6 +30,24 @@ export default function LoginClientForm() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    setError('');
+    setLoading(true);
+    try {
+      const data = await tenantApi.googleAuth(credentialResponse.credential);
+      login(data.token, data.user);
+      router.push('/dashboard');
+    } catch (err: any) {
+      setError(err.message || 'Google login failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google sign-in was cancelled or failed');
   };
 
   return (
@@ -64,6 +83,31 @@ export default function LoginClientForm() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? t('loading') : t('loginBtn')}
           </Button>
+
+          {/* Divider */}
+          <div className="relative my-2">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-[var(--border)]" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-[var(--surface)] px-2 text-[var(--text-muted)]">or</span>
+            </div>
+          </div>
+
+          {/* Google OAuth */}
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              useOneTap={false}
+              theme="outline"
+              size="large"
+              width="100%"
+              text="signin_with"
+              shape="rectangular"
+            />
+          </div>
+
           <p className="text-center text-sm text-[var(--text-muted)]">
             {t('noAccount')}{' '}
             <a href="/register-client" className="text-[var(--primary-color)] hover:underline">

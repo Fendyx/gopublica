@@ -9,6 +9,7 @@ import {
   CreditCard,
   Globe,
   Settings,
+  Wrench,
   Menu,
   X,
   LogOut,
@@ -34,6 +35,7 @@ export default function DashboardLayout({
   const navItems = [
     { href: '/dashboard', label: t('nav.overview'), icon: LayoutDashboard },
     { href: '/dashboard/billing', label: t('nav.billing'), icon: CreditCard },
+    { href: '/dashboard/custom-services', label: t('nav.customServices'), icon: Wrench },
     { href: '/dashboard/sites', label: t('nav.sites'), icon: Globe },
     { href: '/dashboard/settings', label: t('nav.settings'), icon: Settings },
   ];
@@ -58,10 +60,10 @@ export default function DashboardLayout({
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-[var(--border)] shrink-0">
-          <span className="font-bold text-lg">GoPublica</span>
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
-            <X size={24} />
+        <div className="flex items-center justify-between px-5 py-5 border-b border-[var(--border)] shrink-0">
+          <span className="font-bold text-lg tracking-tight">GoPublica</span>
+          <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 hover:opacity-70 transition-opacity">
+            <X size={20} />
           </button>
         </div>
 
@@ -71,23 +73,23 @@ export default function DashboardLayout({
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
                 isActive(href)
-                  ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)]'
+                  ? 'bg-[var(--primary-color)]/10 text-[var(--primary-color)] shadow-sm border-l-2 border-[var(--primary-color)] pl-[10px]'
                   : 'text-[var(--text-muted)] hover:bg-[var(--bg)] hover:text-[var(--text)]'
               }`}
               onClick={() => setSidebarOpen(false)}
             >
-              <Icon size={18} />
+              <Icon size={18} strokeWidth={isActive(href) ? 2.2 : 1.8} />
               {label}
             </Link>
           ))}
         </nav>
 
         {/* User info & logout */}
-        <div className="shrink-0 p-4 border-t border-[var(--border)]">
+        <div className="shrink-0 px-4 py-4 border-t border-[var(--border)]">
             <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 rounded-full bg-[var(--primary-color)]/20 flex items-center justify-center text-sm font-bold">
+            <div className="w-9 h-9 rounded-full bg-[var(--primary-color)]/15 flex items-center justify-center text-sm font-semibold text-[var(--primary-color)] ring-2 ring-[var(--primary-color)]/10">
                 {mounted ? (user?.name?.[0]?.toUpperCase() || 'U') : ''}
             </div>
             <div className="flex-1 min-w-0">
@@ -101,29 +103,30 @@ export default function DashboardLayout({
             </div>
           <Button
             variant="outline"
-            className="w-full gap-2"
+            className="w-full gap-2 rounded-xl h-9 text-sm"
             onClick={logout}
           >
-            <LogOut size={16} />
+            <LogOut size={15} />
             {t('logout')}
           </Button>
         </div>
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col">
-        <header className="sticky top-0 z-30 bg-[var(--surface)] border-b border-[var(--border)] p-4 flex items-center gap-4">
+      <div className="flex-1 flex flex-col min-w-0">
+        <header className="sticky top-0 z-30 bg-[var(--surface)]/80 backdrop-blur-md border-b border-[var(--border)]/60 px-6 py-4 flex items-center gap-4">
           <button
-            className="lg:hidden"
+            className="lg:hidden p-1 hover:opacity-70 transition-opacity"
             onClick={() => setSidebarOpen(true)}
           >
-            <Menu size={24} />
+            <Menu size={22} />
           </button>
-          {/* <h1 className="text-xl font-semibold">
-            {navItems.find((item) => isActive(item.href))?.label || t('title')}
-          </h1> */}
         </header>
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        <main className="flex-1 p-6 lg:p-8 overflow-auto">
+          <div className="mx-auto max-w-5xl">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );

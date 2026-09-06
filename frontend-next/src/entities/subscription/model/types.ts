@@ -12,6 +12,25 @@ export interface TenantUser {
   stripeCustomerId?: string;
 }
 
+export interface PaymentMethod {
+  brand: 'visa' | 'mastercard' | 'amex' | 'discover' | 'diners' | 'jcb' | null;
+  last4: string | null;
+  expMonth: number | null;
+  expYear: number | null;
+  cardholderName: string | null;
+}
+
+export interface Invoice {
+  id: string;
+  date: string;
+  amount: number;
+  currency: string;
+  status: 'paid' | 'failed' | 'open' | 'void' | 'uncollectible';
+  description: string | null;
+  pdfUrl: string | null;
+  hostedUrl: string | null;
+}
+
 export type SiteType = 'primary' | 'subdomain' | 'landing' | 'microsite';
 export type SiteStatus = 'building' | 'staging' | 'live' | 'error' | 'paused';
 export type SiteNiche = 'food' | 'restaurant' | 'beauty' | 'auto' | 'ecommerce';

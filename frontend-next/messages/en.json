@@ -134,7 +134,7 @@
   },
 
 "dashboard": {
-  "nav": { "overview": "Overview", "billing": "Billing", "sites": "Sites", "settings": "Settings" },
+  "nav": { "overview": "Overview", "billing": "Billing", "customServices": "Custom Services", "sites": "Sites", "settings": "Settings" },
   "title": "Dashboard",
   "overviewTitle": "Welcome, {name}!",
   "profile": "Profile",
@@ -147,6 +147,35 @@
   "logout": "Logout"
 },
 
+"customServices": {
+  "title": "Custom Services",
+  "subtitle": "View and pay for custom development tasks.",
+  "yourServices": "Your Services",
+  "includedInSubscription": "Included in subscription",
+  "payNow": "Pay Now",
+  "paid": "Paid",
+  "created": "Created",
+  "empty": "No custom services found.",
+  "stats": {
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "totalDue": "Total Due"
+  },
+  "status": {
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "payment": {
+    "title": "Confirm Payment",
+    "confirm": "Pay {amount}",
+    "processing": "Processing…",
+    "success": "Payment successful!",
+    "error": "Payment failed. Please try again."
+  }
+},
+
   "login": {
   "title": "Client Login",
   "comingSoon": "Login page is coming soon.",
@@ -155,6 +184,7 @@
 
 "billing": {
   "title": "Billing",
+  "subtitle": "Manage your subscription, payment method, and invoices.",
   "upgradePlan": "Upgrade Plan",
   "currentPlan": "Current Plan",
   "upgradeToPro": "Upgrade to Pro",
@@ -166,7 +196,23 @@
   "cancelWarning": "Your subscription will remain active until the end of the paid period, then it will be cancelled.",
   "keepPlan": "Keep my plan",
   "confirmCancelBtn": "Yes, cancel",
-  "cancelling": "Cancelling..."
+  "cancelling": "Cancelling...",
+  "endsAtPeriodEnd": "ends at period end",
+  "perMonth": "/ month",
+  "nextBilling": "Next billing",
+  "paymentMethod": "Payment Method",
+  "noPaymentMethod": "No payment method on file",
+  "addPaymentMethod": "Add Payment Method",
+  "addPaymentMethodDesc": "Add a payment method to keep your subscription active after the trial.",
+  "cardholderName": "Cardholder",
+  "expires": "Expires",
+  "billingHistory": "Billing History",
+  "noInvoices": "No billing history yet",
+  "invoiceDate": "Date",
+  "invoiceAmount": "Amount",
+  "invoiceStatus": "Status",
+  "viewReceipt": "View receipt",
+  "subscription": "Subscription"
 },
 "sites": {
   "title": "Your Sites",
@@ -361,6 +407,23 @@
       "grooming": { "title": "Pet Grooming", "desc": "Booking, pet profiles, loyalty." },
       "salon": { "title": "Beauty & Barbers", "desc": "Appointments, staff, service menus." },
       "other": { "title": "Other Businesses", "desc": "Custom websites for any industry." }
+    },
+    "infrastructureTitle": "Built for Scale",
+    "infrastructureSubtitle": "Enterprise-grade infrastructure that grows with your business.",
+    "infrastructure": {
+      "payments": {
+        "subtitle": "Stripe Integration • Any Payment Method",
+        "stripe": "Powered by Stripe — secure & reliable",
+        "methods": "Cards, Apple Pay, Google Pay & 100+ methods",
+        "recurring": "Subscriptions & recurring billing built-in"
+      },
+      "logistics": {
+        "title": "InPost & More",
+        "subtitle": "Seamless Logistics • Real-time Tracking",
+        "inpost": "InPost, DPD, DHL & local carriers",
+        "tracking": "Real-time package tracking for customers",
+        "pickup": "Pickup points & locker integration"
+      }
     }
   },
   "auth": {

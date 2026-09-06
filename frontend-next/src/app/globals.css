@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Dark mode: Tailwind v4 dark: prefix matches data-theme="dark" */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /* Тема (заменяет tailwind.config.ts) */
 @theme {
   --color-border: var(--border);
@@ -58,6 +61,11 @@
   --text: #111827;
   --text-muted: #6b7280;
   --primary-color: #2563eb;
+
+  /* Premium card tokens */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.08);
+  --gradient-card-brand: linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(37,99,235,0.02) 50%, transparent 100%);
 }
 
 [data-theme="dark"] {
@@ -66,6 +74,11 @@
   --text: #f1f5f9;
   --text-muted: #94a3b8;
   --primary-color: #3b82f6;
+
+  /* Premium card tokens (dark) */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.2);
+  --shadow-card-hover: 0 2px 8px rgba(0,0,0,0.2), 0 8px 24px rgba(0,0,0,0.25);
+  --gradient-card-brand: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(59,130,246,0.03) 50%, transparent 100%);
 }
 
 /* Глобальные стили */

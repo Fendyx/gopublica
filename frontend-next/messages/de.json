@@ -133,6 +133,7 @@
     "nav": {
       "overview": "Übersicht",
       "billing": "Abrechnung",
+      "customServices": "Individuelle Dienste",
       "sites": "Websites",
       "settings": "Einstellungen"
     },
@@ -146,6 +147,36 @@
     "currentPeriodEnd": "Verlängerung",
     "logout": "Abmelden"
   },
+
+  "customServices": {
+    "title": "Individuelle Dienste",
+    "subtitle": "Individuelle Entwicklungsaufgaben anzeigen und bezahlen.",
+    "yourServices": "Deine Dienste",
+    "includedInSubscription": "Im Abonnement enthalten",
+    "payNow": "Jetzt bezahlen",
+    "paid": "Bezahlt",
+    "created": "Erstellt",
+    "empty": "Keine individuellen Dienste gefunden.",
+    "stats": {
+      "pending": "Ausstehend",
+      "inProgress": "In Bearbeitung",
+      "totalDue": "Gesamtbetrag"
+    },
+    "status": {
+      "pending": "Ausstehend",
+      "inProgress": "In Bearbeitung",
+      "completed": "Abgeschlossen",
+      "cancelled": "Storniert"
+    },
+    "payment": {
+      "title": "Zahlung bestätigen",
+      "confirm": "{amount} bezahlen",
+      "processing": "Verarbeitung…",
+      "success": "Zahlung erfolgreich!",
+      "error": "Zahlung fehlgeschlagen. Bitte versuche es erneut."
+    }
+  },
+
   "login": {
     "title": "Kunden-Login",
     "comingSoon": "Die Login-Seite ist bald verfügbar.",
@@ -153,6 +184,7 @@
   },
   "billing": {
     "title": "Abrechnung",
+    "subtitle": "Verwalte dein Abonnement, deine Zahlungsmethode und deine Rechnungen.",
     "upgradePlan": "Tarif upgraden",
     "currentPlan": "Aktueller Tarif",
     "upgradeToPro": "Upgrade auf Pro",
@@ -164,7 +196,23 @@
     "cancelWarning": "Dein Abonnement bleibt bis zum Ende des bezahlten Zeitraums aktiv und wird dann gekündigt.",
     "keepPlan": "Meinen Tarif behalten",
     "confirmCancelBtn": "Ja, kündigen",
-    "cancelling": "Kündigung..."
+    "cancelling": "Kündigung...",
+    "endsAtPeriodEnd": "endet mit der Periode",
+    "perMonth": "/ Monat",
+    "nextBilling": "Nächste Abrechnung",
+    "paymentMethod": "Zahlungsmethode",
+    "noPaymentMethod": "Keine Zahlungsmethode hinterlegt",
+    "addPaymentMethod": "Zahlungsmethode hinzufügen",
+    "addPaymentMethodDesc": "Füge eine Zahlungsmethode hinzu, um dein Abonnement nach der Testzeit fortzusetzen.",
+    "cardholderName": "Karteninhaber",
+    "expires": "Gültig bis",
+    "billingHistory": "Rechnungsverlauf",
+    "noInvoices": "Noch keine Rechnungen",
+    "invoiceDate": "Datum",
+    "invoiceAmount": "Betrag",
+    "invoiceStatus": "Status",
+    "viewReceipt": "Beleg ansehen",
+    "subscription": "Abonnement"
   },
   "sites": {
     "title": "Deine Websites",

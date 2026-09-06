@@ -133,6 +133,7 @@
     "nav": {
       "overview": "Огляд",
       "billing": "Оплата",
+      "customServices": "Індивідуальні послуги",
       "sites": "Сайти",
       "settings": "Налаштування"
     },
@@ -146,6 +147,36 @@
     "currentPeriodEnd": "Поновлення",
     "logout": "Вийти"
   },
+
+  "customServices": {
+    "title": "Індивідуальні послуги",
+    "subtitle": "Переглядайте та оплачуйте завдання індивідуальної розробки.",
+    "yourServices": "Ваші послуги",
+    "includedInSubscription": "Включено в підписку",
+    "payNow": "Сплатити зараз",
+    "paid": "Сплачено",
+    "created": "Створено",
+    "empty": "Індивідуальні послуги не знайдено.",
+    "stats": {
+      "pending": "Очікує",
+      "inProgress": "В роботі",
+      "totalDue": "До сплати"
+    },
+    "status": {
+      "pending": "Очікує",
+      "inProgress": "В роботі",
+      "completed": "Виконано",
+      "cancelled": "Скасовано"
+    },
+    "payment": {
+      "title": "Підтвердити оплату",
+      "confirm": "Сплатити {amount}",
+      "processing": "Обробка…",
+      "success": "Оплату успішно здійснено!",
+      "error": "Оплата не вдалася. Спробуйте ще раз."
+    }
+  },
+
   "login": {
     "title": "Вхід для клієнтів",
     "comingSoon": "Сторінка входу незабаром.",
@@ -153,6 +184,7 @@
   },
   "billing": {
     "title": "Оплата",
+    "subtitle": "Керуйте підпискою, способом оплати та рахунками-фактурами.",
     "upgradePlan": "Покращити",
     "currentPlan": "Поточний тариф",
     "upgradeToPro": "Перейти на Pro",
@@ -164,7 +196,23 @@
     "cancelWarning": "Ваша підписка залишатиметься активною до кінця оплаченого періоду, потім її буде скасовано.",
     "keepPlan": "Залишити мій тариф",
     "confirmCancelBtn": "Так, скасувати",
-    "cancelling": "Скасування..."
+    "cancelling": "Скасування...",
+    "endsAtPeriodEnd": "закінчується з періодом",
+    "perMonth": "/ місяць",
+    "nextBilling": "Наступне списання",
+    "paymentMethod": "Спосіб оплати",
+    "noPaymentMethod": "Спосіб оплати не додано",
+    "addPaymentMethod": "Додати спосіб оплати",
+    "addPaymentMethodDesc": "Додайте спосіб оплати, щоб зберегти підписку після пробного періоду.",
+    "cardholderName": "Власник картки",
+    "expires": "Термін дії",
+    "billingHistory": "Історія платежів",
+    "noInvoices": "Історія платежів поки порожня",
+    "invoiceDate": "Дата",
+    "invoiceAmount": "Сума",
+    "invoiceStatus": "Статус",
+    "viewReceipt": "Переглянути чек",
+    "subscription": "Підписка"
   },
   "sites": {
     "title": "Ваші сайти",

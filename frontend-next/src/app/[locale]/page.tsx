@@ -2,6 +2,7 @@ import HeroSection from "@/widgets/HomePage/HeroSection";
 import HeroSectionV2 from "@/widgets/HomePage/HeroSectionV2";
 import HomeSolutionsSection from "@/widgets/HomePage/HomeSolutionsSection";
 import TrustMarquee from "@/widgets/HomePage/TrustMarquee";
+import InfrastructureSection from "@/widgets/HomePage/InfrastructureSection";
 
 export default function HomePage() {
   const jsonLd = {
@@ -27,6 +28,7 @@ export default function HomePage() {
       {/* <HeroSectionV2 /> */}
       <TrustMarquee />
       <HomeSolutionsSection />
+      <InfrastructureSection />
     </>
   );
 }

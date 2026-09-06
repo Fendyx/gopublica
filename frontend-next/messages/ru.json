@@ -133,6 +133,7 @@
     "nav": {
       "overview": "Обзор",
       "billing": "Платежи",
+      "customServices": "Индивидуальные услуги",
       "sites": "Сайты",
       "settings": "Настройки"
     },
@@ -146,6 +147,36 @@
     "currentPeriodEnd": "Продление",
     "logout": "Выйти"
   },
+
+  "customServices": {
+    "title": "Индивидуальные услуги",
+    "subtitle": "Просматривайте и оплачивайте задачи индивидуальной разработки.",
+    "yourServices": "Ваши услуги",
+    "includedInSubscription": "Включено в подписку",
+    "payNow": "Оплатить",
+    "paid": "Оплачено",
+    "created": "Создано",
+    "empty": "Индивидуальные услуги не найдены.",
+    "stats": {
+      "pending": "Ожидает",
+      "inProgress": "В работе",
+      "totalDue": "К оплате"
+    },
+    "status": {
+      "pending": "Ожидает",
+      "inProgress": "В работе",
+      "completed": "Выполнено",
+      "cancelled": "Отменено"
+    },
+    "payment": {
+      "title": "Подтвердить оплату",
+      "confirm": "Оплатить {amount}",
+      "processing": "Обработка…",
+      "success": "Оплата прошла успешно!",
+      "error": "Оплата не удалась. Попробуйте ещё раз."
+    }
+  },
+
   "login": {
     "title": "Вход для клиентов",
     "comingSoon": "Страница входа скоро появится.",
@@ -153,6 +184,7 @@
   },
   "billing": {
     "title": "Платежи",
+    "subtitle": "Управляйте подпиской, способом оплаты и счетами.",
     "upgradePlan": "Улучшить",
     "currentPlan": "Текущий тариф",
     "upgradeToPro": "Перейти на Pro",
@@ -164,7 +196,23 @@
     "cancelWarning": "Ваша подписка останется активной до конца оплаченного периода, затем будет отменена.",
     "keepPlan": "Оставить мой тариф",
     "confirmCancelBtn": "Да, отменить",
-    "cancelling": "Отмена..."
+    "cancelling": "Отмена...",
+    "endsAtPeriodEnd": "заканчивается с периодом",
+    "perMonth": "/ месяц",
+    "nextBilling": "Следующее списание",
+    "paymentMethod": "Способ оплаты",
+    "noPaymentMethod": "Способ оплаты не добавлен",
+    "addPaymentMethod": "Добавить способ оплаты",
+    "addPaymentMethodDesc": "Добавьте способ оплаты, чтобы сохранить подписку после пробного периода.",
+    "cardholderName": "Держатель карты",
+    "expires": "Срок действия",
+    "billingHistory": "История платежей",
+    "noInvoices": "История платежей пока пуста",
+    "invoiceDate": "Дата",
+    "invoiceAmount": "Сумма",
+    "invoiceStatus": "Статус",
+    "viewReceipt": "Посмотреть чек",
+    "subscription": "Подписка"
   },
   "sites": {
     "title": "Ваши сайты",
