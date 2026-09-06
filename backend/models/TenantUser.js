@@ -10,9 +10,18 @@ const tenantUserSchema = new mongoose.Schema({
   },
   passwordHash: {
     type:     String,
-    required: true,
+    default:  null,  // null for Google OAuth users
   },
   name:  { type: String, default: '' },
+
+  // ─── Google OAuth ──────────────────────────────────────────────
+  googleId: {
+    type:    String,
+    default: null,
+    sparse: true,
+    unique: true,
+  },
+  avatarUrl: { type: String, default: '' },
   phone: { type: String, default: '' },
   companyName: { type: String, default: '' },
   vatId:       { type: String, default: '' },
@@ -83,6 +92,7 @@ tenantUserSchema.index({ tenantId: 1, telegramChatId: 1 });
 // telegramLinkToken index is created by field definition (sparse: true)
 
 tenantUserSchema.methods.comparePassword = async function(candidate) {
+  if (!this.passwordHash) return false; // Google OAuth user — no password set
   return bcrypt.compare(candidate, this.passwordHash);
 };
 

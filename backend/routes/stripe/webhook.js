@@ -44,6 +44,18 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
           break;
         }
 
+        // ── Custom Service payments ──
+        if (paymentIntent.metadata?.customServiceId) {
+          const CustomService = require('../../models/tenant/CustomService');
+          const svc = await CustomService.findById(paymentIntent.metadata.customServiceId);
+          if (svc && !svc.paidAt) {
+            svc.paidAt = new Date();
+            await svc.save();
+            console.log(`✅ CustomService ${svc._id} payment confirmed`);
+          }
+          break;
+        }
+
         // ── Tenant food/beauty orders ──
         if (paymentIntent.metadata?.orderId) {
           const order = await Order.findById(paymentIntent.metadata.orderId);

@@ -21,6 +21,7 @@ router.get('/', async (req, res) => {
     const niche = req.query.niche || 'food';
     const parentKey = req.query.parentKey || null;
     const treeMode = req.query.tree === 'true';
+    const ownOnly = req.query.own === 'true'; // ← only tenant-owned categories (no globals)
 
     if (!tenantId) {
       const globals = await CategoryTranslation.find({ tenantId: null, niche })
@@ -33,6 +34,16 @@ router.get('/', async (req, res) => {
     const tenantCats = await CategoryTranslation.find({ tenantId, niche })
       .sort({ order: 1, name: 1 })
       .lean();
+
+    // If own=true, return only tenant-owned categories
+    if (ownOnly) {
+      if (parentKey) {
+        return res.json(tenantCats.filter(c => (c.parentCategoryKey || null) === parentKey));
+      }
+      if (treeMode) return res.json(buildTree(tenantCats));
+      return res.json(tenantCats);
+    }
+
     const tenantKeys = tenantCats.map(c => c.key);
     const globalCats = await CategoryTranslation.find({
       tenantId: null,

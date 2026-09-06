@@ -288,6 +288,18 @@ router.put('/', authTenant, async (req, res) => {
       delete reqBody.navigation;
     }
 
+    // 3d. Сохраняем features глобально (tenant-wide feature toggles)
+    if (reqBody.features && typeof reqBody.features === 'object') {
+      let globalSettings = await TenantSettings.findOne({ tenantId });
+      if (!globalSettings) globalSettings = new TenantSettings({ tenantId });
+      const existingFeatures = globalSettings.features?.toObject?.() || globalSettings.features || {};
+      globalSettings.features = { ...existingFeatures, ...reqBody.features };
+      globalSettings.markModified('features');
+      await globalSettings.save();
+      console.log('-> Features saved globally');
+      delete reqBody.features;
+    }
+
     // 4. Если есть branchId -> сохраняем остатки в филиал
     if (branchId) {
       const branch = await Branch.findOne({ _id: branchId, tenantId });

@@ -225,6 +225,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasClickCollect: { type: Boolean, default: false },
     hasOnlineOrdering: { type: Boolean, default: false },
     hasJobApplications: { type: Boolean, default: false },
+    showCategoryNav: { type: Boolean, default: false },
   },
 
   // ─── НОВОЕ: Конфигурация навигации (порядок ссылок, видимость, primary/dropdown) ──

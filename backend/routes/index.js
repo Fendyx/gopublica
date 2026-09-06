@@ -34,9 +34,8 @@ function registerRoutes(app) {
   app.use('/api/auth', require('./gopublica/auth'));
   app.use('/api/users', require('./gopublica/users'));
 
-  // Leads & Clients (GoPublica CRM)
+  // Leads (GoPublica CRM)
   app.use('/api/leads', require('./gopublica/leads'));
-  app.use('/api/clients', require('./gopublica/clients'));
 
   // SaaS (Рестораны)
   app.use('/api/saas/auth', require('./saas/auth'));
@@ -56,6 +55,7 @@ function registerRoutes(app) {
   app.use('/api/saas/jobs', saasJobsRoutes);
   app.use('/api/saas/sites', require('./saas/sites'));
   app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
+  app.use('/api/saas/custom-services', require('./saas/customServices'));
 
   // Dynamic form submissions (SaaS admin)
   app.use('/api/saas/forms/submissions', require('./saas/formSubmissions'));
@@ -73,6 +73,8 @@ function registerRoutes(app) {
   app.use('/api/stripe', require('./stripe/subscribe'));
   app.use('/api/stripe', require('./stripe/cancel'));
   app.use('/api/stripe', require('./stripe/prices'));
+  app.use('/api/stripe', require('./stripe/paymentMethod'));
+  app.use('/api/stripe', require('./stripe/invoices'));
 
   // Platform Marketplace (products, orders, news)
   app.use('/api/platform/products', require('./platform/products'));
@@ -96,9 +98,8 @@ function registerRoutes(app) {
   app.use('/api/public/beauty', require('./public/beauty/appointments'));
 
   // GoPublica CRM (other)
-  app.use('/api/change-requests', require('./gopublica/changeRequests'));
   app.use('/api/portfolio', require('./gopublica/portfolio'));
-  app.use('/api/projects', require('./gopublica/projects'));
+  app.use('/api/custom-services', require('./gopublica/customServices'));
   app.use('/api/demo-requests', require('./gopublica/demoRequests'));
 
   // Public auth

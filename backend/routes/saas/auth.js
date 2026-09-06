@@ -2,8 +2,11 @@ const express    = require('express');
 const router     = express.Router();
 const jwt        = require('jsonwebtoken');
 const bcrypt     = require('bcryptjs');
+const { OAuth2Client } = require('google-auth-library');
 const { createCustomer, createTaxId } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const auth = require('../../middleware/auth/jwt');
 const authTenant = require('../../middleware/auth/tenant');
 const checkRole = require('../../middleware/auth/role');
@@ -116,6 +119,105 @@ router.post('/register', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Google OAuth login/register ──────────────────────────────
+router.post('/google', async (req, res) => {
+  try {
+    const { credential, tenantId } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({ error: 'credential is required' });
+    }
+
+    // 1. Verify the Google ID token
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const { sub: googleId, email, name, picture } = ticket.getPayload();
+
+    if (!email) {
+      return res.status(400).json({ error: 'Google account has no email' });
+    }
+
+    // 2. Find existing user by googleId or email (scoped by tenantId if provided)
+    const query = tenantId
+      ? { $or: [{ googleId }, { email }], tenantId }
+      : { $or: [{ googleId }, { email }] };
+    let user = await TenantUser.findOne(query);
+
+    if (!user) {
+      // ── New user: create via Google ──────────────────────────
+      // Create Stripe customer
+      let stripeCustomerId = null;
+      try {
+        const customer = await createCustomer({
+          email,
+          name: name || email,
+        });
+        stripeCustomerId = customer.id;
+      } catch (stripeErr) {
+        console.error('⚠️ Google OAuth: failed to create Stripe customer:', stripeErr.message);
+      }
+
+      user = await TenantUser.create({
+        googleId,
+        email,
+        name: name || '',
+        avatarUrl: picture || '',
+        passwordHash: null,
+        tenantId: tenantId || null,
+        stripeCustomerId,
+        consents: { terms: true, privacy: true, marketing: false, lastUpdated: new Date() },
+      });
+    } else {
+      // ── Existing user: link Google account if not yet linked ──
+      if (!user.googleId) {
+        user.googleId = googleId;
+      }
+      if (picture && !user.avatarUrl) {
+        user.avatarUrl = picture;
+      }
+      if (!user.name && name) {
+        user.name = name;
+      }
+      await user.save();
+    }
+
+    if (!user.isActive) {
+      return res.status(403).json({ error: 'Account is blocked' });
+    }
+
+    // 3. Issue the same JWT as the password login
+    const token = jwt.sign(
+      { userId: user._id, tenantId: user.tenantId, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      token,
+      mustChangePassword: false,
+      user: {
+        id:                 user._id,
+        email:              user.email,
+        name:               user.name,
+        phone:              user.phone,
+        companyName:        user.companyName,
+        vatId:              user.vatId,
+        tenantId:           user.tenantId,
+        subscriptionStatus: user.subscriptionStatus,
+        subscriptionPlan:   user.subscriptionPlan,
+        currentPeriodEnd:   user.currentPeriodEnd,
+        avatarUrl:          user.avatarUrl,
+        consents:           user.consents,
+      },
+    });
+  } catch (err) {
+    console.error('Google OAuth error:', err.message);
+    res.status(500).json({ error: 'Google authentication failed' });
   }
 });
 
