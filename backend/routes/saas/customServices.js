@@ -5,7 +5,7 @@ const TenantUser = require('../../models/TenantUser');
 const authTenant = require('../../middleware/auth/tenant');
 const { Stripe } = require('../../services/payments/stripe');
 
-// GET /api/saas/custom-services — list tenant's custom services
+// GET /api/saas/custom-services - list tenant's custom services
 router.get('/', authTenant, async (req, res) => {
   try {
     const filter = { tenantId: req.tenantId };
@@ -27,7 +27,7 @@ router.get('/', authTenant, async (req, res) => {
   }
 });
 
-// GET /api/saas/custom-services/:id — get single item
+// GET /api/saas/custom-services/:id - get single item
 router.get('/:id', authTenant, async (req, res) => {
   try {
     const service = await CustomService.findOne({
@@ -45,7 +45,7 @@ router.get('/:id', authTenant, async (req, res) => {
   }
 });
 
-// POST /api/saas/custom-services/:id/pay — create Stripe PaymentIntent
+// POST /api/saas/custom-services/:id/pay - create Stripe PaymentIntent
 router.post('/:id/pay', authTenant, async (req, res) => {
   try {
     const service = await CustomService.findOne({
@@ -66,7 +66,7 @@ router.post('/:id/pay', authTenant, async (req, res) => {
     }
 
     if (service.paymentIntentId) {
-      // Payment already initiated — retrieve existing intent
+      // Payment already initiated - retrieve existing intent
       const existingIntent = await Stripe.paymentIntents.retrieve(service.paymentIntentId);
       if (existingIntent.status === 'succeeded') {
         return res.status(400).json({ error: 'Payment already completed' });

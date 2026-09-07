@@ -26,7 +26,7 @@ export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: strin
       const pm = await tenantApi.getPaymentMethod();
       setPaymentMethod(pm);
     } catch {
-      // Silently fail — component handles empty state
+      // Silently fail - component handles empty state
     }
   };
 
@@ -46,7 +46,7 @@ export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: strin
         if (pm.status === 'fulfilled') setPaymentMethod(pm.value);
         if (inv.status === 'fulfilled') setInvoices(inv.value.invoices || []);
       } catch {
-        // Silently fail — components handle empty states
+        // Silently fail - components handle empty states
       } finally {
         setLoadingData(false);
       }

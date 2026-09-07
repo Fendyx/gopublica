@@ -6,7 +6,7 @@ import type { DemoRequestPayload, DemoRequestResponse } from '../model/types';
  * Submit a public "Get a Free Demo" request.
  *
  * NOTE: `apiFetch` attaches the admin JWT if present, but the public
- * demo endpoint does NOT require auth — so this works for anonymous
+ * demo endpoint does NOT require auth - so this works for anonymous
  * visitors too. The 401 auto-redirect only triggers on a 401 response,
  * which this endpoint never returns.
  */

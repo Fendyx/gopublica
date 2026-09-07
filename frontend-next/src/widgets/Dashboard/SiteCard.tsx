@@ -70,12 +70,12 @@ export function SiteCard({ site }: SiteCardProps) {
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5">
       <CardContent className="p-0 flex flex-col md:flex-row">
-        {/* Visual Preview — left on desktop, top on mobile */}
+        {/* Visual Preview - left on desktop, top on mobile */}
         <div className="md:w-[45%] shrink-0">
           <SitePreview site={site} />
         </div>
 
-        {/* Content — right on desktop, bottom on mobile */}
+        {/* Content - right on desktop, bottom on mobile */}
         <div className="flex-1 p-5">
           {/* Badges row */}
           <div className="flex items-center gap-1.5 flex-wrap mb-2">

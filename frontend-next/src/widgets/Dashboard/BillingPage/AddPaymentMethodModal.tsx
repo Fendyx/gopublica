@@ -36,7 +36,7 @@ function SetupCardForm({
 
     setProcessing(true);
     try {
-      // Confirm the SetupIntent — this saves the card to the Stripe customer
+      // Confirm the SetupIntent - this saves the card to the Stripe customer
       const { setupIntent, error } = await stripe.confirmSetup({
         elements,
         confirmParams: {

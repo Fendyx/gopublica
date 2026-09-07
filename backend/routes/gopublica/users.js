@@ -7,7 +7,7 @@ const checkRole = require('../../middleware/auth/role');
 
 const ADMIN_ROLES = ['admin', 'superadmin'];
 
-// GET /api/users — список всех админов (для дропдауна assignedTo)
+// GET /api/users - список всех админов (для дропдауна assignedTo)
 router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const users = await User.find(
@@ -21,7 +21,7 @@ router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// GET /api/users/me/stats — статистика по моим лидам
+// GET /api/users/me/stats - статистика по моим лидам
 router.get('/me/stats', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const userId = req.user.id;

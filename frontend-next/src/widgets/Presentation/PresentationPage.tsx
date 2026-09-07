@@ -57,7 +57,7 @@ function MediaSlot({ Icon, stepId, accent }: { Icon: LucideIcon; stepId: string;
         <Icon size={32} style={{ color: accent }} strokeWidth={1.5} />
       </div>
       <p className="text-[11px] font-mono relative z-10 uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
-        GIF · VIDEO — {stepId}
+        GIF · VIDEO - {stepId}
       </p>
     </div>
   );
@@ -167,7 +167,7 @@ export function PresentationPage() {
       {/* ── Body: sidebar + slide ── */}
       <div className="flex flex-1 overflow-hidden">
 
-        {/* Left sidebar — timeline (hidden on small screens) */}
+        {/* Left sidebar - timeline (hidden on small screens) */}
         <aside
           className="hidden md:flex flex-col justify-center gap-2 px-4 py-8 w-20 lg:w-24 flex-shrink-0 border-r"
           style={{ borderColor: 'var(--border)', backgroundColor: 'var(--surface)' }}
@@ -292,7 +292,7 @@ export function PresentationPage() {
             {!isFirst && !isLast && (
               <div className={`grid grid-cols-1 items-center gap-8 lg:gap-12 ${step.hasMedia ? 'lg:grid-cols-[2fr_3fr]' : 'lg:grid-cols-2 lg:gap-16'}`}>
 
-                {/* Left — text */}
+                {/* Left - text */}
                 <div>
                   {/* Step indicator */}
                   <div className="flex items-center gap-3 mb-5">
@@ -328,7 +328,7 @@ export function PresentationPage() {
                   )}
                 </div>
 
-                {/* Right — media or icon card */}
+                {/* Right - media or icon card */}
                 <div className="flex justify-center lg:justify-end">
                   {step.hasMedia ? (
                     <div className="w-full">

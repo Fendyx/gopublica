@@ -1,4 +1,4 @@
-# GoPublica — Global Architecture Reference
+# GoPublica - Global Architecture Reference
 
 > **Purpose**: Persistent knowledge base for all AI agent sessions. Describes system boundaries, tech stacks, communication patterns, domain models, and file-path mappings across the three repositories.
 
@@ -29,9 +29,8 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 │  /api/auth/*          GoPublica admin auth (sales/User)        │
 │  /api/users/*         CRM user management                     │
 │  /api/leads/*         Sales leads CRUD                        │
-│  /api/clients/*       Client management                       │
-│  /api/change-requests/*  Billable tasks                       │
 │  /api/portfolio/*     Case studies (public read + admin write) │
+│  /api/custom-services/*  Custom Services admin CRUD           │
 │  /api/demo-requests/* Demo funnel                             │
 │  /api/saas/*          Tenant admin operations                 │
 │  /api/public/*        Customer-facing APIs (auth, orders,     │
@@ -47,9 +46,9 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 
 | Project | Role | Audience | Hosting |
 |---------|------|----------|---------|
-| **`backend/`** | Central REST API — all CRUD, auth, payments, notifications, multi-tenant data isolation | Both frontends + external consumers | **Render or Hetzner** (port 5000) |
-| **`frontend-next/`** | GoPublica corporate website — marketing pages, CRM admin panel, tenant dashboard | GoPublica team + prospective/existing tenants | **Vercel** |
-| **`gopublica-core/`** | Multi-tenant SaaS engine — per-tenant admin panel + public storefront | End-customers of tenants (restaurant diners, salon clients, etc.) | **Vercel** (PWA-enabled) |
+| **`backend/`** | Central REST API - all CRUD, auth, payments, notifications, multi-tenant data isolation | Both frontends + external consumers | **Render or Hetzner** (port 5000) |
+| **`frontend-next/`** | GoPublica corporate website - marketing pages, CRM admin panel, tenant dashboard | GoPublica team + prospective/existing tenants | **Vercel** |
+| **`gopublica-core/`** | Multi-tenant SaaS engine - per-tenant admin panel + public storefront | End-customers of tenants (restaurant diners, salon clients, etc.) | **Vercel** (PWA-enabled) |
 
 ---
 
@@ -59,11 +58,12 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
-| **Express** | 5.2.1 | HTTP framework (Express 5 — note: `app.listen`, no `express@5` router change) |
-| **Mongoose** | 9.4.1 | MongoDB ODM — all models in `models/` |
-| **MongoDB** | — | Primary database (connection via `config/db.js` → `MONGO_URI`) |
-| **jsonwebtoken** | 9.x | JWT auth — 3 strategies (see below) |
+| **Express** | 5.2.1 | HTTP framework (Express 5 - note: `app.listen`, no `express@5` router change) |
+| **Mongoose** | 9.4.1 | MongoDB ODM - all models in `models/` |
+| **MongoDB** | - | Primary database (connection via `config/db.js` → `MONGO_URI`) |
+| **jsonwebtoken** | 9.x | JWT auth - 3 strategies (see below) |
 | **bcryptjs** | 3.x | Password hashing |
+| **google-auth-library** | 11.x | Google OAuth ID token verification (`/api/saas/auth/google`) |
 | **Stripe** | 22.x | Subscriptions, checkout sessions, payment intents, webhooks |
 | **web-push** | 3.x | Browser push notifications (VAPID keys) |
 | **Telegram Bot API** | (axios) | Tenant-specific Telegram bots for order/reservation alerts |
@@ -85,13 +85,15 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 8.  [Per-route middleware]       → jwt / authTenant / checkRole / checkBranch / resolveTenant
 ```
 
-**Auth middleware — three strategies**:
+**Auth middleware - three strategies**:
 
 | Middleware | File | Purpose | Sets on `req` |
 |-----------|------|---------|---------------|
 | `jwt` | `middleware/auth/jwt.js` | GoPublica CRM admin auth | `req.user = { id, role, ... }` |
 | `authTenant` | `middleware/auth/tenant.js` | SaaS tenant admin auth | `req.tenantId`, `req.userRole`, `req.userId` |
-| `checkRole` | `middleware/auth/role.js` | RBAC guard (factory: `checkRole(['admin','superadmin'])`) | — (reads `req.user.role`) |
+| `checkRole` | `middleware/auth/role.js` | RBAC guard (factory: `checkRole(['admin','superadmin'])`) | - (reads `req.user.role`) |
+
+**Google OAuth** - Both frontends support "Sign in with Google" via `@react-oauth/google` (GIS SDK). The backend endpoint `POST /api/saas/auth/google` verifies the Google ID token via `google-auth-library`, upserts `TenantUser` by `googleId` or `email`, and issues the same JWT as password login. `TenantUser.googleId` and `TenantUser.avatarUrl` fields support this flow. `TenantUser.passwordHash` is nullable for Google-only users.
 
 ### 2.2 frontend-next (Corporate)
 
@@ -100,9 +102,10 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 | **Next.js** | 16.2.7 | App Router framework |
 | **React** | 19.2.4 | UI library |
 | **TypeScript** | 5.x | Type system |
-| **Tailwind CSS** | 4.3.0 | Styling (CSS-first — no `tailwind.config.ts`) |
+| **Tailwind CSS** | 4.3.0 | Styling (CSS-first - no `tailwind.config.ts`) |
 | **Zustand** | 5.0.14 | State management (`authStore`, `tenantAuthStore`) |
-| **next-intl** | 4.13.0 | i18n — 6 locales: `en`, `de`, `pl`, `ru`, `ua`, `es` (default: `en`) |
+| **next-intl** | 4.13.0 | i18n - 6 locales: `en`, `de`, `pl`, `ru`, `ua`, `es` (default: `en`) |
+| **@react-oauth/google** | 0.13.x | Google Sign-In button (used in `LoginClientForm` for tenant admin dashboard) |
 | **Zod** | 3.25 | Schema validation |
 | **React Hook Form** | 7.83 | Form management |
 | **Framer Motion** | 12.40 | Animations |
@@ -124,7 +127,8 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 | **Tailwind CSS** | 4.x | Styling (CSS-first) |
 | **Shadcn UI** | Radix-based | Component library (Radix UI primitives + Tailwind) |
 | **Zustand** | 5.0.14 | State management (`cartStore`, `platformCartStore`) |
-| **next-intl** | 4.13.0 | i18n — 6 locales: `pl`, `en`, `de`, `ru`, `ua`, `es` (default: `pl`) |
+| **next-intl** | 4.13.0 | i18n - 6 locales: `pl`, `en`, `de`, `ru`, `ua`, `es` (default: `pl`) |
+| **@react-oauth/google** | 0.13.x | Google Sign-In button (used in admin login page) |
 | **TipTap** | 2.11 | Rich text editor (article body editing) |
 | **dnd-kit** | 6.x | Drag-and-drop (page builder, sortable lists) |
 | **Recharts** | 3.8 | Analytics dashboard charts |
@@ -136,7 +140,7 @@ GoPublica is a **multi-tenant SaaS platform** composed of three distinct project
 
 ### 2.4 Architectural Patterns
 
-**Feature-Sliced Design (FSD)** — Both Next.js projects organize code by business domain:
+**Feature-Sliced Design (FSD)** - Both Next.js projects organize code by business domain:
 
 ```
 shared/    → Low-level reusable: UI primitives, API clients, stores, utils
@@ -146,13 +150,13 @@ widgets/   → Complex composed UI: page sections, layouts, dashboards
 content/   → Static data: legal text, product catalog (frontend-next only)
 ```
 
-**Middleware-based routing** — Backend applies auth, tenant resolution, consent extraction, and RBAC guards via Express middleware chain, configured per-route.
+**Middleware-based routing** - Backend applies auth, tenant resolution, consent extraction, and RBAC guards via Express middleware chain, configured per-route.
 
-**Registry pattern** — `gopublica-core` uses `widgets/Sections/registry.tsx` to map `BranchSection.type` strings to React components for the dynamic page builder. Current section types: `hero`, `hero_video`, `entity_carousel`, `feature_carousel`, `booking`, `map`, `menu_categories`, `article_grid`, `dynamic_form`, `contact_block`, `category_list`, plus system types (`system_catalog`, `system_menu`, `system_articles`, `system_gallery`, `system_contacts`, `system_booking_checkout`).
+**Registry pattern** - `gopublica-core` uses `widgets/Sections/registry.tsx` to map `BranchSection.type` strings to React components for the dynamic page builder. Current section types: `hero`, `hero_video`, `entity_carousel`, `feature_carousel`, `booking`, `map`, `menu_categories`, `article_grid`, `dynamic_form`, `contact_block`, `category_list`, plus system types (`system_catalog`, `system_menu`, `system_articles`, `system_gallery`, `system_contacts`, `system_booking_checkout`).
 
-**Custom Pages pattern** — Tenants can create arbitrary landing pages via the Admin Page Builder. Custom pages are stored as `Branch.customPages[]` (title + slug + isActive). Each custom page maps to a storefront route at `/[locale]/[branchSlug]/p/[pageSlug]`. The `BranchSection.page` field stores the custom slug, and sections are rendered via the same `SectionRenderer` pipeline. Reserved slugs (`home`, `catalog`, `menu`, etc.) are blocked on the backend. The Navbar automatically renders links to active custom pages.
+**Custom Pages pattern** - Tenants can create arbitrary landing pages via the Admin Page Builder. Custom pages are stored as `Branch.customPages[]` (title + slug + isActive). Each custom page maps to a storefront route at `/[locale]/[branchSlug]/p/[pageSlug]`. The `BranchSection.page` field stores the custom slug, and sections are rendered via the same `SectionRenderer` pipeline. Reserved slugs (`home`, `catalog`, `menu`, etc.) are blocked on the backend. The Navbar automatically renders links to active custom pages.
 
-**Proxy/rewrite pattern** — Both frontends proxy API calls to the backend via different mechanisms (see §3).
+**Proxy/rewrite pattern** - Both frontends proxy API calls to the backend via different mechanisms (see §3).
 
 ---
 
@@ -163,20 +167,20 @@ content/   → Static data: legal text, product catalog (frontend-next only)
 | Mechanism | File | Details |
 |-----------|------|---------|
 | **Next.js rewrites** | `next.config.ts` | `{ source: '/api/:path*', destination: '${BACKEND_URL}/api/:path*' }` |
-| **Admin API client** | `src/shared/api/apiClient.ts` | `apiFetch(endpoint)` — attaches JWT from `authStore` (localStorage), calls `/api/...`, auto-logs out on 401 |
-| **Tenant API client** | `src/entities/subscription/api/tenantApi.ts` | `authFetch(endpoint)` — attaches JWT from `tenantAuthStore`, calls `NEXT_PUBLIC_API_URL/...` **directly** (bypasses Next.js proxy) |
-| **Server-side fetch** | `src/entities/subscription/api/subscriptionApi.ts` | `fetchWithAuth(endpoint, options, token)` — used in React Server Components, explicit token param, throws on 401 |
+| **Admin API client** | `src/shared/api/apiClient.ts` | `apiFetch(endpoint)` - attaches JWT from `authStore` (localStorage), calls `/api/...`, auto-logs out on 401 |
+| **Tenant API client** | `src/entities/subscription/api/tenantApi.ts` | `authFetch(endpoint)` - attaches JWT from `tenantAuthStore`, calls `NEXT_PUBLIC_API_URL/...` **directly** (bypasses Next.js proxy) |
+| **Server-side fetch** | `src/entities/subscription/api/subscriptionApi.ts` | `fetchWithAuth(endpoint, options, token)` - used in React Server Components, explicit token param, throws on 401 |
 
 ### 3.2 gopublica-core → Backend
 
 | Mechanism | File | Details |
 |-----------|------|---------|
 | **Proxy middleware** | `src/proxy.ts` | Extracts `hostname` from request headers → rewrites URL to `/{hostname}/...` for domain-based tenant resolution (see §3.3) |
-| **API client** | `src/shared/api/apiClient.ts` | `apiFetch<T>(endpoint)` — calls `NEXT_PUBLIC_API_URL` directly, `cache: 'no-store'`, throws on non-OK |
-| **Cached fetch** | `src/shared/api/cachedFetch.ts` | `cachedFetch(url, tags)` — server-side fetch with Next.js cache tags for ISR/revalidation |
+| **API client** | `src/shared/api/apiClient.ts` | `apiFetch<T>(endpoint)` - calls `NEXT_PUBLIC_API_URL` directly, `cache: 'no-store'`, throws on non-OK |
+| **Cached fetch** | `src/shared/api/cachedFetch.ts` | `cachedFetch(url, tags)` - server-side fetch with Next.js cache tags for ISR/revalidation |
 | **Tenant context** | `src/entities/tenant/TenantContext.tsx` | React context providing resolved tenant settings to component tree |
 
-### 3.3 Multi-Tenant Resolution — Full Flow
+### 3.3 Multi-Tenant Resolution - Full Flow
 
 This is the most critical architectural concept. The flow resolves a domain name → tenant → branch → data.
 
@@ -250,7 +254,7 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 
 | Model | File | Key Fields | Notes |
 |-------|------|-----------|-------|
-| **TenantSettings** | `models/TenantSettings.js` | `tenantId` (unique), `businessName`, `domain` (unique sparse), `aliases[]`, `niche` (food/restaurant/beauty/auto/ecommerce), `moduleAccess`, `theme`, `features`, `payments`, `legal` (NIP/REGON/KRS), `primaryLanguage` (deprecated), `activeLocales[]`, `defaultLocale`, `primaryCurrency`, `notifications.telegram`, `logistics`, `navigation` (items[], dropdownLabel) | **Central tenant config — the identity document.** `navigation` stores the tenant's Navbar customization: which links appear in the primary bar vs. the "More" dropdown, their order, visibility, and label overrides. |
+| **TenantSettings** | `models/TenantSettings.js` | `tenantId` (unique), `businessName`, `domain` (unique sparse), `aliases[]`, `niche` (food/restaurant/beauty/auto/ecommerce), `moduleAccess`, `theme`, `features`, `payments`, `legal` (NIP/REGON/KRS), `primaryLanguage` (deprecated), `activeLocales[]`, `defaultLocale`, `primaryCurrency`, `notifications.telegram`, `logistics`, `navigation` (items[], dropdownLabel) | **Central tenant config - the identity document.** `navigation` stores the tenant's Navbar customization: which links appear in the primary bar vs. the "More" dropdown, their order, visibility, and label overrides. |
 | **TenantUser** | `models/TenantUser.js` | `email` (unique), `passwordHash`, `tenantId`, `role` (client_admin/client_manager), `stripeCustomerId`, `stripeSubscriptionId`, `subscriptionStatus`, `subscriptionPlan`, `telegramChatId`, `telegramLinkToken` | Tenant admin users |
 | **Site** | `models/Site.js` | `tenantId`, `name`, `type` (primary/subdomain/landing/microsite), `domain`, `subdomain`, `status` (building/staging/live/error/paunched), `niche`, `theme`, `createdUnderPlan` | Multi-site per tenant (plan limits: basic=1, pro=10) |
 
@@ -260,7 +264,7 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 |-------|------|-----------|-------|
 | **Branch** | `models/Branch.js` | `tenantId`, `name`, `slug` (unique per tenant), `city`, `address`, `coordinates`, `isDefault`, `parentBranchId` (self-ref for sub-branches), `venueType` (main/concept), `settingsOverride`, `hasOnlineOrdering`, `customPages[]` | Multi-branch with sub-branch support. `customPages[]` stores tenant-created landing pages managed via Admin Page Builder. |
 | **Branch.customPages[]** | (embedded in Branch) | `title` (String, required), `slug` (String, unique per tenant, lowercase slug format), `isActive` (Boolean, default true), `createdAt` (Date) | Arbitrary landing pages. Each entry maps to storefront route `/[locale]/[branchSlug]/p/[slug]`. Sections are stored in `BranchSection` with `page === slug`. Reserved slugs blocked: `home`, `catalog`, `menu`, `contacts`, `gallery`, `articles`, `reservations`, `partners`, `order`, `login`, `profile`, `admin`. |
-| **BranchSection** | `models/BranchSection.js` | `tenantId`, `branchId`, `page` (home/partners/about-us/reservations + any custom slug), `type` (hero_video/hero/entity_carousel/feature_carousel/booking/map/menu_categories/article_grid/dynamic_form/contact_block/category_list/rich_text + system_*), `order`, `settings` (Mixed), `translations` (Mixed) | Dynamic page builder sections. `page` field accepts arbitrary slugs — custom pages use their slug as the `page` value. |
+| **BranchSection** | `models/BranchSection.js` | `tenantId`, `branchId`, `page` (home/partners/about-us/reservations + any custom slug), `type` (hero_video/hero/entity_carousel/feature_carousel/booking/map/menu_categories/article_grid/dynamic_form/contact_block/category_list/rich_text + system_*), `order`, `settings` (Mixed), `translations` (Mixed) | Dynamic page builder sections. `page` field accepts arbitrary slugs - custom pages use their slug as the `page` value. |
 | **BranchSectionItem** | `models/BranchSectionItem.js` | `tenantId`, `branchId`, `sectionId`, `slug` (unique per tenant), `media` ({type, url}), `order`, `translations`, `body`, `gallery[]`, `attributes[]`, `isActive` | Content items within sections |
 
 ### 4.3 Customer & Orders
@@ -287,14 +291,14 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 
 | Model | File | Key Fields | Notes |
 |-------|------|-----------|-------|
-| **ServiceAppointment** | `models/booking/ServiceAppointment.js` | `tenantId`, `branchId`, `customerId`, `guestInfo`, `services[]` (frozen name+price), `startAt`, `endAt`, `status`, `metadata` (Mixed, niche-specific), `notes`, `_consent` | Generic service booking — metadata allows niche-specific extensions |
+| **ServiceAppointment** | `models/booking/ServiceAppointment.js` | `tenantId`, `branchId`, `customerId`, `guestInfo`, `services[]` (frozen name+price), `startAt`, `endAt`, `status`, `metadata` (Mixed, niche-specific), `notes`, `_consent` | Generic service booking - metadata allows niche-specific extensions |
 
 ### 4.6 Content
 
 | Model | File | Key Fields | Notes |
 |-------|------|-----------|-------|
 | **Article** | `models/content/Article.js` | `tenantId`, `title`, `slug` (unique per tenant), `coverImage`, `videoUrl`, `body` (Mixed: HTML or block JSON), `bodyFormat`, `author`, `publishedAt`, `seoTitle`, `seoDescription` | Blog/news with flexible body format |
-| **Event** | `models/content/Event.js` | `tenantId`, `articleId` (1:1 unique), `ticketPrice`, `totalTickets`, `ticketsSold`, `ticketsRemaining`, `eventDate`, `venueName`, `maxPerOrder`, `isSoldOut` | Ticketed events — 1:1 with Article |
+| **Event** | `models/content/Event.js` | `tenantId`, `articleId` (1:1 unique), `ticketPrice`, `totalTickets`, `ticketsSold`, `ticketsRemaining`, `eventDate`, `venueName`, `maxPerOrder`, `isSoldOut` | Ticketed events - 1:1 with Article |
 | **GalleryItem** | `models/content/GalleryItem.js` | `tenantId`, `branchId`, `image`, `caption`, `order` | Media gallery |
 
 ### 4.7 HR
@@ -312,16 +316,22 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 | **PlatformOrder** | `models/platform/PlatformOrder.js` | `tenantId`, `buyerType` (private/business), `items[]`, `paymentMethod`, `fulfillment` (parcel_locker/courier/cod), `pricing`, `shipping` | Tenant purchases from marketplace |
 | **PlatformNews** | `models/platform/PlatformNews.js` | `title`, `content`, `type` (info/update/announcement/promo), `isActive`, `publishedAt` | Platform-wide announcements |
 
-### 4.8a Ecommerce — Product Attributes
+### 4.8a Ecommerce - Product Attributes
 
 | Model | File | Key Fields | Notes |
 |-------|------|-----------|-------|
 | **ProductAttribute** | `models/ecommerce/ProductAttribute.js` | `tenantId`, `type` (author/publisher/genre/language/series/custom), `name`, `slug`, `translations` (Map), `description`, `image`, `productCount`, `isActive` | Managed attribute entities for books/merch (authors, publishers, genres, etc.). Compound unique index on `(tenantId, type, slug)`. |
 
 **MenuItem extensions** (added to `models/food/MenuItem.js`):
-- `attributeRefs: [{ type: String, attributeId: String }]` — links to `ProductAttribute._id`. Used for filtering, search, entity pages.
-- `status: String` enum `['published', 'draft', 'hidden']` — product visibility control.
-- `CategoryTranslation` extension: `parentCategoryKey: String` — enables hierarchical categories.
+- `attributeRefs: [{ type: String, attributeId: String }]` - links to `ProductAttribute._id`. Used for filtering, search, entity pages.
+- `status: String` enum `['published', 'draft', 'hidden']` - product visibility control.
+- `CategoryTranslation` extension: `parentCategoryKey: String` - enables hierarchical categories.
+
+### 4.8b Custom Services (Tenant Billing)
+
+| Model | File | Key Fields | Notes |
+|-------|------|-----------|-------|
+| **CustomService** | `models/tenant/CustomService.js` | `tenantId`, `title`, `description`, `price`, `currency`, `status` (pending/in_progress/completed/cancelled), `priority` (low/medium/high), `paymentIntentId`, `paidAt`, `completedAt` | Billable custom development tasks per tenant. `price > 0` = requires payment. Payment via Stripe PaymentIntent. |
 
 ### 4.9 Sales / CRM
 
@@ -329,8 +339,6 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 |-------|------|-----------|-------|
 | **User** | `models/sales/User.js` | `name`, `email` (unique), `password`, `role` (user/admin/superadmin) | GoPublica internal admin users |
 | **Lead** | `models/sales/Lead.js` | `name`, `phone`, `status` (New/In Progress/Closed/Rejected/Call Back/No Answer/etc.), `price`, `businessType`, `priority`, `createdBy`, `assignedTo` | Sales pipeline |
-| **Client** | `models/sales/Client.js` | `leadId` → Lead, `name`, `phone`, `email`, `country`, `businessType`, `status`, `stripeCustomerId` | Converted leads |
-| **ChangeRequest** | `models/sales/ChangeRequest.js` | `clientId` → Client, `title`, `status`, `price`, `billable`, `priority`, `assignedTo` | Billable tasks per client |
 | **DemoRequest** | `models/sales/DemoRequest.js` | `businessType`, `goals`, `contactMethod`, `contact`, `status`, `convertedToLead` → Lead | Demo funnel submissions |
 | **PortfolioCase** | `models/sales/PortfolioCase.js` | `title`, `slug` (unique), `niche`, `heroImages[]`, `liveUrl`, `challenge`, `solution`, `metrics[]`, `features[]`, `gallery[]`, `techStack[]`, `pricing`, `isPublished` | Case studies (public read) |
 
@@ -346,22 +354,22 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 | Domain | Backend Model | gopublica-core Entity | frontend-next Entity |
 |--------|--------------|----------------------|---------------------|
 | Tenant | TenantSettings | `entities/tenant/` (api.ts, types.ts, TenantContext.tsx, useTenantSettings.ts, utils.ts) | `entities/subscription/` (tenantApi.ts) |
-| Branch | Branch | `entities/branch/` | — |
-| Branch Sections | BranchSection, BranchSectionItem | `entities/branch-section/` | — |
-| Menu | MenuItem | `entities/menu-item/` | — |
+| Branch | Branch | `entities/branch/` | - |
+| Branch Sections | BranchSection, BranchSectionItem | `entities/branch-section/` | - |
+| Menu | MenuItem | `entities/menu-item/` | - |
 | Order | Order | `entities/order/` (api.ts, types.ts) | `entities/platformOrder/` (ordersApi.ts, types.ts) |
-| Customer | Customer | `entities/customer/` | — |
-| Article | Article | `entities/article/` | — |
-| Gallery | GalleryItem | `entities/gallery/` | — |
-| Beauty | BeautyService, BeautyMaster | `entities/beauty/` | — |
-| Reservation | Reservation | `entities/reservation/` | — |
-| Telegram | PushSubscription | `entities/telegram/` | — |
+| Customer | Customer | `entities/customer/` | - |
+| Article | Article | `entities/article/` | - |
+| Gallery | GalleryItem | `entities/gallery/` | - |
+| Beauty | BeautyService, BeautyMaster | `entities/beauty/` | - |
+| Reservation | Reservation | `entities/reservation/` | - |
+| Telegram | PushSubscription | `entities/telegram/` | - |
 | Platform Product | PlatformProduct | `entities/platformProduct/` | `entities/platformProduct/` (productsApi.ts, types.ts) |
-| Platform Order | PlatformOrder | — | `entities/platformOrder/` (ordersApi.ts, types.ts) |
-| Platform News | PlatformNews | — | `entities/platformNews/` (newsApi.ts, types.ts) |
-| Lead | Lead | — | `entities/lead/` (leadsApi.ts, types.ts) |
-| Client | Client | — | `entities/client/` (clientsApi.ts) |
-| Demo | DemoRequest | — | `entities/demoRequest/` (demoRequestsApi.ts) |
+| Platform Order | PlatformOrder | - | `entities/platformOrder/` (ordersApi.ts, types.ts) |
+| Platform News | PlatformNews | - | `entities/platformNews/` (newsApi.ts, types.ts) |
+| Lead | Lead | - | `entities/lead/` (leadsApi.ts, types.ts) |
+| Client | Client | - | `entities/client/` (clientsApi.ts - calls `/saas/auth/users` for TenantUser) |
+| Demo | DemoRequest | - | `entities/demoRequest/` (demoRequestsApi.ts) |
 
 ---
 
@@ -373,134 +381,136 @@ User visits: sushi.gopublica.com/en/warszawa/menu
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| GoPublica admin auth | `routes/gopublica/auth.js`, `models/sales/User.js` | — | `src/app/[locale]/admin/login/page.tsx`, `src/store/authStore.ts`, `src/widgets/AdminLogin/AdminLoginForm.tsx` |
+| GoPublica admin auth | `routes/gopublica/auth.js`, `models/sales/User.js` | - | `src/app/[locale]/admin/login/page.tsx`, `src/store/authStore.ts`, `src/widgets/AdminLogin/AdminLoginForm.tsx` |
 | Tenant user auth | `routes/saas/auth.js`, `models/TenantUser.js` | `src/app/[tenantDomain]/admin/login/` | `src/app/[locale]/login-client/`, `src/app/[locale]/register-client/`, `src/entities/subscription/api/tenantApi.ts` |
-| Customer auth | `routes/public/auth.js`, `models/CustomerUser.js` | `src/app/[tenantDomain]/[locale]/login/`, `register/` | — |
-| JWT middleware | `middleware/auth/jwt.js`, `middleware/auth/tenant.js`, `middleware/auth/role.js` | — | — |
+| Customer auth | `routes/public/auth.js`, `models/CustomerUser.js` | `src/app/[tenantDomain]/[locale]/login/`, `register/` | - |
+| JWT middleware | `middleware/auth/jwt.js`, `middleware/auth/tenant.js`, `middleware/auth/role.js` | - | - |
 
 ### 5.2 Multi-Tenant Resolution
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Domain → Tenant | `middleware/tenant/resolve.js`, `models/TenantSettings.js` | `src/proxy.ts`, `src/entities/tenant/TenantContext.tsx`, `src/entities/tenant/api.ts` | — (auth-based, no domain routing) |
-| Branch resolution | `middleware/tenant/branch.js`, `models/Branch.js` | `[branchSlug]` route segment in `src/app/[tenantDomain]/[locale]/[branchSlug]/` | — |
+| Domain → Tenant | `middleware/tenant/resolve.js`, `models/TenantSettings.js` | `src/proxy.ts`, `src/entities/tenant/TenantContext.tsx`, `src/entities/tenant/api.ts` | - (auth-based, no domain routing) |
+| Branch resolution | `middleware/tenant/branch.js`, `models/Branch.js` | `[branchSlug]` route segment in `src/app/[tenantDomain]/[locale]/[branchSlug]/` | - |
 
 ### 5.3 Menu & E-Commerce
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Menu CRUD (admin) | `routes/saas/menu.js`, `models/food/MenuItem.js` | `src/app/[tenantDomain]/admin/menu/`, `src/features/ecommerce-management/` (ProductForm.tsx, CategoryForm.tsx, SortableCategoryList.tsx) | — |
-| Menu display (public) | `routes/public/branchSections.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/menu/`, `src/widgets/Menu/` | — |
-| Categories (hierarchical) | `routes/saas/categories.js`, `models/food/CategoryTranslation.js` (parentCategoryKey) | `src/features/ecommerce-management/CategoryForm.tsx` | — |
-| Product Attributes (admin) | `routes/saas/productAttributes.js`, `models/ecommerce/ProductAttribute.js` | `src/features/ecommerce-management/AttributeManager.tsx`, `src/entities/product-attribute/` (types.ts, api.ts) | — |
-| Product Search (public) | `routes/public/productSearch.js` | `src/widgets/Catalog/SearchBar.tsx`, `src/widgets/Catalog/CatalogSearchClient.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/catalog/search/` | — |
-| Related Products (public) | `routes/public/relatedProducts.js` | `src/widgets/Catalog/RelatedProducts.tsx`, `src/entities/product/api.ts` | — |
-| Entity Pages (author/publisher/genre) | `routes/saas/menu.js` (attributeRefType/attributeRefId filter) | `src/widgets/Catalog/EntityPage.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/catalog/[type]/[slug]/` | — |
-| Faceted Filters | — | `src/widgets/Catalog/FilterSidebar.tsx` | — |
-| Cart / Checkout | `routes/orders/public.js` | `src/shared/store/cartStore.ts`, `src/widgets/Checkout/` | — |
-| Menu filter | — | `src/features/menu-filter/` | — |
+| Menu CRUD (admin) | `routes/saas/menu.js`, `models/food/MenuItem.js` | `src/app/[tenantDomain]/admin/menu/`, `src/features/ecommerce-management/` (ProductForm.tsx, CategoryForm.tsx, SortableCategoryList.tsx) | - |
+| Menu display (public) | `routes/public/branchSections.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/menu/`, `src/widgets/Menu/` | - |
+| Categories (hierarchical) | `routes/saas/categories.js`, `models/food/CategoryTranslation.js` (parentCategoryKey) | `src/features/ecommerce-management/CategoryForm.tsx` | - |
+| Product Attributes (admin) | `routes/saas/productAttributes.js`, `models/ecommerce/ProductAttribute.js` | `src/features/ecommerce-management/AttributeManager.tsx`, `src/entities/product-attribute/` (types.ts, api.ts) | - |
+| Product Search (public) | `routes/public/productSearch.js` | `src/widgets/Catalog/SearchBar.tsx`, `src/widgets/Catalog/CatalogSearchClient.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/catalog/search/` | - |
+| Related Products (public) | `routes/public/relatedProducts.js` | `src/widgets/Catalog/RelatedProducts.tsx`, `src/entities/product/api.ts` | - |
+| Entity Pages (author/publisher/genre) | `routes/saas/menu.js` (attributeRefType/attributeRefId filter) | `src/widgets/Catalog/EntityPage.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/catalog/[type]/[slug]/` | - |
+| Faceted Filters | - | `src/widgets/Catalog/FilterSidebar.tsx` | - |
+| Cart / Checkout | `routes/orders/public.js` | `src/shared/store/cartStore.ts`, `src/widgets/Checkout/` | - |
+| Menu filter | - | `src/features/menu-filter/` | - |
 
 ### 5.4 Reservations & Booking
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Table reservations (admin) | `routes/saas/reservations.js`, `models/food/Reservation.js` | `src/app/[tenantDomain]/admin/reservations/` | — |
-| Reservation form (public) | (inline in saas routes) | `src/features/reservation/BookingForm.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/reservations/` | — |
-| Service booking (universal) | `routes/saas/appointments.js`, `models/booking/ServiceAppointment.js` | `src/widgets/ServiceBooking/`, `src/app/[tenantDomain]/[locale]/[branchSlug]/booking/` | — |
-| Beauty services CRUD | `routes/saas/beauty/services.js`, `routes/beauty/services.js`, `models/beauty/ServiceItem.js` | `src/entities/beauty/`, `src/app/[tenantDomain]/admin/beauty-services/` | — |
-| Beauty masters CRUD | `routes/saas/beauty/masters.js`, `routes/beauty/masters.js`, `models/beauty/Master.js` | `src/entities/beauty/`, `src/app/[tenantDomain]/admin/beauty-masters/` | — |
-| Beauty appointments | `routes/saas/beauty/appointments.js`, `routes/beauty/appointments.js`, `models/beauty/Appointment.js` | `src/entities/beauty/` | — |
+| Table reservations (admin) | `routes/saas/reservations.js`, `models/food/Reservation.js` | `src/app/[tenantDomain]/admin/reservations/` | - |
+| Reservation form (public) | (inline in saas routes) | `src/features/reservation/BookingForm.tsx`, `src/app/[tenantDomain]/[locale]/[branchSlug]/reservations/` | - |
+| Service booking (universal) | `routes/saas/appointments.js`, `models/booking/ServiceAppointment.js` | `src/widgets/ServiceBooking/`, `src/app/[tenantDomain]/[locale]/[branchSlug]/booking/` | - |
+| Beauty services CRUD | `routes/saas/beauty/services.js`, `routes/beauty/services.js`, `models/beauty/ServiceItem.js` | `src/entities/beauty/`, `src/app/[tenantDomain]/admin/beauty-services/` | - |
+| Beauty masters CRUD | `routes/saas/beauty/masters.js`, `routes/beauty/masters.js`, `models/beauty/Master.js` | `src/entities/beauty/`, `src/app/[tenantDomain]/admin/beauty-masters/` | - |
+| Beauty appointments | `routes/saas/beauty/appointments.js`, `routes/beauty/appointments.js`, `models/beauty/Appointment.js` | `src/entities/beauty/` | - |
 
 ### 5.5 Orders
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Tenant order management | `routes/saas/orders.js`, `models/food/Order.js` | `src/app/[tenantDomain]/admin/orders/` | — |
-| Customer order history | `routes/public/orders.js` | `src/app/[tenantDomain]/[locale]/order/` | — |
-| Order checkout (public) | `routes/orders/public.js` (inline `getTenant`) | `src/widgets/Checkout/`, `src/shared/store/cartStore.ts` | — |
+| Tenant order management | `routes/saas/orders.js`, `models/food/Order.js` | `src/app/[tenantDomain]/admin/orders/` | - |
+| Customer order history | `routes/public/orders.js` | `src/app/[tenantDomain]/[locale]/order/` | - |
+| Order checkout (public) | `routes/orders/public.js` (inline `getTenant`) | `src/widgets/Checkout/`, `src/shared/store/cartStore.ts` | - |
 | Platform orders | `routes/platform/orders.js`, `models/platform/PlatformOrder.js` | `src/entities/platformProduct/` (related) | `src/app/[locale]/admin/platform-orders/`, `src/widgets/PlatformOrdersAdminPage/`, `src/entities/platformOrder/` |
 
 ### 5.6 Content Management
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Articles (admin) | `routes/saas/articles.js`, `models/content/Article.js` | `src/app/[tenantDomain]/admin/articles/`, `src/entities/article/` | — |
-| Articles (public) | `routes/public/articles.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/articles/` | — |
-| Events (admin) | `routes/saas/events.js`, `models/content/Event.js` | `src/entities/article/` (merged with article) | — |
-| Events (public) | `routes/public/events.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/` (articles) | — |
-| Gallery (admin) | `routes/saas/gallery.js`, `models/content/GalleryItem.js` | `src/app/[tenantDomain]/admin/gallery/`, `src/widgets/Gallery/`, `src/entities/gallery/` | — |
-| Page builder (admin) | `routes/saas/branchSections.js`, `models/BranchSection.js`, `models/BranchSectionItem.js` | `src/app/[tenantDomain]/admin/page-builder/`, `src/widgets/Sections/` (SectionRenderer.tsx, registry.tsx + 14 section components including 6 system types) | — |
-| Custom pages (admin) | `routes/saas/branches.js` (custom-pages sub-routes), `models/Branch.js` (`customPages[]`) | `src/app/[tenantDomain]/admin/page-builder/page.tsx` (tabs merge + Add Page dialog), `src/entities/branch/api.ts` (fetchCustomPages, createCustomPage, updateCustomPage, deleteCustomPage) | — |
-| Custom pages (storefront) | `routes/public/branchSections.js` (reused — queries by `page` slug) | `src/app/[tenantDomain]/[locale]/[branchSlug]/p/[pageSlug]/page.tsx` | — |
-| Public page sections | `routes/public/branchSections.js` | `src/widgets/Sections/SectionRenderer.tsx`, `src/widgets/Sections/registry.tsx` | — |
-| Dynamic forms | `routes/saas/formSubmissions.js`, `routes/public/formSubmissions.js`, `models/hr/JobApplication.js` (reused) | `src/features/dynamic-form/`, `src/widgets/Sections/DynamicFormSection.tsx` | — |
+| Articles (admin) | `routes/saas/articles.js`, `models/content/Article.js` | `src/app/[tenantDomain]/admin/articles/`, `src/entities/article/` | - |
+| Articles (public) | `routes/public/articles.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/articles/` | - |
+| Events (admin) | `routes/saas/events.js`, `models/content/Event.js` | `src/entities/article/` (merged with article) | - |
+| Events (public) | `routes/public/events.js` | `src/app/[tenantDomain]/[locale]/[branchSlug]/` (articles) | - |
+| Gallery (admin) | `routes/saas/gallery.js`, `models/content/GalleryItem.js` | `src/app/[tenantDomain]/admin/gallery/`, `src/widgets/Gallery/`, `src/entities/gallery/` | - |
+| Page builder (admin) | `routes/saas/branchSections.js`, `models/BranchSection.js`, `models/BranchSectionItem.js` | `src/app/[tenantDomain]/admin/page-builder/`, `src/widgets/Sections/` (SectionRenderer.tsx, registry.tsx + 14 section components including 6 system types) | - |
+| Custom pages (admin) | `routes/saas/branches.js` (custom-pages sub-routes), `models/Branch.js` (`customPages[]`) | `src/app/[tenantDomain]/admin/page-builder/page.tsx` (tabs merge + Add Page dialog), `src/entities/branch/api.ts` (fetchCustomPages, createCustomPage, updateCustomPage, deleteCustomPage) | - |
+| Custom pages (storefront) | `routes/public/branchSections.js` (reused - queries by `page` slug) | `src/app/[tenantDomain]/[locale]/[branchSlug]/p/[pageSlug]/page.tsx` | - |
+| Public page sections | `routes/public/branchSections.js` | `src/widgets/Sections/SectionRenderer.tsx`, `src/widgets/Sections/registry.tsx` | - |
+| Dynamic forms | `routes/saas/formSubmissions.js`, `routes/public/formSubmissions.js`, `models/hr/JobApplication.js` (reused) | `src/features/dynamic-form/`, `src/widgets/Sections/DynamicFormSection.tsx` | - |
 
 ### 5.7 CRM & Sales
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Leads CRUD | `routes/gopublica/leads.js`, `models/sales/Lead.js` | — | `src/app/[locale]/admin/leads/`, `src/entities/lead/` (leadsApi.ts, types.ts), `src/widgets/LeadsCRMPage/` |
-| Clients CRUD | `routes/gopublica/clients.js`, `models/sales/Client.js` | — | `src/app/[locale]/admin/clients/`, `src/entities/client/` (clientsApi.ts), `src/widgets/ClientsAdminPage/` |
-| Change requests | `routes/gopublica/changeRequests.js`, `models/sales/ChangeRequest.js` | — | — |
-| Portfolio | `routes/gopublica/portfolio.js`, `models/sales/PortfolioCase.js` | — | `src/app/[locale]/portfolio/` |
-| Demo requests | `routes/gopublica/demoRequests.js`, `models/sales/DemoRequest.js` | — | `src/app/[locale]/demo/`, `src/widgets/DemoQuiz/` (multi-step wizard), `src/entities/demoRequest/` |
+| Leads CRUD | `routes/gopublica/leads.js`, `models/sales/Lead.js` | - | `src/app/[locale]/admin/leads/`, `src/entities/lead/` (leadsApi.ts, types.ts), `src/widgets/LeadsCRMPage/` |
+| Clients CRUD | - | - | `src/app/[locale]/admin/clients/`, `src/entities/client/` (clientsApi.ts, calls `/saas/auth/users`), `src/widgets/ClientsAdminPage/` |
+| Custom Services | `routes/gopublica/customServices.js` (admin CRUD), `routes/saas/customServices.js` (tenant read/pay), `models/tenant/CustomService.js` | - | Admin: `src/app/[locale]/admin/custom-services/`, `src/entities/customService/api/adminCustomServiceApi.ts`, `src/widgets/CustomServicesAdminPage/` · Tenant: `src/app/[locale]/dashboard/custom-services/`, `src/entities/customService/api/customServiceApi.ts`, `src/widgets/Dashboard/CustomServicesPage.tsx` |
+| Portfolio | `routes/gopublica/portfolio.js`, `models/sales/PortfolioCase.js` | - | `src/app/[locale]/portfolio/` |
+| Demo requests | `routes/gopublica/demoRequests.js`, `models/sales/DemoRequest.js` | - | `src/app/[locale]/demo/`, `src/widgets/DemoQuiz/` (multi-step wizard), `src/entities/demoRequest/` |
 
 ### 5.8 Platform Marketplace
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
 | Products CRUD | `routes/platform/products.js`, `models/platform/PlatformProduct.js` | `src/entities/platformProduct/` | `src/app/[locale]/admin/platform-products/`, `src/entities/platformProduct/` (productsApi.ts, types.ts), `src/widgets/PlatformProductsAdminPage/` |
-| Platform news | `routes/platform/news.js`, `models/platform/PlatformNews.js` | — | `src/app/[locale]/admin/platform-news/`, `src/entities/platformNews/` (newsApi.ts, types.ts), `src/widgets/PlatformNewsAdminPage/` |
+| Platform news | `routes/platform/news.js`, `models/platform/PlatformNews.js` | - | `src/app/[locale]/admin/platform-news/`, `src/entities/platformNews/` (newsApi.ts, types.ts), `src/widgets/PlatformNewsAdminPage/` |
 
 ### 5.9 Payments & Subscriptions
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Stripe webhook | `routes/stripe/webhook.js` | — | — |
-| Checkout / subscribe | `routes/stripe/checkout.js`, `routes/stripe/subscribe.js` | — | `src/features/billing/` (PricingCards.tsx, SubscribeForm.tsx, actions.ts), `src/app/[locale]/subscribe/` |
-| Cancel subscription | `routes/stripe/cancel.js` | — | — |
-| Prices | `routes/stripe/prices.js` | — | — |
-| Setup intent | `routes/stripe/setupIntent.js` | — | — |
-| Tenant billing | — | `src/app/[tenantDomain]/admin/settings/` (billing section) | `src/app/[locale]/dashboard/billing/`, `src/widgets/Dashboard/BillingPage.tsx` |
+| Stripe webhook | `routes/stripe/webhook.js` | - | - |
+| Checkout / subscribe | `routes/stripe/checkout.js`, `routes/stripe/subscribe.js` | - | `src/features/billing/` (PricingCards.tsx, SubscribeForm.tsx, actions.ts), `src/app/[locale]/subscribe/` |
+| Cancel subscription | `routes/stripe/cancel.js` | - | - |
+| Prices | `routes/stripe/prices.js` | - | - |
+| Setup intent | `routes/stripe/setupIntent.js` | - | - |
+| Payment method | `routes/stripe/paymentMethod.js` | - | `src/widgets/Dashboard/BillingPage/PaymentMethodCard.tsx` |
+| Invoice history | `routes/stripe/invoices.js` | - | `src/widgets/Dashboard/BillingPage/BillingHistory.tsx` |
+| Tenant billing | - | `src/app/[tenantDomain]/admin/settings/` (billing section) | `src/app/[locale]/dashboard/billing/`, `src/widgets/Dashboard/BillingPage.tsx` (orchestrator), `src/widgets/Dashboard/BillingPage/SubscriptionOverview.tsx` |
 
 ### 5.10 Push Notifications & Telegram
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Web push subscribe | `routes/saas/push.js`, `config/push.js` | `public/sw.js` (service worker) | — |
-| Telegram bot webhook | `routes/telegram/tenantWebhook.js`, `services/notifications/tenantTelegram.js` | — | — |
-| Telegram link/unlink | `routes/saas/telegram.js` | `src/entities/telegram/` | — |
+| Web push subscribe | `routes/saas/push.js`, `config/push.js` | `public/sw.js` (service worker) | - |
+| Telegram bot webhook | `routes/telegram/tenantWebhook.js`, `services/notifications/tenantTelegram.js` | - | - |
+| Telegram link/unlink | `routes/saas/telegram.js` | `src/entities/telegram/` | - |
 
 ### 5.11 Analytics
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Page tracking (POST) | `routes/saas/analytics.js`, `models/analytics/Analytics.js` | `src/shared/ui/TrackVisit.tsx` | — |
-| Analytics dashboard (GET) | `routes/saas/analytics.js` | `src/features/analytics/AnalyticsDashboard.tsx` | — |
+| Page tracking (POST) | `routes/saas/analytics.js`, `models/analytics/Analytics.js` | `src/shared/ui/TrackVisit.tsx` | - |
+| Analytics dashboard (GET) | `routes/saas/analytics.js` | `src/features/analytics/AnalyticsDashboard.tsx` | - |
 
 ### 5.12 Settings & Configuration
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
 | Tenant settings (admin) | `routes/saas/settings.js`, `models/TenantSettings.js` | `src/app/[tenantDomain]/admin/settings/`, `src/entities/tenant/` (api.ts, types.ts, useTenantSettings.ts) | `src/app/[locale]/dashboard/settings/`, `src/widgets/Dashboard/SettingsPage.tsx` |
-| Branch management | `routes/saas/branches.js`, `models/Branch.js` | `src/app/[tenantDomain]/admin/branches/`, `src/entities/branch/` | — |
-| Site management | `routes/saas/sites.js`, `models/Site.js` | — | `src/app/[locale]/dashboard/sites/`, `src/widgets/Dashboard/SitesPage.tsx` |
+| Branch management | `routes/saas/branches.js`, `models/Branch.js` | `src/app/[tenantDomain]/admin/branches/`, `src/entities/branch/` | - |
+| Site management | `routes/saas/sites.js`, `models/Site.js` | - | `src/app/[locale]/dashboard/sites/`, `src/widgets/Dashboard/SitesPage.tsx` |
 | Dashboard overview | `routes/saas/dashboard.js` | `src/app/[tenantDomain]/admin/page.tsx` | `src/app/[locale]/dashboard/page.tsx`, `src/widgets/Dashboard/OverviewPage.tsx` |
 
 ### 5.13 HR & Jobs
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Job form settings | `routes/saas/jobs.js`, `models/hr/JobFormSettings.js` | `src/app/[tenantDomain]/admin/jobs/` | — |
-| Job applications | `routes/public/jobs.js`, `models/hr/JobApplication.js` | `src/app/[tenantDomain]/[locale]/careers/` | — |
+| Job form settings | `routes/saas/jobs.js`, `models/hr/JobFormSettings.js` | `src/app/[tenantDomain]/admin/jobs/` | - |
+| Job applications | `routes/public/jobs.js`, `models/hr/JobApplication.js` | `src/app/[tenantDomain]/[locale]/careers/` | - |
 
 ### 5.14 GDPR & Consent
 
 | Feature | backend/ | gopublica-core/ | frontend-next/ |
 |---------|----------|----------------|----------------|
-| Consent extraction | `middleware/common/extractConsent.js` | — | — |
-| Consent audit log | `models/audit/ConsentLog.js` | — | — |
-| Consent checkboxes UI | — | `src/shared/ui/ConsentCheckboxes.tsx` | `src/shared/ui/ConsentCheckboxes.tsx` |
+| Consent extraction | `middleware/common/extractConsent.js` | - | - |
+| Consent audit log | `models/audit/ConsentLog.js` | - | - |
+| Consent checkboxes UI | - | `src/shared/ui/ConsentCheckboxes.tsx` | `src/shared/ui/ConsentCheckboxes.tsx` |
 
 ### 5.15 Corporate Marketing (frontend-next only)
 
@@ -593,7 +603,7 @@ Supported locales: `pl` 🇵🇱, `en` 🇬🇧, `de` 🇩🇪, `ru` 🇷🇺, `
 |-------|------|---------|---------|
 | `activeLocales` | `[String]` | `['pl', 'en']` | Locales this tenant has enabled. Admin forms render tabs only for these. |
 | `defaultLocale` | `String` | `'pl'` | Primary / fallback locale. Must be one of `activeLocales`. |
-| `primaryLanguage` | `String` | `'pl'` | **Deprecated** — kept for backward compat. Use `defaultLocale` instead. |
+| `primaryLanguage` | `String` | `'pl'` | **Deprecated** - kept for backward compat. Use `defaultLocale` instead. |
 
 ### 8.3 Frontend Context Flow
 
@@ -612,7 +622,7 @@ TenantSettings API → normalizeTenantData() → SiteConfig.activeLocales/defaul
 
 ### 8.4 Translation Data Pattern
 
-All translation data uses `Map<String>` or `Mixed` in Mongoose — keys are **freeform locale codes**, not hardcoded. Examples:
+All translation data uses `Map<String>` or `Mixed` in Mongoose - keys are **freeform locale codes**, not hardcoded. Examples:
 
 - `MenuItem.translations` = `Map<lang, { name, description }>`
 - `CategoryTranslation.translations` = `Map<String>`
@@ -631,20 +641,20 @@ All translation data uses `Map<String>` or `Mixed` in Mongoose — keys are **fr
 Tenants can customize which links appear in the desktop Navbar and how they're grouped.
 
 **Data model** (`TenantSettings.navigation`):
-- `items[]` — Array of nav items, each with: `id` (UUID), `type` (home/system/custom/external), `slug`, `label` (optional override), `isVisible`, `placement` (primary/dropdown), `order`
-- `dropdownLabel` — Optional override for the "More" button text
+- `items[]` - Array of nav items, each with: `id` (UUID), `type` (home/system/custom/external), `slug`, `label` (optional override), `isVisible`, `placement` (primary/dropdown), `order`
+- `dropdownLabel` - Optional override for the "More" button text
 
 **System page catalog** (canonical list in `gopublica-core/src/shared/lib/navigation.ts` → `SYSTEM_PAGES`):
 
 | Slug | Feature Flag | i18n Key |
 |------|-------------|----------|
-| `home` | — | `nav.home` |
+| `home` | - | `nav.home` |
 | `menu` | `hasMenu` | `nav.menu` |
 | `catalog` | `hasOnlineOrdering` | `nav.catalog` |
 | `gallery` | `hasGallery` | `nav.gallery` |
-| `partners` | — | `nav.partners` |
-| `contacts` | — | `nav.contact` |
-| `articles` | — | `nav.articles` |
+| `partners` | - | `nav.partners` |
+| `contacts` | - | `nav.contact` |
+| `articles` | - | `nav.articles` |
 | `reservations` | `hasBooking` | `nav.booking` |
 
 **Backwards compatibility**: When `navigation.items` is empty or absent, the Navbar falls back to the original hardcoded link construction based on feature flags.
@@ -659,16 +669,16 @@ Tenants can customize which links appear in the desktop Navbar and how they're g
 
 | Service Directory | Files | Purpose |
 |-------------------|-------|---------|
-| `services/booking/` | — | Booking-related business logic |
-| `services/consent/` | — | GDPR consent processing |
-| `services/content/` | — | Article/event content logic |
-| `services/external/` | — | External API integrations (Furgonetka, etc.) |
-| `services/hr/` | — | Job application processing |
+| `services/booking/` | - | Booking-related business logic |
+| `services/consent/` | - | GDPR consent processing |
+| `services/content/` | - | Article/event content logic |
+| `services/external/` | - | External API integrations (Furgonetka, etc.) |
+| `services/hr/` | - | Job application processing |
 | `services/notifications/` | `tenantTelegram.js` + others | Telegram bot + push notification logic |
-| `services/payments/` | — | Stripe payment processing helpers |
-| `services/platform/` | — | Platform marketplace logic |
-| `services/tenant/` | — | Tenant provisioning and management |
-| `services/validation/` | — | Input validation helpers |
+| `services/payments/` | - | Stripe payment processing helpers |
+| `services/platform/` | - | Platform marketplace logic |
+| `services/tenant/` | - | Tenant provisioning and management |
+| `services/validation/` | - | Input validation helpers |
 
 ## Appendix: Backend Scripts Reference
 

@@ -5,8 +5,8 @@
  * public event happens (e.g. a new "Get a Free Demo" request).
  *
  * Env vars (set tomorrow in .env):
- *   TELEGRAM_BOT_TOKEN   — the bot token from @BotFather
- *   TELEGRAM_ADMIN_CHAT_ID — target chat/channel id (negative for channels)
+ *   TELEGRAM_BOT_TOKEN   - the bot token from @BotFather
+ *   TELEGRAM_ADMIN_CHAT_ID - target chat/channel id (negative for channels)
  *
  * Until the env vars are present, every call gracefully falls back to a
  * console.log so the app never crashes today and "magically" starts
@@ -17,7 +17,7 @@ const TELEGRAM_API_BASE = 'https://api.telegram.org';
 
 /**
  * Send a text message to the admin Telegram chat.
- * @param {string} text — message body (Markdown / plain text)
+ * @param {string} text - message body (Markdown / plain text)
  * @returns {Promise<boolean>} true if sent, false if skipped/failed
  */
 async function sendTelegramMessage(text) {
@@ -25,8 +25,8 @@ async function sendTelegramMessage(text) {
   const chatId = process.env.TELEGRAM_ADMIN_CHAT_ID;
 
   if (!token || !chatId) {
-    // Graceful fallback — do not crash, just log locally.
-    console.log('🔔 [Telegram skipped — env not configured]', text);
+    // Graceful fallback - do not crash, just log locally.
+    console.log('🔔 [Telegram skipped - env not configured]', text);
     return false;
   }
 
@@ -51,7 +51,7 @@ async function sendTelegramMessage(text) {
 
     return true;
   } catch (err) {
-    // Network / runtime error — never let this break the user flow.
+    // Network / runtime error - never let this break the user flow.
     console.error('❌ Telegram notification error:', err.message);
     return false;
   }
@@ -69,7 +69,7 @@ async function notifyNewDemoRequest(demoRequest) {
   const bt = demoRequest.businessType || {};
   const businessTypeLabel = bt.custom
     ? `Other: ${bt.custom}`
-    : bt.preset || '—';
+    : bt.preset || '-';
 
   const goals = demoRequest.goals || {};
   const goalsLabel = [
@@ -77,16 +77,16 @@ async function notifyNewDemoRequest(demoRequest) {
     goals.custom ? `Other: ${goals.custom}` : '',
   ]
     .filter(Boolean)
-    .join(', ') || '—';
+    .join(', ') || '-';
 
   const c = demoRequest.contact || {};
-  const contactLines = [`• Name: ${c.name || '—'}`];
+  const contactLines = [`• Name: ${c.name || '-'}`];
 
   if (demoRequest.contactMethod === 'telegram') {
-    contactLines.push(`• Telegram: ${c.telegramHandle || '—'}`);
+    contactLines.push(`• Telegram: ${c.telegramHandle || '-'}`);
     if (c.phone) contactLines.push(`• Phone: ${c.phone}`);
   } else {
-    contactLines.push(`• Phone: ${c.phone || '—'}`);
+    contactLines.push(`• Phone: ${c.phone || '-'}`);
     if (c.preferredLanguage) contactLines.push(`• Language: ${c.preferredLanguage}`);
     if (c.bestTimeToCall) contactLines.push(`• Best time to call: ${c.bestTimeToCall}`);
   }
@@ -96,12 +96,12 @@ async function notifyNewDemoRequest(demoRequest) {
     '',
     `*Business type:* ${businessTypeLabel}`,
     `*Goals:* ${goalsLabel}`,
-    `*Preferred contact:* ${demoRequest.contactMethod || '—'}`,
+    `*Preferred contact:* ${demoRequest.contactMethod || '-'}`,
     '',
     '*Contact details:*',
     ...contactLines,
     '',
-    `*Locale:* ${demoRequest.locale || '—'}`,
+    `*Locale:* ${demoRequest.locale || '-'}`,
     `*ID:* \`${demoRequest._id}\``,
     `*Submitted:* ${new Date(demoRequest.createdAt || Date.now()).toISOString()}`,
   ].join('\n');

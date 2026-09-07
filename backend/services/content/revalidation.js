@@ -73,7 +73,7 @@ async function triggerRevalidation({
         'x-revalidation-signature': signature,
         'x-revalidation-timestamp': timestamp,
       },
-      timeout: 5000, // 5s timeout — never block the API response
+      timeout: 5000, // 5s timeout - never block the API response
     });
 
     if (response.status === 200) {
@@ -89,7 +89,7 @@ async function triggerRevalidation({
       return { error: `HTTP ${response.status}` };
     }
   } catch (err) {
-    // Non-blocking: log but never throw — API response must not be delayed
+    // Non-blocking: log but never throw - API response must not be delayed
     console.error('❌ Revalidation request failed:', err.message);
     return { error: err.message };
   }

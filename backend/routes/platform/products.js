@@ -10,7 +10,7 @@ router.get('/', authTenant, async (req, res) => {
     const { niche, category } = req.query;
     const filter = { isActive: true };
 
-    // Filter by tenant's niche — include products targeting 'all' or the specific niche
+    // Filter by tenant's niche - include products targeting 'all' or the specific niche
     if (niche) {
       filter.$or = [
         { targetNiches: 'all' },

@@ -28,7 +28,7 @@ const serviceAppointmentSchema = new mongoose.Schema(
     },
 
     // ─── Client information ──────────────────────────────────────────────────
-    // Linked account customer (optional — supports guest checkout / walk-ins).
+    // Linked account customer (optional - supports guest checkout / walk-ins).
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Customer',
@@ -115,7 +115,7 @@ const serviceAppointmentSchema = new mongoose.Schema(
 
 // ─── Indexes ─────────────────────────────────────────────────────────────────
 // Compound index for the most common query: "all appointments for a branch
-// within a time window" — used by availability checks and calendar views.
+// within a time window" - used by availability checks and calendar views.
 serviceAppointmentSchema.index({ tenantId: 1, branchId: 1, startAt: 1 });
 serviceAppointmentSchema.index({ tenantId: 1, branchId: 1, status: 1 });
 

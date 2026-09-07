@@ -91,7 +91,7 @@ export const PRIORITY_COLOR: Record<LeadPriority, string> = {
 };
 
 export const getAssignedName = (val?: AssignedUser | string): string => {
-  if (!val) return '—';
+  if (!val) return '-';
   if (typeof val === 'object') return val.name;
   return val;
 };

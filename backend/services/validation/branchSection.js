@@ -22,7 +22,7 @@
  *                      (inferred from videoUrl for legacy docs missing the key)
  *       textAlignment  must be one of: 'left', 'center', 'right' (default: 'center')
  *       slides         sanitized only when mediaType === 'slider':
- *                      [{ imageUrl?: string, videoUrl?: string }] — at least one
+ *                      [{ imageUrl?: string, videoUrl?: string }] - at least one
  *                      of the two required per slide (max 10 items)
  *
  * Unknown keys are preserved for carousel and hero settings to avoid breaking
@@ -68,7 +68,7 @@ function coerceString(value) {
   if (value === null || value === undefined) return '';
   if (typeof value === 'string') return value;
   if (typeof value === 'object') {
-    // Avoid storing complex objects — flatten to JSON string
+    // Avoid storing complex objects - flatten to JSON string
     try {
       return JSON.stringify(value);
     } catch {
@@ -81,7 +81,7 @@ function coerceString(value) {
 function validateBookingSettings(settings) {
   const errors = [];
 
-  // sideContentType — must be an allowed enum value
+  // sideContentType - must be an allowed enum value
   let sideContentType = settings.sideContentType;
   if (sideContentType === undefined || sideContentType === null || sideContentType === '') {
     sideContentType = 'none';
@@ -89,7 +89,7 @@ function validateBookingSettings(settings) {
     errors.push(`sideContentType must be one of: ${ALLOWED_SIDE_CONTENT_TYPES.join(', ')}`);
   }
 
-  // checkoutFlow — must be 'inline' or 'redirect' (default 'inline')
+  // checkoutFlow - must be 'inline' or 'redirect' (default 'inline')
   let checkoutFlow = settings.checkoutFlow;
   if (checkoutFlow === undefined || checkoutFlow === null || checkoutFlow === '') {
     checkoutFlow = 'inline';
@@ -97,10 +97,10 @@ function validateBookingSettings(settings) {
     errors.push(`checkoutFlow must be one of: ${ALLOWED_CHECKOUT_FLOWS.join(', ')}`);
   }
 
-  // address — coerce to string
+  // address - coerce to string
   const address = coerceString(settings.address);
 
-  // customText — coerce to string
+  // customText - coerce to string
   const customText = coerceString(settings.customText);
 
   if (errors.length > 0) {
@@ -130,14 +130,14 @@ function validateBookingSettings(settings) {
  * productCardVariant, etc.) are preserved as-is to avoid breaking
  * dynamic carousel configurations.
  *
- * @param {object} settings — the raw settings payload from req.body
- * @param {boolean} includeLinkToDetailPage — true for entity_carousel, false for feature_carousel
+ * @param {object} settings - the raw settings payload from req.body
+ * @param {boolean} includeLinkToDetailPage - true for entity_carousel, false for feature_carousel
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateCarouselSettings(settings, includeLinkToDetailPage) {
   const errors = [];
 
-  // desktopItemsPerRow — default to 3 when absent/null/empty
+  // desktopItemsPerRow - default to 3 when absent/null/empty
   let desktopItemsPerRow = settings.desktopItemsPerRow;
   if (desktopItemsPerRow === undefined || desktopItemsPerRow === null || desktopItemsPerRow === '') {
     desktopItemsPerRow = DEFAULT_DESKTOP_ITEMS_PER_ROW;
@@ -147,7 +147,7 @@ function validateCarouselSettings(settings, includeLinkToDetailPage) {
     errors.push(`desktopItemsPerRow must be one of: ${ALLOWED_DESKTOP_ITEMS_PER_ROW.join(', ')}`);
   }
 
-  // Preserve all existing settings — only override the fields we validate.
+  // Preserve all existing settings - only override the fields we validate.
   // This prevents stripping mode, selectionMode, selectedCategoryKeys,
   // productCardVariant, and any future additions.
   const value = { ...settings };
@@ -179,18 +179,18 @@ function validateCarouselSettings(settings, includeLinkToDetailPage) {
  *     When mediaType !== 'slider' a stale slides array is removed.
  *
  * All other existing keys (primaryCta, secondaryCta, videoUrl, imageUrl,
- * overlayOpacity, etc.) are preserved as-is — same contract as carousel.
+ * overlayOpacity, etc.) are preserved as-is - same contract as carousel.
  *
- * @param {object} settings — the raw settings payload from req.body
+ * @param {object} settings - the raw settings payload from req.body
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateHeroSettings(settings) {
   const errors = [];
 
-  // Preserve all existing settings — only override the fields we validate.
+  // Preserve all existing settings - only override the fields we validate.
   const value = { ...settings };
 
-  // textAlignment — default to 'center' when absent/null/empty
+  // textAlignment - default to 'center' when absent/null/empty
   let textAlignment = settings.textAlignment;
   if (textAlignment === undefined || textAlignment === null || textAlignment === '') {
     textAlignment = DEFAULT_TEXT_ALIGNMENT;
@@ -201,7 +201,7 @@ function validateHeroSettings(settings) {
     errors.push(`textAlignment must be one of: ${ALLOWED_TEXT_ALIGNMENTS.join(', ')}`);
   }
 
-  // mediaType — infer for legacy docs missing the key
+  // mediaType - infer for legacy docs missing the key
   let mediaType = settings.mediaType;
   if (mediaType === undefined || mediaType === null || mediaType === '') {
     mediaType =
@@ -215,7 +215,7 @@ function validateHeroSettings(settings) {
     errors.push(`mediaType must be one of: ${ALLOWED_HERO_MEDIA_TYPES.join(', ')}`);
   }
 
-  // slides — sanitize only when the effective media type is 'slider'
+  // slides - sanitize only when the effective media type is 'slider'
   if (!errors.includes(`mediaType must be one of: ${ALLOWED_HERO_MEDIA_TYPES.join(', ')}`)) {
     if (mediaType === 'slider') {
       let slides = settings.slides;
@@ -245,11 +245,11 @@ function validateHeroSettings(settings) {
             return;
           }
 
-          // Strip unknown keys — keep only the whitelisted fields.
+          // Strip unknown keys - keep only the whitelisted fields.
           const cleanSlide = {};
           if (imageUrl) cleanSlide.imageUrl = imageUrl;
           if (videoUrl) cleanSlide.videoUrl = videoUrl;
-          // clickableUrl — optional per-slide link
+          // clickableUrl - optional per-slide link
           const clickableUrl = typeof slide.clickableUrl === 'string' ? slide.clickableUrl.trim() : '';
           if (clickableUrl) cleanSlide.clickableUrl = clickableUrl;
           sanitized.push(cleanSlide);
@@ -266,7 +266,7 @@ function validateHeroSettings(settings) {
   value.mediaType = mediaType;
   value.textAlignment = textAlignment;
 
-  // preset — must be one of allowed values or undefined
+  // preset - must be one of allowed values or undefined
   if (settings.preset !== undefined && settings.preset !== null && settings.preset !== '') {
     if (typeof settings.preset !== 'string' || !ALLOWED_HERO_PRESETS.includes(settings.preset)) {
       errors.push(`preset must be one of: ${ALLOWED_HERO_PRESETS.join(', ')}`);
@@ -277,7 +277,7 @@ function validateHeroSettings(settings) {
     delete value.preset;
   }
 
-  // clickableUrl — optional string for clickable background
+  // clickableUrl - optional string for clickable background
   if (settings.clickableUrl !== undefined && settings.clickableUrl !== null) {
     const clickableUrl = typeof settings.clickableUrl === 'string' ? settings.clickableUrl.trim() : '';
     if (clickableUrl) {
@@ -287,14 +287,14 @@ function validateHeroSettings(settings) {
     }
   }
 
-  // sliderShowArrows — optional boolean
+  // sliderShowArrows - optional boolean
   if (typeof settings.sliderShowArrows === 'boolean') {
     value.sliderShowArrows = settings.sliderShowArrows;
   } else {
     delete value.sliderShowArrows;
   }
 
-  // sliderPauseOnInteraction — optional boolean
+  // sliderPauseOnInteraction - optional boolean
   if (typeof settings.sliderPauseOnInteraction === 'boolean') {
     value.sliderPauseOnInteraction = settings.sliderPauseOnInteraction;
   } else {
@@ -319,16 +319,16 @@ function validateHeroSettings(settings) {
  * All other existing keys are preserved as-is to avoid breaking
  * dynamic article_grid configurations.
  *
- * @param {object} settings — the raw settings payload from req.body
+ * @param {object} settings - the raw settings payload from req.body
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateArticleGridSettings(settings) {
   const errors = [];
 
-  // Preserve all existing settings — only override the fields we validate.
+  // Preserve all existing settings - only override the fields we validate.
   const value = { ...settings };
 
-  // layoutMode — default to 'grid' when absent/null/empty
+  // layoutMode - default to 'grid' when absent/null/empty
   let layoutMode = settings.layoutMode;
   if (layoutMode === undefined || layoutMode === null || layoutMode === '') {
     layoutMode = DEFAULT_LAYOUT_MODE;
@@ -339,7 +339,7 @@ function validateArticleGridSettings(settings) {
     errors.push(`layoutMode must be one of: ${ALLOWED_LAYOUT_MODES.join(', ')}`);
   }
 
-  // aspectRatio — default to '16:9' when absent/null/empty
+  // aspectRatio - default to '16:9' when absent/null/empty
   let aspectRatio = settings.aspectRatio;
   if (aspectRatio === undefined || aspectRatio === null || aspectRatio === '') {
     aspectRatio = DEFAULT_ASPECT_RATIO;
@@ -350,7 +350,7 @@ function validateArticleGridSettings(settings) {
     errors.push(`aspectRatio must be one of: ${ALLOWED_ASPECT_RATIOS.join(', ')}`);
   }
 
-  // cardVariant — default to 'default' when absent/null/empty
+  // cardVariant - default to 'default' when absent/null/empty
   let cardVariant = settings.cardVariant;
   if (cardVariant === undefined || cardVariant === null || cardVariant === '') {
     cardVariant = DEFAULT_CARD_VARIANT;
@@ -361,7 +361,7 @@ function validateArticleGridSettings(settings) {
     errors.push(`cardVariant must be one of: ${ALLOWED_CARD_VARIANTS.join(', ')}`);
   }
 
-  // itemsPerRow — default to 3 when absent/null/empty, must be an allowed integer
+  // itemsPerRow - default to 3 when absent/null/empty, must be an allowed integer
   let itemsPerRow = settings.itemsPerRow;
   if (itemsPerRow === undefined || itemsPerRow === null || itemsPerRow === '') {
     itemsPerRow = DEFAULT_ITEMS_PER_ROW;
@@ -386,8 +386,8 @@ function validateArticleGridSettings(settings) {
 /**
  * Validate and sanitize a settings object for a given section type.
  *
- * @param {string} type — the BranchSection.type value
- * @param {object} settings — the raw settings payload from req.body
+ * @param {string} type - the BranchSection.type value
+ * @param {object} settings - the raw settings payload from req.body
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateSectionSettings(type, settings) {
@@ -443,16 +443,16 @@ function validateSectionSettings(type, settings) {
  * Top-level presentation keys (title, description, submitButtonText, etc.)
  * are preserved as-is to allow future additions.
  *
- * @param {object} settings — the raw settings payload from req.body
+ * @param {object} settings - the raw settings payload from req.body
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateDynamicFormSettings(settings) {
   const errors = [];
 
-  // Preserve all top-level keys — only sanitize the fields array.
+  // Preserve all top-level keys - only sanitize the fields array.
   const value = { ...settings };
 
-  // fields — must be an array
+  // fields - must be an array
   let fields = settings.fields;
   if (fields === undefined || fields === null) {
     fields = [];
@@ -473,7 +473,7 @@ function validateDynamicFormSettings(settings) {
         return;
       }
 
-      // id — required, unique, non-empty string
+      // id - required, unique, non-empty string
       const id = typeof field.id === 'string' ? field.id.trim() : '';
       if (!id) {
         errors.push(`fields[${i}].id is required and must be a non-empty string`);
@@ -485,7 +485,7 @@ function validateDynamicFormSettings(settings) {
       }
       seenIds.add(id);
 
-      // type — must be one of the allowed enums
+      // type - must be one of the allowed enums
       const type = field.type;
       if (!ALLOWED_FIELD_TYPES.includes(type)) {
         errors.push(
@@ -499,7 +499,7 @@ function validateDynamicFormSettings(settings) {
         errors.push(`fields[${i}].options is required for type '${type}'`);
       }
 
-      // Build sanitized field — whitelist only known keys
+      // Build sanitized field - whitelist only known keys
       const cleanField = {
         id,
         label: coerceString(field.label),
@@ -508,7 +508,7 @@ function validateDynamicFormSettings(settings) {
         order: typeof field.order === 'number' ? field.order : i,
       };
 
-      // Optional keys — only include if present
+      // Optional keys - only include if present
       if (field.labelI18n && typeof field.labelI18n === 'object') {
         cleanField.labelI18n = field.labelI18n;
       }
@@ -557,7 +557,7 @@ module.exports = { validateSectionSettings, validateDynamicFormSettings, coerceS
  *   - content must be a string (coerced from truthy non-string values)
  *   - contentI18n must be an object with string values
  *
- * @param {object} settings — the raw settings payload from req.body
+ * @param {object} settings - the raw settings payload from req.body
  * @returns {{ ok: boolean, errors: string[], value: object|null }}
  */
 function validateRichTextSettings(settings) {

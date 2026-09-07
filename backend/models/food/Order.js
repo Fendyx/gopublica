@@ -4,7 +4,7 @@ const orderItemSchema = new mongoose.Schema({
   menuItemId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'MenuItem',
-    required: false, // optional — ticketed events have no MenuItem
+    required: false, // optional - ticketed events have no MenuItem
     index: true,
   },
   itemType: {

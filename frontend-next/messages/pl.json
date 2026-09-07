@@ -11,7 +11,7 @@
     "dashboard": "Panel"
   },
   "footer": {
-    "description": "Wszystko, czego Twoja mała firma potrzebuje, by zabłysnąć online — strony internetowe, rezerwacje, zamówienia online i wiele więcej.",
+    "description": "Wszystko, czego Twoja mała firma potrzebuje, by zabłysnąć online - strony internetowe, rezerwacje, zamówienia online i wiele więcej.",
     "solutionsTitle": "Rozwiązania",
     "solutionsOverview": "Wszystkie rozwiązania",
     "categories": {
@@ -39,7 +39,7 @@
   },
   "hero": {
     "title": "Twój biznes, w pełni zdigitalizowany",
-    "subtitle": "Jedna platforma dla Twojej strony, CRM, zamówień online i więcej — bez kodowania.",
+    "subtitle": "Jedna platforma dla Twojej strony, CRM, zamówień online i więcej - bez kodowania.",
     "startFree": "Rozpocznij darmowy okres próbny",
     "contact": "Skontaktuj się z nami"
   },
@@ -62,7 +62,7 @@
       "adminPanel": "Pełny panel administracyjny (menu, usługi, ceny)",
       "booking": "System rezerwacji stolików i wizyt",
       "gallery": "Galeria, aktualności i zarządzanie treścią",
-      "domainSsl": "Domena + SSL — w pełni zarządzane przez nas",
+      "domainSsl": "Domena + SSL - w pełni zarządzane przez nas",
       "basicStats": "Podstawowe statystyki strony",
       "location1": "1 lokalizacja firmy",
       "location3": "Do 3 lokalizacji",
@@ -413,6 +413,34 @@
         "title": "Inne firmy",
         "desc": "Strony internetowe na zamówienie dla każdej branży."
       }
+    },
+    "infrastructureTitle": "Zbudowane dla skali",
+    "infrastructureSubtitle": "Infrastruktura klasy enterprise, która rośnie wraz z Twoim biznesem.",
+    "infrastructure": {
+      "payments": {
+        "eyebrow": "Płatności",
+        "title": "Akceptuj każdą metodę.",
+        "titleMuted": "Nie trać żadnej sprzedaży.",
+        "statMethods": "Metody płatności",
+        "statConversion": "Wyższa konwersja",
+        "checkout": {
+          "header": "Płatność",
+          "planName": "Plan Agency Pro",
+          "planDesc": "Subskrypcja miesięczna",
+          "planPrice": "49 €/mies.",
+          "cardNumber": "Numer karty",
+          "expiry": "Ważność",
+          "cvc": "CVC",
+          "payBtn": "Zapłać 49,00 €",
+          "poweredBy": "Obsługiwane przez Stripe"
+        }
+      },
+      "logistics": {
+        "heading": "Integruj dowolne rozwiązanie logistyczne",
+        "warehouse": "Magazyn",
+        "hub": "Hub",
+        "customer": "Klient"
+      }
     }
   },
   "auth": {
@@ -473,7 +501,7 @@
         "highlight": "💶 €300 jednorazowej opłaty obejmuje: profesjonalny design, konfigurację domeny i optymalizację SEO. Bezpieczna płatność przez Stripe."
       },
       "done": {
-        "title": "Jesteś w sieci — gratulacje! 🎉",
+        "title": "Jesteś w sieci - gratulacje! 🎉",
         "subtitle": "Masz jakieś pytania, zanim ruszymy dalej? Jesteśmy gotowi odpowiedzieć na wszystko."
       }
     }
@@ -570,7 +598,7 @@
         "title": "Dlaczego to się opłaca",
         "item1": {
           "title": "Oszczędzaj godziny każdego dnia",
-          "desc": "Zautomatyzuj zadania, które pożerają Twój czas — potwierdzenia, przypomnienia i aktualizacje."
+          "desc": "Zautomatyzuj zadania, które pożerają Twój czas - potwierdzenia, przypomnienia i aktualizacje."
         },
         "item2": {
           "title": "Buduj bazę klientów",

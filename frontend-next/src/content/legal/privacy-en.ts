@@ -34,7 +34,7 @@ W przypadku jakichkolwiek pytań dotyczących ochrony danych prosimy o kontakt p
 - Imię, nazwisko i nazwa firmy
 - Adres e-mail
 - NIP
-- Dane karty płatniczej (przetwarzane i przechowywane wyłącznie przez Stripe — nie przechowujemy surowych danych kart)
+- Dane karty płatniczej (przetwarzane i przechowywane wyłącznie przez Stripe - nie przechowujemy surowych danych kart)
 - Adres firmy i dane kontaktowe
 
 **Dane zbierane automatycznie:**
@@ -53,10 +53,10 @@ W przypadku jakichkolwiek pytań dotyczących ochrony danych prosimy o kontakt p
 
 Przetwarzamy dane osobowe na następujących podstawach prawnych zgodnie z art. 6 RODO:
 
-- **Art. 6 ust. 1 lit. b — Wykonanie umowy:** Przetwarzanie danych konta, informacji rozliczeniowych i danych o użytkowaniu w celu udostępnienia platformy.
-- **Art. 6 ust. 1 lit. c — Obowiązek prawny:** Przechowywanie faktur i rejestrów transakcji zgodnie z polskim prawem podatkowym i rachunkowym.
-- **Art. 6 ust. 1 lit. f — Prawnie uzasadniony interes:** Monitorowanie bezpieczeństwa platformy, zapobieganie oszustwom i ulepszanie działania platformy.
-- **Art. 6 ust. 1 lit. a — Zgoda:** Wykorzystywanie plików cookie Google Analytics do analityki strony (jeśli wyrażono zgodę).
+- **Art. 6 ust. 1 lit. b - Wykonanie umowy:** Przetwarzanie danych konta, informacji rozliczeniowych i danych o użytkowaniu w celu udostępnienia platformy.
+- **Art. 6 ust. 1 lit. c - Obowiązek prawny:** Przechowywanie faktur i rejestrów transakcji zgodnie z polskim prawem podatkowym i rachunkowym.
+- **Art. 6 ust. 1 lit. f - Prawnie uzasadniony interes:** Monitorowanie bezpieczeństwa platformy, zapobieganie oszustwom i ulepszanie działania platformy.
+- **Art. 6 ust. 1 lit. a - Zgoda:** Wykorzystywanie plików cookie Google Analytics do analityki strony (jeśli wyrażono zgodę).
 
 ---
 
@@ -72,12 +72,12 @@ Przetwarzamy dane osobowe na następujących podstawach prawnych zgodnie z art. 
 
 W celu obsługi platformy udostępniamy ograniczone dane następującym podmiotom:
 
-*   **Stripe, Inc.** — Przetwarzanie płatności (UE / USA)
-*   **EmailJS Ltd** — Wysyłka e-maili transakcyjnych (UE / USA)
-*   **Vercel, Inc.** — Hosting frontendu (UE / USA)
-*   **MongoDB Atlas (AWS)** — Przechowywanie baz danych (Niemcy, UE)
-*   **Hetzner Online GmbH** — Infrastruktura serwerowa (Niemcy, UE)
-*   **Google LLC** — Analityka ruchu (UE / USA)
+*   **Stripe, Inc.** - Przetwarzanie płatności (UE / USA)
+*   **EmailJS Ltd** - Wysyłka e-maili transakcyjnych (UE / USA)
+*   **Vercel, Inc.** - Hosting frontendu (UE / USA)
+*   **MongoDB Atlas (AWS)** - Przechowywanie baz danych (Niemcy, UE)
+*   **Hetzner Online GmbH** - Infrastruktura serwerowa (Niemcy, UE)
+*   **Google LLC** - Analityka ruchu (UE / USA)
 
 Nie sprzedajemy danych Twoich ani Twoich klientów żadnym stronom trzecim.
 
@@ -105,7 +105,7 @@ Masz również prawo wnieść skargę do **Urzędu Ochrony Danych Osobowych (UOD
 
 **10. PLIKI COOKIE**
 
-Używamy niezbędnych plików cookie do zarządzania sesją logowania (nie można ich wyłączyć) oraz analitycznych plików cookie (Google Analytics) — wyłącznie po wyrażeniu przez Ciebie zgody.
+Używamy niezbędnych plików cookie do zarządzania sesją logowania (nie można ich wyłączyć) oraz analitycznych plików cookie (Google Analytics) - wyłącznie po wyrażeniu przez Ciebie zgody.
 
 ---
 

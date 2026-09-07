@@ -85,7 +85,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
                   console.error(
                     `❌ Failed to reserve tickets for order ${order._id}, event ${item.ticketMeta.eventId}: ${result.error}`
                   );
-                  // Note: We don't fail the webhook here — the order is already paid.
+                  // Note: We don't fail the webhook here - the order is already paid.
                   // Manual intervention or a reconciliation job would be needed.
                 } else {
                   console.log(
@@ -99,7 +99,7 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
             require('../../services/orderNotification').notifyNewOrder(order);
 
             // Автоматическое создание накладной Фургонетки
-            // (пропускаем цифровые заказы — физическая доставка им не нужна)
+            // (пропускаем цифровые заказы - физическая доставка им не нужна)
             const tenant = await TenantSettings.findOne({ tenantId: order.tenantId });
             if (tenant && order.fulfillment?.type !== 'digital') {
               await createFurgonetkaShipment(order, tenant);

@@ -69,7 +69,7 @@ router.use(verifyModuleAccess);
 // SECTION ROUTES
 // ============================================================
 
-// GET /?branchId=&branchSlug= — list all sections for a branch, sorted by order
+// GET /?branchId=&branchSlug= - list all sections for a branch, sorted by order
 router.get('/', checkBranch, async (req, res) => {
   try {
     const { branchId, branchSlug, page } = req.query;
@@ -86,7 +86,7 @@ router.get('/', checkBranch, async (req, res) => {
     }
     if (!resolvedBranchId && !branchSlug) return res.status(400).json({ error: 'branchId or branchSlug is required' });
 
-    // Build the query filter — optionally scope by page
+    // Build the query filter - optionally scope by page
     const filter = { tenantId: req.tenantId, branchId: resolvedBranchId };
     if (page) {
       filter.page = page;
@@ -102,7 +102,7 @@ router.get('/', checkBranch, async (req, res) => {
   }
 });
 
-// POST / — create a section
+// POST / - create a section
 router.post('/', checkBranch, async (req, res) => {
   try {
     const { branchId, branchSlug, page = 'home', type, order, settings = {}, translations = {} } = req.body;
@@ -156,7 +156,7 @@ router.post('/', checkBranch, async (req, res) => {
   }
 });
 
-// PUT /reorder — bulk update order field
+// PUT /reorder - bulk update order field
 router.put('/reorder', checkBranch, async (req, res) => {
   try {
     const { branchId, orderedIds } = req.body;
@@ -185,7 +185,7 @@ router.put('/reorder', checkBranch, async (req, res) => {
   }
 });
 
-// PUT /reorder-bulk — bulk update order field using updates array
+// PUT /reorder-bulk - bulk update order field using updates array
 // Expects: { updates: [{ _id, order }, ...] }
 router.put('/reorder-bulk', async (req, res) => {
   try {
@@ -216,7 +216,7 @@ router.put('/reorder-bulk', async (req, res) => {
   }
 });
 
-// PUT /:id — update a section
+// PUT /:id - update a section
 router.put('/:id', checkBranch, async (req, res) => {
   try {
     const section = await BranchSection.findById(req.params.id);
@@ -255,7 +255,7 @@ router.put('/:id', checkBranch, async (req, res) => {
   }
 });
 
-// DELETE /:id — delete a section (cascade delete its items)
+// DELETE /:id - delete a section (cascade delete its items)
 router.delete('/:id', checkBranch, async (req, res) => {
   try {
     const section = await BranchSection.findById(req.params.id);
@@ -298,7 +298,7 @@ router.delete('/:id', checkBranch, async (req, res) => {
 // ITEM SUB-ROUTES (mounted at /:sectionId/items)
 // ============================================================
 
-// GET /:sectionId/items — list items for a section
+// GET /:sectionId/items - list items for a section
 router.get('/:sectionId/items', checkBranch, async (req, res) => {
   try {
     const { sectionId } = req.params;
@@ -317,7 +317,7 @@ router.get('/:sectionId/items', checkBranch, async (req, res) => {
   }
 });
 
-// POST /:sectionId/items — create item
+// POST /:sectionId/items - create item
 router.post('/:sectionId/items', checkBranch, async (req, res) => {
   try {
     const { sectionId } = req.params;
@@ -359,7 +359,7 @@ router.post('/:sectionId/items', checkBranch, async (req, res) => {
   }
 });
 
-// PUT /:sectionId/items/:itemId — update item
+// PUT /:sectionId/items/:itemId - update item
 router.put('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
   try {
     const { sectionId, itemId } = req.params;
@@ -393,7 +393,7 @@ router.put('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
   }
 });
 
-// DELETE /:sectionId/items/:itemId — delete item
+// DELETE /:sectionId/items/:itemId - delete item
 router.delete('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
   try {
     const { sectionId, itemId } = req.params;
@@ -410,7 +410,7 @@ router.delete('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
   }
 });
 
-// PUT /:sectionId/items/reorder — bulk reorder items
+// PUT /:sectionId/items/reorder - bulk reorder items
 router.put('/:sectionId/items/reorder', checkBranch, async (req, res) => {
   try {
     const { sectionId } = req.params;

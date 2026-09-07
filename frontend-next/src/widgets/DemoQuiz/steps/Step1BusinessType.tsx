@@ -94,7 +94,7 @@ export default function Step1BusinessType() {
         })}
       </div>
 
-      {/* Custom "Other" input — slides up when "Other" is selected */}
+      {/* Custom "Other" input - slides up when "Other" is selected */}
       <motion.div
         initial={false}
         animate={{

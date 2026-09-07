@@ -18,7 +18,7 @@ export async function SolutionDetail({ module }: Props) {
     <main className="min-h-screen bg-base">
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-24">
 
-        {/* Split: text left — video right */}
+        {/* Split: text left - video right */}
         <div className="grid lg:grid-cols-2 gap-14 items-center">
 
           {/* ── Left column ── */}
@@ -35,7 +35,7 @@ export async function SolutionDetail({ module }: Props) {
               {heroDesc}
             </p>
 
-            {/* Benefits — simple checklist, no heavy cards */}
+            {/* Benefits - simple checklist, no heavy cards */}
             <ul className="flex flex-col gap-4 mt-1">
               {(['item1', 'item2', 'item3'] as const).map((key) => (
                 <li key={key} className="flex items-start gap-3">
@@ -49,7 +49,7 @@ export async function SolutionDetail({ module }: Props) {
                     </span>
                     {' '}
                     <span className="text-body-muted">
-                      — {ct(`benefits.${key}.desc`)}
+                      - {ct(`benefits.${key}.desc`)}
                     </span>
                   </div>
                 </li>

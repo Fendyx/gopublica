@@ -6,7 +6,7 @@ const checkRole    = require('../../middleware/auth/role');
 
 const ADMIN = ['admin', 'superadmin'];
 
-// GET /api/subscriptions/:clientId — подписка клиента
+// GET /api/subscriptions/:clientId - подписка клиента
 router.get('/:clientId', auth, checkRole(ADMIN), async (req, res) => {
   try {
     const sub = await Subscription.findOne({ clientId: req.params.clientId });
@@ -17,7 +17,7 @@ router.get('/:clientId', auth, checkRole(ADMIN), async (req, res) => {
   }
 });
 
-// PUT /api/subscriptions/:id — изменить тариф / паузу / отмену
+// PUT /api/subscriptions/:id - изменить тариф / паузу / отмену
 router.put('/:id', auth, checkRole(ADMIN), async (req, res) => {
   try {
     const { plan, amount, status, nextBillingDate, includes } = req.body;
@@ -40,7 +40,7 @@ router.put('/:id', auth, checkRole(ADMIN), async (req, res) => {
   }
 });
 
-// POST /api/subscriptions/:id/payment — записать платёж вручную
+// POST /api/subscriptions/:id/payment - записать платёж вручную
 router.post('/:id/payment', auth, checkRole(ADMIN), async (req, res) => {
   try {
     const { amount, note, paidBy } = req.body;

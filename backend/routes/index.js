@@ -12,7 +12,7 @@ const fs = require('fs');
  * @param {express.Express} app
  */
 function registerRoutes(app) {
-  // ── Health check (public, no auth — used by external cron) ──
+  // ── Health check (public, no auth - used by external cron) ──
   app.get('/api/ping', (_req, res) => {
     res.json({ status: 'ok', message: 'pong', timestamp: new Date().toISOString() });
   });
@@ -70,11 +70,11 @@ function registerRoutes(app) {
   // Tenant Telegram Bot (SaaS admin)
   app.use('/api/saas/telegram', require('./saas/telegram'));
 
-  // Stripe (SaaS подписки) — mount all at /api/stripe so that
+  // Stripe (SaaS подписки) - mount all at /api/stripe so that
   // each router's own path segments form the correct final URL
   // e.g. router.post('/subscribe') → POST /api/stripe/subscribe
   //
-  // IMPORTANT: `prices` has a /:priceId wildcard — it MUST be registered
+  // IMPORTANT: `prices` has a /:priceId wildcard - it MUST be registered
   // LAST so it doesn't shadow specific routes like /payment-method or /invoices.
   app.use('/api/stripe', require('./stripe/checkout'));
   app.use('/api/stripe', require('./stripe/setupIntent'));

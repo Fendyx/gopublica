@@ -28,7 +28,7 @@ function supportsTransactions(session) {
   }
 }
 
-// ─── GET /api/saas/events — list all events for the authenticated tenant ────
+// ─── GET /api/saas/events - list all events for the authenticated tenant ────
 router.get('/', ensureTenant, async (req, res) => {
   try {
     const events = await Event.find({ tenantId: req.tenantId })
@@ -40,7 +40,7 @@ router.get('/', ensureTenant, async (req, res) => {
   }
 });
 
-// ─── GET /api/saas/events/:id — single event by ID ────────────────────────
+// ─── GET /api/saas/events/:id - single event by ID ────────────────────────
 router.get('/:id', ensureTenant, async (req, res) => {
   try {
     const event = await Event.findOne({ _id: req.params.id, tenantId: req.tenantId }).lean();
@@ -51,7 +51,7 @@ router.get('/:id', ensureTenant, async (req, res) => {
   }
 });
 
-// ─── POST /api/saas/events — create Event + Article atomically ────────────
+// ─── POST /api/saas/events - create Event + Article atomically ────────────
 router.post('/', ensureTenant, async (req, res) => {
   const session = await mongoose.startSession();
   const useTransaction = supportsTransactions(session);
@@ -155,7 +155,7 @@ router.post('/', ensureTenant, async (req, res) => {
   }
 });
 
-// ─── PUT /api/saas/events/:id — update Event + Article ────────────────────
+// ─── PUT /api/saas/events/:id - update Event + Article ────────────────────
 // Supports upsert: if the Article exists but has no linked Event yet,
 // a new Event is created (e.g. user toggles "Sell Tickets" ON for a
 // standard article).
@@ -291,7 +291,7 @@ router.put('/:id', ensureTenant, async (req, res) => {
   }
 });
 
-// ─── DELETE /api/saas/events/:id — delete Event + Article ─────────────────
+// ─── DELETE /api/saas/events/:id - delete Event + Article ─────────────────
 router.delete('/:id', ensureTenant, async (req, res) => {
   const session = await mongoose.startSession();
   const useTransaction = supportsTransactions(session);

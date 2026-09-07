@@ -67,7 +67,7 @@ router.delete('/unlink', authTenant, async (req, res) => {
 });
 
 // GET /api/saas/telegram/preferences
-// Get notification preferences — returns flat event flags for the frontend
+// Get notification preferences - returns flat event flags for the frontend
 router.get('/preferences', authTenant, async (req, res) => {
   try {
     const tenant = await TenantSettings.findOne({ tenantId: req.tenantId })

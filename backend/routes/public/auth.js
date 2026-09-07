@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
       tenantId: finalTenantId,
     });
 
-    // ── GDPR: Record consent (best-effort — never block registration) ──
+    // ── GDPR: Record consent (best-effort - never block registration) ──
     if (consents?.terms && consents?.privacy) {
       newUser.consents = {
         terms: true,

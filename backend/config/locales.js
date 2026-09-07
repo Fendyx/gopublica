@@ -1,5 +1,5 @@
 /**
- * Global locale catalog — single source of truth for all supported languages.
+ * Global locale catalog - single source of truth for all supported languages.
  *
  * Used by backend routes for search queries, default translations, validation,
  * and seed data. Each locale entry defines:

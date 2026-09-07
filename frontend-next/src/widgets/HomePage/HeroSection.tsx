@@ -20,7 +20,7 @@ export default function HeroSection() {
         <div className="absolute top-[40%] left-[45%] w-[280px] h-[280px] rounded-full hero-shape-3 opacity-40 blur-3xl" />
       </div>
 
-      {/* Скрим — гасит фон именно под текстом, не влияя на декор по краям */}
+      {/* Скрим - гасит фон именно под текстом, не влияя на декор по краям */}
       <div
         className="absolute inset-0 z-[5] pointer-events-none"
         style={{

@@ -12,8 +12,8 @@ function isValidObjectId(str) {
  * checkBranch middleware
  *
  * Resolves a branch from the request using either:
- *   - branchId (MongoDB _id as string) — via req.params.branchId, req.body.branchId, or req.query.branchId
- *   - branchSlug — via req.params.branchSlug, req.body.branchSlug, or req.query.branchSlug
+ *   - branchId (MongoDB _id as string) - via req.params.branchId, req.body.branchId, or req.query.branchId
+ *   - branchSlug - via req.params.branchSlug, req.body.branchSlug, or req.query.branchSlug
  *
  * If branchId is provided but is not a valid ObjectId, it is treated as a slug.
  *

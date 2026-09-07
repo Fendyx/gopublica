@@ -65,7 +65,7 @@ async function migrate() {
         _id: { $ne: branch._id },
       }).lean();
       if (existing) {
-        // Collision with a pre-existing slug — keep incrementing
+        // Collision with a pre-existing slug - keep incrementing
         do {
           candidate = `${slug}-${suffix}`;
           suffix++;

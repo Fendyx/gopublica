@@ -60,7 +60,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Динамический роут — всегда в конце
+// Динамический роут - всегда в конце
 router.get('/:slug', async (req, res) => {
   try {
     const caseItem = await PortfolioCase.findOne({ slug: req.params.slug, isPublished: true });

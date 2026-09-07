@@ -2,9 +2,9 @@
  * migrate-add-tenant-theme.js
  *
  * Что делает:
- * 1. Всем существующим тенантам у которых нет niche — ставит 'food'
- * 2. Всем у кого нет theme — ставит дефолтную тему
- * 3. Всем у кого нет features — ставит дефолтные фичи
+ * 1. Всем существующим тенантам у которых нет niche - ставит 'food'
+ * 2. Всем у кого нет theme - ставит дефолтную тему
+ * 3. Всем у кого нет features - ставит дефолтные фичи
  *
  * Запуск:
  *   node scripts/migrate-add-tenant-theme.js
@@ -40,7 +40,7 @@ async function migrate() {
   await mongoose.connect(MONGO_URI);
   console.log('✅ Connected to MongoDB:', MONGO_URI);
 
-  // .lean() — возвращает чистые JS-объекты без магии Mongoose
+  // .lean() - возвращает чистые JS-объекты без магии Mongoose
   // Без него Mongoose подставляет дефолты из схемы и скрипт думает что поля уже есть
   const collection = mongoose.connection.collection('tenantsettings');
   const all = await collection.find({}).toArray();
@@ -58,7 +58,7 @@ async function migrate() {
       changes.niche = 'food';
     }
 
-    // 2. theme — проверяем именно в сыром объекте из MongoDB
+    // 2. theme - проверяем именно в сыром объекте из MongoDB
     if (!tenant.theme || typeof tenant.theme !== 'object') {
       changes.theme = DEFAULT_THEME;
     } else {
@@ -81,7 +81,7 @@ async function migrate() {
       }
     }
 
-    // 4. domain — не трогаем (у каждого будет свой домен, ставится вручную)
+    // 4. domain - не трогаем (у каждого будет свой домен, ставится вручную)
 
     if (Object.keys(changes).length > 0) {
       await collection.updateOne(
@@ -94,7 +94,7 @@ async function migrate() {
       }
       updated++;
     } else {
-      console.log(`  ⏭️  ${tenant.tenantId} — already up to date`);
+      console.log(`  ⏭️  ${tenant.tenantId} - already up to date`);
       skipped++;
     }
   }

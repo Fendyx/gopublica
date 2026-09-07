@@ -89,7 +89,7 @@ export default function PaymentMethodCard({ paymentMethod, userName, onPaymentMe
 
   return (
     <Card premium hover className={`relative overflow-hidden bg-gradient-to-br ${getBrandColor(brand)} border-[var(--border)]`}>
-      {/* Brand logo — top right */}
+      {/* Brand logo - top right */}
       <div className="absolute top-6 right-8">
         {getBrandLogo(brand)}
       </div>

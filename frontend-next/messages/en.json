@@ -12,7 +12,7 @@
   },
 
   "footer": {
-    "description": "Everything your small business needs to shine online — websites, reservations, online orders, and more.",
+    "description": "Everything your small business needs to shine online - websites, reservations, online orders, and more.",
     "solutionsTitle": "Solutions",
     "solutionsOverview": "All solutions",
     "categories": {
@@ -40,7 +40,7 @@
   },
   "hero": {
   "title": "Your Business, Fully Digitalized",
-  "subtitle": "One platform for your website, CRM, online ordering and more — without any coding.",
+  "subtitle": "One platform for your website, CRM, online ordering and more - without any coding.",
   "startFree": "Start Free Trial",
   "contact": "Contact us"
 },
@@ -64,7 +64,7 @@
       "adminPanel":         "Full admin panel (menu, services, prices)",
       "booking":            "Table & appointment booking system",
       "gallery":            "Gallery, news & content management",
-      "domainSsl":          "Domain + SSL — fully managed by us",
+      "domainSsl":          "Domain + SSL - fully managed by us",
       "basicStats":         "Basic website analytics",
       "location1":          "1 business location",
       "location3":          "Up to 3 business locations",
@@ -338,7 +338,7 @@
     
     "overviewEyebrow": "What we build",
     "overviewTitle": "Everything to keep tails wagging",
-    "overviewText": "From automated appointment scheduling to detailed pet profiles, our digital solutions help you save time and focus on what you do best — caring for pets.",
+    "overviewText": "From automated appointment scheduling to detailed pet profiles, our digital solutions help you save time and focus on what you do best - caring for pets.",
     
     "features": {
       "onlineBooking": {
@@ -411,7 +411,7 @@
   },
   "home": {
     "solutionsTitle": "Solutions for Every Industry",
-    "solutionsSubtitle": "From restaurants to car tuning — we've got you covered.",
+    "solutionsSubtitle": "From restaurants to car tuning - we've got you covered.",
     "solutions": {
       "food": { "title": "Restaurants & Cafes", "desc": "Online menus, ordering, reservations." },
       "grooming": { "title": "Pet Grooming", "desc": "Booking, pet profiles, loyalty." },
@@ -422,17 +422,28 @@
     "infrastructureSubtitle": "Enterprise-grade infrastructure that grows with your business.",
     "infrastructure": {
       "payments": {
-        "subtitle": "Stripe Integration • Any Payment Method",
-        "stripe": "Powered by Stripe — secure & reliable",
-        "methods": "Cards, Apple Pay, Google Pay & 100+ methods",
-        "recurring": "Subscriptions & recurring billing built-in"
+        "eyebrow": "Payments",
+        "title": "Accept every method.",
+        "titleMuted": "Miss no sale.",
+        "statMethods": "Payment methods",
+        "statConversion": "Higher conversion",
+        "checkout": {
+          "header": "Checkout",
+          "planName": "Agency Pro Plan",
+          "planDesc": "Monthly subscription",
+          "planPrice": "€49/mo",
+          "cardNumber": "Card number",
+          "expiry": "Expiry",
+          "cvc": "CVC",
+          "payBtn": "Pay €49.00",
+          "poweredBy": "Powered by Stripe"
+        }
       },
       "logistics": {
-        "title": "InPost & More",
-        "subtitle": "Seamless Logistics • Real-time Tracking",
-        "inpost": "InPost, DPD, DHL & local carriers",
-        "tracking": "Real-time package tracking for customers",
-        "pickup": "Pickup points & locker integration"
+        "heading": "Integrate any logistics solution",
+        "warehouse": "Warehouse",
+        "hub": "Hub",
+        "customer": "Customer"
       }
     }
   },
@@ -470,7 +481,7 @@
     "steps": {
       "intro": {
         "title": "Here's How We Work Together",
-        "subtitle": "5 simple steps — from first call to your site going live. Let's walk through it."
+        "subtitle": "5 simple steps - from first call to your site going live. Let's walk through it."
       },
       "meeting_1": {
         "title": "Meeting #1: Launching Your 30-Day Free Trial",
@@ -495,7 +506,7 @@
         "highlight": "💶 €300 one-time fee includes: Professional Design, Domain Setup, and SEO Optimization. Secure payment via Stripe."
       },
       "done": {
-        "title": "You're Live — Congrats! 🎉",
+        "title": "You're Live - Congrats! 🎉",
         "subtitle": "Any questions before we move forward? We're ready to answer everything."
       }
     }
@@ -592,7 +603,7 @@
       "title": "Why it pays for itself",
       "item1": {
         "title": "Save hours every day",
-        "desc": "Automate the tasks that eat your time — confirmations, reminders, and updates."
+        "desc": "Automate the tasks that eat your time - confirmations, reminders, and updates."
       },
       "item2": {
         "title": "Build your customer list",
@@ -613,7 +624,7 @@
     "hero": {
       "eyebrow": "Free Demo",
       "title": "Let's build something great together",
-      "subtitle": "3 quick questions — takes less than a minute. No credit card, no commitment."
+      "subtitle": "3 quick questions - takes less than a minute. No credit card, no commitment."
     },
     "stepIndicator": {
       "step": "Step",
@@ -621,7 +632,7 @@
     },
     "step1": {
       "title": "What's your business type?",
-      "subtitle": "Pick the closest match — you can type your own if it's not listed.",
+      "subtitle": "Pick the closest match - you can type your own if it's not listed.",
       "other": "Other",
       "otherPlaceholder": "Type your business type…",
       "options": {
@@ -637,7 +648,7 @@
     },
     "step2": {
       "title": "What are your main goals?",
-      "subtitle": "Select all that apply — or add your own.",
+      "subtitle": "Select all that apply - or add your own.",
       "other": "Other",
       "otherPlaceholder": "Type your goal…",
       "options": {

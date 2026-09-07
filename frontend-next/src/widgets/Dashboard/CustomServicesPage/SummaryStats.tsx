@@ -82,7 +82,7 @@ export default function SummaryStats({ services, loading }: SummaryStatsProps) {
           {t('stats.totalDue')}
         </p>
         <p className="mt-1 text-2xl font-bold text-[var(--text)]">
-          {totalDue > 0 ? formatCurrency(totalDue, 'PLN') : '—'}
+          {totalDue > 0 ? formatCurrency(totalDue, 'PLN') : '-'}
         </p>
       </div>
     </div>

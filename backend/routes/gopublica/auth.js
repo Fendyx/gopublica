@@ -52,7 +52,7 @@ router.post('/login', loginLimiter, async (req, res) => {
     }
 
     const user = await User.findOne({ email: email.toLowerCase().trim() });
-    // Одинаковое сообщение — не раскрываем существование email
+    // Одинаковое сообщение - не раскрываем существование email
     if (!user) return res.status(401).json({ message: 'Неверный email или пароль' });
 
     const isMatch = await bcrypt.compare(password, user.password);

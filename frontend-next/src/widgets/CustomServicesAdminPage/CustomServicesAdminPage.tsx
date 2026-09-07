@@ -330,7 +330,7 @@ export default function CustomServicesAdminPage() {
               </label>
             )}
 
-            {/* Description — full width */}
+            {/* Description - full width */}
             <label className="text-sm md:col-span-2">
               <span className="mb-1 block font-medium">Description</span>
               <textarea
@@ -342,7 +342,7 @@ export default function CustomServicesAdminPage() {
               />
             </label>
 
-            {/* Notes — full width (admin-only) */}
+            {/* Notes - full width (admin-only) */}
             <label className="text-sm md:col-span-2">
               <span className="mb-1 block font-medium">Internal notes</span>
               <textarea

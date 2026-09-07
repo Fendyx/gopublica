@@ -15,7 +15,7 @@ function isValidObjectId(str) {
 /**
  * POST /api/saas/appointments/public
  *
- * Public endpoint — creates a new service appointment for the tenant resolved
+ * Public endpoint - creates a new service appointment for the tenant resolved
  * from the request Host header. No authentication required (guest bookings).
  *
  * Required body:
@@ -97,7 +97,7 @@ router.post('/public', resolveTenant, async (req, res) => {
       notes: notes || '',
     });
 
-    // ── GDPR: Record consent (best-effort — never block appointment) ──
+    // ── GDPR: Record consent (best-effort - never block appointment) ──
     if (consents) {
       try {
         appointment._consent = await writeConsentLog({

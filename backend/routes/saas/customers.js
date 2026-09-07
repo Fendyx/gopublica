@@ -22,10 +22,10 @@ function escapeRegExp(str) {
 // Mini-CRM: list of the tenant's registered customers with aggregated stats.
 //
 // Query params:
-//   search — matches name / email / phone (case-insensitive)
-//   sort   — totalSpent (default) | totalOrders | lastOrderAt | name | newest
-//   page   — 1-based page number (default 1)
-//   limit  — page size, capped at 100 (default 20)
+//   search - matches name / email / phone (case-insensitive)
+//   sort   - totalSpent (default) | totalOrders | lastOrderAt | name | newest
+//   page   - 1-based page number (default 1)
+//   limit  - page size, capped at 100 (default 20)
 //
 // Rules (agreed):
 //   - Cancelled orders are excluded from totalOrders / totalSpent.

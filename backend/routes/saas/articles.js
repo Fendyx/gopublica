@@ -33,7 +33,7 @@ async function mergeEventIntoArticle(article) {
   };
 }
 
-// GET / — list all articles for the authenticated tenant, sorted by publishedAt desc
+// GET / - list all articles for the authenticated tenant, sorted by publishedAt desc
 router.get('/', async (req, res) => {
   try {
     const articles = await Article.find({ tenantId: req.tenantId })
@@ -77,7 +77,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// POST / — create a new article for the authenticated tenant
+// POST / - create a new article for the authenticated tenant
 router.post('/', async (req, res) => {
   try {
     const {
@@ -118,7 +118,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /:id — update an article by ID and tenant
+// PUT /:id - update an article by ID and tenant
 router.put('/:id', async (req, res) => {
   try {
     const {
@@ -159,7 +159,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE /:id — delete an article by ID and tenant
+// DELETE /:id - delete an article by ID and tenant
 router.delete('/:id', async (req, res) => {
   try {
     const article = await Article.findOneAndDelete({ _id: req.params.id, tenantId: req.tenantId });
@@ -170,7 +170,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// GET /:id — single article by ID with merged Event data
+// GET /:id - single article by ID with merged Event data
 router.get('/:id', async (req, res) => {
   try {
     const article = await Article.findOne({

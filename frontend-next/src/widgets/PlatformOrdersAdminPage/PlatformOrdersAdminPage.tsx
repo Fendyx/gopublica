@@ -277,7 +277,7 @@ export default function PlatformOrdersAdminPage() {
                   <p className="text-xs font-medium text-[var(--text-muted)] mb-1">Fulfillment</p>
                   <p className="text-sm">
                     {selected.fulfillment.type === 'parcel_locker'
-                      ? `Paczkomaty — ${selected.fulfillment.parcelLocker?.lockerId || '—'}`
+                      ? `Paczkomaty - ${selected.fulfillment.parcelLocker?.lockerId || '-'}`
                       : selected.fulfillment.type === 'courier'
                       ? 'Courier (DPD)'
                       : 'Cash on Delivery'}

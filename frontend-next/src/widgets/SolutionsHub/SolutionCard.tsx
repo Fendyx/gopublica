@@ -42,7 +42,7 @@ export function SolutionCard({ module }: Props) {
         )}
       </div>
 
-      {/* Текстовый блок — растягивается на всю оставшуюся высоту */}
+      {/* Текстовый блок - растягивается на всю оставшуюся высоту */}
       <div className="p-5 flex flex-col flex-grow">
         <h3 className="text-lg font-bold text-body">
           {t(`modules.${module.id}.title`)}

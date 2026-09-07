@@ -12,7 +12,7 @@ const canEdit = (user, lead) => {
   return lead.assignedTo?.toString() === user.id;
 };
 
-// GET /api/leads — все лиды
+// GET /api/leads - все лиды
 router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const leads = await Lead.find({})
@@ -25,7 +25,7 @@ router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// POST /api/leads — создать лид
+// POST /api/leads - создать лид
 router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const {
@@ -64,7 +64,7 @@ router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// PUT /api/leads/:id — обновить лид
+// PUT /api/leads/:id - обновить лид
 router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const lead = await Lead.findById(req.params.id);
@@ -128,9 +128,9 @@ router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
 });
 
 // ============================================================
-// POST /api/leads/import — массовый импорт лидов из Apify JSON
+// POST /api/leads/import - массовый импорт лидов из Apify JSON
 // ============================================================
-// POST /api/leads/import — массовый импорт лидов из Apify JSON
+// POST /api/leads/import - массовый импорт лидов из Apify JSON
 router.post('/import', auth, async (req, res) => {
   try {
     const userId = req.user?._id || req.user?.id || req.user?.userId;
@@ -151,7 +151,7 @@ router.post('/import', auth, async (req, res) => {
     if (totalBefore > 0) {
       const sample = await Lead.find({}).limit(5).select('phone name');
       console.log('Sample leads in DB:');
-      sample.forEach(l => console.log(`  ${l.phone} — ${l.name}`));
+      sample.forEach(l => console.log(`  ${l.phone} - ${l.name}`));
     } else {
       console.log('DB is completely empty.');
     }

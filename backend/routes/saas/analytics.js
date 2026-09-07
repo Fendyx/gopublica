@@ -6,7 +6,7 @@ const Reservation = require('../../models/food/Reservation');
 const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/auth/tenant');
 
-// POST /api/saas/analytics/track  — публичный, вызывается из Next.js API route
+// POST /api/saas/analytics/track  - публичный, вызывается из Next.js API route
 router.post('/track', async (req, res) => {
   try {
     const { tenantId, hash, city, device, date } = req.body;
@@ -14,7 +14,7 @@ router.post('/track', async (req, res) => {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Проверяем — был ли этот хэш сегодня
+    // Проверяем - был ли этот хэш сегодня
     const existing = await Analytics.findOne({ tenantId, date, visitorsHashes: hash });
     const isUnique = !existing;
 
@@ -38,7 +38,7 @@ router.post('/track', async (req, res) => {
   }
 });
 
-// GET /api/saas/analytics?days=30  — защищён, для дашборда
+// GET /api/saas/analytics?days=30  - защищён, для дашборда
 router.get('/', authTenant, async (req, res) => {
   try {
     const tenantId = req.tenantId;

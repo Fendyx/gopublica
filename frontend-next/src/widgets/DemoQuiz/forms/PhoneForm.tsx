@@ -94,7 +94,7 @@ export default function PhoneForm() {
           className={inputClass(!!errors.bestTimeToCall)}
         >
           <option value="" disabled>
-            —
+            -
           </option>
           {['weekdayMorning', 'weekdayAfternoon', 'weekdayEvening', 'weekend', 'anytime'].map(
             (k) => (

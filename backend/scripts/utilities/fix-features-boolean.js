@@ -8,7 +8,7 @@ const fixFeaturesBooleans = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ MongoDB connected');
 
-    // Находим все документы, у которых features.hasJobApplications — строка
+    // Находим все документы, у которых features.hasJobApplications - строка
     const tenants = await TenantSettings.find({
       'features.hasJobApplications': { $type: 'string' }
     });

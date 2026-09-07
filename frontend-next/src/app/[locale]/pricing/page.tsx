@@ -9,7 +9,7 @@ import type { Metadata } from 'next';
 export type PlanFeature = {
   text: string;
   included: boolean;
-  /** Marks a "killer feature" — rendered with an accent pill */
+  /** Marks a "killer feature" - rendered with an accent pill */
   hot?: boolean;
 };
 

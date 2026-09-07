@@ -53,7 +53,7 @@ router.post('/', authTenant, async (req, res) => {
       parentBranchId, venueType, slug,
     } = req.body;
 
-    // Если создаём подфилию — проверяем, что родитель существует и принадлежит тому же тенанту
+    // Если создаём подфилию - проверяем, что родитель существует и принадлежит тому же тенанту
     if (parentBranchId) {
       const parent = await Branch.findOne({ _id: parentBranchId, tenantId: req.tenantId });
       if (!parent) return res.status(400).json({ error: 'parentBranchId не найден для этого тенанта' });
@@ -235,7 +235,7 @@ router.delete('/:id', authTenant, async (req, res) => {
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CUSTOM PAGES — sub-resource of Branch
+// CUSTOM PAGES - sub-resource of Branch
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** Slugs that map to hardcoded storefront routes and must never be reused */
@@ -244,7 +244,7 @@ const RESERVED_PAGE_SLUGS = [
   'reservations', 'partners', 'order', 'login', 'profile', 'admin',
 ];
 
-// GET /saas/branches/:branchId/custom-pages — list all custom pages for a branch
+// GET /saas/branches/:branchId/custom-pages - list all custom pages for a branch
 router.get('/:branchId/custom-pages', authTenant, async (req, res) => {
   try {
     const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId })
@@ -257,7 +257,7 @@ router.get('/:branchId/custom-pages', authTenant, async (req, res) => {
   }
 });
 
-// POST /saas/branches/:branchId/custom-pages — create a custom page
+// POST /saas/branches/:branchId/custom-pages - create a custom page
 router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
   try {
     const { title } = req.body;
@@ -310,7 +310,7 @@ router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
   }
 });
 
-// PUT /saas/branches/:branchId/custom-pages/:slug — update a custom page
+// PUT /saas/branches/:branchId/custom-pages/:slug - update a custom page
 router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
   try {
     const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId });
@@ -372,7 +372,7 @@ router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
   }
 });
 
-// DELETE /saas/branches/:branchId/custom-pages/:slug — delete a custom page
+// DELETE /saas/branches/:branchId/custom-pages/:slug - delete a custom page
 router.delete('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
   try {
     const branch = await Branch.findOne({ _id: req.params.branchId, tenantId: req.tenantId });

@@ -93,7 +93,7 @@ async function ensureValidCustomer(customerId, userData) {
   } catch (err) {
     if (err.type === 'StripeInvalidRequestError' && err.statusCode === 404) {
       console.warn(
-        `⚠️ Stripe customer ${customerId} not found — creating a new customer for ${userData.email}`
+        `⚠️ Stripe customer ${customerId} not found - creating a new customer for ${userData.email}`
       );
       const customer = await Stripe.customers.create({
         email: userData.email,

@@ -6,7 +6,7 @@ const checkRole = require('../../middleware/auth/role');
 
 const ADMIN_ROLES = ['admin', 'superadmin'];
 
-// GET /api/custom-services — list all (admin, supports ?tenantId filter)
+// GET /api/custom-services - list all (admin, supports ?tenantId filter)
 router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const filter = {};
@@ -20,7 +20,7 @@ router.get('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// GET /api/custom-services/:id — get single item
+// GET /api/custom-services/:id - get single item
 router.get('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const service = await CustomService.findById(req.params.id);
@@ -31,7 +31,7 @@ router.get('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// POST /api/custom-services — create a new custom service for a tenant
+// POST /api/custom-services - create a new custom service for a tenant
 router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const { tenantId, title, description, price, currency, priority, notes } = req.body;
@@ -59,7 +59,7 @@ router.post('/', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// PUT /api/custom-services/:id — update a custom service
+// PUT /api/custom-services/:id - update a custom service
 router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const { title, description, price, currency, status, priority, notes } = req.body;
@@ -90,7 +90,7 @@ router.put('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   }
 });
 
-// DELETE /api/custom-services/:id — delete a custom service
+// DELETE /api/custom-services/:id - delete a custom service
 router.delete('/:id', auth, checkRole(ADMIN_ROLES), async (req, res) => {
   try {
     const service = await CustomService.findByIdAndDelete(req.params.id);

@@ -160,7 +160,7 @@ router.post('/apply', upload, async (req, res) => {
       status: 'new',
     });
 
-    // ── GDPR: Record consent (best-effort — never block application) ──
+    // ── GDPR: Record consent (best-effort - never block application) ──
     if (consents) {
       try {
         application._consent = await writeConsentLog({

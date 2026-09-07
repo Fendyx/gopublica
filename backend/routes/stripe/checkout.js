@@ -23,7 +23,7 @@ router.post('/create-checkout-session', authTenant, async (req, res) => {
     }
     const customerId = stripeCustomer.id;
 
-    // Если tenantId уже назначен — обновляем метадату в Stripe
+    // Если tenantId уже назначен - обновляем метадату в Stripe
     if (user.tenantId) {
       await updateCustomer(customerId, {
         metadata: { tenantId: user.tenantId, userId: user._id.toString() },

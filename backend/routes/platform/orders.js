@@ -13,7 +13,7 @@ const DELIVERY_FEES = {
   cash_on_delivery: 30.00,
 };
 
-// ─── POST /api/platform/orders — create order ─────────────────────────────
+// ─── POST /api/platform/orders - create order ─────────────────────────────
 router.post('/', authTenant, async (req, res) => {
   try {
     const { tenantId } = req;

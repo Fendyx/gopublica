@@ -5,7 +5,7 @@
  *   1. If `activeLocales` doesn't exist yet → set it to all 6 supported locales.
  *   2. Set `defaultLocale` from the current `primaryLanguage` (fallback: 'pl').
  *
- * Safe to run multiple times — only updates documents that are missing the fields.
+ * Safe to run multiple times - only updates documents that are missing the fields.
  *
  * Usage:
  *   node scripts/migrations/migrate-add-active-locales.js [--dry-run]

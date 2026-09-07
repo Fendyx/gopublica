@@ -157,7 +157,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     },
   },
 
-  // Ниша — определяет какой шаблон рендерить на фронте
+  // Ниша - определяет какой шаблон рендерить на фронте
   niche: {
     type: String,
     enum: ['food', 'restaurant', 'beauty', 'auto', 'ecommerce'],
@@ -315,7 +315,7 @@ tenantSettingsSchema.pre('validate', function () {
 // Нельзя, чтобы два тенанта имели одинаковый domain ИЛИ одинаковый alias.
 // Проверяем пересечения как по domain, так и по aliases (в обе стороны).
 // NOTE: This hook is declared as `async` (no `next` callback). Mongoose
-// automatically treats async middleware as promise-based — passing `next`
+// automatically treats async middleware as promise-based - passing `next`
 // would make it undefined and crash with "next is not a function".
 tenantSettingsSchema.pre('save', async function () {
   if (!this.isModified('domain') && !this.isModified('aliases')) {
@@ -332,7 +332,7 @@ tenantSettingsSchema.pre('save', async function () {
   }
 
   if (hostnames.size === 0) {
-    return; // ни домена, ни алисов — нечего проверять
+    return; // ни домена, ни алисов - нечего проверять
   }
 
   const hostArray = Array.from(hostnames);

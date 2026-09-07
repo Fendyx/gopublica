@@ -23,7 +23,7 @@ export default function CustomServicesPage() {
       const data = await customServiceApi.list();
       setServices(data);
     } catch {
-      // Silently fail — empty state handles this
+      // Silently fail - empty state handles this
     } finally {
       setLoading(false);
     }

@@ -32,7 +32,7 @@ export default function DashboardOverview() {
           </CardHeader>
           <CardContent className="space-y-2">
             <p><span className="text-[var(--text-muted)]">{t('email')}:</span> {user.email}</p>
-            <p><span className="text-[var(--text-muted)]">{t('phone')}:</span> {user.phone || '—'}</p>
+            <p><span className="text-[var(--text-muted)]">{t('phone')}:</span> {user.phone || '-'}</p>
           </CardContent>
         </Card>
         <Card>

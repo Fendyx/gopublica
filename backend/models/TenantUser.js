@@ -96,7 +96,7 @@ tenantUserSchema.index({ tenantId: 1, telegramChatId: 1 });
 // telegramLinkToken index is created by field definition (sparse: true)
 
 tenantUserSchema.methods.comparePassword = async function(candidate) {
-  if (!this.passwordHash) return false; // Google OAuth user — no password set
+  if (!this.passwordHash) return false; // Google OAuth user - no password set
   return bcrypt.compare(candidate, this.passwordHash);
 };
 

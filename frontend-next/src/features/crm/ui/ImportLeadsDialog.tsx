@@ -69,7 +69,7 @@ export default function ImportLeadsDialog({ open, onClose }: Props) {
           <div>
             <label className="text-xs font-semibold">Assigned To</label>
             <select className="w-full mt-1 border rounded-lg px-3 py-2 text-sm" value={assignedTo} onChange={e => setAssignedTo(e.target.value)}>
-              <option value="">— Unassigned —</option>
+              <option value="">- Unassigned -</option>
               {admins.map(a => <option key={a._id} value={a._id}>{a.name} {a._id === user?.id ? '(me)' : ''}</option>)}
             </select>
           </div>

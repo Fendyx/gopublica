@@ -97,7 +97,7 @@ router.post('/', getTenant, async (req, res) => {
     } else if (fulfillmentType === 'delivery') {
       // Physical delivery requires a destination: full address OR parcel locker
       const hasFullAddress = fulfillment?.address?.street && fulfillment?.address?.city && fulfillment?.address?.zip;
-      // Frontend sends parcelLocker as { id, network, address } — no `enabled` flag
+      // Frontend sends parcelLocker as { id, network, address } - no `enabled` flag
       const hasLocker = Boolean(fulfillment?.parcelLocker?.id || fulfillment?.parcelLocker?.lockerId);
       if (!hasFullAddress && !hasLocker) {
         return res.status(400).json({
@@ -271,7 +271,7 @@ router.post('/', getTenant, async (req, res) => {
       locale,
     });
 
-    // ── GDPR: Record consent (best-effort — never block order creation) ──
+    // ── GDPR: Record consent (best-effort - never block order creation) ──
     if (consents) {
       try {
         order._consent = await writeConsentLog({

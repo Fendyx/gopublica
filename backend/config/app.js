@@ -21,7 +21,7 @@ module.exports = function configureApp(app) {
   // Вебхук Страйпа должен быть ДО express.json(), чтобы получать сырой body
   app.use('/api/stripe/webhook', require('../routes/stripe/webhook'));
 
-  // Tenant Telegram webhook — тоже до express.json() для raw body
+  // Tenant Telegram webhook - тоже до express.json() для raw body
   app.use('/api/telegram/tenant/webhook', require('../routes/telegram/tenantWebhook'));
 
   app.use(express.json({ limit: '10mb' }));

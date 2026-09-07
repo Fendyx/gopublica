@@ -17,7 +17,7 @@ async function authFetch(endpoint: string, options: RequestInit = {}) {
     throw new Error('Unauthorized');
   }
 
-  // Safely parse response — handle non-JSON error pages (404 HTML, proxy errors, etc.)
+  // Safely parse response - handle non-JSON error pages (404 HTML, proxy errors, etc.)
   let data: any;
   const contentType = res.headers.get('content-type') || '';
   if (contentType.includes('application/json')) {

@@ -86,7 +86,7 @@ export default function ServiceItemCard({ service, onPay }: ServiceItemCardProps
           className="w-full gap-2 rounded-xl"
         >
           <CreditCard size={16} />
-          {t('payNow')} — {formatCurrency(service.price, service.currency.toUpperCase())}
+          {t('payNow')} - {formatCurrency(service.price, service.currency.toUpperCase())}
         </Button>
       )}
 

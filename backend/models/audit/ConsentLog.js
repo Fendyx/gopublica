@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 /**
  * Centralized GDPR consent audit log.
  *
- * One row per (entity × consent-type) — so a single form submission that
+ * One row per (entity × consent-type) - so a single form submission that
  * grants terms + privacy + marketing produces 3 rows.
  *
  * Designed for:

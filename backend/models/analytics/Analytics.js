@@ -16,7 +16,7 @@ const analyticsSchema = new mongoose.Schema({
   itemQuantity:    { type: Number, default: 0 },  // total items sold
 });
 
-// Ключевой индекс — быстрый поиск и защита от дублей
+// Ключевой индекс - быстрый поиск и защита от дублей
 analyticsSchema.index({ tenantId: 1, date: 1 }, { unique: true });
 
 module.exports = mongoose.model('Analytics', analyticsSchema);

@@ -83,7 +83,7 @@ async function createFurgonetkaShipment(order, tenant) {
       },
     });
 
-    // Успешно создано — сохраняем трек-номер и ссылку на этикетку в заказ
+    // Успешно создано - сохраняем трек-номер и ссылку на этикетку в заказ
     order.shipping = {
       provider: 'furgonetka',
       packageId: response.data.package_id || response.data.id,

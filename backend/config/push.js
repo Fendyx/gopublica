@@ -15,6 +15,6 @@ module.exports = function initPush() {
       vapidPrivate
     );
   } else {
-    console.warn('⚠️  WebPush VAPID keys not configured — push notifications will not work');
+    console.warn('⚠️  WebPush VAPID keys not configured - push notifications will not work');
   }
 };

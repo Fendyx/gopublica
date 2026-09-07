@@ -1,61 +1,41 @@
 'use client';
 
 import { useRef } from 'react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { motion, useInView } from 'framer-motion';
 import AnimatedCounter from '@/shared/ui/AnimatedCounter';
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   LOGO PLACEHOLDERS
-   Replace <text> content with <image> or real SVG components once assets are ready.
-   Each component renders a styled text placeholder in the shape of a real logo.
+   PAYMENT LOGOS — powered by /logos/*.svg
    ══════════════════════════════════════════════════════════════════════════════ */
 
 function LogoApplePay({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 40" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="600" fontFamily="system-ui, sans-serif">Pay</text>
-    </svg>
-  );
+  return <Image alt="Apple Pay" className={className} height={40} src="/logos/Apple_Pay_logo.svg" width={120} />;
 }
 
 function LogoGooglePay({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 40" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="600" fontFamily="system-ui, sans-serif">G Pay</text>
-    </svg>
-  );
+  return <Image alt="Google Pay" className={className} height={40} src="/logos/Google_Pay_Logo.svg" width={120} />;
 }
 
 function LogoVisa({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 40" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="700" fontStyle="italic" fontFamily="system-ui, sans-serif">VISA</text>
-    </svg>
-  );
+  return <Image alt="Visa" className={className} height={40} src="/logos/visa.svg" width={100} />;
 }
 
 function LogoBlik({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 100 40" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="700" fontFamily="system-ui, sans-serif">BLIK</text>
-    </svg>
-  );
+  return <Image alt="BLIK" className={className} height={40} src="/logos/blik.svg" width={100} />;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   LOGISTICS LOGOS — powered by /logos/*.svg (or .png)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
 function LogoInPost({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 160 48" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif">InPost</text>
-    </svg>
-  );
+  return <Image alt="InPost" className={className} height={40} src="/logos/inpost_logo.svg" width={120} />;
 }
 
 function LogoDPD({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 120 48" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif">DPD</text>
-    </svg>
-  );
+  return <Image alt="DPD" className={className} height={40} src="/logos/dpd_logo.svg" width={100} />;
 }
 
 function LogoDHL({ className }: { className?: string }) {
@@ -67,15 +47,31 @@ function LogoDHL({ className }: { className?: string }) {
 }
 
 function LogoFedEx({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 140 48" fill="none" className={className}>
-      <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fill="currentColor" fontSize="18" fontWeight="700" fontFamily="system-ui, sans-serif">FedEx</text>
-    </svg>
-  );
+  return <Image alt="FedEx" className={className} height={40} src="/logos/fedex_logo.svg" width={120} />;
+}
+
+function LogoUPS({ className }: { className?: string }) {
+  return <Image alt="UPS" className={className} height={40} src="/logos/ups_logo.svg" width={80} />;
+}
+
+function LogoPocztaPolska({ className }: { className?: string }) {
+  return <Image alt="Poczta Polska" className={className} height={40} src="/logos/poczta_polska_logo.svg" width={100} />;
+}
+
+function LogoOrlenPaczka({ className }: { className?: string }) {
+  return <Image alt="Orlen Paczka" className={className} height={40} src="/logos/Orlen_paczka_logo.svg" width={80} />;
+}
+
+function LogoGLS({ className }: { className?: string }) {
+  return <Image alt="GLS" className={className} height={40} src="/logos/GLS_Logo.svg" width={120} />;
+}
+
+function LogoAmbroExpress({ className }: { className?: string }) {
+  return <Image alt="Ambro Express" className={className} height={40} src="/logos/ambro_express_logo.png" width={120} />;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PAYMENTS SECTION — Full-width dark immersive
+   PAYMENTS SECTION - Full-width dark immersive
    ══════════════════════════════════════════════════════════════════════════════ */
 
 const paymentLogos = [
@@ -122,6 +118,7 @@ function FloatingLogo({
 }
 
 function CheckoutMockup() {
+  const t = useTranslations('home.infrastructure');
   return (
     <motion.div
       className="relative w-full max-w-sm mx-auto"
@@ -132,7 +129,7 @@ function CheckoutMockup() {
       <div className="rounded-3xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-xl p-6 shadow-2xl shadow-black/40">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <span className="text-sm font-medium text-white/50">Checkout</span>
+          <span className="text-sm font-medium text-white/50">{t('payments.checkout.header')}</span>
           <div className="flex gap-1">
             <span className="h-2 w-2 rounded-full bg-white/20" />
             <span className="h-2 w-2 rounded-full bg-white/20" />
@@ -147,16 +144,16 @@ function CheckoutMockup() {
               <span className="text-sm">🛒</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-white/80 truncate">Agency Pro Plan</div>
-              <div className="text-xs text-white/40">Monthly subscription</div>
+              <div className="text-sm font-medium text-white/80 truncate">{t('payments.checkout.planName')}</div>
+              <div className="text-xs text-white/40">{t('payments.checkout.planDesc')}</div>
             </div>
-            <div className="text-sm font-semibold text-white/90 shrink-0">€49/mo</div>
+            <div className="text-sm font-semibold text-white/90 shrink-0">{t('payments.checkout.planPrice')}</div>
           </div>
         </div>
 
         {/* Card number field */}
         <div className="mb-3">
-          <label className="block text-xs text-white/40 mb-1.5">Card number</label>
+          <label className="block text-xs text-white/40 mb-1.5">{t('payments.checkout.cardNumber')}</label>
           <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 flex items-center gap-3">
             <div className="flex gap-1.5">
               <span className="h-4 w-6 rounded bg-white/10" />
@@ -171,13 +168,13 @@ function CheckoutMockup() {
         {/* Expiry + CVC */}
         <div className="flex gap-3 mb-5">
           <div className="flex-1">
-            <label className="block text-xs text-white/40 mb-1.5">Expiry</label>
+            <label className="block text-xs text-white/40 mb-1.5">{t('payments.checkout.expiry')}</label>
             <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/30">
               MM / YY
             </div>
           </div>
           <div className="flex-1">
-            <label className="block text-xs text-white/40 mb-1.5">CVC</label>
+            <label className="block text-xs text-white/40 mb-1.5">{t('payments.checkout.cvc')}</label>
             <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/30">
               •••
             </div>
@@ -186,12 +183,12 @@ function CheckoutMockup() {
 
         {/* Pay button */}
         <div className="rounded-xl bg-[var(--primary-color)] py-3.5 text-center text-sm font-semibold text-white shadow-lg shadow-[var(--primary-color)]/25">
-          Pay €49.00
+          {t('payments.checkout.payBtn')}
         </div>
 
         {/* Powered by */}
         <div className="mt-4 text-center">
-          <span className="text-[10px] text-white/25 uppercase tracking-widest">Powered by Stripe</span>
+          <span className="text-[10px] text-white/25 uppercase tracking-widest">{t('payments.checkout.poweredBy')}</span>
         </div>
       </div>
     </motion.div>
@@ -199,6 +196,7 @@ function CheckoutMockup() {
 }
 
 function PaymentsSection() {
+  const t = useTranslations('home.infrastructure');
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -215,7 +213,7 @@ function PaymentsSection() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center gap-16 md:flex-row md:items-center md:justify-between">
-          {/* Left — Typography & Stats */}
+          {/* Left - Typography & Stats */}
           <motion.div
             className="max-w-lg text-center md:text-left"
             initial={{ opacity: 0, x: -30 }}
@@ -223,12 +221,12 @@ function PaymentsSection() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[var(--primary-color)]">
-              Payments
+              {t('payments.eyebrow')}
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1]">
-              Accept&nbsp;every&nbsp;method.
+              {t('payments.title')}
               <br />
-              <span className="text-white/40">Miss&nbsp;no&nbsp;sale.</span>
+              <span className="text-white/40">{t('payments.titleMuted')}</span>
             </h2>
 
             {/* Stats row */}
@@ -240,7 +238,7 @@ function PaymentsSection() {
                   className="text-5xl md:text-6xl font-bold text-white tabular-nums"
                   duration={2.5}
                 />
-                <p className="mt-2 text-sm text-white/40">Payment methods</p>
+                <p className="mt-2 text-sm text-white/40">{t('payments.statMethods')}</p>
               </div>
               <div>
                 <AnimatedCounter
@@ -249,12 +247,12 @@ function PaymentsSection() {
                   className="text-5xl md:text-6xl font-bold text-white tabular-nums"
                   duration={2}
                 />
-                <p className="mt-2 text-sm text-white/40">Higher conversion</p>
+                <p className="mt-2 text-sm text-white/40">{t('payments.statConversion')}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right — Checkout mockup with floating logos */}
+          {/* Right - Checkout mockup with floating logos */}
           <div className="relative flex items-center justify-center w-full md:w-auto min-h-[420px]">
             {/* Floating logos around the checkout */}
             {isInView &&
@@ -270,7 +268,7 @@ function PaymentsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   LOGISTICS SECTION — Full-width with logo marquee + route SVG
+   LOGISTICS SECTION - Full-width with logo marquee + route SVG
    ══════════════════════════════════════════════════════════════════════════════ */
 
 const logisticsLogos = [
@@ -278,6 +276,11 @@ const logisticsLogos = [
   { Logo: LogoDPD, label: 'DPD' },
   { Logo: LogoDHL, label: 'DHL' },
   { Logo: LogoFedEx, label: 'FedEx' },
+  { Logo: LogoUPS, label: 'UPS' },
+  { Logo: LogoPocztaPolska, label: 'Poczta Polska' },
+  { Logo: LogoOrlenPaczka, label: 'Orlen Paczka' },
+  { Logo: LogoGLS, label: 'GLS' },
+  { Logo: LogoAmbroExpress, label: 'Ambro Express' },
 ];
 
 function LogoMarqueeRow({ reverse = false, speed = 30 }: { reverse?: boolean; speed?: number }) {
@@ -315,6 +318,7 @@ function LogoMarqueeRow({ reverse = false, speed = 30 }: { reverse?: boolean; sp
 }
 
 function DeliveryRouteSVG() {
+  const t = useTranslations('home.infrastructure');
   const ref = useRef<SVGSVGElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -341,7 +345,7 @@ function DeliveryRouteSVG() {
         transition={{ duration: 3, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      {/* Start node — Warehouse */}
+      {/* Start node - Warehouse */}
       <motion.circle
         cx="40"
         cy="80"
@@ -362,7 +366,7 @@ function DeliveryRouteSVG() {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 0.4 }}
       >
-        Warehouse
+        {t('logistics.warehouse')}
       </motion.text>
 
       {/* Hub node */}
@@ -386,10 +390,10 @@ function DeliveryRouteSVG() {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1.0 }}
       >
-        Hub
+        {t('logistics.hub')}
       </motion.text>
 
-      {/* End node — Customer */}
+      {/* End node - Customer */}
       <motion.circle
         cx="800"
         cy="50"
@@ -410,7 +414,7 @@ function DeliveryRouteSVG() {
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 1.6 }}
       >
-        Customer
+        {t('logistics.customer')}
       </motion.text>
 
       {/* Traveling package dot */}
@@ -457,6 +461,7 @@ function DeliveryRouteSVG() {
 }
 
 function LogisticsSection() {
+  const t = useTranslations('home.infrastructure');
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -473,18 +478,12 @@ function LogisticsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[var(--primary-color)]">
-            Logistics
-          </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.1]">
-            Delivery that just works.
+            {t('logistics.heading')}
           </h2>
-          <p className="mx-auto max-w-xl text-lg text-[var(--text-muted)]">
-            Integrated with top carriers. Real-time tracking, pickup points, and locker delivery — all out of the box.
-          </p>
         </motion.div>
 
-        {/* Logo marquee — top row */}
+        {/* Logo marquee - top row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -496,7 +495,7 @@ function LogisticsSection() {
         {/* Delivery route SVG */}
         <DeliveryRouteSVG />
 
-        {/* Logo marquee — bottom row (reversed) */}
+        {/* Logo marquee - bottom row (reversed) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
@@ -510,7 +509,7 @@ function LogisticsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   MAIN EXPORT — Stacked full-width sections
+   MAIN EXPORT - Stacked full-width sections
    ══════════════════════════════════════════════════════════════════════════════ */
 
 export default function InfrastructureSection() {

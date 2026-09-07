@@ -62,7 +62,7 @@ export default function SubscriptionOverview({ ipCurrency = 'EUR' }: Subscriptio
 
   const statusKey = isCanceled ? 'canceled' : user.subscriptionStatus === 'active' || user.subscriptionStatus === 'trialing' ? user.subscriptionStatus : 'inactive';
   const statusLabel = isCanceled
-    ? `${user.subscriptionStatus} — ${t('endsAtPeriodEnd')}`
+    ? `${user.subscriptionStatus} - ${t('endsAtPeriodEnd')}`
     : user.subscriptionStatus;
 
   const handleCancel = async () => {

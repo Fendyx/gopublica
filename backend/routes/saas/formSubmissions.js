@@ -9,7 +9,7 @@ const authTenant = require('../../middleware/auth/tenant');
 //
 // Reuses the JobApplication collection. Only submissions that
 // originated from a BranchSection (sourceSectionId present) are
-// returned here — regular job applications are excluded.
+// returned here - regular job applications are excluded.
 // ============================================================
 
 // GET /api/saas/forms/submissions

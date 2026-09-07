@@ -54,7 +54,7 @@ export default function SettingsPage() {
           </div>
           <div>
             <label className="text-sm font-semibold">{t('phone')}</label>
-            <p className="mt-1 text-lg">{user.phone || '—'}</p>
+            <p className="mt-1 text-lg">{user.phone || '-'}</p>
           </div>
           <p className="text-xs text-[var(--text-muted)]">
             {t('editHint')}

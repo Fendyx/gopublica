@@ -3,7 +3,7 @@ const router = express.Router();
 const Event = require('../../models/content/Event');
 const Article = require('../../models/content/Article');
 
-// ─── GET /api/public/events — list active events for a tenant ─────────────
+// ─── GET /api/public/events - list active events for a tenant ─────────────
 // Query params: tenantId (required), upcomingOnly (optional, default true)
 router.get('/', async (req, res) => {
   try {
@@ -51,7 +51,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// ─── GET /api/public/events/:slug — single event by Article slug ──────────
+// ─── GET /api/public/events/:slug - single event by Article slug ──────────
 // Returns Event + full Article (including body) in one request
 router.get('/:slug', async (req, res) => {
   try {
@@ -88,7 +88,7 @@ router.get('/:slug', async (req, res) => {
   }
 });
 
-// ─── GET /api/public/events/:slug/availability — check ticket stock ───────
+// ─── GET /api/public/events/:slug/availability - check ticket stock ───────
 router.get('/:slug/availability', async (req, res) => {
   try {
     const { tenantId } = req.query;

@@ -11,7 +11,7 @@ const router = express.Router();
 const ADMIN_ROLES = ['admin', 'superadmin'];
 
 // ── Rate limiter for public submissions ─────────────────────────────
-// 5 submissions per 15 minutes per IP — enough for legit users,
+// 5 submissions per 15 minutes per IP - enough for legit users,
 // blocks brute-force / spam.
 const demoLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -139,7 +139,7 @@ router.post('/', demoLimiter, async (req, res) => {
       ip: req.consentContext?.ip || req.ip || '',
     });
 
-    // Fire-and-forget notification — never block the response on it.
+    // Fire-and-forget notification - never block the response on it.
     notifyNewDemoRequest(doc).catch((err) => {
       console.error('notifyNewDemoRequest error:', err.message);
     });

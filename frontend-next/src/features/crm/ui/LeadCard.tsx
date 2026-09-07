@@ -21,7 +21,7 @@ interface Props {
 }
 
 const isURL = (str?: string) => { try { return str ? Boolean(new URL(str)) : false; } catch { return false; } };
-const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '—';
+const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '-';
 
 const getFollowUpLabel = (dateStr: string) => {
   const d = new Date(dateStr);
@@ -108,8 +108,8 @@ export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props)
             <div className="p-5 space-y-4">
               <div className="grid grid-cols-2 gap-3 p-3 bg-[var(--bg)] rounded-lg border">
                 <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><Phone size={11} className="inline mr-1"/>Phone</span><p className="text-sm font-medium">{lead.phone}</p></div>
-                <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><DollarSign size={11} className="inline mr-1"/>Budget</span><p className="text-sm font-medium">{lead.price ? `$${lead.price.toLocaleString()}` : '—'}</p></div>
-                <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><Building2 size={11} className="inline mr-1"/>Business</span><p className="text-sm">{lead.businessType || '—'}</p></div>
+                <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><DollarSign size={11} className="inline mr-1"/>Budget</span><p className="text-sm font-medium">{lead.price ? `$${lead.price.toLocaleString()}` : '-'}</p></div>
+                <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><Building2 size={11} className="inline mr-1"/>Business</span><p className="text-sm">{lead.businessType || '-'}</p></div>
                 <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><Calendar size={11} className="inline mr-1"/>Added</span><p className="text-sm">{fmt(lead.createdAt)}</p></div>
                 {lead.city && <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><MapPin size={11} className="inline mr-1"/>City</span><p className="text-sm">{lead.city}</p></div>}
                 {lead.businessHours && <div><span className="text-xs font-semibold uppercase text-[var(--text-muted)]"><Clock size={11} className="inline mr-1"/>Hours</span><p className="text-sm">{lead.businessHours}</p></div>}

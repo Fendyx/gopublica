@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     // 2. Get its attribute refs
     const refs = target.attributeRefs || [];
     if (refs.length === 0) {
-      // No attribute refs — fall back to same category products
+      // No attribute refs - fall back to same category products
       const fallback = await MenuItem.find({
         tenantId,
         _id: { $ne: productId },

@@ -413,6 +413,34 @@
         "title": "Weitere Unternehmen",
         "desc": "Maßgeschneiderte Websites für jede Branche."
       }
+    },
+    "infrastructureTitle": "Für Skalierbarkeit gebaut",
+    "infrastructureSubtitle": "Infrastruktur auf Enterprise-Niveau, die mit Ihrem Unternehmen wächst.",
+    "infrastructure": {
+      "payments": {
+        "eyebrow": "Zahlungen",
+        "title": "Akzeptiere jede Methode.",
+        "titleMuted": "Verlier keinen Verkauf.",
+        "statMethods": "Zahlungsmethoden",
+        "statConversion": "Höhere Conversion",
+        "checkout": {
+          "header": "Checkout",
+          "planName": "Agentur Pro-Plan",
+          "planDesc": "Monatliches Abonnement",
+          "planPrice": "49 €/Monat",
+          "cardNumber": "Kartennummer",
+          "expiry": "Ablaufdatum",
+          "cvc": "CVC",
+          "payBtn": "49,00 € bezahlen",
+          "poweredBy": "Bereitgestellt von Stripe"
+        }
+      },
+      "logistics": {
+        "heading": "Integriere jede Logistiklösung",
+        "warehouse": "Lager",
+        "hub": "Hub",
+        "customer": "Kunde"
+      }
     }
   },
   "auth": {

@@ -70,7 +70,7 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
 
-  // 👇 Если локаль не из списка — сразу 404
+  // 👇 Если локаль не из списка - сразу 404
   if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }

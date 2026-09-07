@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 /**
- * BranchSection — a configurable page section belonging to a branch.
+ * BranchSection - a configurable page section belonging to a branch.
  * 
  * SECTION TYPES & SETTINGS SHAPES:
  * 
@@ -47,7 +47,7 @@ const mongoose = require('mongoose');
  *      desktopItemsPerRow: Number   // Items per row on desktop: 3, 4, or 5 (default: 3)
  *    }
  *    Items are stored in BranchSectionItem collection (referenced by sectionId)
- *    No detail page link — purely presentational cards
+ *    No detail page link - purely presentational cards
  * 
  * 4. booking
  *    settings: {

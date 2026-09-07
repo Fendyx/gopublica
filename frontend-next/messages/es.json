@@ -11,7 +11,7 @@
     "dashboard": "Panel"
   },
   "footer": {
-    "description": "Todo lo que tu pequeña empresa necesita para brillar en línea — sitios web, reservas, pedidos en línea y más.",
+    "description": "Todo lo que tu pequeña empresa necesita para brillar en línea - sitios web, reservas, pedidos en línea y más.",
     "solutionsTitle": "Soluciones",
     "solutionsOverview": "Todas las soluciones",
     "categories": {
@@ -39,7 +39,7 @@
   },
   "hero": {
     "title": "Tu negocio, completamente digitalizado",
-    "subtitle": "Una plataforma para tu sitio web, CRM, pedidos en línea y más — sin programación.",
+    "subtitle": "Una plataforma para tu sitio web, CRM, pedidos en línea y más - sin programación.",
     "startFree": "Comenzar prueba gratuita",
     "contact": "Contáctanos"
   },
@@ -62,7 +62,7 @@
       "adminPanel": "Panel de administración completo (menú, servicios, precios)",
       "booking": "Sistema de reserva de mesas y citas",
       "gallery": "Galería, noticias y gestión de contenido",
-      "domainSsl": "Dominio + SSL — completamente gestionado por nosotros",
+      "domainSsl": "Dominio + SSL - completamente gestionado por nosotros",
       "basicStats": "Analítica web básica",
       "location1": "1 ubicación comercial",
       "location3": "Hasta 3 ubicaciones",
@@ -412,6 +412,34 @@
       "other": {
         "title": "Otros negocios",
         "desc": "Sitios web personalizados para cualquier sector."
+      }
+    },
+    "infrastructureTitle": "Construido para escalar",
+    "infrastructureSubtitle": "Infraestructura de nivel empresarial que crece con tu negocio.",
+    "infrastructure": {
+      "payments": {
+        "eyebrow": "Pagos",
+        "title": "Acepta cada método.",
+        "titleMuted": "No pierdas ninguna venta.",
+        "statMethods": "Métodos de pago",
+        "statConversion": "Mayor conversión",
+        "checkout": {
+          "header": "Pago",
+          "planName": "Plan Agencia Pro",
+          "planDesc": "Suscripción mensual",
+          "planPrice": "49 €/mes",
+          "cardNumber": "Número de tarjeta",
+          "expiry": "Vencimiento",
+          "cvc": "CVC",
+          "payBtn": "Pagar 49,00 €",
+          "poweredBy": "Impulsado por Stripe"
+        }
+      },
+      "logistics": {
+        "heading": "Integra cualquier solución logística",
+        "warehouse": "Almacén",
+        "hub": "Hub",
+        "customer": "Cliente"
       }
     }
   },

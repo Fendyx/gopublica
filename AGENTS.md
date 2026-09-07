@@ -1,4 +1,4 @@
-# GoPublica — Agent Instructions
+# GoPublica - Agent Instructions
 
 > This file defines the operational rules and essential context for all AI agents working in this repository. Read this **before** any coding task.
 
@@ -25,8 +25,8 @@ This repository contains **three distinct projects** that share a single backend
 | Project | Path | What it handles |
 |---------|------|-----------------|
 | **backend/** | `backend/` | REST API, database models, auth, payments, notifications |
-| **frontend-next/** | `frontend-next/` | GoPublica corporate site — marketing, CRM admin, tenant dashboard |
-| **gopublica-core/** | `gopublica-core/` | Multi-tenant SaaS engine — per-tenant admin + public storefront |
+| **frontend-next/** | `frontend-next/` | GoPublica corporate site - marketing, CRM admin, tenant dashboard |
+| **gopublica-core/** | `gopublica-core/` | Multi-tenant SaaS engine - per-tenant admin + public storefront |
 
 **Decision tree**:
 
@@ -87,7 +87,7 @@ Both Next.js projects follow FSD. Place new code in the correct layer:
 | Layer | Purpose | Examples |
 |-------|---------|---------|
 | `shared/` | Low-level, zero-dependency utils | `cn()`, API clients, UI primitives (Button, Card) |
-| `entities/` | Domain models — API calls + TypeScript types | `entities/order/api.ts`, `entities/tenant/types.ts` |
+| `entities/` | Domain models - API calls + TypeScript types | `entities/order/api.ts`, `entities/tenant/types.ts` |
 | `features/` | User-facing business logic | Form components, wizards, checkout flows |
 | `widgets/` | Complex composed UI blocks | Page sections, layouts, dashboards |
 | `content/` | Static data exports (no logic) | Legal text, product catalog definitions |

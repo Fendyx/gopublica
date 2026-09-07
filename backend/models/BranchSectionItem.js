@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 /**
- * BranchSectionItem — individual slides/cards for entity_carousel and feature_carousel sections.
+ * BranchSectionItem - individual slides/cards for entity_carousel and feature_carousel sections.
  * 
  * USAGE:
  * - entity_carousel: Items represent entities with detail pages (e.g., "Our Concepts", "Team Members")
- *   - slug is REQUIRED and unique per tenant — used for detail page URLs (/entity/:slug)
+ *   - slug is REQUIRED and unique per tenant - used for detail page URLs (/entity/:slug)
  *   - translations.story: optional long-form content for detail page
  * - feature_carousel: Items are purely presentational cards (e.g., "Features", "Benefits")
  *   - slug is still required for DB uniqueness but not used for routing

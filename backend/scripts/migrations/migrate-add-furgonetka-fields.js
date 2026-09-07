@@ -33,7 +33,7 @@ async function migrate() {
       }
     );
 
-    console.log(`✅ Migration complete — ${result.modifiedCount} document(s) updated`);
+    console.log(`✅ Migration complete - ${result.modifiedCount} document(s) updated`);
     console.log('   Added: logistics.env = "sandbox", logistics.mapApiKey = ""');
     process.exit(0);
   } catch (error) {

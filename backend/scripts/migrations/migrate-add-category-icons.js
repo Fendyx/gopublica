@@ -104,7 +104,7 @@ async function migrate() {
   for (const cat of categories) {
     // Не перезаписывать уже установленные иконки
     if (cat.icon) {
-      console.log(`⏭️  Skip [${cat.key}] — already has icon: ${cat.icon}`);
+      console.log(`⏭️  Skip [${cat.key}] - already has icon: ${cat.icon}`);
       skipped++;
       continue;
     }

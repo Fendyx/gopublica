@@ -10,7 +10,7 @@ const Event = require('../../models/content/Event');
  * Design decisions:
  *  - Stock deduction uses MongoDB's atomic `findOneAndUpdate` with a
  *    `$gte` guard predicate. This guarantees that two concurrent buyers
- *    cannot both purchase the last ticket — only one update succeeds.
+ *    cannot both purchase the last ticket - only one update succeeds.
  *  - Pattern A: stock is RESERVED on checkout and CONFIRMED on Stripe
  *    payment success (payment_intent.succeeded). If payment fails or the
  *    order is cancelled, tickets are RELEASED back.
@@ -22,7 +22,7 @@ const Event = require('../../models/content/Event');
 
 /**
  * Check whether enough tickets are currently available for a purchase.
- * Does NOT modify stock — safe to call repeatedly from the frontend.
+ * Does NOT modify stock - safe to call repeatedly from the frontend.
  *
  * @param {string} eventId   - Event _id
  * @param {number} quantity  - number of tickets requested
@@ -58,7 +58,7 @@ async function checkAvailability(eventId, quantity, tenantId) {
 }
 
 // ───────────────────────────────────────────────────────
-// ATOMIC STOCK DEDUCTION (Pattern A — called on payment success)
+// ATOMIC STOCK DEDUCTION (Pattern A - called on payment success)
 // ───────────────────────────────────────────────────────
 
 /**

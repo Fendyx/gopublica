@@ -69,7 +69,7 @@ router.post('/:sectionId/submit', rateLimit, resumeUpload.single('resume'), asyn
   try {
     const { sectionId } = req.params;
 
-    // Load the section — this also implicitly resolves the tenant (no body tenantId trusted)
+    // Load the section - this also implicitly resolves the tenant (no body tenantId trusted)
     const section = await BranchSection.findById(sectionId).lean();
     if (!section) {
       return res.status(404).json({ error: 'Форма не найдена' });
@@ -151,7 +151,7 @@ router.post('/:sectionId/submit', rateLimit, resumeUpload.single('resume'), asyn
       status: 'new',
     });
 
-    // ── GDPR: Record consent (best-effort — never block application) ──
+    // ── GDPR: Record consent (best-effort - never block application) ──
     if (consents) {
       try {
         application._consent = await writeConsentLog({

@@ -9,8 +9,8 @@
  * JWT tokens (~200+ chars) were silently truncated/dropped by Telegram.
  *
  * Env vars required:
- *   TENANT_TELEGRAM_BOT_TOKEN   — bot token from @BotFather
- *   TENANT_TELEGRAM_BOT_USERNAME — bot username (e.g., "OurTenantBot")
+ *   TENANT_TELEGRAM_BOT_TOKEN   - bot token from @BotFather
+ *   TENANT_TELEGRAM_BOT_USERNAME - bot username (e.g., "OurTenantBot")
  */
 
 const crypto = require('crypto');
@@ -47,7 +47,7 @@ function getBotUsername() {
  * @returns {string} Safely escaped string for Markdown
  */
 function escapeMd(text) {
-  if (text == null) return '—';
+  if (text == null) return '-';
   const str = String(text).replace(/`/g, '\u02CB'); // replace backticks with modifier letter grave accent
   return '`' + str + '`';
 }
@@ -62,7 +62,7 @@ function escapeMd(text) {
 async function sendTelegramMessage(chatId, text, options = {}) {
   const token = getBotToken();
   if (!token) {
-    console.log('🔔 [Tenant Telegram skipped — TENANT_TELEGRAM_BOT_TOKEN not configured]', text);
+    console.log('🔔 [Tenant Telegram skipped - TENANT_TELEGRAM_BOT_TOKEN not configured]', text);
     return false;
   }
 
@@ -244,7 +244,7 @@ async function sendMenuKeyboard(chatId) {
 
   return sendTelegramMessage(
     chatId,
-    `📊 *${escapeMd(tenantName)} — Dashboard*\n\nSelect a category to view statistics:`,
+    `📊 *${escapeMd(tenantName)} - Dashboard*\n\nSelect a category to view statistics:`,
     { reply_markup: MENU_KEYBOARD }
   );
 }
@@ -488,7 +488,7 @@ async function handleCallbackQuery(query) {
     const categoryLabels = { o: 'Orders', r: 'Reservations', p: 'Partner Requests', j: 'Job Applications' };
     await sendTelegramMessage(
       chatId,
-      `📊 *${categoryLabels[category]} — Select period:*`,
+      `📊 *${categoryLabels[category]} - Select period:*`,
       { reply_markup: PERIOD_KEYBOARD(category) }
     );
     await answerCallbackQuery(callbackQueryId);
@@ -601,7 +601,7 @@ async function handleUpdate(update) {
   // ─── /start <token> (deep link for account linking) ────────────────────────
   const match = text.match(/^\/start(?:@\w+)?\s+(\S+)$/);
   if (!match) {
-    // Unrecognized command or text — show menu if linked, otherwise hint to link
+    // Unrecognized command or text - show menu if linked, otherwise hint to link
     const tenant = await resolveTenantFromChat(chatId);
     if (tenant) {
       await sendMenuKeyboard(chatId);
@@ -808,7 +808,7 @@ async function notifyNewReservation(tenantId, branchId, reservation) {
     `*Guest:* ${escapeMd(reservation.name)}`,
     `*Phone:* ${escapeMd(reservation.phone)}`,
     `*Date:* ${reservation.date} at ${reservation.time}`,
-    `*Guests:* ${reservation.guests || '—'}`,
+    `*Guests:* ${reservation.guests || '-'}`,
     `*Comment:* ${escapeMd(reservation.comment)}`,
     `*Time:* ${new Date(reservation.createdAt).toLocaleString()}`,
     '',
@@ -840,7 +840,7 @@ async function notifyNewJobApplication(tenantId, branchId, application) {
   }
 
   const fields = application.fields || new Map();
-  const getField = (key) => fields.get(key) || '—';
+  const getField = (key) => fields.get(key) || '-';
 
   const text = [
     '💼 *New Job Application*',

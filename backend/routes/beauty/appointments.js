@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
     const { tenantId, name, phone, email, date, time, guests, comment, serviceId, consents } = req.body;
     const appointment = new BeautyAppointment({ tenantId, name, phone, email, date, time, guests, comment, serviceId });
 
-    // ── GDPR: Record consent (best-effort — never block appointment) ──
+    // ── GDPR: Record consent (best-effort - never block appointment) ──
     if (consents) {
       try {
         appointment._consent = await writeConsentLog({

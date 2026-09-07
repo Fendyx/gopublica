@@ -18,7 +18,7 @@ interface Props {
   onLeadUpdated: (lead: Lead) => void;
 }
 
-const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '—';
+const fmt = (d?: string) => d ? new Date(d).toLocaleDateString('en-GB') : '-';
 
 const SortIcon = ({ col, sortBy, sortDir }: { col: SortBy; sortBy: SortBy; sortDir: SortDir }) => {
   if (sortBy !== col) return <ArrowUpDown className="w-3 h-3 opacity-30" />;
@@ -151,17 +151,17 @@ export default function LeadBoard({ leads, loading, filter, onFilterChange, onSe
               >
                 <td className="py-2 px-3 text-center text-xs text-[var(--text-muted)] font-medium">{sorted.length - idx}</td>
                 <td className="py-2 px-3 font-semibold text-[var(--text)]">{lead.name}</td>
-                <td className="py-2 px-3 text-xs text-[var(--text-muted)]">{lead.businessType || '—'}</td>
+                <td className="py-2 px-3 text-xs text-[var(--text-muted)]">{lead.businessType || '-'}</td>
                 <td className="py-2 px-3 text-xs">
                   {lead.city ? (
                     <span className="inline-flex items-center gap-1 text-[var(--text-muted)]"><MapPin size={11} />{lead.city}</span>
-                  ) : <span className="text-[var(--text-muted)]">—</span>}
+                  ) : <span className="text-[var(--text-muted)]">-</span>}
                 </td>
                 <td className="py-2 px-3 text-xs text-[var(--text-muted)]">
                   <span className="inline-flex items-center gap-1"><Phone size={11} />{lead.phone}</span>
                 </td>
                 <td className="py-2 px-3 text-xs font-medium">
-                  {lead.price ? `$${lead.price.toLocaleString()}` : <span className="text-[var(--text-muted)]">—</span>}
+                  {lead.price ? `$${lead.price.toLocaleString()}` : <span className="text-[var(--text-muted)]">-</span>}
                 </td>
                 <td className="py-2 px-3">
                   {lead.priority && (

@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
     });
     console.log('🟢 [RESERVATION] Reservation created (unsaved), _id:', reservation._id);
 
-    // ── GDPR: Record consent (best-effort — never block reservation) ──
+    // ── GDPR: Record consent (best-effort - never block reservation) ──
     if (consents) {
       console.log('🟢 [RESERVATION] Writing consent log...', consents);
       try {

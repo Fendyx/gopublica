@@ -32,7 +32,7 @@ async function mergeActiveEventIntoArticle(article) {
   };
 }
 
-// GET / — list active articles for a tenant (from query param), sorted by publishedAt desc
+// GET / - list active articles for a tenant (from query param), sorted by publishedAt desc
 router.get('/', async (req, res) => {
   try {
     const { tenantId } = req.query;
@@ -81,7 +81,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /:slug — get a single active article by slug and tenant
+// GET /:slug - get a single active article by slug and tenant
 router.get('/:slug', async (req, res) => {
   try {
     console.log('BACKEND GET ARTICLE:', { slug: req.params.slug, queryTenantId: req.query.tenantId });

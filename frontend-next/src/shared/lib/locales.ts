@@ -1,5 +1,5 @@
 /**
- * Global locale catalog — single source of truth for all supported languages.
+ * Global locale catalog - single source of truth for all supported languages.
  *
  * Keep in sync with `backend/config/locales.js` and
  * `gopublica-core/src/shared/lib/locales.ts`.
