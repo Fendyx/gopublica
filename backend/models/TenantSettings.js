@@ -178,6 +178,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     gallery: { type: Boolean, default: null },
     news: { type: Boolean, default: null },
     jobs: { type: Boolean, default: null },
+    team: { type: Boolean, default: null },
   },
 
   // ─── НОВОЕ: Тема (вместо site.config.ts) ────────────────────────────────────

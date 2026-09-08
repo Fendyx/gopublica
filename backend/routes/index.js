@@ -62,6 +62,10 @@ function registerRoutes(app) {
   app.use('/api/saas/branch-sections', saasBranchSectionsRoutes);
   app.use('/api/saas/custom-services', require('./saas/customServices'));
 
+  // Staff / Team Management (SaaS admin)
+  app.use('/api/saas/staff', require('./saas/staff'));
+  app.use('/api/saas/staff-shifts', require('./saas/staffShifts'));
+
   // Dynamic form submissions (SaaS admin)
   app.use('/api/saas/forms/submissions', require('./saas/formSubmissions'));
   app.use('/api/saas/articles', require('../middleware/auth/tenant'), require('./saas/articles'));
