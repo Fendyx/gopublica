@@ -107,12 +107,27 @@ const branchSchema = new mongoose.Schema({
       required: true,
       trim: true,
     },
+    titleI18n: {
+      type: Map,
+      of: String,
+      default: {},
+    },
     slug: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
       match: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+    },
+    description: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    descriptionI18n: {
+      type: Map,
+      of: String,
+      default: {},
     },
     isActive: {
       type: Boolean,

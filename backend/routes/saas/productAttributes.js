@@ -3,19 +3,7 @@ const router = express.Router();
 const ProductAttribute = require('../../models/ecommerce/ProductAttribute');
 const MenuItem = require('../../models/food/MenuItem');
 const authTenant = require('../../middleware/auth/tenant');
-
-// ── Helper: generate slug from name ──
-function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/[\s_]+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-\-+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-}
+const slugify = require('../../utils/slugify');
 
 // ── PUBLIC: List attributes (filter by type, tenantId) ──
 router.get('/', async (req, res) => {

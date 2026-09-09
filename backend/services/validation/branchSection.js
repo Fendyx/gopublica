@@ -32,6 +32,12 @@
 
 const ALLOWED_SIDE_CONTENT_TYPES = ['none', 'map', 'text'];
 const ALLOWED_CHECKOUT_FLOWS = ['inline', 'redirect'];
+const ALLOWED_BOOKING_MODES = ['reservation', 'slot_booking'];
+const ALLOWED_SLOT_INTERVALS = [15, 30, 60, 90, 120, 180];
+const DEFAULT_SLOT_START = '09:00';
+const DEFAULT_SLOT_END = '22:00';
+const DEFAULT_SLOT_INTERVAL = 60;
+const DEFAULT_SLOT_CAPACITY = 10;
 
 const ALLOWED_DESKTOP_ITEMS_PER_ROW = [3, 4, 5];
 const DEFAULT_DESKTOP_ITEMS_PER_ROW = 3;
@@ -41,6 +47,9 @@ const ALLOWED_TEXT_ALIGNMENTS = ['left', 'center', 'right'];
 const DEFAULT_TEXT_ALIGNMENT = 'center';
 const DEFAULT_MAX_SLIDES = 10;
 const ALLOWED_HERO_PRESETS = ['classic_with_buttons', 'banner_link', 'gallery_slider'];
+const ALLOWED_HERO_CTA_VARIANTS = ['filled', 'outline', 'ghost', 'soft', 'borderless', 'underline'];
+const ALLOWED_GRADIENT_DIRECTIONS = ['to-r', 'to-br', 'to-b', 'to-bl'];
+const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/;
 
 // ─── Dynamic Form (reuses JobFormSettings field contract) ──────────────
 const ALLOWED_FIELD_TYPES = [
@@ -103,6 +112,48 @@ function validateBookingSettings(settings) {
   // customText - coerce to string
   const customText = coerceString(settings.customText);
 
+  // ── Slot booking mode fields ──
+  let bookingMode = settings.bookingMode;
+  if (bookingMode === undefined || bookingMode === null || bookingMode === '') {
+    bookingMode = 'reservation';
+  } else if (typeof bookingMode !== 'string' || !ALLOWED_BOOKING_MODES.includes(bookingMode)) {
+    errors.push(`bookingMode must be one of: ${ALLOWED_BOOKING_MODES.join(', ')}`);
+  }
+
+  let slotStartTime = coerceString(settings.slotStartTime) || DEFAULT_SLOT_START;
+  let slotEndTime = coerceString(settings.slotEndTime) || DEFAULT_SLOT_END;
+  let slotIntervalMinutes = settings.slotIntervalMinutes;
+  let slotCapacity = settings.slotCapacity;
+
+  if (bookingMode === 'slot_booking') {
+    // Validate time format (HH:mm)
+    const timeRe = /^\d{2}:\d{2}$/;
+    if (!timeRe.test(slotStartTime)) {
+      errors.push('slotStartTime must be in HH:mm format');
+    }
+    if (!timeRe.test(slotEndTime)) {
+      errors.push('slotEndTime must be in HH:mm format');
+    }
+
+    if (slotIntervalMinutes === undefined || slotIntervalMinutes === null) {
+      slotIntervalMinutes = DEFAULT_SLOT_INTERVAL;
+    } else if (typeof slotIntervalMinutes !== 'number' || !ALLOWED_SLOT_INTERVALS.includes(slotIntervalMinutes)) {
+      errors.push(`slotIntervalMinutes must be one of: ${ALLOWED_SLOT_INTERVALS.join(', ')}`);
+    }
+
+    if (slotCapacity === undefined || slotCapacity === null) {
+      slotCapacity = DEFAULT_SLOT_CAPACITY;
+    } else if (typeof slotCapacity !== 'number' || !Number.isInteger(slotCapacity) || slotCapacity < 1 || slotCapacity > 999) {
+      errors.push('slotCapacity must be an integer between 1 and 999');
+    }
+  } else {
+    // Reset slot fields to defaults for non-slot mode
+    slotStartTime = DEFAULT_SLOT_START;
+    slotEndTime = DEFAULT_SLOT_END;
+    slotIntervalMinutes = DEFAULT_SLOT_INTERVAL;
+    slotCapacity = DEFAULT_SLOT_CAPACITY;
+  }
+
   if (errors.length > 0) {
     return { ok: false, errors, value: null };
   }
@@ -115,6 +166,11 @@ function validateBookingSettings(settings) {
       checkoutFlow,
       address,
       customText,
+      bookingMode,
+      slotStartTime,
+      slotEndTime,
+      slotIntervalMinutes,
+      slotCapacity,
     },
   };
 }
@@ -300,6 +356,59 @@ function validateHeroSettings(settings) {
   } else {
     delete value.sliderPauseOnInteraction;
   }
+
+  // overlayOpacity - optional number 0-100
+  if (settings.overlayOpacity !== undefined && settings.overlayOpacity !== null) {
+    const op = Number(settings.overlayOpacity);
+    if (Number.isNaN(op) || op < 0 || op > 100) {
+      errors.push('overlayOpacity must be a number between 0 and 100');
+    } else {
+      value.overlayOpacity = op;
+    }
+  }
+
+  // Validate CTA fields (primaryCta, secondaryCta)
+  const validateCta = (cta, ctaLabel) => {
+    if (!cta || typeof cta !== 'object') return;
+    // color - optional hex string
+    if (cta.color !== undefined && cta.color !== null && cta.color !== '') {
+      if (typeof cta.color !== 'string' || !HEX_COLOR_RE.test(cta.color)) {
+        errors.push(`${ctaLabel}.color must be a valid hex color (e.g. #ff0000)`);
+      }
+    }
+    // textColor - optional hex string
+    if (cta.textColor !== undefined && cta.textColor !== null && cta.textColor !== '') {
+      if (typeof cta.textColor !== 'string' || !HEX_COLOR_RE.test(cta.textColor)) {
+        errors.push(`${ctaLabel}.textColor must be a valid hex color (e.g. #ffffff)`);
+      }
+    }
+    // variant - must be one of allowed values
+    if (cta.variant !== undefined && cta.variant !== null && cta.variant !== '') {
+      if (typeof cta.variant !== 'string' || !ALLOWED_HERO_CTA_VARIANTS.includes(cta.variant)) {
+        errors.push(`${ctaLabel}.variant must be one of: ${ALLOWED_HERO_CTA_VARIANTS.join(', ')}`);
+      }
+    }
+    // gradientFrom - optional hex string
+    if (cta.gradientFrom !== undefined && cta.gradientFrom !== null && cta.gradientFrom !== '') {
+      if (typeof cta.gradientFrom !== 'string' || !HEX_COLOR_RE.test(cta.gradientFrom)) {
+        errors.push(`${ctaLabel}.gradientFrom must be a valid hex color`);
+      }
+    }
+    // gradientTo - optional hex string
+    if (cta.gradientTo !== undefined && cta.gradientTo !== null && cta.gradientTo !== '') {
+      if (typeof cta.gradientTo !== 'string' || !HEX_COLOR_RE.test(cta.gradientTo)) {
+        errors.push(`${ctaLabel}.gradientTo must be a valid hex color`);
+      }
+    }
+    // gradientDirection - must be one of allowed values
+    if (cta.gradientDirection !== undefined && cta.gradientDirection !== null && cta.gradientDirection !== '') {
+      if (typeof cta.gradientDirection !== 'string' || !ALLOWED_GRADIENT_DIRECTIONS.includes(cta.gradientDirection)) {
+        errors.push(`${ctaLabel}.gradientDirection must be one of: ${ALLOWED_GRADIENT_DIRECTIONS.join(', ')}`);
+      }
+    }
+  };
+  validateCta(settings.primaryCta, 'primaryCta');
+  validateCta(settings.secondaryCta, 'secondaryCta');
 
   if (errors.length > 0) {
     return { ok: false, errors, value: null };

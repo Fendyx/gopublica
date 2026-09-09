@@ -39,6 +39,7 @@ const categoryTranslationSchema = new mongoose.Schema({
 });
 
 categoryTranslationSchema.index({ key: 1, tenantId: 1 }, { unique: true });
+categoryTranslationSchema.index({ tenantId: 1, niche: 1, order: 1 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../../services/content/modelHooks');

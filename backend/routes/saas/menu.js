@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const MenuItem = require('../../models/food/MenuItem');
+const CategoryTranslation = require('../../models/food/CategoryTranslation');
 const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/auth/tenant');
@@ -15,7 +16,7 @@ function isValidObjectId(str) {
 // Публичный роут: получение меню
 router.get('/', async (req, res) => {
   try {
-    const { tenantId, branchId, branchSlug, status, attributeRefType, attributeRefId } = req.query;
+    const { tenantId, branchId, branchSlug, status, attributeRefType, attributeRefId, includeCategories, niche } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
 
     let resolvedBranchId = branchId;
@@ -58,6 +59,19 @@ router.get('/', async (req, res) => {
     }
 
     const items = await MenuItem.find(query).sort({ categoryKey: 1, order: 1 }).lean();
+
+    // Optional: include categories in the same response to avoid a separate round-trip
+    if (includeCategories === 'true') {
+      const catNiche = niche || 'food';
+      const tenantCats = await CategoryTranslation.find({ tenantId, niche: catNiche })
+        .sort({ order: 1, name: 1 }).lean();
+      const tenantKeys = tenantCats.map(c => c.key);
+      const globalCats = await CategoryTranslation.find({
+        tenantId: null, niche: catNiche, key: { $nin: tenantKeys }
+      }).sort({ order: 1, name: 1 }).lean();
+      return res.json({ items, categories: [...tenantCats, ...globalCats] });
+    }
+
     res.json(items);
   } catch (err) {
     res.status(500).json({ error: err.message });

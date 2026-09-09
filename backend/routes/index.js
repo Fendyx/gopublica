@@ -50,6 +50,7 @@ function registerRoutes(app) {
   app.use('/api/saas/categories', require('./saas/categories'));
   app.use('/api/saas/product-attributes', require('./saas/productAttributes'));
   app.use('/api/saas/reservations', require('./saas/reservations'));
+  app.use('/api/saas/slot-bookings', require('./saas/slotBookings'));
   app.use('/api/saas/appointments', require('./saas/appointments'));
   app.use('/api/saas/orders', require('./saas/orders'));
   app.use('/api/saas/gallery', require('./saas/gallery'));
@@ -93,6 +94,7 @@ function registerRoutes(app) {
   app.use('/api/platform/products', require('./platform/products'));
   app.use('/api/platform/orders', require('./platform/orders'));
   app.use('/api/platform/news', require('./platform/news'));
+  app.use('/api/platform/site-news', require('./platform/goPublicaNews'));
 
   // Beauty (legacy standalone)
   app.use('/api/beauty/services', require('./beauty/services'));
@@ -137,6 +139,9 @@ function registerRoutes(app) {
 
   // Branch Sections (public)
   app.use('/api/public/branch-sections', publicBranchSectionsRoutes);
+
+  // Slot Bookings (public)
+  app.use('/api/public/slot-bookings', require('./public/slotBookings'));
 
   // Dynamic form submissions (public)
   app.use('/api/public/forms', require('./public/formSubmissions'));

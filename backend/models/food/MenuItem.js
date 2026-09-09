@@ -12,8 +12,8 @@ const variantSchema = new mongoose.Schema({
 
 const menuItemSchema = new mongoose.Schema(
   {
-    tenantId: { type: String, required: true, index: true },
-    branchId: { type: String, default: null, index: true },
+    tenantId: { type: String, required: true },
+    branchId: { type: String, default: null },
     baseItemId: { type: String, default: null },
     name: { type: String, required: true },
     description: { type: String, default: "" },
@@ -96,6 +96,9 @@ const menuItemSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+
+// ── Compound indexes for public menu queries ──────────────────────────────────
+menuItemSchema.index({ tenantId: 1, branchId: 1, categoryKey: 1, order: 1 });
 
 // ─── Revalidation Hooks (MUST be registered BEFORE mongoose.model() compiles) ──
 const { registerRevalidationHooks } = require('../../services/content/modelHooks');

@@ -2,17 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Branch = require('../../models/Branch');
 const authTenant = require('../../middleware/auth/tenant');
-
-/**
- * Slugify a string: lowercase, replace non-alphanumeric runs with hyphens,
- * trim leading/trailing hyphens.
- */
-function slugify(str) {
-  return String(str || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+const slugify = require('../../utils/slugify');
 
 /**
  * Generate a unique slug for a branch within a tenant.
@@ -297,7 +287,10 @@ router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
     branch.customPages = branch.customPages || [];
     branch.customPages.push({
       title: title.trim(),
+      titleI18n: req.body.titleI18n || {},
       slug: baseSlug,
+      description: req.body.description || '',
+      descriptionI18n: req.body.descriptionI18n || {},
       isActive: true,
       createdAt: new Date(),
     });
@@ -319,10 +312,19 @@ router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
     const cp = (branch.customPages || []).find(p => p.slug === req.params.slug);
     if (!cp) return res.status(404).json({ error: 'Custom page not found' });
 
-    const { title, isActive, slug: newSlug } = req.body;
+    const { title, titleI18n, description, descriptionI18n, isActive, slug: newSlug } = req.body;
 
     if (title !== undefined) {
       cp.title = title.trim();
+    }
+    if (titleI18n !== undefined) {
+      cp.titleI18n = titleI18n;
+    }
+    if (description !== undefined) {
+      cp.description = description;
+    }
+    if (descriptionI18n !== undefined) {
+      cp.descriptionI18n = descriptionI18n;
     }
     if (isActive !== undefined) {
       cp.isActive = isActive;
