@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     if (!tenant) return res.status(404).json({ error: 'Tenant not found' });
     if (!enforceModuleAccess(tenant, 'orders', res)) return;
 
-    const { status, branchId, branchSlug, from, to } = req.query;
+    const { status, branchId, branchSlug, from, to, page = '1', limit = '50' } = req.query;
     const filter = { tenantId: req.tenantId };
     if (status) filter.status = status;
 
@@ -50,11 +50,21 @@ router.get('/', async (req, res) => {
       if (to) filter.createdAt.$lte = new Date(to);
     }
 
-    const orders = await Order.find(filter)
-      .populate('customerId', 'name email phone')
-      .sort({ createdAt: -1 })
-      .lean();
-    res.json(orders);
+    const pageNum = Math.max(1, parseInt(page, 10) || 1);
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 50));
+    const skip = (pageNum - 1) * limitNum;
+
+    const [orders, total] = await Promise.all([
+      Order.find(filter)
+        .populate('customerId', 'name email phone')
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limitNum)
+        .lean(),
+      Order.countDocuments(filter),
+    ]);
+
+    res.json({ orders, total, page: pageNum, limit: limitNum });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

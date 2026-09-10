@@ -321,19 +321,30 @@ router.get('/:sectionId/items', checkBranch, async (req, res) => {
 router.post('/:sectionId/items', checkBranch, async (req, res) => {
   try {
     const { sectionId } = req.params;
-    const { slug, media, order = 0, translations = {}, body = '', gallery = [], attributes = [] } = req.body;
+    const { slug: rawSlug, media, order = 0, translations = {}, body = '', bodyI18n = {}, gallery = [], attributes = [] } = req.body;
 
     const section = await BranchSection.findById(sectionId);
     if (!section) return res.status(404).json({ error: 'Section not found' });
     if (section.tenantId !== req.tenantId) return res.status(403).json({ error: 'Access denied' });
 
-    // Only entity_carousel and feature_carousel support items
-    if (!['entity_carousel', 'feature_carousel'].includes(section.type)) {
+    // Only certain section types support items
+    if (!['entity_carousel', 'feature_carousel', 'accordion', 'testimonials', 'before_after', 'logo_ticker'].includes(section.type)) {
       return res.status(400).json({ error: 'This section type does not support items' });
     }
 
-    if (!slug) return res.status(400).json({ error: 'slug is required' });
-    if (!media || !media.type || !media.url) return res.status(400).json({ error: 'media (type, url) is required' });
+    // Auto-generate slug if not provided (for new section types that don't use slugs)
+    let slug = rawSlug;
+    if (!slug) {
+      slug = `item-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    }
+
+    // Dynamic media validation based on section type
+    const needsMedia = ['entity_carousel', 'feature_carousel', 'before_after', 'logo_ticker'].includes(section.type);
+    if (needsMedia && (!media || !media.type || !media.url)) {
+      return res.status(400).json({ error: 'media (type, url) is required for this section type' });
+    }
+    // For accordion: media not needed at all
+    // For testimonials: media (avatar) is optional
 
     // Check slug uniqueness per tenant
     const existing = await BranchSectionItem.findOne({ tenantId: req.tenantId, slug });
@@ -344,10 +355,11 @@ router.post('/:sectionId/items', checkBranch, async (req, res) => {
       branchId: section.branchId,
       sectionId,
       slug,
-      media,
+      media: media || undefined,
       order,
       translations,
       body,
+      bodyI18n,
       gallery,
       attributes,
     });
@@ -363,7 +375,7 @@ router.post('/:sectionId/items', checkBranch, async (req, res) => {
 router.put('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
   try {
     const { sectionId, itemId } = req.params;
-    const { slug, media, order, translations, isActive, body, gallery, attributes } = req.body;
+    const { slug, media, order, translations, isActive, body, bodyI18n, gallery, attributes } = req.body;
 
     const item = await BranchSectionItem.findById(itemId);
     if (!item) return res.status(404).json({ error: 'Item not found' });
@@ -383,6 +395,7 @@ router.put('/:sectionId/items/:itemId', checkBranch, async (req, res) => {
     if (translations !== undefined) item.translations = translations;
     if (isActive !== undefined) item.isActive = isActive;
     if (body !== undefined) item.body = body;
+    if (bodyI18n !== undefined) item.bodyI18n = bodyI18n;
     if (gallery !== undefined) item.gallery = gallery;
     if (attributes !== undefined) item.attributes = attributes;
 

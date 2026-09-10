@@ -291,6 +291,11 @@ router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
       slug: baseSlug,
       description: req.body.description || '',
       descriptionI18n: req.body.descriptionI18n || {},
+      seoTitle: req.body.seoTitle || '',
+      seoTitleI18n: req.body.seoTitleI18n || {},
+      seoDescription: req.body.seoDescription || '',
+      seoDescriptionI18n: req.body.seoDescriptionI18n || {},
+      ogImage: req.body.ogImage || '',
       isActive: true,
       createdAt: new Date(),
     });
@@ -312,7 +317,7 @@ router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
     const cp = (branch.customPages || []).find(p => p.slug === req.params.slug);
     if (!cp) return res.status(404).json({ error: 'Custom page not found' });
 
-    const { title, titleI18n, description, descriptionI18n, isActive, slug: newSlug } = req.body;
+    const { title, titleI18n, description, descriptionI18n, seoTitle, seoTitleI18n, seoDescription, seoDescriptionI18n, ogImage, isActive, slug: newSlug } = req.body;
 
     if (title !== undefined) {
       cp.title = title.trim();
@@ -325,6 +330,21 @@ router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
     }
     if (descriptionI18n !== undefined) {
       cp.descriptionI18n = descriptionI18n;
+    }
+    if (seoTitle !== undefined) {
+      cp.seoTitle = seoTitle;
+    }
+    if (seoTitleI18n !== undefined) {
+      cp.seoTitleI18n = seoTitleI18n;
+    }
+    if (seoDescription !== undefined) {
+      cp.seoDescription = seoDescription;
+    }
+    if (seoDescriptionI18n !== undefined) {
+      cp.seoDescriptionI18n = seoDescriptionI18n;
+    }
+    if (ogImage !== undefined) {
+      cp.ogImage = ogImage;
     }
     if (isActive !== undefined) {
       cp.isActive = isActive;

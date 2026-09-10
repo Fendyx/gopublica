@@ -153,6 +153,10 @@ const branchSectionSchema = new mongoose.Schema(
         'contact_block',
         'category_list',
         'rich_text',
+        'accordion',
+        'testimonials',
+        'before_after',
+        'logo_ticker',
         // System section types (auto-created, not manually creatable)
         'system_catalog',
         'system_menu',

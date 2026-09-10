@@ -48,8 +48,150 @@ const DEFAULT_TEXT_ALIGNMENT = 'center';
 const DEFAULT_MAX_SLIDES = 10;
 const ALLOWED_HERO_PRESETS = ['classic_with_buttons', 'banner_link', 'gallery_slider'];
 const ALLOWED_HERO_CTA_VARIANTS = ['filled', 'outline', 'ghost', 'soft', 'borderless', 'underline'];
+
+// Testimonials defaults
+const DEFAULT_TESTIMONIALS_AUTOPLAY_DELAY = 5000;
+const MIN_TESTIMONIALS_AUTOPLAY_DELAY = 1000;
+const MAX_TESTIMONIALS_AUTOPLAY_DELAY = 15000;
+const ALLOWED_CARD_STYLES = ['card', 'minimal', 'quote'];
+const DEFAULT_CARD_STYLE = 'card';
+
+// Logo Ticker defaults
+const DEFAULT_LOGO_TICKER_SPEED = 30;
+const MIN_LOGO_TICKER_SPEED = 10;
+const MAX_LOGO_TICKER_SPEED = 100;
 const ALLOWED_GRADIENT_DIRECTIONS = ['to-r', 'to-br', 'to-b', 'to-bl'];
 const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/;
+
+// ─── Section Background ────────────────────────────────────────────────
+const ALLOWED_BACKGROUND_TYPES = ['none', 'color', 'gradient', 'image', 'video'];
+const ALLOWED_BG_GRADIENT_DIRECTIONS = ['to-r', 'to-br', 'to-b', 'to-bl', 'to-l'];
+const ALLOWED_BG_MEDIA_FITS = ['cover', 'contain'];
+const DEFAULT_BG_OVERLAY_COLOR = '#000000';
+
+/**
+ * Validate and sanitize a SectionBackground object.
+ *
+ * @param {object} bg - the raw background payload from settings.background
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateSectionBackground(bg) {
+  if (!bg || typeof bg !== 'object' || Array.isArray(bg)) {
+    return { ok: false, errors: ['background must be a plain object'], value: null };
+  }
+
+  const errors = [];
+  const result = {};
+
+  // type — required, must be one of allowed values
+  let type = bg.type;
+  if (type === undefined || type === null || type === '') {
+    type = 'none';
+  } else if (typeof type !== 'string' || !ALLOWED_BACKGROUND_TYPES.includes(type)) {
+    errors.push(`background.type must be one of: ${ALLOWED_BACKGROUND_TYPES.join(', ')}`);
+  }
+  result.type = type;
+
+  if (type === 'none') {
+    return errors.length > 0
+      ? { ok: false, errors, value: null }
+      : { ok: true, errors: [], value: result };
+  }
+
+  // color — required when type='color', must be valid hex
+  if (type === 'color') {
+    const color = typeof bg.color === 'string' ? bg.color.trim() : '';
+    if (!color || !HEX_COLOR_RE.test(color)) {
+      errors.push('background.color must be a valid hex color (e.g. #ff0000)');
+    } else {
+      result.color = color;
+    }
+  }
+
+  // gradient — required when type='gradient'
+  if (type === 'gradient') {
+    if (!bg.gradient || typeof bg.gradient !== 'object' || Array.isArray(bg.gradient)) {
+      errors.push('background.gradient must be an object with from, to, direction');
+    } else {
+      const from = typeof bg.gradient.from === 'string' ? bg.gradient.from.trim() : '';
+      const to = typeof bg.gradient.to === 'string' ? bg.gradient.to.trim() : '';
+      const direction = bg.gradient.direction;
+
+      if (!from || !HEX_COLOR_RE.test(from)) {
+        errors.push('background.gradient.from must be a valid hex color');
+      }
+      if (!to || !HEX_COLOR_RE.test(to)) {
+        errors.push('background.gradient.to must be a valid hex color');
+      }
+      if (!direction || typeof direction !== 'string' || !ALLOWED_BG_GRADIENT_DIRECTIONS.includes(direction)) {
+        errors.push(`background.gradient.direction must be one of: ${ALLOWED_BG_GRADIENT_DIRECTIONS.join(', ')}`);
+      }
+
+      if (errors.length === 0) {
+        result.gradient = { from, to, direction };
+      }
+    }
+  }
+
+  // imageUrl — required when type='image'
+  if (type === 'image') {
+    const imageUrl = typeof bg.imageUrl === 'string' ? bg.imageUrl.trim() : '';
+    if (!imageUrl) {
+      errors.push('background.imageUrl is required when type is "image"');
+    } else {
+      result.imageUrl = imageUrl;
+    }
+  }
+
+  // videoUrl — required when type='video'
+  if (type === 'video') {
+    const videoUrl = typeof bg.videoUrl === 'string' ? bg.videoUrl.trim() : '';
+    if (!videoUrl) {
+      errors.push('background.videoUrl is required when type is "video"');
+    } else {
+      result.videoUrl = videoUrl;
+    }
+  }
+
+  // mediaFit — optional, default 'cover'
+  let mediaFit = bg.mediaFit;
+  if (mediaFit !== undefined && mediaFit !== null && mediaFit !== '') {
+    if (typeof mediaFit !== 'string' || !ALLOWED_BG_MEDIA_FITS.includes(mediaFit)) {
+      errors.push(`background.mediaFit must be one of: ${ALLOWED_BG_MEDIA_FITS.join(', ')}`);
+    } else {
+      result.mediaFit = mediaFit;
+    }
+  }
+
+  // overlayOpacity — optional number 0–100
+  if (bg.overlayOpacity !== undefined && bg.overlayOpacity !== null) {
+    const op = Number(bg.overlayOpacity);
+    if (Number.isNaN(op) || op < 0 || op > 100) {
+      errors.push('background.overlayOpacity must be a number between 0 and 100');
+    } else {
+      result.overlayOpacity = op;
+    }
+  }
+
+  // overlayColor — optional hex, default '#000000'
+  if (bg.overlayColor !== undefined && bg.overlayColor !== null && bg.overlayColor !== '') {
+    const oc = typeof bg.overlayColor === 'string' ? bg.overlayColor.trim() : '';
+    if (!oc || !HEX_COLOR_RE.test(oc)) {
+      errors.push('background.overlayColor must be a valid hex color');
+    } else {
+      result.overlayColor = oc;
+    }
+  } else if (result.overlayOpacity !== undefined && result.overlayOpacity > 0) {
+    // Set default when overlay is used but no color specified
+    result.overlayColor = DEFAULT_BG_OVERLAY_COLOR;
+  }
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value: result };
+}
 
 // ─── Dynamic Form (reuses JobFormSettings field contract) ──────────────
 const ALLOWED_FIELD_TYPES = [
@@ -505,34 +647,72 @@ function validateSectionSettings(type, settings) {
     return { ok: false, errors: ['settings must be a plain object'], value: null };
   }
 
+  // Validate common background field (applies to all section types)
+  let validatedBg = undefined;
+  if (settings.background) {
+    const bgResult = validateSectionBackground(settings.background);
+    if (!bgResult.ok) {
+      return bgResult;
+    }
+    validatedBg = bgResult.value;
+  }
+
+  let result;
   switch (type) {
     case 'booking':
-      return validateBookingSettings(settings);
+      result = validateBookingSettings(settings);
+      break;
 
     case 'entity_carousel':
-      return validateCarouselSettings(settings, true);
+      result = validateCarouselSettings(settings, true);
+      break;
 
     case 'feature_carousel':
-      return validateCarouselSettings(settings, false);
+      result = validateCarouselSettings(settings, false);
+      break;
 
     case 'hero':
     case 'hero_video':
-      return validateHeroSettings(settings);
+      result = validateHeroSettings(settings);
+      break;
 
     case 'article_grid':
-      return validateArticleGridSettings(settings);
+      result = validateArticleGridSettings(settings);
+      break;
 
     case 'dynamic_form':
-      return validateDynamicFormSettings(settings);
+      result = validateDynamicFormSettings(settings);
+      break;
 
     case 'rich_text':
-      return validateRichTextSettings(settings);
+      result = validateRichTextSettings(settings);
+      break;
+
+    case 'testimonials':
+      result = validateTestimonialsSettings(settings);
+      break;
+
+    case 'before_after':
+      result = validateBeforeAfterSettings(settings);
+      break;
+
+    case 'logo_ticker':
+      result = validateLogoTickerSettings(settings);
+      break;
 
     default:
       // For all other section types we currently have no enforced shape.
       // Return the settings as-is (shallow clone) to avoid mutating req.body.
-      return { ok: true, errors: [], value: { ...settings } };
+      result = { ok: true, errors: [], value: { ...settings } };
+      break;
   }
+
+  // Attach validated background to the result if present
+  if (result.ok && validatedBg !== undefined && result.value) {
+    result.value.background = validatedBg;
+  }
+
+  return result;
 }
 
 /**
@@ -657,7 +837,7 @@ function validateDynamicFormSettings(settings) {
   return { ok: true, errors: [], value };
 }
 
-module.exports = { validateSectionSettings, validateDynamicFormSettings, coerceString };
+module.exports = { validateSectionSettings, validateSectionBackground, validateDynamicFormSettings, coerceString };
 
 /**
  * Validate and sanitize settings for a 'rich_text' section type.
@@ -683,6 +863,110 @@ function validateRichTextSettings(settings) {
     }
     value.contentI18n = sanitized;
   }
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value };
+}
+
+/**
+ * Validate and sanitize settings for a 'testimonials' section type.
+ *
+ * Enforces:
+ *   - autoplay must be a boolean (default: true)
+ *   - autoplayDelay must be a number within range (default: 5000)
+ *   - showRating must be a boolean (default: true)
+ *   - cardStyle must be one of: 'card', 'minimal', 'quote' (default: 'card')
+ *
+ * @param {object} settings - the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateTestimonialsSettings(settings) {
+  const errors = [];
+  const value = { ...settings };
+
+  // autoplay - boolean, default true
+  value.autoplay = settings.autoplay !== undefined ? Boolean(settings.autoplay) : true;
+
+  // autoplayDelay - number, clamped to range
+  let autoplayDelay = settings.autoplayDelay;
+  if (autoplayDelay === undefined || autoplayDelay === null || autoplayDelay === '') {
+    autoplayDelay = DEFAULT_TESTIMONIALS_AUTOPLAY_DELAY;
+  } else if (typeof autoplayDelay !== 'number' || !Number.isFinite(autoplayDelay)) {
+    errors.push('autoplayDelay must be a number');
+    autoplayDelay = DEFAULT_TESTIMONIALS_AUTOPLAY_DELAY;
+  } else {
+    autoplayDelay = Math.max(MIN_TESTIMONIALS_AUTOPLAY_DELAY, Math.min(MAX_TESTIMONIALS_AUTOPLAY_DELAY, Math.round(autoplayDelay)));
+  }
+  value.autoplayDelay = autoplayDelay;
+
+  // showRating - boolean, default true
+  value.showRating = settings.showRating !== undefined ? Boolean(settings.showRating) : true;
+
+  // cardStyle - must be one of allowed values
+  let cardStyle = settings.cardStyle;
+  if (cardStyle === undefined || cardStyle === null || cardStyle === '') {
+    cardStyle = DEFAULT_CARD_STYLE;
+  } else if (typeof cardStyle !== 'string' || !ALLOWED_CARD_STYLES.includes(cardStyle)) {
+    errors.push(`cardStyle must be one of: ${ALLOWED_CARD_STYLES.join(', ')}`);
+    cardStyle = DEFAULT_CARD_STYLE;
+  }
+  value.cardStyle = cardStyle;
+
+  if (errors.length > 0) {
+    return { ok: false, errors, value: null };
+  }
+
+  return { ok: true, errors: [], value };
+}
+
+/**
+ * Validate and sanitize settings for a 'before_after' section type.
+ *
+ * Minimal validation — passthrough for background and layout.
+ *
+ * @param {object} settings - the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateBeforeAfterSettings(settings) {
+  // Passthrough — no strict shape enforcement needed yet.
+  return { ok: true, errors: [], value: { ...settings } };
+}
+
+/**
+ * Validate and sanitize settings for a 'logo_ticker' section type.
+ *
+ * Enforces:
+ *   - speed must be a number within range (default: 30)
+ *   - pauseOnHover must be a boolean (default: true)
+ *   - grayscaleOnIdle must be a boolean (default: false)
+ *
+ * @param {object} settings - the raw settings payload from req.body
+ * @returns {{ ok: boolean, errors: string[], value: object|null }}
+ */
+function validateLogoTickerSettings(settings) {
+  const errors = [];
+  const value = { ...settings };
+
+  // speed - number, clamped to range
+  let speed = settings.speed;
+  if (speed === undefined || speed === null || speed === '') {
+    speed = DEFAULT_LOGO_TICKER_SPEED;
+  } else if (typeof speed !== 'number' || !Number.isFinite(speed)) {
+    errors.push('speed must be a number');
+    speed = DEFAULT_LOGO_TICKER_SPEED;
+  } else {
+    speed = Math.max(MIN_LOGO_TICKER_SPEED, Math.min(MAX_LOGO_TICKER_SPEED, Math.round(speed)));
+  }
+  value.speed = speed;
+
+  // pauseOnHover - boolean, default true
+  value.pauseOnHover = settings.pauseOnHover !== undefined ? Boolean(settings.pauseOnHover) : true;
+
+  // grayscaleOnIdle - boolean, default false
+  value.grayscaleOnIdle = settings.grayscaleOnIdle !== undefined ? Boolean(settings.grayscaleOnIdle) : false;
 
   if (errors.length > 0) {
     return { ok: false, errors, value: null };

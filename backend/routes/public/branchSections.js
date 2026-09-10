@@ -52,7 +52,7 @@ router.get('/', async (req, res) => {
 
     // ── Fetch all carousel items in a single $in query (fixes N+1) ──
     const carouselSectionIds = sections
-      .filter(s => ['entity_carousel', 'feature_carousel'].includes(s.type))
+      .filter(s => ['entity_carousel', 'feature_carousel', 'accordion', 'testimonials', 'before_after', 'logo_ticker'].includes(s.type))
       .map(s => s._id);
 
     const allItems = carouselSectionIds.length > 0

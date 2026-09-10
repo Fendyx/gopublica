@@ -129,6 +129,31 @@ const branchSchema = new mongoose.Schema({
       of: String,
       default: {},
     },
+    seoTitle: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    seoTitleI18n: {
+      type: Map,
+      of: String,
+      default: {},
+    },
+    seoDescription: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    seoDescriptionI18n: {
+      type: Map,
+      of: String,
+      default: {},
+    },
+    ogImage: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     isActive: {
       type: Boolean,
       default: true,

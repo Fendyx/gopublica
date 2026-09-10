@@ -42,11 +42,9 @@ const branchSectionItemSchema = new mongoose.Schema(
       type: {
         type: String,
         enum: ['video', 'image'],
-        required: true,
       },
       url: {
         type: String,
-        required: true,
       },
     },
     order: {
@@ -60,6 +58,10 @@ const branchSectionItemSchema = new mongoose.Schema(
     body: {
       type: String,
       default: '',
+    },
+    bodyI18n: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {},
     },
     gallery: [
       {

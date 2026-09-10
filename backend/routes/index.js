@@ -51,7 +51,6 @@ function registerRoutes(app) {
   app.use('/api/saas/product-attributes', require('./saas/productAttributes'));
   app.use('/api/saas/reservations', require('./saas/reservations'));
   app.use('/api/saas/slot-bookings', require('./saas/slotBookings'));
-  app.use('/api/saas/appointments', require('./saas/appointments'));
   app.use('/api/saas/orders', require('./saas/orders'));
   app.use('/api/saas/gallery', require('./saas/gallery'));
   app.use('/api/saas/branches', require('./saas/branches'));
@@ -95,12 +94,6 @@ function registerRoutes(app) {
   app.use('/api/platform/orders', require('./platform/orders'));
   app.use('/api/platform/news', require('./platform/news'));
   app.use('/api/platform/site-news', require('./platform/goPublicaNews'));
-
-  // Beauty (legacy standalone)
-  app.use('/api/beauty/services', require('./beauty/services'));
-  app.use('/api/beauty/appointments', require('./beauty/appointments'));
-  app.use('/api/beauty/masters', require('./beauty/masters'));
-  app.use('/api/beauty/categories', require('./beauty/categories'));
 
   // Beauty (SaaS admin)
   app.use('/api/saas/beauty/services', require('./saas/beauty/services'));
