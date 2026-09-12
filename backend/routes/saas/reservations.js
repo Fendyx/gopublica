@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const webpush = require('web-push');
 const Reservation = require('../../models/food/Reservation');
 const Branch = require('../../models/Branch');
-const PushSubscription = require('../../models/communication/PushSubscription');
 const authTenant = require('../../middleware/auth/tenant');
 const { writeConsentLog } = require('../../services/consent/writeConsent');
 
@@ -80,30 +78,6 @@ router.post('/', async (req, res) => {
     require('../../services/notifications/tenantTelegram')
       .notifyNewReservation(tenantId, resolvedBranchId, reservation)
       .catch(err => console.error('Tenant Telegram reservation notification failed:', err.message));
-
-    // Push-уведомления (без изменений, можно при желании добавить branchId в payload)
-    const subs = await PushSubscription.find({ tenantId });
-    if (subs.length > 0) {
-      const payload = JSON.stringify({
-        title: '🍽️ Neue Buchung',
-        body: `${name} · ${date} um ${time}${guests ? ` · ${guests} Gäste` : ''} · ${branch.city} ${branch.name}`,
-        tag: `booking-${reservation._id}`,
-        url: '/admin/reservations',
-      });
-
-      const results = await Promise.allSettled(
-        subs.map(sub => webpush.sendNotification(sub.subscription, payload))
-      );
-
-      const expiredEndpoints = results
-        .map((r, i) => ({ r, sub: subs[i] }))
-        .filter(({ r }) => r.status === 'rejected' && r.reason?.statusCode === 410)
-        .map(({ sub }) => sub.endpoint);
-
-      if (expiredEndpoints.length > 0) {
-        await PushSubscription.deleteMany({ endpoint: { $in: expiredEndpoints } });
-      }
-    }
 
     console.log('🟢 [RESERVATION] Sending 201 response...');
     res.status(201).json(reservation);

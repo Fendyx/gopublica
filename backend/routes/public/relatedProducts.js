@@ -47,6 +47,8 @@ router.get('/', async (req, res) => {
       .limit(100) // fetch more, then rank in-memory
       .lean();
 
+    const WEIGHTS = { author: 10, series: 8, genre: 5, publisher: 3, language: 2 };
+
     // 4. Score and rank candidates
     const scored = candidates.map((product) => {
       let score = 0;
@@ -55,9 +57,8 @@ router.get('/', async (req, res) => {
       for (const ref of refs) {
         for (const prodRef of prodRefs) {
           if (ref.attributeId === prodRef.attributeId) {
-            // Weight by attribute type: author > series > genre > publisher > language > custom
-            const weights = { author: 10, series: 8, genre: 5, publisher: 3, language: 2, custom: 1 };
-            score += weights[ref.type] || 1;
+            // Weight by attribute type — known types get priority, custom types get 1
+            score += WEIGHTS[ref.type] || 1;
           }
         }
       }

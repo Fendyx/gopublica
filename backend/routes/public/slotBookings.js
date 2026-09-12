@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const webpush = require('web-push');
 const Branch = require('../../models/Branch');
-const PushSubscription = require('../../models/communication/PushSubscription');
 const { writeConsentLog } = require('../../services/consent/writeConsent');
 const {
   getAvailableSlots,
@@ -153,31 +151,6 @@ router.post('/book', async (req, res) => {
         comment,
       })
       .catch(err => console.error('Slot booking Telegram notification failed:', err.message));
-
-    // Push notifications
-    const subs = await PushSubscription.find({ tenantId });
-    if (subs.length > 0) {
-      const branch = resolvedBranchId ? await Branch.findById(resolvedBranchId).lean() : null;
-      const payload = JSON.stringify({
-        title: '🎯 Neue Buchung',
-        body: `${name} · ${slot.date} ${slot.startTime}–${slot.endTime} · ${partySize} Person${partySize > 1 ? 'en' : ''}${branch ? ` · ${branch.city || ''} ${branch.name}` : ''}`,
-        tag: `slot-booking-${booking._id}`,
-        url: '/admin/slots',
-      });
-
-      const results = await Promise.allSettled(
-        subs.map(sub => webpush.sendNotification(sub.subscription, payload))
-      );
-
-      const expiredEndpoints = results
-        .map((r, i) => ({ r, sub: subs[i] }))
-        .filter(({ r }) => r.status === 'rejected' && r.reason?.statusCode === 410)
-        .map(({ sub }) => sub.endpoint);
-
-      if (expiredEndpoints.length > 0) {
-        await PushSubscription.deleteMany({ endpoint: { $in: expiredEndpoints } });
-      }
-    }
 
     res.status(201).json({ booking, slot });
   } catch (err) {

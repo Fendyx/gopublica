@@ -42,6 +42,9 @@ function registerRoutes(app) {
   // Leads (GoPublica CRM)
   app.use('/api/leads', require('./gopublica/leads'));
 
+  // Tenant Manager (GoPublica superadmin → full access to any tenant's data)
+  app.use('/api/gopublica/tenants', require('./gopublica/tenants'));
+
   // SaaS (Рестораны)
   app.use('/api/saas/auth', require('./saas/auth'));
   app.use('/api/saas/settings', require('./saas/settings'));
@@ -49,13 +52,13 @@ function registerRoutes(app) {
   app.use('/api/saas/menu', require('./saas/menu'));
   app.use('/api/saas/categories', require('./saas/categories'));
   app.use('/api/saas/product-attributes', require('./saas/productAttributes'));
+  app.use('/api/saas/attribute-groups', require('./saas/attributeGroups'));
   app.use('/api/saas/reservations', require('./saas/reservations'));
   app.use('/api/saas/slot-bookings', require('./saas/slotBookings'));
   app.use('/api/saas/orders', require('./saas/orders'));
   app.use('/api/saas/gallery', require('./saas/gallery'));
   app.use('/api/saas/branches', require('./saas/branches'));
   app.use('/api/saas/analytics', require('./saas/analytics'));
-  app.use('/api/saas/push', require('./saas/push'));
   app.use('/api/saas/customers', require('./saas/customers'));
   app.use('/api/saas/jobs', saasJobsRoutes);
   app.use('/api/saas/sites', require('./saas/sites'));

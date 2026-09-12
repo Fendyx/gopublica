@@ -18,11 +18,9 @@ const PORT = 5000;
 // ── Config modules ───────────────────────────────────
 const configureApp = require('./config/app');
 const connectDB = require('./config/db');
-const initPush = require('./config/push');
 
 // ── Initialize config ────────────────────────────────
 configureApp(app);
-initPush();
 
 // ── Database connection ──────────────────────────────
 connectDB();

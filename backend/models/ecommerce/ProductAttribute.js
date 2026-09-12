@@ -5,10 +5,12 @@ const productAttributeSchema = new mongoose.Schema(
     tenantId: { type: String, required: true, index: true },
     type: {
       type: String,
-      enum: ['author', 'publisher', 'genre', 'language', 'series', 'custom'],
       required: true,
       index: true,
+      // Previously enum-restricted to ['author','publisher','genre','language','series','custom'].
+      // Now free-form: stores the attribute group slug for backward compatibility.
     },
+    groupId: { type: String, default: null, index: true },
     name: { type: String, required: true, trim: true },
     slug: { type: String, required: true, trim: true, lowercase: true },
     translations: {

@@ -1,7 +1,9 @@
 const express    = require('express');
 const router     = express.Router();
 const jwt        = require('jsonwebtoken');
+const crypto     = require('crypto');
 const bcrypt     = require('bcryptjs');
+const rateLimit  = require('express-rate-limit');
 const { OAuth2Client } = require('google-auth-library');
 const { createCustomer, createTaxId } = require('../../services/payments/stripe');
 const TenantUser = require('../../models/TenantUser');
@@ -16,10 +18,45 @@ const { writeConsentLog } = require('../../services/consent/writeConsent');
 
 const ADMIN = ['admin', 'superadmin'];
 
+// ── Security constants ─────────────────────────────────────────────────────
+const ACCESS_TOKEN_EXPIRY = '30d';
+const REFRESH_LEEWAY_MS  = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Rate limiter: max 10 refresh attempts per IP per 15 minutes
+const refreshLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Слишком много попыток обновления токена. Попробуйте позже.' },
+});
+
+// Rate limiter: max 20 login attempts per IP per 15 minutes
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Слишком много попыток входа. Попробуйте позже.' },
+});
+
 function sanitizeUser(user) {
   const obj = user.toObject ? user.toObject() : user;
   delete obj.passwordHash;
   return obj;
+}
+
+/**
+ * Sign a JWT with unique jti (JWT ID) for audit trail.
+ * The jti is a cryptographically random UUID v4.
+ */
+function signToken(payload) {
+  return jwt.sign(
+    { ...payload, jti: crypto.randomUUID() },
+    JWT_SECRET,
+    { expiresIn: ACCESS_TOKEN_EXPIRY }
+  );
 }
 
 // ── Регистрация (gopublica self-service) ──────────────────────
@@ -96,11 +133,7 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    const token = jwt.sign(
-      { userId: user._id, tenantId: null, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const token = signToken({ userId: user._id, tenantId: null, role: user.role });
 
     res.status(201).json({
       token,
@@ -191,11 +224,7 @@ router.post('/google', async (req, res) => {
     }
 
     // 3. Issue the same JWT as the password login
-    const token = jwt.sign(
-      { userId: user._id, tenantId: user.tenantId, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const token = signToken({ userId: user._id, tenantId: user.tenantId, role: user.role });
 
     res.json({
       token,
@@ -222,7 +251,7 @@ router.post('/google', async (req, res) => {
 });
 
 // ── Логин (один эндпоинт для обоих флоу) ─────────────────────
-router.post('/login', async (req, res) => {
+router.post('/login', loginLimiter, async (req, res) => {
   try {
     const { email, password, tenantId } = req.body;
 
@@ -246,11 +275,7 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ error: 'Аккаунт заблокирован' });
     }
 
-    const token = jwt.sign(
-      { userId: user._id, tenantId: user.tenantId, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '7d' }
-    );
+    const token = signToken({ userId: user._id, tenantId: user.tenantId, role: user.role });
 
     res.json({
       token,
@@ -381,14 +406,74 @@ router.delete('/users/:id', auth, checkRole(ADMIN), async (req, res) => {
   }
 });
 
-// ── Текущий пользователь ──────────────────────────────────────
+// ── Текущий пользователь (с валидацией токена) ────────────────
 router.get('/me', authTenant, async (req, res) => {
   try {
     const user = await TenantUser.findById(req.userId).select('-passwordHash');
     if (!user) return res.status(404).json({ error: 'Не найден' });
+    if (!user.isActive) return res.status(403).json({ error: 'Аккаунт заблокирован' });
     res.json({
       ...user.toObject(),
-      consents: user.consents,   // передаём согласия в ответе
+      consents: user.consents,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Обновление токена (token refresh) ────────────────────────
+// POST /api/saas/auth/refresh
+// Accepts the current (possibly expired) JWT, validates it with leeway,
+// checks user is still active, and issues a fresh token.
+// Rate-limited to 10 attempts per IP per 15 minutes.
+router.post('/refresh', refreshLimiter, async (req, res) => {
+  try {
+    const { token } = req.body;
+    if (!token) return res.status(400).json({ error: 'Token is required' });
+
+    // 1. Decode the token WITHOUT expiry check
+    let decoded;
+    try {
+      decoded = jwt.verify(token, JWT_SECRET, { ignoreExpiration: true });
+    } catch {
+      return res.status(401).json({ error: 'Недействительный токен' });
+    }
+
+    // 2. Check the token is not older than REFRESH_LEEWAY_MS (30 days)
+    //    This prevents abuse of very old tokens.
+    const tokenAge = Date.now() - (decoded.iat * 1000);
+    if (tokenAge > REFRESH_LEEWAY_MS) {
+      return res.status(401).json({ error: 'Токен слишком старый. Войдите заново.' });
+    }
+
+    // 3. Verify the user still exists and is active
+    const user = await TenantUser.findById(decoded.userId);
+    if (!user) return res.status(401).json({ error: 'Пользователь не найден' });
+    if (!user.isActive) return res.status(403).json({ error: 'Аккаунт заблокирован' });
+
+    // 4. Issue a fresh token with new jti and renewed expiry
+    const newToken = signToken({
+      userId:   user._id,
+      tenantId: user.tenantId,
+      role:     user.role,
+    });
+
+    res.json({
+      token: newToken,
+      user: {
+        id:                 user._id,
+        email:              user.email,
+        name:               user.name,
+        phone:              user.phone,
+        companyName:        user.companyName,
+        vatId:              user.vatId,
+        tenantId:           user.tenantId,
+        role:               user.role,
+        subscriptionStatus: user.subscriptionStatus,
+        subscriptionPlan:   user.subscriptionPlan,
+        currentPeriodEnd:   user.currentPeriodEnd,
+        consents:           user.consents,
+      },
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

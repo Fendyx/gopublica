@@ -1,8 +1,91 @@
 const express = require('express');
 const router = express.Router();
 const Branch = require('../../models/Branch');
+const TenantSettings = require('../../models/TenantSettings');
 const authTenant = require('../../middleware/auth/tenant');
 const slugify = require('../../utils/slugify');
+
+// ─── Navigation sync helpers ─────────────────────────────────────────────────
+// When a custom page is created, renamed, or deleted, the corresponding
+// navigation item in TenantSettings.navigation.items must be kept in sync
+// so that storefront links always point to the correct slug.
+
+/**
+ * Add a new navigation item for a newly created custom page.
+ */
+async function addNavigationItemForPage(tenantId, slug, title) {
+  try {
+    const settings = await TenantSettings.findOne({ tenantId });
+    if (!settings?.navigation?.items) return;
+    // Don't add if a nav item for this slug already exists
+    const exists = settings.navigation.items.some(
+      (item) => item.type === 'custom' && item.slug === slug
+    );
+    if (exists) return;
+    const maxOrder = settings.navigation.items.reduce((max, i) => Math.max(max, i.order || 0), 0);
+    settings.navigation.items.push({
+      id: `custom-${slug}`,
+      type: 'custom',
+      slug,
+      label: title || '',
+      isVisible: true,
+      placement: 'dropdown',
+      order: maxOrder + 1,
+    });
+    settings.markModified('navigation');
+    await settings.save();
+    console.log(`-> Navigation: added item for custom page "${slug}"`);
+  } catch (err) {
+    console.error('Failed to add navigation item for custom page:', err.message);
+  }
+}
+
+/**
+ * Update slug on all navigation items that match the old custom page slug.
+ */
+async function syncNavigationSlugOnRename(tenantId, oldSlug, newSlug, newTitle) {
+  try {
+    const settings = await TenantSettings.findOne({ tenantId });
+    if (!settings?.navigation?.items?.length) return;
+    let changed = false;
+    for (const item of settings.navigation.items) {
+      if (item.type === 'custom' && item.slug === oldSlug) {
+        item.slug = newSlug;
+        item.id = `custom-${newSlug}`;
+        if (newTitle) item.label = newTitle;
+        changed = true;
+      }
+    }
+    if (changed) {
+      settings.markModified('navigation');
+      await settings.save();
+      console.log(`-> Navigation: synced slug "${oldSlug}" → "${newSlug}"`);
+    }
+  } catch (err) {
+    console.error('Failed to sync navigation slug:', err.message);
+  }
+}
+
+/**
+ * Remove the navigation item for a deleted custom page.
+ */
+async function removeNavigationItemForPage(tenantId, slug) {
+  try {
+    const settings = await TenantSettings.findOne({ tenantId });
+    if (!settings?.navigation?.items?.length) return;
+    const len = settings.navigation.items.length;
+    settings.navigation.items = settings.navigation.items.filter(
+      (item) => !(item.type === 'custom' && item.slug === slug)
+    );
+    if (settings.navigation.items.length < len) {
+      settings.markModified('navigation');
+      await settings.save();
+      console.log(`-> Navigation: removed item for custom page "${slug}"`);
+    }
+  } catch (err) {
+    console.error('Failed to remove navigation item:', err.message);
+  }
+}
 
 /**
  * Generate a unique slug for a branch within a tenant.
@@ -301,6 +384,9 @@ router.post('/:branchId/custom-pages', authTenant, async (req, res) => {
     });
     await branch.save();
 
+    // Auto-add navigation item for the new custom page
+    await addNavigationItemForPage(req.tenantId, baseSlug, title.trim());
+
     const created = branch.customPages[branch.customPages.length - 1];
     res.status(201).json(created);
   } catch (err) {
@@ -385,6 +471,10 @@ router.put('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
         { branchId: branch._id, page: oldSlug },
         { $set: { page: renamedSlug } }
       );
+
+      // Sync navigation items to use the new slug
+      const updatedTitle = title !== undefined ? title.trim() : cp.title;
+      await syncNavigationSlugOnRename(req.tenantId, oldSlug, renamedSlug, updatedTitle);
     }
 
     await branch.save();
@@ -407,9 +497,12 @@ router.delete('/:branchId/custom-pages/:slug', authTenant, async (req, res) => {
     branch.customPages.splice(idx, 1);
     await branch.save();
 
-    // Optionally clean up orphaned BranchSection docs for the deleted page
+    // Clean up orphaned BranchSection docs for the deleted page
     const BranchSection = require('../../models/BranchSection');
     await BranchSection.deleteMany({ branchId: branch._id, page: removedSlug, isSystem: false });
+
+    // Remove the navigation item for the deleted page
+    await removeNavigationItemForPage(req.tenantId, removedSlug);
 
     res.json({ message: 'Custom page deleted', slug: removedSlug });
   } catch (err) {

@@ -5,7 +5,11 @@ const categoryTranslationSchema = new mongoose.Schema({
   tenantId: { type: String, default: null, index: true },
   name: { type: String, default: '' },
   description: { type: String, default: '' },
-  translations: { type: Map, of: String, default: {} },
+  translations: {
+    type: Map,
+    of: new mongoose.Schema({ name: { type: String, default: '' }, description: { type: String, default: '' } }, { _id: false }),
+    default: {},
+  },
   addedByTenants: [{ type: String }],
   icon: { type: String, default: '' },
   niche: {

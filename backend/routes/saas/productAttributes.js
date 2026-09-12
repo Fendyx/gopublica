@@ -8,11 +8,12 @@ const slugify = require('../../utils/slugify');
 // ── PUBLIC: List attributes (filter by type, tenantId) ──
 router.get('/', async (req, res) => {
   try {
-    const { tenantId, type, active } = req.query;
+    const { tenantId, type, groupId, active } = req.query;
     if (!tenantId) return res.status(400).json({ error: 'tenantId is required' });
 
     const query = { tenantId };
     if (type) query.type = type;
+    if (groupId) query.groupId = groupId;
     if (active !== undefined) query.isActive = active === 'true';
 
     const attributes = await ProductAttribute.find(query)
@@ -55,7 +56,11 @@ router.get('/suggest', async (req, res) => {
     const query = { tenantId, isActive: true };
     if (type) query.type = type;
     if (q && q.trim()) {
-      query.name = { $regex: q.trim(), $options: 'i' };
+      const escaped = q.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.$or = [
+        { name: { $regex: escaped, $options: 'i' } },
+        { slug: { $regex: escaped, $options: 'i' } },
+      ];
     }
 
     const attributes = await ProductAttribute.find(query)
@@ -71,7 +76,7 @@ router.get('/suggest', async (req, res) => {
 // ── ADMIN: Create attribute ──
 router.post('/', authTenant, async (req, res) => {
   try {
-    const { type, name, translations, description, image } = req.body;
+    const { type, groupId, name, translations, description, image } = req.body;
     const tenantId = req.tenantId;
 
     if (!type || !name) {
@@ -94,6 +99,7 @@ router.post('/', authTenant, async (req, res) => {
     const attribute = new ProductAttribute({
       tenantId,
       type,
+      groupId: groupId || null,
       name: name.trim(),
       slug,
       translations: translations || {},

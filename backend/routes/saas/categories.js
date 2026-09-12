@@ -128,7 +128,7 @@ router.put('/reorder', authTenant, async (req, res) => {
 // Обновить категорию по ID
 router.put('/:id', authTenant, async (req, res) => {
   try {
-    const { name, description, icon, layout, niche, coverImage, cardBgColor,
+    const { name, description, translations, icon, layout, niche, coverImage, cardBgColor,
             imageAspectRatio, productImageAspectRatio, order, carouselAutoplay,
             productCardVariant, productCardWidth, parentCategoryKey } = req.body;
     const tenantId = req.tenantId;
@@ -155,7 +155,7 @@ router.put('/:id', authTenant, async (req, res) => {
           layout: layout !== undefined ? layout : category.layout,
           coverImage: coverImage !== undefined ? coverImage : category.coverImage,
           cardBgColor: cardBgColor !== undefined ? cardBgColor : category.cardBgColor,
-          translations: category.translations,
+          translations: translations !== undefined ? translations : category.translations,
           imageAspectRatio: imageAspectRatio || '1/1',
           productImageAspectRatio: productImageAspectRatio || '1/1',
           order: order !== undefined ? order : category.order,
@@ -180,6 +180,7 @@ router.put('/:id', authTenant, async (req, res) => {
     if (coverImage !== undefined) category.coverImage = coverImage;
     if (cardBgColor !== undefined) category.cardBgColor = cardBgColor;
     if (parentCategoryKey !== undefined) category.parentCategoryKey = parentCategoryKey || null;
+    if (translations !== undefined) category.translations = translations;
 
     await category.save();
     res.json(category);
