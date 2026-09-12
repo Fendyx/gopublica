@@ -14,54 +14,28 @@ function buildTree(categories, parentKey = null) {
     }));
 }
 
-// ПУБЛИЧНЫЙ РОУТ: Получить доступные категории (свои + глобальные)
+// ПУБЛИЧНЫЙ РОУТ: Получить категории тенанта
 router.get('/', async (req, res) => {
   try {
     const tenantId = req.query.tenantId;
     const niche = req.query.niche || 'food';
     const parentKey = req.query.parentKey || null;
     const treeMode = req.query.tree === 'true';
-    const ownOnly = req.query.own === 'true'; // ← only tenant-owned categories (no globals)
 
     if (!tenantId) {
-      const globals = await CategoryTranslation.find({ tenantId: null, niche })
-        .sort({ order: 1, name: 1 })
-        .lean();
-      if (treeMode) return res.json(buildTree(globals));
-      return res.json(globals);
+      return res.json([]);
     }
 
-    const tenantCats = await CategoryTranslation.find({ tenantId, niche })
+    // Only return categories owned by this tenant (global/tenantId:null categories are no longer used)
+    const cats = await CategoryTranslation.find({ tenantId, niche })
       .sort({ order: 1, name: 1 })
       .lean();
 
-    // If own=true, return only tenant-owned categories
-    if (ownOnly) {
-      if (parentKey) {
-        return res.json(tenantCats.filter(c => (c.parentCategoryKey || null) === parentKey));
-      }
-      if (treeMode) return res.json(buildTree(tenantCats));
-      return res.json(tenantCats);
-    }
-
-    const tenantKeys = tenantCats.map(c => c.key);
-    const globalCats = await CategoryTranslation.find({
-      tenantId: null,
-      niche,
-      key: { $nin: tenantKeys }
-    })
-      .sort({ order: 1, name: 1 })
-      .lean();
-
-    const allCats = [...tenantCats, ...globalCats];
-
-    // Filter by parentKey if provided
     if (parentKey) {
-      return res.json(allCats.filter(c => (c.parentCategoryKey || null) === parentKey));
+      return res.json(cats.filter(c => (c.parentCategoryKey || null) === parentKey));
     }
-
-    if (treeMode) return res.json(buildTree(allCats));
-    res.json(allCats);
+    if (treeMode) return res.json(buildTree(cats));
+    res.json(cats);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -142,34 +116,6 @@ router.put('/:id', authTenant, async (req, res) => {
     if (productCardVariant !== undefined) category.productCardVariant = productCardVariant || null;
     if (productCardWidth !== undefined) category.productCardWidth = productCardWidth;
 
-    // Клонирование глобальной категории при редактировании
-    if (category.tenantId === null || category.tenantId === undefined) {
-      let tenantCategory = await CategoryTranslation.findOne({ key: category.key, tenantId });
-      if (!tenantCategory) {
-        tenantCategory = new CategoryTranslation({
-          key: category.key, tenantId,
-          name: name !== undefined ? name : category.name,
-          description: description !== undefined ? description : category.description,
-          icon: icon !== undefined ? icon : category.icon,
-          niche: niche !== undefined ? niche : category.niche,
-          layout: layout !== undefined ? layout : category.layout,
-          coverImage: coverImage !== undefined ? coverImage : category.coverImage,
-          cardBgColor: cardBgColor !== undefined ? cardBgColor : category.cardBgColor,
-          translations: translations !== undefined ? translations : category.translations,
-          imageAspectRatio: imageAspectRatio || '1/1',
-          productImageAspectRatio: productImageAspectRatio || '1/1',
-          order: order !== undefined ? order : category.order,
-          carouselAutoplay: carouselAutoplay !== undefined ? carouselAutoplay : category.carouselAutoplay,
-          productCardVariant: productCardVariant !== undefined ? productCardVariant : category.productCardVariant,
-          productCardWidth: productCardWidth !== undefined ? productCardWidth : category.productCardWidth
-        });
-        await tenantCategory.save();
-        return res.json(tenantCategory);
-      } else {
-        category = tenantCategory;
-      }
-    }
-
     if (category.tenantId !== tenantId) return res.status(403).json({ error: 'Forbidden' });
 
     if (name !== undefined) category.name = name;
@@ -201,7 +147,7 @@ router.delete('/:id', authTenant, async (req, res) => {
   }
 });
 
-// Поиск категорий
+// Поиск категорий тенанта
 router.get('/suggest', authTenant, async (req, res) => {
   try {
     const { q, niche } = req.query;
@@ -209,7 +155,7 @@ router.get('/suggest', authTenant, async (req, res) => {
     const regex = new RegExp(q, 'i');
     const categories = await CategoryTranslation.find({
       $or: [{ key: regex }, { name: regex }],
-      tenantId: null,
+      tenantId: req.tenantId,
       niche: niche || 'food'
     }).limit(8).lean();
     res.json(categories);

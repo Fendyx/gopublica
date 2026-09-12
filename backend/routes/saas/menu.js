@@ -96,13 +96,9 @@ router.get('/', async (req, res) => {
     // Optional: include categories in the same response to avoid a separate round-trip
     if (includeCategories === 'true') {
       const catNiche = niche || 'food';
-      const tenantCats = await CategoryTranslation.find({ tenantId, niche: catNiche })
+      const cats = await CategoryTranslation.find({ tenantId, niche: catNiche })
         .sort({ order: 1, name: 1 }).lean();
-      const tenantKeys = tenantCats.map(c => c.key);
-      const globalCats = await CategoryTranslation.find({
-        tenantId: null, niche: catNiche, key: { $nin: tenantKeys }
-      }).sort({ order: 1, name: 1 }).lean();
-      return res.json({ items, categories: [...tenantCats, ...globalCats] });
+      return res.json({ items, categories: cats });
     }
 
     res.json(items);
