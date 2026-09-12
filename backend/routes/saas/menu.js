@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const MenuItem = require('../../models/food/MenuItem');
+const ProductAttribute = require('../../models/ecommerce/ProductAttribute');
 const CategoryTranslation = require('../../models/food/CategoryTranslation');
 const TenantSettings = require('../../models/TenantSettings');
 const Branch = require('../../models/Branch');
@@ -11,6 +12,38 @@ const { enforceModuleAccess } = require('../../services/tenant/moduleAccess');
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
   return mongoose.Types.ObjectId.isValid(str) && /^[0-9a-fA-F]{24}$/.test(str);
+}
+
+/**
+ * Sync productCount on ProductAttribute documents after attributeRefs change.
+ * Computes the diff between old and new refs and applies $inc increments.
+ */
+async function syncAttributeCounts(tenantId, oldRefs, newRefs) {
+  const oldMap = new Map();
+  for (const ref of oldRefs || []) oldMap.set(ref.attributeId, (oldMap.get(ref.attributeId) || 0) + 1);
+  const newMap = new Map();
+  for (const ref of newRefs || []) newMap.set(ref.attributeId, (newMap.get(ref.attributeId) || 0) + 1);
+
+  const bulkOps = [];
+  const allIds = new Set([...oldMap.keys(), ...newMap.keys()]);
+
+  for (const id of allIds) {
+    const delta = (newMap.get(id) || 0) - (oldMap.get(id) || 0);
+    if (delta !== 0) {
+      bulkOps.push({
+        updateOne: {
+          filter: { _id: id, tenantId },
+          update: { $inc: { productCount: delta } },
+        },
+      });
+    }
+  }
+
+  if (bulkOps.length > 0) {
+    await ProductAttribute.bulkWrite(bulkOps, { ordered: false }).catch((err) => {
+      console.error('[syncAttributeCounts] bulkWrite error:', err.message);
+    });
+  }
 }
 
 // Публичный роут: получение меню
@@ -118,6 +151,12 @@ router.post('/', authTenant, async (req, res) => {
     });
 
     await newItem.save();
+
+    // Sync productCount for linked attributes
+    if (Array.isArray(attributeRefs) && attributeRefs.length > 0) {
+      await syncAttributeCounts(req.tenantId, [], attributeRefs);
+    }
+
     res.status(201).json(newItem);
   } catch (err) {
     console.error('Ошибка в POST /api/saas/menu:', err);
@@ -135,6 +174,9 @@ router.put('/:id', authTenant, async (req, res) => {
     const item = await MenuItem.findById(req.params.id);
     if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
     if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });
+
+    // Snapshot old attributeRefs before mutation for productCount sync
+    const oldRefs = Array.isArray(item.attributeRefs) ? [...item.attributeRefs] : [];
 
     const {
       name, description, price, category, categoryKey, image,
@@ -174,6 +216,12 @@ router.put('/:id', authTenant, async (req, res) => {
     if (status !== undefined) item.status = status;
 
     await item.save();
+
+    // Sync productCount when attributeRefs change
+    if (Array.isArray(attributeRefs)) {
+      await syncAttributeCounts(req.tenantId, oldRefs, attributeRefs);
+    }
+
     res.json(item);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -190,6 +238,11 @@ router.delete('/:id', authTenant, async (req, res) => {
     const item = await MenuItem.findById(req.params.id);
     if (!item) return res.status(404).json({ error: 'Блюдо не найдено' });
     if (item.tenantId !== req.tenantId) return res.status(403).json({ error: 'Доступ запрещён' });
+
+    // Decrement productCount for linked attributes before deletion
+    if (Array.isArray(item.attributeRefs) && item.attributeRefs.length > 0) {
+      await syncAttributeCounts(req.tenantId, item.attributeRefs, []);
+    }
 
     await MenuItem.findByIdAndDelete(req.params.id);
     res.json({ message: 'Deleted' });
