@@ -42,6 +42,9 @@ const DEFAULT_SLOT_CAPACITY = 10;
 const ALLOWED_DESKTOP_ITEMS_PER_ROW = [3, 4, 5];
 const DEFAULT_DESKTOP_ITEMS_PER_ROW = 3;
 
+const ALLOWED_MOBILE_ITEMS_PER_ROW = [1, 2, 3];
+const DEFAULT_MOBILE_ITEMS_PER_ROW = 1;
+
 const ALLOWED_HERO_MEDIA_TYPES = ['image', 'video', 'slider'];
 const ALLOWED_TEXT_ALIGNMENTS = ['left', 'center', 'right'];
 const DEFAULT_TEXT_ALIGNMENT = 'center';
@@ -345,12 +348,23 @@ function validateCarouselSettings(settings, includeLinkToDetailPage) {
     errors.push(`desktopItemsPerRow must be one of: ${ALLOWED_DESKTOP_ITEMS_PER_ROW.join(', ')}`);
   }
 
+  // mobileItemsPerRow - default to 1 when absent/null/empty
+  let mobileItemsPerRow = settings.mobileItemsPerRow;
+  if (mobileItemsPerRow === undefined || mobileItemsPerRow === null || mobileItemsPerRow === '') {
+    mobileItemsPerRow = DEFAULT_MOBILE_ITEMS_PER_ROW;
+  } else if (typeof mobileItemsPerRow !== 'number' || !Number.isInteger(mobileItemsPerRow)) {
+    errors.push('mobileItemsPerRow must be an integer');
+  } else if (!ALLOWED_MOBILE_ITEMS_PER_ROW.includes(mobileItemsPerRow)) {
+    errors.push(`mobileItemsPerRow must be one of: ${ALLOWED_MOBILE_ITEMS_PER_ROW.join(', ')}`);
+  }
+
   // Preserve all existing settings - only override the fields we validate.
   // This prevents stripping mode, selectionMode, selectedCategoryKeys,
   // productCardVariant, and any future additions.
   const value = { ...settings };
 
   value.desktopItemsPerRow = desktopItemsPerRow;
+  value.mobileItemsPerRow = mobileItemsPerRow;
 
   if (includeLinkToDetailPage) {
     value.linkToDetailPage = Boolean(settings.linkToDetailPage);
@@ -546,6 +560,18 @@ function validateHeroSettings(settings) {
     if (cta.gradientDirection !== undefined && cta.gradientDirection !== null && cta.gradientDirection !== '') {
       if (typeof cta.gradientDirection !== 'string' || !ALLOWED_GRADIENT_DIRECTIONS.includes(cta.gradientDirection)) {
         errors.push(`${ctaLabel}.gradientDirection must be one of: ${ALLOWED_GRADIENT_DIRECTIONS.join(', ')}`);
+      }
+    }
+    // labelI18n - optional object with string values (per-locale translations)
+    if (cta.labelI18n !== undefined && cta.labelI18n !== null) {
+      if (typeof cta.labelI18n !== 'object' || Array.isArray(cta.labelI18n)) {
+        errors.push(`${ctaLabel}.labelI18n must be a plain object`);
+      } else {
+        for (const [loc, val] of Object.entries(cta.labelI18n)) {
+          if (typeof val !== 'string') {
+            errors.push(`${ctaLabel}.labelI18n.${loc} must be a string`);
+          }
+        }
       }
     }
   };

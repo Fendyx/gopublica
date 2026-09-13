@@ -121,6 +121,9 @@ function registerRoutes(app) {
   app.use('/api/public/products/search', require('./public/productSearch'));
   app.use('/api/public/products/related', require('./public/relatedProducts'));
 
+  // Omni-search (aggregated products + categories + attributes)
+  app.use('/api/public/omni-search', require('./public/omniSearch'));
+
   // Чекаут и оплата
   app.use('/api/orders/public', ordersPublicRoutes);
   // Личный кабинет и история заказов
@@ -129,6 +132,9 @@ function registerRoutes(app) {
   app.use('/api/public/jobs', jobsPublicRoutes);
 
   app.use('/api/public/profile', publicProfileRoutes);
+
+  // Wishlist (customer-facing, authenticated)
+  app.use('/api/public/wishlist', require('./public/wishlist'));
 
   // Публичные заявки на/demo ("Get a Free Demo" funnel)
   app.use('/api/public/demo-requests', require('./public/demoRequests'));

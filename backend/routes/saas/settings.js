@@ -108,10 +108,17 @@ router.get('/', async (req, res) => {
       const branchTheme = branch.settingsOverride?.theme || {};
       const mergedTheme = { ...globalTheme, ...branchTheme };
 
+      // ГЛУБОКОЕ СЛИЯНИЕ FEATURES (чтобы settingsOverride.features.hasVeganTeaser
+      // не затирал глобальные showCategoryNav, hasSearch, bottomNav и т.д.)
+      const globalFeatures = globalObj.features || {};
+      const branchFeatures = branch.settingsOverride?.features || {};
+      const mergedFeatures = { ...globalFeatures, ...branchFeatures };
+
       const merged = {
         ...globalObj,
         ...branch.settingsOverride,
         theme: mergedTheme,
+        features: mergedFeatures,
         workingHours: branch.workingHours,
         coordinates: branch.coordinates,
         address: branch.address,
@@ -330,9 +337,16 @@ router.put('/', authTenant, async (req, res) => {
       const globalObj = globalSettings.toObject?.() || {};
       const access = getModuleAccess(globalObj);
 
+      // ГЛУБОКОЕ СЛИЯНИЕ FEATURES (чтобы settingsOverride.features.hasVeganTeaser
+      // не затирал глобальные showCategoryNav, hasSearch, bottomNav и т.д.)
+      const globalFeaturesResp = globalObj.features || {};
+      const branchFeaturesResp = branch.settingsOverride?.features || {};
+      const mergedFeaturesResp = { ...globalFeaturesResp, ...branchFeaturesResp };
+
       const merged = {
         ...globalObj,
         ...branch.settingsOverride,
+        features: mergedFeaturesResp,
         workingHours: branch.workingHours,
         coordinates: branch.coordinates,
         address: branch.address,

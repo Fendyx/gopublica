@@ -30,7 +30,7 @@ const categoryTranslationSchema = new mongoose.Schema({
   carouselAutoplay: { type: Boolean, default: false },
   productCardVariant: {
     type: String,
-    enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean', null],
+    enum: ['overlay', 'action-bar', 'minimal', 'horizontal', 'action-overlay', 'clean', 'badge-top', 'split-action', null],
     default: null
   },
   productCardWidth: {

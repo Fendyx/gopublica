@@ -39,12 +39,14 @@ const mongoose = require('mongoose');
  *    settings: {
  *      linkToDetailPage: Boolean,   // If true, clicking item navigates to /entity/:slug
  *      desktopItemsPerRow: Number   // Items per row on desktop: 3, 4, or 5 (default: 3)
+ *      mobileItemsPerRow: Number    // Items per row on mobile: 1, 2, or 3 (default: 1)
  *    }
  *    Items are stored in BranchSectionItem collection (referenced by sectionId)
  *
  * 3. feature_carousel
  *    settings: {
  *      desktopItemsPerRow: Number   // Items per row on desktop: 3, 4, or 5 (default: 3)
+ *      mobileItemsPerRow: Number    // Items per row on mobile: 1, 2, or 3 (default: 1)
  *    }
  *    Items are stored in BranchSectionItem collection (referenced by sectionId)
  *    No detail page link - purely presentational cards

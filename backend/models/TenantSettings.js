@@ -210,8 +210,13 @@ const tenantSettingsSchema = new mongoose.Schema({
     },
     productCardVariant: {
       type: String,
-      enum: ['overlay', 'action-bar', 'minimal', 'hover-vertical', 'action-overlay', 'clean'],
+      enum: ['overlay', 'action-bar', 'minimal', 'horizontal', 'action-overlay', 'clean', 'badge-top', 'split-action'],
       default: 'action-bar'
+    },
+    pdpGalleryLayout: {
+      type: String,
+      enum: ['classic', 'thumbnails-left', 'stacked-grid', 'lookbook'],
+      default: 'classic',
     },
     categoryBgColor: { type: String, default: '' }, 
     pageBgColor: { type: String, default: '' },
@@ -227,6 +232,21 @@ const tenantSettingsSchema = new mongoose.Schema({
     hasOnlineOrdering: { type: Boolean, default: false },
     hasJobApplications: { type: Boolean, default: false },
     showCategoryNav: { type: Boolean, default: false },
+    hasSearch:       { type: Boolean, default: false },
+    // ── Mobile Bottom Navigation (optional, ecommerce only) ────────────────────
+    bottomNav: {
+      enabled: { type: Boolean, default: false },
+      items: [{
+        id:    { type: String, required: true },
+        type:  { type: String, enum: ['home', 'catalog', 'search', 'profile', 'custom', 'external'], required: true },
+        slug:  { type: String, default: '' },
+        href:  { type: String, default: '' },
+        label: { type: String, default: '' },
+        icon:  { type: String, default: '' },
+        isVisible: { type: Boolean, default: true },
+        order: { type: Number, default: 0 },
+      }],
+    },
   },
 
   // ─── НОВОЕ: Конфигурация навигации (порядок ссылок, видимость, primary/dropdown) ──
