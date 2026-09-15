@@ -649,6 +649,116 @@
       }
     }
   },
+  "demoQuiz": {
+    "meta": {
+      "title": "Obten una demo gratis",
+      "description": "Responde 3 preguntas rapidas y prepararemos una demo personalizada para tu negocio."
+    },
+    "hero": {
+      "eyebrow": "Demo gratis",
+      "title": "Construyamos algo increible juntos",
+      "subtitle": "3 preguntas rapidas - toma menos de un minuto. Sin tarjeta de credito, sin compromiso."
+    },
+    "stepIndicator": {
+      "step": "Paso",
+      "of": "de"
+    },
+    "step1": {
+      "title": "Cual es tu tipo de negocio?",
+      "subtitle": "Elige la opcion mas cercana - o escribe el tuyo si no esta en la lista.",
+      "other": "Otro",
+      "otherPlaceholder": "Escribe tu tipo de negocio...",
+      "options": {
+        "restaurant": "Restaurante / Cafe",
+        "ecommerce": "E-commerce / Tienda",
+        "beautySalon": "Salon de belleza",
+        "barbershop": "Barberia",
+        "gym": "Gimnasio / Fitness",
+        "hotel": "Hotel / Hosteleria",
+        "auto": "Servicios automotrices",
+        "other": "Otro"
+      }
+    },
+    "step2": {
+      "title": "Cuales son tus objetivos principales?",
+      "subtitle": "Selecciona todos los que apliquen - o agrega el tuyo.",
+      "other": "Otro",
+      "otherPlaceholder": "Escribe tu objetivo...",
+      "options": {
+        "onlineSales": "Vender en linea",
+        "onlinePresence": "Crear presencia en linea",
+        "bookings": "Tomar reservas / Citas",
+        "leadGen": "Generar mas leads",
+        "branding": "Mejorar el branding",
+        "automation": "Automatizar operaciones",
+        "other": "Otro"
+      }
+    },
+    "step3": {
+      "title": "Como debemos contactarte?",
+      "subtitle": "Elige tu canal preferido y comparte tus datos.",
+      "methods": {
+        "phone": "Llamada telefonica",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram"
+      },
+      "forms": {
+        "phone": {
+          "title": "Te llamaremos rapidamente",
+          "name": "Nombre completo",
+          "namePlaceholder": "Juan Perez",
+          "phone": "Numero de telefono",
+          "phonePlaceholder": "+52 / +34...",
+          "language": "Idioma preferido",
+          "bestTime": "Mejor hora para llamar",
+          "bestTimeOptions": {
+            "weekdayMorning": "Mananas entre semana",
+            "weekdayAfternoon": "Tardes entre semana",
+            "weekdayEvening": "Noches entre semana",
+            "weekend": "Fines de semana",
+            "anytime": "En cualquier momento"
+          }
+        },
+        "whatsapp": {
+          "title": "Escríbenos en WhatsApp",
+          "name": "Nombre completo",
+          "namePlaceholder": "Juan Perez",
+          "phone": "Numero de WhatsApp",
+          "phonePlaceholder": "+52 / +34..."
+        },
+        "telegram": {
+          "title": "Chatea con nosotros en Telegram",
+          "name": "Nombre completo",
+          "namePlaceholder": "Juan Perez",
+          "handle": "Usuario de Telegram",
+          "handlePlaceholder": "@tunombre",
+          "phoneOptional": "Telefono (opcional)",
+          "phonePlaceholder": "+52 / +34..."
+        }
+      },
+      "consent": "Doy mi consentimiento para ser contactado sobre mi solicitud de demo y acepto los <terms>Terminos</terms> y la <privacy>Politica de Privacidad</privacy>."
+    },
+    "buttons": {
+      "back": "Atras",
+      "next": "Siguiente",
+      "submit": "Solicitar mi demo",
+      "submitting": "Enviando...",
+      "restart": "Empezar de nuevo"
+    },
+    "success": {
+      "title": "Gracias! 🎉",
+      "text": "Tu solicitud ha sido recibida. Nuestro equipo se comunicara contigo pronto.",
+      "cta": "Volver al inicio"
+    },
+    "errors": {
+      "generic": "Algo salio mal. Por favor, intentalo de nuevo.",
+      "rateLimited": "Demasiadas solicitudes. Por favor, intentalo de nuevo en unos minutos.",
+      "selectBusinessType": "Por favor, selecciona o escribe tu tipo de negocio.",
+      "selectGoal": "Por favor, selecciona al menos un objetivo.",
+      "selectContactMethod": "Por favor, elige un metodo de contacto.",
+      "acceptConsent": "Por favor, acepta los Terminos y la Politica de Privacidad para continuar."
+    }
+  },
   "legal": {
     "sidebarTitle": "Legal",
     "hubTitle": "Centro Legal e Informacion",

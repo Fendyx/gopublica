@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import { fetchPinnedNews } from '@/entities/siteNews/api/siteNewsApi';
 import type { GoPublicaNews } from '@/entities/siteNews/model/types';
+import { resolveI18n } from '@/entities/siteNews/model/types';
 import { ArrowRight, Clock } from 'lucide-react';
 
 function isExternalVideoUrl(url: string): boolean {
@@ -70,7 +71,7 @@ export default function HomeNewsSection() {
                 ) : item.coverImage ? (
                   <img
                     src={item.coverImage}
-                    alt={item.title}
+                    alt={resolveI18n(item.title, item.titleI18n, locale)}
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
@@ -97,11 +98,11 @@ export default function HomeNewsSection() {
                   </span>
                 </div>
                 <h3 className="font-semibold text-sm mb-1 group-hover:text-[var(--primary-color)] transition-colors line-clamp-2">
-                  {item.title}
+                  {resolveI18n(item.title, item.titleI18n, locale)}
                 </h3>
                 {item.excerpt && (
                   <p className="text-xs text-[var(--text-muted)] line-clamp-2 mb-2">
-                    {item.excerpt}
+                    {resolveI18n(item.excerpt, item.excerptI18n, locale)}
                   </p>
                 )}
                 {item.publishedAt && (

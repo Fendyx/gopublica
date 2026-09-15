@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useLocale } from 'next-intl';
 import { fetchPublicNews } from '@/entities/siteNews/api/siteNewsApi';
 import type { GoPublicaNews, NewsCategory } from '@/entities/siteNews/model/types';
+import { resolveI18n } from '@/entities/siteNews/model/types';
 import { Button } from '@/shared/ui/Button';
 import { ChevronRight, Clock, User, ArrowLeft } from 'lucide-react';
 
@@ -129,7 +130,7 @@ export default function NewsListPage() {
                 ) : item.coverImage ? (
                   <img
                     src={item.coverImage}
-                    alt={item.title}
+                    alt={resolveI18n(item.title, item.titleI18n, locale)}
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (
@@ -161,11 +162,11 @@ export default function NewsListPage() {
                   )}
                 </div>
                 <h3 className="font-semibold text-base mb-1 group-hover:text-[var(--primary-color)] transition-colors line-clamp-2">
-                  {item.title}
+                  {resolveI18n(item.title, item.titleI18n, locale)}
                 </h3>
                 {item.excerpt && (
                   <p className="text-sm text-[var(--text-muted)] line-clamp-2 mb-3">
-                    {item.excerpt}
+                    {resolveI18n(item.excerpt, item.excerptI18n, locale)}
                   </p>
                 )}
                 <div className="flex items-center gap-3 text-xs text-[var(--text-muted)]">

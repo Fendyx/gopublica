@@ -649,6 +649,116 @@
       }
     }
   },
+  "demoQuiz": {
+    "meta": {
+      "title": "Kostenlose Demo erhalten",
+      "description": "Beantworten Sie 3 kurze Fragen und wir bereiten eine personalisierte Demo fuer Ihr Unternehmen vor."
+    },
+    "hero": {
+      "eyebrow": "Kostenlose Demo",
+      "title": "Lass uns gemeinsam etwas Grossartiges schaffen",
+      "subtitle": "3 kurze Fragen - dauert weniger als eine Minute. Keine Kreditkarte, keine Verpflichtung."
+    },
+    "stepIndicator": {
+      "step": "Schritt",
+      "of": "von"
+    },
+    "step1": {
+      "title": "Was ist Ihr Geschaeftstyp?",
+      "subtitle": "Waehlen Sie die passendste Option - oder tippen Sie Ihre eigene ein, wenn sie nicht aufgelistet ist.",
+      "other": "Andere",
+      "otherPlaceholder": "Geben Sie Ihren Geschaeftstyp ein...",
+      "options": {
+        "restaurant": "Restaurant / Cafe",
+        "ecommerce": "E-Commerce / Einzelhandel",
+        "beautySalon": "Beauty-Salon",
+        "barbershop": "Barbershop",
+        "gym": "Fitnessstudio",
+        "hotel": "Hotel / Gastgewerbe",
+        "auto": "Auto-Services",
+        "other": "Andere"
+      }
+    },
+    "step2": {
+      "title": "Was sind Ihre Hauptziele?",
+      "subtitle": "Waehlen Sie alles Zutreffende - oder fuegen Sie Ihr eigenes hinzu.",
+      "other": "Andere",
+      "otherPlaceholder": "Geben Sie Ihr Ziel ein...",
+      "options": {
+        "onlineSales": "Online verkaufen",
+        "onlinePresence": "Online-Praesenz aufbauen",
+        "bookings": "Buchungen / Termine anbieten",
+        "leadGen": "Mehr Leads generieren",
+        "branding": "Branding verbessern",
+        "automation": "Ablaeufe automatisieren",
+        "other": "Andere"
+      }
+    },
+    "step3": {
+      "title": "Wie sollen wir Sie kontaktieren?",
+      "subtitle": "Waehlen Sie Ihren bevorzugten Kanal und teilen Sie uns Ihre Daten mit.",
+      "methods": {
+        "phone": "Telefonanruf",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram"
+      },
+      "forms": {
+        "phone": {
+          "title": "Wir rufen Sie schnell zurueck",
+          "name": "Vollstaendiger Name",
+          "namePlaceholder": "Max Mustermann",
+          "phone": "Telefonnummer",
+          "phonePlaceholder": "+49 / +48...",
+          "language": "Bevorzugte Sprache",
+          "bestTime": "Beste Anrufzeit",
+          "bestTimeOptions": {
+            "weekdayMorning": "Werktags morgens",
+            "weekdayAfternoon": "Werktags nachmittags",
+            "weekdayEvening": "Werktags abends",
+            "weekend": "Am Wochenende",
+            "anytime": "Jederzeit"
+          }
+        },
+        "whatsapp": {
+          "title": "Schreiben Sie uns auf WhatsApp",
+          "name": "Vollstaendiger Name",
+          "namePlaceholder": "Max Mustermann",
+          "phone": "WhatsApp-Nummer",
+          "phonePlaceholder": "+49 / +48..."
+        },
+        "telegram": {
+          "title": "Chatten Sie mit uns auf Telegram",
+          "name": "Vollstaendiger Name",
+          "namePlaceholder": "Max Mustermann",
+          "handle": "Telegram-Benutzername",
+          "handlePlaceholder": "@ihrname",
+          "phoneOptional": "Telefon (optional)",
+          "phonePlaceholder": "+49 / +48..."
+        }
+      },
+      "consent": "Ich stimme zu, bezueglich meiner Demo-Anfrage kontaktiert zu werden, und akzeptiere die <terms>AGB</terms> und die <privacy>Datenschutzerklaerung</privacy>."
+    },
+    "buttons": {
+      "back": "Zurueck",
+      "next": "Weiter",
+      "submit": "Demo anfordern",
+      "submitting": "Wird gesendet...",
+      "restart": "Neu starten"
+    },
+    "success": {
+      "title": "Vielen Dank! 🎉",
+      "text": "Ihre Anfrage wurde erhalten. Unser Team wird sich in Kuerze bei Ihnen melden.",
+      "cta": "Zurueck zur Startseite"
+    },
+    "errors": {
+      "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "rateLimited": "Zu viele Anfragen. Bitte versuchen Sie es in einigen Minuten erneut.",
+      "selectBusinessType": "Bitte waehlen oder tippen Sie Ihren Geschaeftstyp ein.",
+      "selectGoal": "Bitte waehlen Sie mindestens ein Ziel.",
+      "selectContactMethod": "Bitte waehlen Sie eine Kontaktmethode.",
+      "acceptConsent": "Bitte akzeptieren Sie die AGB und Datenschutzerklaerung, um fortzufahren."
+    }
+  },
   "legal": {
     "sidebarTitle": "Rechtliches",
     "hubTitle": "Rechts- & Informationszentrum",

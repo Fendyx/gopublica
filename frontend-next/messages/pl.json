@@ -648,6 +648,116 @@
       }
     }
   },
+  "demoQuiz": {
+    "meta": {
+      "title": "Otrzymaj bezplatna demo",
+      "description": "Odpowiedz na 3 krotkie pytania, a my przygotujemy spersonalizowana demo dla Twojej firmy."
+    },
+    "hero": {
+      "eyebrow": "Bezplatna demo",
+      "title": "Stworzmy razem cos wspanialego",
+      "subtitle": "3 krotkie pytania - zajmie mniej niz minute. Bez karty, bez zobowiazan."
+    },
+    "stepIndicator": {
+      "step": "Krok",
+      "of": "z"
+    },
+    "step1": {
+      "title": "Jaki jest Twoj typ dzialalnosci?",
+      "subtitle": "Wybierz najblizsza opcje - lub wpisz wlasna, jesli nie ma jej na liscie.",
+      "other": "Inne",
+      "otherPlaceholder": "Wpisz typ dzialalnosci...",
+      "options": {
+        "restaurant": "Restauracja / Kawiarnia",
+        "ecommerce": "E-commerce / Sprzedaz detaliczna",
+        "beautySalon": "Salon pieknosci",
+        "barbershop": "Barbershop",
+        "gym": "Silownia / Fitness",
+        "hotel": "Hotel / Hotelerstwo",
+        "auto": "Serwisy samochodowe",
+        "other": "Inne"
+      }
+    },
+    "step2": {
+      "title": "Jakie sa Twoje glowne cele?",
+      "subtitle": "Wybierz wszystko, co pasuje - lub dodaj wlasny.",
+      "other": "Inne",
+      "otherPlaceholder": "Wpisz swoj cel...",
+      "options": {
+        "onlineSales": "Sprzedaz online",
+        "onlinePresence": "Budowanie obecnosci online",
+        "bookings": "Rezerwacje / Wizyty",
+        "leadGen": "Generowanie wiecej leadow",
+        "branding": "Poprawa brandingu",
+        "automation": "Automatyzacja operacji",
+        "other": "Inne"
+      }
+    },
+    "step3": {
+      "title": "Jak mamy sie z Toba skontaktowac?",
+      "subtitle": "Wybierz preferowany kanal i podaj swoje dane.",
+      "methods": {
+        "phone": "Polaczenie telefoniczne",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram"
+      },
+      "forms": {
+        "phone": {
+          "title": "Szybko do Ciebie zadzwonimy",
+          "name": "Imie i nazwisko",
+          "namePlaceholder": "Jan Kowalski",
+          "phone": "Numer telefonu",
+          "phonePlaceholder": "+48 / +49...",
+          "language": "Preferowany jezyk",
+          "bestTime": "Najlepszy czas na telefon",
+          "bestTimeOptions": {
+            "weekdayMorning": "Rano w dni robocze",
+            "weekdayAfternoon": "Popoludniu w dni robocze",
+            "weekdayEvening": "Wieczorem w dni robocze",
+            "weekend": "Weekendy",
+            "anytime": "Kazdego czasu"
+          }
+        },
+        "whatsapp": {
+          "title": "Napisz do nas na WhatsApp",
+          "name": "Imie i nazwisko",
+          "namePlaceholder": "Jan Kowalski",
+          "phone": "Numer WhatsApp",
+          "phonePlaceholder": "+48 / +49..."
+        },
+        "telegram": {
+          "title": "Czatuj z nami na Telegram",
+          "name": "Imie i nazwisko",
+          "namePlaceholder": "Jan Kowalski",
+          "handle": "Nazwa uzytkownika Telegram",
+          "handlePlaceholder": "@twojanazwa",
+          "phoneOptional": "Telefon (opcjonalnie)",
+          "phonePlaceholder": "+48 / +49..."
+        }
+      },
+      "consent": "Wyrazam zgode na kontakt w sprawie mojego zapytania o demo i akceptuje <terms>Regulamin</terms> oraz <privacy>Polityke prywatnosci</privacy>."
+    },
+    "buttons": {
+      "back": "Wstecz",
+      "next": "Dalej",
+      "submit": "Zadam demo",
+      "submitting": "Wysylanie...",
+      "restart": "Zaczynaj od nowa"
+    },
+    "success": {
+      "title": "Dziekujemy! 🎉",
+      "text": "Twoje zapytanie zostalo przyjete. Nasz skontaktuje sie wkrotce.",
+      "cta": "Powrot do strony glownej"
+    },
+    "errors": {
+      "generic": "Cos poszlo nie tak. Sprobuj ponownie.",
+      "rateLimited": "Zbyt wiele zapytan. Sprobuj ponownie za kilka minut.",
+      "selectBusinessType": "Prosze wybrac lub wpisac typ dzialalnosci.",
+      "selectGoal": "Prosze wybrac co najmniej jeden cel.",
+      "selectContactMethod": "Prosze wybrac metode kontaktu.",
+      "acceptConsent": "Prosze zaakceptowac Regulamin i Polityke prywatnosci, aby kontynuowac."
+    }
+  },
   "legal": {
     "sidebarTitle": "Informacje prawne",
     "hubTitle": "Centrum informacji prawnych",

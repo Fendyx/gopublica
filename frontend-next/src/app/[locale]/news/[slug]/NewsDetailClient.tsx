@@ -23,7 +23,7 @@ function getVideoEmbedUrl(url: string): string {
 }
 
 /* ---------- Video player that adapts to any aspect ratio ---------- */
-function AdaptiveVideo({ src }: { src: string }) {
+function AdaptiveVideo({ src, poster }: { src: string; poster?: string }) {
   if (isYouTubeUrl(src) || isVimeoUrl(src)) {
     return (
       <div className="relative w-full max-w-3xl mx-auto aspect-video">
@@ -39,7 +39,9 @@ function AdaptiveVideo({ src }: { src: string }) {
   return (
     <video
       src={src}
+      poster={poster}
       controls
+      playsInline
       className="max-w-full max-h-[80vh] h-auto block object-contain rounded-xl"
       preload="metadata"
     />
@@ -151,7 +153,7 @@ export default function NewsDetailClient({ item, locale }: Props) {
         {item.mediaType === 'video' && item.videoUrl && (
           <div className="w-full lg:w-1/3 lg:max-w-[400px] shrink-0 mx-auto lg:mx-0 mb-8 lg:mb-0 lg:sticky lg:top-8">
             <div className="w-fit mx-auto lg:w-auto">
-              <AdaptiveVideo src={item.videoUrl} />
+              <AdaptiveVideo src={item.videoUrl} poster={item.coverImage || undefined} />
             </div>
           </div>
         )}
