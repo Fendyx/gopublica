@@ -8,7 +8,8 @@
     "solutionsOverview": "Alle Lösungen",
     "login": "Anmelden",
     "register": "Kostenlos starten",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "bookCall": "Termin vereinbaren"
   },
   "footer": {
     "description": "Alles, was dein kleines Unternehmen braucht, um online zu glänzen – Websites, Reservierungen, Online-Bestellungen und mehr.",
@@ -26,6 +27,11 @@
     "legalTitle": "Rechtliches",
     "terms": "AGB",
     "privacy": "Datenschutzerklärung",
+    "services": "Unsere Dienstleistungen",
+    "delivery": "Lieferinformationen",
+    "payment": "Zahlungsmethoden",
+    "imprint": "Impressum",
+    "allDocuments": "Alle Dokumente",
     "contactTitle": "Kontakt",
     "email": "support@gopublica.com",
     "location": "Kraków, Poland",
@@ -38,13 +44,10 @@
     }
   },
   "hero": {
-    "title": "Dein Business, vollständig digitalisiert",
-    "subtitle": "Eine Plattform für deine Website, CRM, Online-Bestellungen und mehr – ganz ohne Programmierung.",
-    "startFree": "Kostenlose Testphase starten",
-    "contact": "Kontaktiere uns"
-  },
-  "trust": {
-    "eyebrow": "uns vertrauen"
+    "title": "Websites, NFC-Karten & Video — Alles an einem Ort",
+    "subtitle": "Individuelle Websites, intelligente NFC-Karten und professionelle Videoproduktion für dein Business. supported by einer Plattform mit CRM, Buchung und Online-Bestellungen.",
+    "bookConsultation": "Kostenlose Beratung buchen",
+    "seeOurWork": "Unsere Arbeiten ansehen"
   },
   "pricing": {
     "eyebrow": "Preise",
@@ -394,8 +397,28 @@
     "ctaSubtitle": "Entdecke eine voll funktionsfähige Demo für Dienstleistungsunternehmen."
   },
   "home": {
+    "servicesTitle": "Was wir tun",
+    "servicesSubtitle": "Drei Kernleistungen für die Digitalisierung deines Unternehmens.",
+    "services": {
+      "websites": {
+        "title": "Individuelle Websites",
+        "desc": "Mobile-first, SEO-optimierte Websites mit integriertem CRM, Buchung und Online-Bestellungen. Kein Coding nötig."
+      },
+      "nfcCards": {
+        "title": "NFC-Karten",
+        "desc": "Intelligente NFC-Karten, die mit deinem digitalen Profil, Menü oder Portfolio verlinken. Tippen, um mit Kunden zu verbinden."
+      },
+      "video": {
+        "title": "Videoproduktion",
+        "desc": "Professionelle Videoinhalte, die dein Unternehmen präsentieren, Vertrauen aufbauen und Conversions steigern."
+      }
+    },
+    "pricingTeaserSubtitle": "Ab nur 49 €/Monat. Alles, was du für dein Online-Business brauchst.",
+    "viewAllPlans": "Alle Tarife ansehen",
+    "ctaTitle": "Bereit, dein Business zu transformieren?",
+    "ctaSubtitle": "Buche eine kostenlose 15-minütige Beratung. Wir zeigen dir, was möglich ist.",
     "solutionsTitle": "Lösungen für jede Branche",
-    "solutionsSubtitle": "Von Restaurants bis zum Auto-Tuning – wir haben alles für dich.",
+    "solutionsSubtitle": "Von Restaurants bis Autotuning – wir haben alles, was du brauchst.",
     "solutions": {
       "food": {
         "title": "Restaurants & Cafés",
@@ -578,6 +601,21 @@
         "title": "Business-Dashboard",
         "desc": "Sieh, woher deine Besucher kommen und worauf sie klicken.",
         "heroDesc": "Verstehe deinen Traffic, ohne Google Analytics anfassen zu müssen."
+      },
+      "data-compliance": {
+        "title": "Rechtskonforme Datenspeicherung",
+        "desc": "Erfasse und speichere Kundendaten rechtskonform mit integrierten DSGVO-Einwilligungsabläufen.",
+        "heroDesc": "Keine Sorgen mehr vor Bußgeldern wegen Datenschutz. Jede Einwilligung wird erfasst, gespeichert und ist prüfbar."
+      },
+      "client-crm": {
+        "title": "CRM — Verwalte deine Kunden",
+        "desc": "Speichere alle Kundendprofile, Besuchsverlauf und Nachrichten an einem Ort.",
+        "heroDesc": "Kenne jeden Kunden beim Namen. Verfolge Besuche, Präferenzen und automatisiere Nachfassungen."
+      },
+      "telegram-bot": {
+        "title": "Telegram Bot Benachrichtigungen",
+        "desc": "Erhalte sofortige Warnungen für Buchungen, Bestellungen und Zahlungen direkt in Telegram.",
+        "heroDesc": "Verpasse nie eine Reservierung oder einen Verkauf. Jedes wichtige Ereignis wird in Echtzeit auf dein Telefon gesendet."
       }
     },
     "badge": {
@@ -610,5 +648,25 @@
         }
       }
     }
+  },
+  "legal": {
+    "sidebarTitle": "Rechtliches",
+    "hubTitle": "Rechts- & Informationszentrum",
+    "hubDescription": "Alle Rechtsdokumente, Serviceinformationen und Unternehmensdaten an einem Ort.",
+    "services": "Unsere Dienstleistungen",
+    "delivery": "Lieferinformationen",
+    "payment": "Zahlungsmethoden",
+    "imprint": "Impressum",
+    "privacy": "Datenschutzerklaerung",
+    "terms": "AGB",
+    "servicesDesc": "Plattformuebersicht und Modulbeschreibungen fuer Restaurants, Salons und Werkstaetten",
+    "deliveryDesc": "Furgonetka-Lieferoptionen: Paketstationen, Kurier und Abholpunkte",
+    "paymentDesc": "Ueber 100 Zahlungsmethoden via Stripe: Karten, BLIK, Apple Pay und mehr",
+    "imprintDesc": "Unternehmensregistrierung und rechtliche Identifikation",
+    "privacyDesc": "Wie wir Ihre personenbezogenen Daten erheben, nutzen und schuetzen (DSGVO)",
+    "termsDesc": "Nutzungsbedingungen, Abrechnung und Service Level Agreement",
+    "searchPlaceholder": "Rechtsdokumente durchsuchen…",
+    "searchNoResults": "Keine Ergebnisse gefunden. Versuchen Sie andere Stichworte.",
+    "searchResultsCount": "{count, plural, =0 {Keine Ergebnisse} one {# Ergebnis} other {# Ergebnisse}}"
   }
 }

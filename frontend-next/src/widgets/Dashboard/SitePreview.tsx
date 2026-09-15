@@ -72,10 +72,10 @@ export function SitePreview({ site }: SitePreviewProps) {
             onError={handleIframeError}
             onLoad={handleIframeLoad}
             className={cn(
-              'absolute top-0 left-0 w-[400%] h-[400%] origin-top-left pointer-events-none transition-opacity duration-300',
+              'absolute top-0 left-0 w-[200%] h-[200%] origin-top-left pointer-events-none transition-opacity duration-300',
               iframeLoaded ? 'opacity-100' : 'opacity-0'
             )}
-            style={{ transform: 'scale(0.25)' }}
+            style={{ transform: 'scale(0.5)' }}
           />
           {!iframeLoaded && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-[var(--bg)]">

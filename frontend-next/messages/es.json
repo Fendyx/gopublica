@@ -8,7 +8,8 @@
     "solutionsOverview": "Todas las soluciones",
     "login": "Iniciar sesión",
     "register": "Comenzar gratis",
-    "dashboard": "Panel"
+    "dashboard": "Panel",
+    "bookCall": "Agendar una llamada"
   },
   "footer": {
     "description": "Todo lo que tu pequeña empresa necesita para brillar en línea - sitios web, reservas, pedidos en línea y más.",
@@ -26,6 +27,11 @@
     "legalTitle": "Legal",
     "terms": "Términos del servicio",
     "privacy": "Política de privacidad",
+    "services": "Nuestros Servicios",
+    "delivery": "Información de Envío",
+    "payment": "Métodos de Pago",
+    "imprint": "Aviso Legal",
+    "allDocuments": "Todos los documentos",
     "contactTitle": "Contacto",
     "email": "support@gopublica.com",
     "location": "Kraków, Poland",
@@ -38,13 +44,10 @@
     }
   },
   "hero": {
-    "title": "Tu negocio, completamente digitalizado",
-    "subtitle": "Una plataforma para tu sitio web, CRM, pedidos en línea y más - sin programación.",
-    "startFree": "Comenzar prueba gratuita",
-    "contact": "Contáctanos"
-  },
-  "trust": {
-    "eyebrow": "confían en nosotros"
+    "title": "Sitios web, tarjetas NFC y video — todo en un solo lugar",
+    "subtitle": "Sitios web personalizados, tarjetas NFC inteligentes y producción de video profesional para tu negocio. Impulsado por una plataforma con CRM, reservas y pedidos en línea.",
+    "bookConsultation": "Agendar una consultoría gratuita",
+    "seeOurWork": "Ver nuestro trabajo"
   },
   "pricing": {
     "eyebrow": "Precios",
@@ -394,6 +397,26 @@
     "ctaSubtitle": "Explora una demo funcional para negocios de servicios."
   },
   "home": {
+    "servicesTitle": "Lo que hacemos",
+    "servicesSubtitle": "Tres servicios clave para llevar tu negocio al mundo digital.",
+    "services": {
+      "websites": {
+        "title": "Sitios web personalizados",
+        "desc": "Sitios web móviles, optimizados para SEO, con CRM, reservas y pedidos en línea integrados. Sin necesidad de programación."
+      },
+      "nfcCards": {
+        "title": "Tarjetas NFC",
+        "desc": "Tarjetas NFC inteligentes que enlazan a tu perfil digital, menú o portafolio. Toca para conectar con tus clientes."
+      },
+      "video": {
+        "title": "Producción de video",
+        "desc": "Contenido de video profesional que muestra tu negocio, genera confianza y aumenta las conversiones."
+      }
+    },
+    "pricingTeaserSubtitle": "Desde solo 49 €/mes. Todo lo que necesitas para dirigir tu negocio en línea.",
+    "viewAllPlans": "Ver todos los planes",
+    "ctaTitle": "¿Listo para transformar tu negocio?",
+    "ctaSubtitle": "Agenda una consultoría gratuita de 15 minutos. Te mostraremos lo que es posible.",
     "solutionsTitle": "Soluciones para cada industria",
     "solutionsSubtitle": "Desde restaurantes hasta tuning automotriz, lo tenemos cubierto.",
     "solutions": {
@@ -578,6 +601,21 @@
         "title": "Panel de negocio",
         "desc": "Ve de dónde vienen los visitantes y en qué hacen clic.",
         "heroDesc": "Entiende tu tráfico sin tocar Google Analytics."
+      },
+      "data-compliance": {
+        "title": "Almacenamiento legal de datos",
+        "desc": "Recopila y almacena datos de clientes de forma legal con flujos de consentimiento GDPR integrados.",
+        "heroDesc": "Nunca te preocupes por multas de protección de datos. Cada consentimiento se registra, almacena y es auditable."
+      },
+      "client-crm": {
+        "title": "CRM — Gestiona tus clientes",
+        "desc": "Guarda los perfiles, historial de visitas y mensajes de tus clientes en un solo lugar.",
+        "heroDesc": "Conoce a cada cliente por su nombre. Rastrea visitas, preferencias y automatiza seguimientos."
+      },
+      "telegram-bot": {
+        "title": "Notificaciones Telegram Bot",
+        "desc": "Recibe alertas instantáneas de reservas, pedidos y pagos directamente en Telegram.",
+        "heroDesc": "Nunca pierdas una reserva o venta. Cada evento importante llega a tu teléfono en tiempo real."
       }
     },
     "badge": {
@@ -610,5 +648,25 @@
         }
       }
     }
+  },
+  "legal": {
+    "sidebarTitle": "Legal",
+    "hubTitle": "Centro Legal e Informacion",
+    "hubDescription": "Todos los documentos legales, informacion de servicios y datos de la empresa en un solo lugar.",
+    "services": "Nuestros Servicios",
+    "delivery": "Informacion de Envio",
+    "payment": "Metodos de Pago",
+    "imprint": "Aviso Legal",
+    "privacy": "Politica de Privacidad",
+    "terms": "Terminos del Servicio",
+    "servicesDesc": "Descripcion de la plataforma y modulos para restaurantes, salones y talleres",
+    "deliveryDesc": "Opciones de envio de Furgonetka: lockers, mensajero y puntos de recogida",
+    "paymentDesc": "Mas de 100 metodos de pago con Stripe: tarjetas, BLIK, Apple Pay y mas",
+    "imprintDesc": "Datos de registro de la empresa e identificacion legal",
+    "privacyDesc": "Como recopilamos, usamos y protegemos sus datos personales (RGPD)",
+    "termsDesc": "Terminos de uso, facturacion y acuerdo de nivel de servicio",
+    "searchPlaceholder": "Buscar en documentos legales…",
+    "searchNoResults": "No se encontraron resultados. Intente con otras palabras clave.",
+    "searchResultsCount": "{count, plural, =0 {Sin resultados} one {# resultado} other {# resultados}}"
   }
 }

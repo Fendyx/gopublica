@@ -10,6 +10,7 @@ import {
   Wrench,
   Globe,
   LayoutDashboard,
+  Phone,
 } from 'lucide-react';
 import LanguageSelector from '@/shared/ui/LanguageSelector';
 import { useTenantAuthStore } from '@/store/tenantAuthStore';
@@ -18,7 +19,7 @@ import { solutions, categories } from '@/content/solutions/modules';
 export default function Navbar() {
   const t = useTranslations();
   const [mounted, setMounted] = useState(false);
-  const { token } = useTenantAuthStore();
+  const token = useTenantAuthStore((s) => s.token);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -34,7 +35,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur-lg transition-colors duration-200">
+    <nav className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--surface)] transition-colors duration-200">
       {/* === MOBILE: logo + language selector only === */}
       <div className="md:hidden flex items-center justify-between px-4 py-3">
         <Link href="/" className="text-xl font-bold text-[var(--text)]">
@@ -119,6 +120,14 @@ export default function Navbar() {
               className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
             >
               {t('nav.contact')}
+            </Link>
+
+            <Link
+              href="/demo"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold px-4 py-2 rounded-lg bg-[var(--primary-color)] text-white hover:opacity-90 transition-opacity"
+            >
+              <Phone size={14} />
+              {t('nav.bookCall')}
             </Link>
 
             {mounted && token ? (

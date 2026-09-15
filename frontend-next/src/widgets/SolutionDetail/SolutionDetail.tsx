@@ -1,7 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import type { SolutionModule } from '@/content/solutions/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2 } from 'lucide-react';
+import VideoPlayer from '@/shared/ui/VideoPlayer';
 
 interface Props {
   module: SolutionModule;
@@ -64,23 +66,41 @@ export async function SolutionDetail({ module }: Props) {
             </Link>
           </div>
 
-          {/* ── Right column: video ── */}
+          {/* ── Right column: image, GIF or video ── */}
           <div className="relative">
-            {/* Subtle glow behind the video */}
+            {/* Subtle glow behind the media */}
             <div
               className="absolute -inset-4 rounded-3xl opacity-20 blur-2xl bg-brand pointer-events-none"
               aria-hidden
             />
             <div className="relative rounded-2xl overflow-hidden border border-border shadow-2xl bg-black aspect-video">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              >
-                <source src={module.videoSrc} type="video/mp4" />
-              </video>
+              {module.mediaSrc && module.mediaType !== 'video' ? (
+                module.mediaType === 'gif' ? (
+                  <img
+                    src={module.mediaSrc}
+                    alt={title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={module.mediaSrc}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
+                  />
+                )
+              ) : (
+                <VideoPlayer
+                  src={module.mediaSrc ?? module.videoSrc}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
         </div>

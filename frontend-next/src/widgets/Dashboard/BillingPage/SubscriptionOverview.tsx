@@ -47,7 +47,9 @@ interface SubscriptionOverviewProps {
 export default function SubscriptionOverview({ ipCurrency = 'EUR' }: SubscriptionOverviewProps) {
   const t = useTranslations('billing');
   const router = useRouter();
-  const { user, login, token } = useTenantAuthStore();
+  const user = useTenantAuthStore((s) => s.user);
+  const login = useTenantAuthStore((s) => s.login);
+  const token = useTenantAuthStore((s) => s.token);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

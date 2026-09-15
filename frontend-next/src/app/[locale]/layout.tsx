@@ -6,8 +6,9 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import Navbar from "@/widgets/Layout/Navbar";
 import Footer from "@/widgets/Layout/Footer";
-import MobileBottomNav from "@/widgets/Layout/MobileBottomNav";import { GoogleOAuthProvider } from '@react-oauth/google';import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import MobileBottomNav from "@/widgets/Layout/MobileBottomNav";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -80,7 +81,6 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
-        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ''}>
         <NextIntlClientProvider messages={messages}>
           <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)]">
             <Navbar />
@@ -89,7 +89,6 @@ export default async function RootLayout({
             <MobileBottomNav />
           </div>
         </NextIntlClientProvider>
-        </GoogleOAuthProvider>
         <Analytics />
         <SpeedInsights />
       </body>

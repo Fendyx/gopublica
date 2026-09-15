@@ -11,26 +11,26 @@ import { solutions as allSolutions, categories } from '@/content/solutions/modul
 
 const categoryMeta: Record<
   string,
-  { icon: typeof Utensils; videoSrc: string; gradient: string }
+  { icon: typeof Utensils; imageSrc: string; gradient: string }
 > = {
   food: {
     icon: Utensils,
-    videoSrc: '/videos/food-demo.mp4',
+    imageSrc: 'https://images.unsplash.com/photo-1622115837997-90c89ae689f9?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     gradient: 'from-orange-500/80 to-red-500/80',
   },
   beauty: {
     icon: Scissors,
-    videoSrc: '/videos/grooming-demo.mp4',
+    imageSrc: 'https://images.unsplash.com/photo-1633681926035-ec1ac984418a?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     gradient: 'from-pink-500/80 to-purple-500/80',
   },
   auto: {
     icon: Wrench,
-    videoSrc: '/videos/beautysalon-demo.mp4',
+    imageSrc: 'https://images.unsplash.com/photo-1625047509248-ec889cbff17f?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     gradient: 'from-blue-500/80 to-cyan-500/80',
   },
   universal: {
     icon: Globe,
-    videoSrc: '',
+    imageSrc: '',
     gradient: 'from-slate-600/80 to-slate-800/80',
   },
 };
@@ -62,17 +62,15 @@ function CategoryCard({
       >
         {/* Media background */}
         <div className="absolute inset-0 w-full h-full">
-          {catId === 'universal' ? (
-            <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
-          ) : (
-            <video
-              src={meta.videoSrc}
-              autoPlay
-              loop
-              muted
-              playsInline
+          {meta.imageSrc ? (
+            <img
+              src={meta.imageSrc}
+              alt={t(`categories.${catId}`)}
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
             />
+          ) : (
+            <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
           )}
         </div>
 
@@ -124,17 +122,15 @@ function MobileCategoryCard({ catId }: { catId: string }) {
       className="group relative block overflow-hidden rounded-2xl aspect-[4/3] bg-[var(--bg)] border border-[var(--border)] transition-all duration-500 hover:-translate-y-1 hover:shadow-xl snap-start shrink-0 w-[85%]"
     >
       <div className="absolute inset-0 w-full h-full">
-        {catId === 'universal' ? (
-          <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
-        ) : (
-          <video
-            src={meta.videoSrc}
-            autoPlay
-            loop
-            muted
-            playsInline
+        {meta.imageSrc ? (
+          <img
+            src={meta.imageSrc}
+            alt={t(`categories.${catId}`)}
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
           />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-br ${meta.gradient}`} />
         )}
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-75" />

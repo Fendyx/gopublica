@@ -24,7 +24,8 @@ export default function DashboardLayout({
 }) {
   const t = useTranslations('dashboard');
   const pathname = usePathname();
-  const { logout, user } = useTenantAuthStore();
+  const logout = useTenantAuthStore((s) => s.logout);
+  const user = useTenantAuthStore((s) => s.user);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -114,7 +115,7 @@ export default function DashboardLayout({
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="sticky top-0 z-30 bg-[var(--surface)]/80 backdrop-blur-md border-b border-[var(--border)]/60 px-6 py-4 flex items-center gap-4">
+        <header className="sticky top-0 z-30 bg-[var(--surface)] border-b border-[var(--border)]/60 px-6 py-4 flex items-center gap-4">
           <button
             className="lg:hidden p-1 hover:opacity-70 transition-opacity"
             onClick={() => setSidebarOpen(true)}

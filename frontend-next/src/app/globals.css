@@ -143,12 +143,40 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideUp {
+  from { transform: translateY(80px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-shape-1,
+  .hero-shape-2,
+  .hero-shape-3 {
+    animation: none !important;
+  }
+}
+
 @keyframes tm-scroll {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-100% / 3)); }
 }
 
-/* ===== ШАРЫ HERO ===== */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Dark theme — gradient + blobs */
+.hero-gradient {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%) !important;
+}
+
+/* ===== HERO BLOBS ===== */
 .hero-shape-1 {
   background: radial-gradient(circle at 30% 40%, #60a5fa, #7c3aed, #06b6d4, #2563eb);
   background-size: 300% 300%;
@@ -179,19 +207,12 @@ body {
     iridescent3 15s linear infinite;
 }
 
-/* Тёмная тема – вертикальный градиент для hero-фона */
-[data-theme="dark"] .hero-gradient {
-  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-}
-
-/* Увеличиваем яркость шаров в тёмной теме */
+/* Dark theme — brighter blobs */
 [data-theme="dark"] .hero-shape-1,
 [data-theme="dark"] .hero-shape-2,
 [data-theme="dark"] .hero-shape-3 {
   opacity: 0.4;
 }
-
-.scrollbar-hide::-webkit-scrollbar { display: none; }
 
 /* Safe area insets for mobile bottom nav */
 .pb-safe {

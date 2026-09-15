@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { privacyEn } from '@/content/legal/privacy-en';
+import { getLegalContent } from '@/content/legal';
 import LegalPage from '@/widgets/LegalPage/LegalPage';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -30,7 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const content = getLegalContent(locale, 'privacy');
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -49,7 +52,7 @@ export default function PrivacyPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LegalPage content={privacyEn} />
+      <LegalPage content={content} />
     </>
   );
 }

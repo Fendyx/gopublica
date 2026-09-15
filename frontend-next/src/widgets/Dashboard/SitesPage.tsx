@@ -41,7 +41,8 @@ function EmptyState() {
 export default function SitesPage() {
   const t = useTranslations('sites');
   const router = useRouter();
-  const { token, user } = useTenantAuthStore();
+  const token = useTenantAuthStore((s) => s.token);
+const user = useTenantAuthStore((s) => s.user);
   const [sites, setSites] = useState<Site[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { ExternalLink } from 'lucide-react';
+import VideoPlayer from '@/shared/ui/VideoPlayer';
 
 type Feature = {
   key: string;
@@ -24,17 +25,15 @@ export default function AgencyDemoPage({ namespace, videoSrc, posterSrc, demoUrl
     <div>
       {/* Sticky-видео */}
       <div className="sticky top-0 h-screen overflow-hidden z-0">
-        <video
+        <VideoPlayer
+          src={videoSrc}
+          poster={posterSrc}
           autoPlay
           muted
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          poster={posterSrc}
-        >
-          <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        />
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
           <div className="text-center text-white px-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">{t('heroTitle')}</h1>

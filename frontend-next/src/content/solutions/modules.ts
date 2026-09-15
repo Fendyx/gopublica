@@ -7,8 +7,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.qrMenu.title',
     descriptionKey: 'solutions.modules.qrMenu.desc',
     category: 'food',
-    badge: 'included',
     videoSrc: '/videos/qr-menu-preview.mp4',
+    mediaSrc: '/images/solutions/qr-menu.jpg',
     slug: 'qr-menu',
     tags: ['menu', 'qr']
   },
@@ -17,8 +17,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.reservations.title',
     descriptionKey: 'solutions.modules.reservations.desc',
     category: 'food',
-    badge: 'premium',
     videoSrc: '/videos/reservations-preview.mp4',
+    mediaSrc: '/images/solutions/reservations.png',
     slug: 'reservations',
     tags: ['booking', 'table']
   },
@@ -27,8 +27,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.onlineOrdering.title',
     descriptionKey: 'solutions.modules.onlineOrdering.desc',
     category: 'food',
-    badge: 'included',
     videoSrc: '/videos/online-ordering-preview.mp4',
+    mediaSrc: '/images/solutions/ordering.jpg',
     slug: 'online-ordering',
     tags: ['takeout', 'delivery']
   },
@@ -38,8 +38,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.appointments.title',
     descriptionKey: 'solutions.modules.appointments.desc',
     category: 'beauty',
-    badge: 'premium',
     videoSrc: '/videos/appointments-preview.mp4',
+    mediaSrc: '/images/solutions/appointments.jpg',
     slug: 'appointments',
     tags: ['booking', 'staff']
   },
@@ -48,8 +48,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.staffManagement.title',
     descriptionKey: 'solutions.modules.staffManagement.desc',
     category: 'beauty',
-    badge: 'included',
     videoSrc: '/videos/staff-management-preview.mp4',
+    mediaSrc: '/images/solutions/staff_management.jpg',
     slug: 'staff-management',
     tags: ['team']
   },
@@ -58,8 +58,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.portfolio.title',
     descriptionKey: 'solutions.modules.portfolio.desc',
     category: 'beauty',
-    badge: 'included',
     videoSrc: '/videos/portfolio-preview.mp4',
+    mediaSrc: '/images/solutions/portfolio.jpg',
     slug: 'portfolio',
     tags: ['gallery']
   },
@@ -69,8 +69,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.quoteEstimator.title',
     descriptionKey: 'solutions.modules.quoteEstimator.desc',
     category: 'auto',
-    badge: 'premium',
     videoSrc: '/videos/quote-estimator-preview.mp4',
+    mediaSrc: '/images/solutions/quote-estimator.jpg',
     slug: 'quote-estimator',
     tags: ['lead']
   },
@@ -79,8 +79,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.beforeAfter.title',
     descriptionKey: 'solutions.modules.beforeAfter.desc',
     category: 'auto',
-    badge: 'included',
     videoSrc: '/videos/before-after-preview.mp4',
+    mediaSrc: '/images/solutions/before-after.jpg',
     slug: 'before-after',
     tags: ['gallery']
   },
@@ -89,19 +89,49 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.serviceRequest.title',
     descriptionKey: 'solutions.modules.serviceRequest.desc',
     category: 'auto',
-    badge: 'included',
     videoSrc: '/videos/service-request-preview.mp4',
+    mediaSrc: '/images/solutions/service-request.jpg',
     slug: 'service-request',
     tags: ['lead', 'photo']
   },
   // 🏢 Универсальные
   {
+    id: 'data-compliance',
+    titleKey: 'solutions.modules.dataCompliance.title',
+    descriptionKey: 'solutions.modules.dataCompliance.desc',
+    category: 'universal',
+    videoSrc: '/videos/data-compliance-preview.mp4',
+    mediaSrc: '/images/solutions/data-compliance.jpg',
+    slug: 'data-compliance',
+    tags: ['gdpr', 'privacy', 'consent']
+  },
+  {
+    id: 'client-crm',
+    titleKey: 'solutions.modules.clientCrm.title',
+    descriptionKey: 'solutions.modules.clientCrm.desc',
+    category: 'universal',
+    videoSrc: '/videos/client-crm-preview.mp4',
+    mediaSrc: '/images/solutions/.jpg',
+    slug: 'client-crm',
+    tags: ['crm', 'clients', 'manage']
+  },
+  {
+    id: 'telegram-bot',
+    titleKey: 'solutions.modules.telegramBot.title',
+    descriptionKey: 'solutions.modules.telegramBot.desc',
+    category: 'universal',
+    videoSrc: '/videos/telegram-bot-preview.mp4',
+    mediaSrc: '/images/solutions/telegrambot.jpg',
+    slug: 'telegram-bot',
+    tags: ['telegram', 'notifications', 'bot']
+  },
+  {
     id: 'careers',
     titleKey: 'solutions.modules.careers.title',
     descriptionKey: 'solutions.modules.careers.desc',
     category: 'universal',
-    badge: 'included',
     videoSrc: '/videos/careers-preview.mp4',
+    mediaSrc: '/images/solutions/careers.jpg',
     slug: 'careers',
     tags: ['hiring']
   },
@@ -110,8 +140,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.reviewBooster.title',
     descriptionKey: 'solutions.modules.reviewBooster.desc',
     category: 'universal',
-    badge: 'included',
     videoSrc: '/videos/review-booster-preview.mp4',
+    mediaSrc: '/images/solutions/review-booster.jpg',
     slug: 'review-booster',
     tags: ['reputation']
   },
@@ -120,8 +150,8 @@ export const solutions: SolutionModule[] = [
     titleKey: 'solutions.modules.analytics.title',
     descriptionKey: 'solutions.modules.analytics.desc',
     category: 'universal',
-    badge: 'included',
     videoSrc: '/videos/analytics-preview.mp4',
+    mediaSrc: '/images/solutions/analytics.jpg',
     slug: 'analytics',
     tags: ['dashboard']
   }

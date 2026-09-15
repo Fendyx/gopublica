@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 interface Props {
   onTermsChange: (checked: boolean) => void;
@@ -28,7 +28,7 @@ export default function ConsentCheckboxes({
         />
         <span className="text-sm text-[var(--text-muted)]">
           I accept the{' '}
-          <Link href="/terms" target="_blank" className="underline hover:text-[var(--primary-color)]">
+          <Link href="/legal/terms" target="_blank" className="underline hover:text-[var(--primary-color)]">
             Terms of Service
           </Link>
         </span>
@@ -43,7 +43,7 @@ export default function ConsentCheckboxes({
         />
         <span className="text-sm text-[var(--text-muted)]">
           I have read and understood the{' '}
-          <Link href="/privacy" target="_blank" className="underline hover:text-[var(--primary-color)]">
+          <Link href="/legal/privacy" target="_blank" className="underline hover:text-[var(--primary-color)]">
             Privacy Policy
           </Link>
         </span>

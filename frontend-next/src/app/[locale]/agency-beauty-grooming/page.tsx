@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/shared/ui/Button';
 import { ExternalLink, Scissors, Dog, Award } from 'lucide-react';
+import VideoPlayer from '@/shared/ui/VideoPlayer';
 
 const FEATURE_ICONS = {
   onlineBooking: Scissors,
@@ -32,16 +33,15 @@ export default function GroomingPage() {
     <div className="relative w-full">
       {/* ── ВИДЕО (STICKY) ── */}
       <div className="sticky left-0 top-0 z-0 h-screen w-full overflow-hidden">
-        <video
+        <VideoPlayer
+          src="/videos/grooming-demo.mp4"
+          poster="/videos/grooming-poster.jpg"
           autoPlay
           muted
           loop
           playsInline
           className="absolute inset-0 h-full w-full object-cover"
-          poster="/videos/grooming-poster.jpg"
-        >
-          <source src="/videos/grooming-demo.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/65" />
       </div>
 

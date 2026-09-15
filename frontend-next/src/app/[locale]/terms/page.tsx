@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { termsEn } from '@/content/legal/terms-en';
+import { getLegalContent } from '@/content/legal';
 import LegalPage from '@/widgets/LegalPage/LegalPage';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -30,7 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function TermsPage() {
+export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const content = getLegalContent(locale, 'terms');
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -49,7 +52,7 @@ export default function TermsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LegalPage content={termsEn} />
+      <LegalPage content={content} />
     </>
   );
 }

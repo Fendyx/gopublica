@@ -11,7 +11,7 @@ import BillingHistory from './BillingPage/BillingHistory';
 
 export default function BillingPage({ ipCurrency = 'EUR' }: { ipCurrency?: string }) {
   const t = useTranslations('billing');
-  const { user } = useTenantAuthStore();
+  const user = useTenantAuthStore((s) => s.user);
   const [mounted, setMounted] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
   const [invoices, setInvoices] = useState<Invoice[]>([]);

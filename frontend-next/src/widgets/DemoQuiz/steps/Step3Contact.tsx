@@ -4,7 +4,7 @@
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Phone, MessageCircle, Send, type LucideProps } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useDemoQuizStore } from '@/features/demoQuiz/model/demoQuizStore';
 import { CONTACT_METHODS } from '@/features/demoQuiz/model/schema';
 import type { ContactMethod } from '@/entities/demoRequest/model/types';
@@ -98,7 +98,7 @@ export default function Step3Contact() {
           {t.rich('step3.consent', {
             terms: (chunks) => (
               <Link
-                href="/terms"
+                href="/legal/terms"
                 target="_blank"
                 className="font-semibold text-[var(--primary-color)] underline hover:opacity-80"
               >
@@ -107,7 +107,7 @@ export default function Step3Contact() {
             ),
             privacy: (chunks) => (
               <Link
-                href="/privacy"
+                href="/legal/privacy"
                 target="_blank"
                 className="font-semibold text-[var(--primary-color)] underline hover:opacity-80"
               >

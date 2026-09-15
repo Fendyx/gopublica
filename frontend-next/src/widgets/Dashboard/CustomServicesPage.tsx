@@ -12,7 +12,7 @@ import PaymentModal from './CustomServicesPage/PaymentModal';
 
 export default function CustomServicesPage() {
   const t = useTranslations('customServices');
-  const { user } = useTenantAuthStore();
+  const user = useTenantAuthStore((s) => s.user);
   const [services, setServices] = useState<CustomService[]>([]);
   const [loading, setLoading] = useState(true);
   const [payingService, setPayingService] = useState<CustomService | null>(null);

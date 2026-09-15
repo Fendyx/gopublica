@@ -11,7 +11,7 @@ import ConsentCheckboxes from '@/shared/ui/ConsentCheckboxes';
 export default function RegisterClientForm() {
   const t = useTranslations('register');
   const router = useRouter();
-  const { login } = useTenantAuthStore();
+  const login = useTenantAuthStore((s) => s.login);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl';
 import { useAuthStore } from '@/store/authStore';
 import {
   LayoutDashboard, Users, FileText, Settings, Menu, X, LogOut,
-  Target, Package, ShoppingCart, Megaphone, Wrench,
+  Target, Package, ShoppingCart, Megaphone, Wrench, Newspaper, Building2,
 } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 
@@ -15,7 +15,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
-  const { token, user, logout } = useAuthStore();
+  const token = useAuthStore((s) => s.token);
+  const user = useAuthStore((s) => s.user);
+  const logout = useAuthStore((s) => s.logout);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -40,6 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const navItems = [
     { href: `/${locale}/admin`, label: 'Dashboard', icon: LayoutDashboard },
+    { href: `/${locale}/admin/tenants`, label: 'Tenants', icon: Building2 },
     { href: `/${locale}/admin/leads`, label: 'Leads', icon: Target },
     { href: `/${locale}/admin/clients`, label: 'Clients', icon: Users },
     { href: `/${locale}/admin/custom-services`, label: 'Custom Services', icon: Wrench },
@@ -47,6 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { href: `/${locale}/admin/platform-products`, label: 'Platform Products', icon: Package },
     { href: `/${locale}/admin/platform-orders`, label: 'Platform Orders', icon: ShoppingCart },
     { href: `/${locale}/admin/platform-news`, label: 'Platform News', icon: Megaphone },
+    { href: `/${locale}/admin/site-news`, label: 'Site News', icon: Newspaper },
     { href: `/${locale}/admin/settings`, label: 'Settings', icon: Settings },
   ];
 

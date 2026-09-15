@@ -1,9 +1,9 @@
-export const termsEn = `
+export const termsPl = `
 # REGULAMIN ŚWIADCZENIA USŁUG (TERMS OF SERVICE)
 
 **Ostatnia aktualizacja: 10 czerwca 2026 r.**
 
-Witamy w GoPublica! Rejestrując konto lub korzystając z naszych usług, wyrażasz zgodę na niniejszy Regulamin. 
+Witamy w GoPublica! Rejestrując konto lub korzystając z naszych usług, wyrażasz zgodę na niniejszy Regulamin.
 
 Pojęcia "my", "nasze" i "GoPublica" odnoszą się do **GoPublica Andrii Knapp**, firmy zarejestrowanej w Polsce, NIP: 6772525332, kontakt: **support@gopublica.com**. "Ty" lub "Klient" oznacza podmiot gospodarczy, firmę lub jednoosobową działalność gospodarczą korzystającą z Usług.
 

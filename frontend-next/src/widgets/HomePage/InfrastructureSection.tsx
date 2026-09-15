@@ -198,18 +198,20 @@ function CheckoutMockup() {
 function PaymentsSection() {
   const t = useTranslations('home.infrastructure');
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: false, margin: '-100px' });
 
   return (
     <section
       ref={ref}
       className="relative overflow-hidden bg-[#0a0f1e] py-24 md:py-32"
     >
-      {/* Background gradient orbs */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-40 top-1/4 h-80 w-80 rounded-full bg-[var(--primary-color)]/10 blur-[100px]" />
-        <div className="absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-violet-500/10 blur-[100px]" />
-      </div>
+      {/* Background gradient orbs (only render when in view) */}
+      {isInView && (
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -left-40 top-1/4 h-80 w-80 rounded-full bg-[var(--primary-color)]/10 blur-[100px]" />
+          <div className="absolute -right-32 bottom-1/4 h-64 w-64 rounded-full bg-violet-500/10 blur-[100px]" />
+        </div>
+      )}
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="flex flex-col items-center gap-16 md:flex-row md:items-center md:justify-between">
@@ -220,9 +222,6 @@ function PaymentsSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-[var(--primary-color)]">
-              {t('payments.eyebrow')}
-            </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-8 leading-[1.1]">
               {t('payments.title')}
               <br />
@@ -283,9 +282,11 @@ const logisticsLogos = [
   { Logo: LogoAmbroExpress, label: 'Ambro Express' },
 ];
 
-function LogoMarqueeRow({ reverse = false, speed = 30 }: { reverse?: boolean; speed?: number }) {
+function LogoMarqueeRow({ reverse = false, speed = 30, paused = false }: { reverse?: boolean; speed?: number; paused?: boolean }) {
   // 4× duplication for seamless loop
   const items = [...logisticsLogos, ...logisticsLogos, ...logisticsLogos, ...logisticsLogos];
+
+  if (paused) return null;
 
   return (
     <div className="relative flex overflow-hidden">
@@ -463,7 +464,7 @@ function DeliveryRouteSVG() {
 function LogisticsSection() {
   const t = useTranslations('home.infrastructure');
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isInView = useInView(ref, { once: false, margin: '-80px' });
 
   return (
     <section
@@ -475,7 +476,7 @@ function LogisticsSection() {
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.1]">
@@ -483,26 +484,30 @@ function LogisticsSection() {
           </h2>
         </motion.div>
 
-        {/* Logo marquee - top row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <LogoMarqueeRow speed={28} />
-        </motion.div>
+        {/* Logo marquee - top row (unmounts when off-screen to stop infinite animation) */}
+        {isInView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <LogoMarqueeRow speed={28} />
+          </motion.div>
+        )}
 
         {/* Delivery route SVG */}
         <DeliveryRouteSVG />
 
-        {/* Logo marquee - bottom row (reversed) */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <LogoMarqueeRow reverse speed={32} />
-        </motion.div>
+        {/* Logo marquee - bottom row (reversed, unmounts when off-screen) */}
+        {isInView && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <LogoMarqueeRow reverse speed={32} />
+          </motion.div>
+        )}
       </div>
     </section>
   );

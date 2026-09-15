@@ -166,7 +166,9 @@ export default function SubscribeForm() {
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
 
-  const { token, user, login } = useTenantAuthStore();
+  const token = useTenantAuthStore((s) => s.token);
+  const user = useTenantAuthStore((s) => s.user);
+  const login = useTenantAuthStore((s) => s.login);
   const isGuest = !token;
 
   const [loading, setLoading] = useState(false);

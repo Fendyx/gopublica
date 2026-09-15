@@ -8,7 +8,7 @@ import { useAuthStore } from '@/store/authStore';
 export default function AdminLoginForm() {
   const router = useRouter();
   const locale = useLocale();
-  const { login } = useAuthStore();
+  const login = useAuthStore((s) => s.login);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

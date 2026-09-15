@@ -11,7 +11,7 @@ import { type Lead, type LeadStatus } from '@/entities/lead/model/types';
 import { useAuthStore } from '@/store/authStore';
 
 export default function LeadsCRMPage() {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<LeadStatus | 'All'>('All');

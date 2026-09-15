@@ -11,7 +11,7 @@ import { GoogleLogin } from '@react-oauth/google';
 export default function LoginClientForm() {
   const t = useTranslations('auth');
   const router = useRouter();
-  const { login } = useTenantAuthStore();
+  const login = useTenantAuthStore((s) => s.login);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

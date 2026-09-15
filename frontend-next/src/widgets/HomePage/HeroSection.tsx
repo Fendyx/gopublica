@@ -3,62 +3,58 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { Button } from "@/shared/ui/Button";
-import { Rocket, Mail, ArrowRight } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
 
 export default function HeroSection() {
   const t = useTranslations("hero");
 
   return (
     <section className="relative overflow-hidden border-b border-[var(--border)] py-32 px-6 text-center">
-      {/* Фоновый градиент с анимацией */}
+      {/* Gradient background + blobs */}
       <div className="hero-gradient absolute inset-0 z-0 bg-gradient-to-br from-[var(--surface)] via-[var(--bg)] to-blue-100/20 dark:to-blue-900/20 animate-gradientShift bg-[size:200%_200%]">
-        {/* Шар 1 */}
         <div className="absolute top-[-15%] left-[-10%] w-[450px] h-[450px] rounded-full hero-shape-1 opacity-60 blur-3xl" />
-        {/* Шар 2 */}
         <div className="absolute bottom-[5%] right-[-10%] w-[350px] h-[350px] hero-shape-2 opacity-50 blur-3xl" />
-        {/* Шар 3 */}
         <div className="absolute top-[40%] left-[45%] w-[280px] h-[280px] rounded-full hero-shape-3 opacity-40 blur-3xl" />
       </div>
 
-      {/* Скрим - гасит фон именно под текстом, не влияя на декор по краям */}
+      {/* Scrim — softens background behind text only */}
       <div
         className="absolute inset-0 z-[5] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 40%, var(--surface) 0%, transparent 75%)",
+            'radial-gradient(ellipse 70% 60% at 50% 40%, var(--surface) 0%, transparent 75%)',
           opacity: 0.75,
         }}
       />
 
-      {/* Контент */}
+      {/* Content */}
       <div className="relative z-10 max-w-3xl mx-auto">
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text)] mb-6 animate-fadeUp [text-shadow:0_2px_20px_var(--surface)]">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text)] mb-6 animate-fadeUp">
           {t("title")}
         </h1>
         <p className="text-lg sm:text-xl text-[var(--text-muted)] mb-10 max-w-2xl mx-auto animate-fadeUp [animation-delay:100ms]">
           {t("subtitle")}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeUp [animation-delay:200ms]">
-          <Link href="/pricing" className="w-full sm:w-auto">
+          <Link href="/demo" className="w-full sm:w-auto">
             <Button
               size="lg"
               className="gap-2 w-full sm:w-auto bg-[var(--primary-color)] hover:bg-blue-700 text-white shadow-lg shadow-[var(--primary-color)]/20"
             >
-              <Rocket size={18} />
-              {t("startFree")}
+              {t("bookConsultation")}
               <ArrowRight size={16} />
             </Button>
           </Link>
-          <Link href="/contact" className="w-full sm:w-auto">
+          {/* <Link href="/pricing" className="w-full sm:w-auto">
             <Button
               variant="outline"
               size="lg"
               className="gap-2 w-full sm:w-auto border-[var(--border)] bg-[var(--surface)]/90 backdrop-blur-sm text-[var(--text)] hover:bg-[var(--surface)] hover:border-[var(--primary-color)]"
             >
-              <Mail size={18} />
-              {t("contact")}
+              <Eye size={18} />
+              {t("seeOurWork")}
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>

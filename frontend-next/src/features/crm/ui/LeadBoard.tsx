@@ -26,7 +26,7 @@ const SortIcon = ({ col, sortBy, sortDir }: { col: SortBy; sortBy: SortBy; sortD
 };
 
 export default function LeadBoard({ leads, loading, filter, onFilterChange, onSelectLead, onLeadUpdated }: Props) {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
   const [sortBy, setSortBy] = useState<SortBy>('date');
   const [sortDir, setSortDir] = useState<SortDir>('desc');
 

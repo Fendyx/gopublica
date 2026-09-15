@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import { SiInstagram, SiTiktok, SiTelegram, SiYoutube } from 'react-icons/si';
 import { solutions } from '@/content/solutions/modules';
@@ -140,7 +140,15 @@ export default async function Footer({ className }: { className?: string } = {})
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/terms"
+                    href="/legal"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
+                  >
+                    {t('footer.allDocuments')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/legal/terms"
                     className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
                   >
                     {t('footer.terms')}
@@ -148,10 +156,42 @@ export default async function Footer({ className }: { className?: string } = {})
                 </li>
                 <li>
                   <Link
-                    href="/privacy"
+                    href="/legal/privacy"
                     className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
                   >
                     {t('footer.privacy')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/legal/services"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
+                  >
+                    {t('footer.services')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/legal/delivery"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
+                  >
+                    {t('footer.delivery')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/legal/payment"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
+                  >
+                    {t('footer.payment')}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/legal/imprint"
+                    className="text-sm text-[var(--text-muted)] hover:text-[var(--primary-color)] transition-colors"
+                  >
+                    {t('footer.imprint')}
                   </Link>
                 </li>
               </ul>

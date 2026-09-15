@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default function LeadForm({ onSave, onCancel, initialData, isEdit = false }: Props) {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
   const [form, setForm] = useState(initialData ?? EMPTY(user?.id || ''));
   const [admins, setAdmins] = useState<AdminUser[]>([]);
   const [saving, setSaving] = useState(false);

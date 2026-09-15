@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { solutions, categories } from '@/content/solutions/modules';
 import { PillNav } from './PillNav';
-import { SolutionsGrid } from './SolutionsGrid';
+import { SolutionsList } from './SolutionsList';
 
 export function SolutionsHub() {
   const t = useTranslations('solutions');
@@ -27,7 +27,7 @@ export function SolutionsHub() {
         onChange={setActiveCategory}
         labelFn={(cat) => t(`categories.${cat.id}`)}
       />
-      <SolutionsGrid solutions={filteredSolutions} />
+            <SolutionsList solutions={filteredSolutions} />
     </div>
   );
 }

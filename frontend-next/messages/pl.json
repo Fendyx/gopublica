@@ -8,7 +8,8 @@
     "solutionsOverview": "Wszystkie rozwiązania",
     "login": "Zaloguj się",
     "register": "Zacznij za darmo",
-    "dashboard": "Panel"
+    "dashboard": "Panel",
+    "bookCall": "Umów rozmowę"
   },
   "footer": {
     "description": "Wszystko, czego Twoja mała firma potrzebuje, by zabłysnąć online - strony internetowe, rezerwacje, zamówienia online i wiele więcej.",
@@ -26,6 +27,11 @@
     "legalTitle": "Informacje prawne",
     "terms": "Regulamin",
     "privacy": "Polityka prywatności",
+    "services": "Nasze usługi",
+    "delivery": "Informacje o dostawie",
+    "payment": "Metody płatności",
+    "imprint": "Impressum",
+    "allDocuments": "Wszystkie dokumenty",
     "contactTitle": "Kontakt",
     "email": "support@gopublica.com",
     "location": "Kraków, Poland",
@@ -38,13 +44,10 @@
     }
   },
   "hero": {
-    "title": "Twój biznes, w pełni zdigitalizowany",
-    "subtitle": "Jedna platforma dla Twojej strony, CRM, zamówień online i więcej - bez kodowania.",
-    "startFree": "Rozpocznij darmowy okres próbny",
-    "contact": "Skontaktuj się z nami"
-  },
-  "trust": {
-    "eyebrow": "zaufali nam"
+    "title": "Strony, karty NFC i video — wszystko w jednym miejscu",
+    "subtitle": "Niestandardowe strony internetowe, inteligentne karty NFC i profesjonalna produkcja wideo dla Twojej firmy. Platforma z CRM, rezerwacjami i zamówieniami online.",
+    "bookConsultation": "Umów bezpłatną konsultację",
+    "seeOurWork": "Zobacz nasze realizacje"
   },
   "pricing": {
     "eyebrow": "Cennik",
@@ -393,7 +396,26 @@
     "ctaTitle": "Gotowy zobaczyć to na żywo?",
     "ctaSubtitle": "Poznaj w pełni działające demo dla firm usługowych."
   },
-  "home": {
+  "home": {    "servicesTitle": "Co robimy",
+    "servicesSubtitle": "Trzy kluczowe usługi, aby przenieść Twój biznes do świata cyfrowego.",
+    "services": {
+      "websites": {
+        "title": "Niestandardowe strony internetowe",
+        "desc": "Mobilne, zoptymalizowane pod SEO strony z wbudowanym CRM, rezerwacjami i zamówieniami online. Bez kodowania."
+      },
+      "nfcCards": {
+        "title": "Karty NFC",
+        "desc": "Inteligentne karty NFC łączące z Twoim profilem cyfrowym, menu lub portfolio. Dotknij, aby połączyć się z klientami."
+      },
+      "video": {
+        "title": "Produkcja wideo",
+        "desc": "Profesjonalne treści wideo, które prezentują Twoją firmę, budują zaufanie i zwiększają konwersje."
+      }
+    },
+    "pricingTeaserSubtitle": "Już od 49 €/mies. Wszystko, czego potrzebujesz do prowadzenia firmy online.",
+    "viewAllPlans": "Zobacz wszystkie plany",
+    "ctaTitle": "Gotowy na transformację swojej firmy?",
+    "ctaSubtitle": "Umów bezpłatną 15-minutową konsultację. Pokażemy Ci, co jest możliwe.",
     "solutionsTitle": "Rozwiązania dla każdej branży",
     "solutionsSubtitle": "Od restauracji po tuning samochodowy – mamy wszystko, czego potrzebujesz.",
     "solutions": {
@@ -578,6 +600,21 @@
         "title": "Panel biznesowy",
         "desc": "Zobacz, skąd pochodzą odwiedzający i w co klikają.",
         "heroDesc": "Zrozum swój ruch bez dotykania Google Analytics."
+      },
+      "data-compliance": {
+        "title": "Legalne przechowywanie danych",
+        "desc": "Zbieraj i przechowuj dane klientów legalnie dzięki wbudowanym przepływom zgód RODO.",
+        "heroDesc": "Nigdy nie martw się o kary za ochronę danych. Każda zgoda jest zapisywana, przechowywana i możliwa do audytu."
+      },
+      "client-crm": {
+        "title": "CRM — Zarządzaj swoimi klientami",
+        "desc": "Przechowuj profile klientów, historię wizyt i wiadomości w jednym miejscu.",
+        "heroDesc": "Znaj każdego klienta po imieniu. Śledź wizyty, preferencje i automatyzuj follow-upy."
+      },
+      "telegram-bot": {
+        "title": "Powiadomienia Telegram Bot",
+        "desc": "Otrzymuj natychmiastowe alerty o rezerwacjach, zamówieniach i płatnościach bezpośrednio w Telegramie.",
+        "heroDesc": "Nigdy nie przegap rezerwacji ani sprzedaży. Każde ważne zdarzenie trafia na Twój telefon w czasie rzeczywistym."
       }
     },
     "badge": {
@@ -610,5 +647,25 @@
         }
       }
     }
+  },
+  "legal": {
+    "sidebarTitle": "Informacje prawne",
+    "hubTitle": "Centrum informacji prawnych",
+    "hubDescription": "Wszystkie dokumenty prawne, informacje o uslugach i dane firmowe w jednym miejscu.",
+    "services": "Nasze uslugi",
+    "delivery": "Informacje o dostawie",
+    "payment": "Metody platnosci",
+    "imprint": "Impressum",
+    "privacy": "Polityka prywatnosci",
+    "terms": "Regulamin",
+    "servicesDesc": "Przeglad platformy i opisy modulow dla restauracji, salonow i warsztatow",
+    "deliveryDesc": "Opcje dostawy Furgonetka: paczkomaty, kurier i punkty odbioru",
+    "paymentDesc": "Ponad 100 metod platnosci przez Stripe: karty, BLIK, Apple Pay i inne",
+    "imprintDesc": "Dane rejestracyjne firmy i identyfikacja prawna",
+    "privacyDesc": "Jak zbieramy, wykorzystujemy i chronimy Twoje dane osobowe (RODO)",
+    "termsDesc": "Warunki korzystania z platformy, rozliczenia i gwarancja poziomu uslugi",
+    "searchPlaceholder": "Szukaj w dokumentach prawnych…",
+    "searchNoResults": "Nie znaleziono wynikow. Sprobuj innych slow kluczowych.",
+    "searchResultsCount": "{count, plural, =0 {Brak wynikow} one {# wynik} few {# wyniki} many {# wynikow} other {# wynikow}}"
   }
 }

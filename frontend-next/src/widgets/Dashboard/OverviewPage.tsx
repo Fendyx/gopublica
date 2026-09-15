@@ -9,7 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/Card';
 export default function DashboardOverview() {
   const t = useTranslations('dashboard');
   const router = useRouter();
-  const { token, user } = useTenantAuthStore();
+  const token = useTenantAuthStore((s) => s.token);
+const user = useTenantAuthStore((s) => s.user);
 
   useEffect(() => {
     if (!token) router.replace('/login-client');

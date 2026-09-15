@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ImportLeadsDialog({ open, onClose }: Props) {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<any[] | null>(null);
   const [result, setResult] = useState<{ inserted: number; skipped: number } | null>(null);

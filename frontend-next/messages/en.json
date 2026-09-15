@@ -8,7 +8,8 @@
     "solutionsOverview": "All solutions",
     "login": "Log in",
     "register": "Start free",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "bookCall": "Book a call"
   },
 
   "footer": {
@@ -27,6 +28,11 @@
     "legalTitle": "Legal",
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
+    "services": "Our Services",
+    "delivery": "Delivery Information",
+    "payment": "Payment Methods",
+    "imprint": "Imprint",
+    "allDocuments": "All Documents",
     "contactTitle": "Contact",
     "email": "support@gopublica.com",
     "location": "Kraków, Poland",
@@ -39,14 +45,11 @@
     }
   },
   "hero": {
-  "title": "Your Business, Fully Digitalized",
-  "subtitle": "One platform for your website, CRM, online ordering and more - without any coding.",
-  "startFree": "Start Free Trial",
-  "contact": "Contact us"
+  "title": "Websites, NFC Cards & Video — All in One Place",
+  "subtitle": "Custom websites, smart NFC cards, and professional video production for your business. Powered by a platform with CRM, booking, and online ordering.",
+  "bookConsultation": "Book a free consultation",
+  "seeOurWork": "See our work"
 },
-  "trust": {
-    "eyebrow": "trusted by"
-  },
   "pricing": {
     "eyebrow": "Pricing",
     "title": "Simple, transparent pricing",
@@ -410,6 +413,26 @@
     "ctaSubtitle": "Explore a fully working demo for service businesses."
   },
   "home": {
+    "servicesTitle": "What We Do",
+    "servicesSubtitle": "Three core services to take your business digital.",
+    "services": {
+      "websites": {
+        "title": "Custom Websites",
+        "desc": "Mobile-first, SEO-optimized websites with built-in CRM, booking, and online ordering. No coding required."
+      },
+      "nfcCards": {
+        "title": "NFC Cards",
+        "desc": "Smart NFC cards that link to your digital profile, menu, or portfolio. Tap to connect with your customers."
+      },
+      "video": {
+        "title": "Video Production",
+        "desc": "Professional video content that showcases your business, builds trust, and drives conversions."
+      }
+    },
+    "pricingTeaserSubtitle": "Start from just €49/mo. Everything you need to run your business online.",
+    "viewAllPlans": "View all plans",
+    "ctaTitle": "Ready to Transform Your Business?",
+    "ctaSubtitle": "Book a free 15-minute consultation. We'll show you what's possible.",
     "solutionsTitle": "Solutions for Every Industry",
     "solutionsSubtitle": "From restaurants to car tuning - we've got you covered.",
     "solutions": {
@@ -583,6 +606,21 @@
       "title": "Business Dashboard",
       "desc": "See where visitors come from and what they click.",
       "heroDesc": "Understand your traffic without touching Google Analytics."
+    },
+    "data-compliance": {
+      "title": "Legal Data Storage",
+      "desc": "Collect and store client data legally with built-in GDPR consent flows.",
+      "heroDesc": "Never worry about data protection fines. Every consent is captured, stored, and auditable."
+    },
+    "client-crm": {
+      "title": "CRM — Manage Your Clients",
+      "desc": "Keep all your client profiles, visit history, and messages in one place.",
+      "heroDesc": "Know every client by name. Track visits, preferences, and automate follow-ups."
+    },
+    "telegram-bot": {
+      "title": "Telegram Bot Notifications",
+      "desc": "Get instant alerts for bookings, orders, and payments directly in Telegram.",
+      "heroDesc": "Never miss a reservation or sale. Every important event is delivered to your phone in real time."
     }
   },
   "badge": {
@@ -724,6 +762,25 @@
       "selectGoal": "Please select at least one goal.",
       "selectContactMethod": "Please choose a contact method.",
       "acceptConsent": "Please accept the Terms and Privacy Policy to continue."
-    }
+    }  },
+  "legal": {
+    "sidebarTitle": "Legal & Info",
+    "hubTitle": "Legal & Information Center",
+    "hubDescription": "All legal documents, service information, and company details in one place.",
+    "services": "Our Services",
+    "delivery": "Delivery Information",
+    "payment": "Payment Methods",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "servicesDesc": "Platform overview and module descriptions for restaurants, salons, and auto shops",
+    "deliveryDesc": "Furgonetka delivery options: parcel lockers, courier, and pickup points",
+    "paymentDesc": "100+ payment methods powered by Stripe: cards, BLIK, Apple Pay, and more",
+    "imprintDesc": "Company registration details and legal identification",
+    "privacyDesc": "How we collect, use, and protect your personal data (GDPR)",
+    "termsDesc": "Platform usage terms, billing, and service level agreement",
+    "searchPlaceholder": "Search legal documents…",
+    "searchNoResults": "No results found. Try different keywords.",
+    "searchResultsCount": "{count, plural, =0 {No results} one {# result} other {# results}}"
   }
 }

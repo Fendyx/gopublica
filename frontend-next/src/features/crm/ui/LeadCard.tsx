@@ -35,7 +35,7 @@ const getFollowUpLabel = (dateStr: string) => {
 };
 
 export default function LeadCard({ lead, onClose, onUpdated, onDeleted }: Props) {
-  const { user } = useAuthStore();
+  const user = useAuthStore((s) => s.user);
   const [isEditing, setIsEditing] = useState(false);
   const [schedulingCall, setSchedulingCall] = useState(false);
   const [callDateTime, setCallDateTime] = useState('');

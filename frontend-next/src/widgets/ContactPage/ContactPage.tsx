@@ -253,7 +253,7 @@ export default function ContactPage() {
 
                             <p className="text-xs text-center text-[var(--text-muted)]">
                                 {t('form.privacyStart')}
-                                <a href="/privacy" className="text-[var(--primary-color)] hover:underline">
+                                <a href="/legal/privacy" className="text-[var(--primary-color)] hover:underline">
                                     {t('form.privacyLink')}
                                 </a>
                                 {t('form.privacyEnd')}

@@ -11,7 +11,8 @@ import { AlertTriangle, X } from 'lucide-react';
 export default function SettingsPage() {
   const t = useTranslations('settings');
   const router = useRouter();
-  const { user, logout } = useTenantAuthStore();
+  const user = useTenantAuthStore((s) => s.user);
+const logout = useTenantAuthStore((s) => s.logout);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
