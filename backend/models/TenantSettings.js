@@ -186,6 +186,7 @@ const tenantSettingsSchema = new mongoose.Schema({
     primary:      { type: String, default: '#ff0505' },
     accent:       { type: String, default: '#F1A208' },
     fontHeading:  { type: String, default: 'playfair' },
+    fontBody:     { type: String, default: 'inter' },
     heroStyle: {
       type: String,
       enum: ['centered', 'split', 'video', 'slider', 'image-bg', 'compact'],

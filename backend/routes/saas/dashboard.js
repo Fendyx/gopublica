@@ -10,13 +10,14 @@ const BeautyAppointment = require('../../models/beauty/Appointment');
 const GalleryItem = require('../../models/content/GalleryItem');
 const JobApplication = require('../../models/hr/JobApplication');
 const authTenant = require('../../middleware/auth/tenant');
+const Branch = require('../../models/Branch');
 
 // ─── Niche-aware setup checklist ─────────────────────────────────────────────
-async function buildChecklist(tenantId, settings) {
+async function buildChecklist(tenantId, settings, branch) {
   const niche = settings?.niche || 'food';
   const features = settings?.features || {};
-  const contactFilled = Boolean(settings?.phone || settings?.address || settings?.email);
-  const hoursFilled = Boolean(settings?.hours);
+  const contactFilled = Boolean(settings?.phone || settings?.address || settings?.email || branch?.phone || branch?.address || branch?.email);
+  const hoursFilled = Boolean(settings?.hours || (branch?.workingHours && Object.values(branch.workingHours).some(v => v && v !== '')));
 
   const items = [];
 
@@ -263,10 +264,12 @@ router.get('/', authTenant, async (req, res) => {
       .select('niche features phone address email hours primaryCurrency')
       .lean();
 
+    const branch = await Branch.findOne({ tenantId }).lean();
+
     const [attention, stats, checklist, activity] = await Promise.all([
       buildAttention(tenantId, settings),
       buildStats(tenantId, settings),
-      buildChecklist(tenantId, settings),
+      buildChecklist(tenantId, settings, branch),
       buildActivity(tenantId, settings),
     ]);
 

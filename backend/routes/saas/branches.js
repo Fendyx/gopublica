@@ -15,8 +15,18 @@ const slugify = require('../../utils/slugify');
  */
 async function addNavigationItemForPage(tenantId, slug, title) {
   try {
-    const settings = await TenantSettings.findOne({ tenantId });
-    if (!settings?.navigation?.items) return;
+    let settings = await TenantSettings.findOne({ tenantId });
+    if (!settings) settings = new TenantSettings({ tenantId });
+    // Initialize the navigation structure if it doesn't exist yet, so the
+    // new custom page always gets a nav item (previously this helper silently
+    // skipped when no nav config had ever been saved, leaving the page
+    // unmanageable in the navbar settings).
+    if (!settings.navigation) {
+      settings.navigation = { items: [], dropdownLabel: '' };
+    }
+    if (!Array.isArray(settings.navigation.items)) {
+      settings.navigation.items = [];
+    }
     // Don't add if a nav item for this slug already exists
     const exists = settings.navigation.items.some(
       (item) => item.type === 'custom' && item.slug === slug
