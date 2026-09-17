@@ -61,6 +61,7 @@
   --text: #111827;
   --text-muted: #6b7280;
   --primary-color: #2563eb;
+  --primary-color-subtle: color-mix(in srgb, var(--primary-color) 6%, transparent);
 
   /* Premium card tokens */
   --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
@@ -74,6 +75,7 @@
   --text: #f1f5f9;
   --text-muted: #94a3b8;
   --primary-color: #3b82f6;
+  --primary-color-subtle: color-mix(in srgb, var(--primary-color) 10%, transparent);
 
   /* Premium card tokens (dark) */
   --shadow-card: 0 1px 3px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.2);

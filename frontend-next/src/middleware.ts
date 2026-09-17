@@ -5,7 +5,7 @@ export default createMiddleware(routing);
 
 export const config = {
   matcher: [
-    // Матчим всё, КРОМЕ: api, статики Next.js, файлов с расширениями
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
+    // Матчим всё, КРОМЕ: api, статики Next.js, файлов с расширениями, pitch deck
+    "/((?!api|_next/static|_next/image|favicon.ico|pitch|.*\\..*).*)",
   ],
 };
