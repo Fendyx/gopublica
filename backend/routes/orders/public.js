@@ -11,8 +11,9 @@ const TenantSettings = require('../../models/TenantSettings');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { getModuleAccess } = require('../../services/tenant/moduleAccess');
-const { checkAvailability } = require('../../services/booking/tickets');
+const { checkAvailability, reserveTickets } = require('../../services/booking/tickets');
 const { writeConsentLog } = require('../../services/consent/writeConsent');
+const { createFurgonetkaShipment } = require('../../services/external/furgonetka');
 
 // Helper: check if a string is a valid MongoDB ObjectId (24-char hex)
 function isValidObjectId(str) {
@@ -319,11 +320,61 @@ router.post('/:id/pay', getTenant, async (req, res) => {
     if (order.status !== 'pending_payment') return res.status(400).json({ error: 'Order is not awaiting payment' });
 
     const tenant = req.tenant;
+    const amountInGroszy = Math.round(order.pricing.total * 100);
+
+    // ── Free order bypass: skip Stripe for amounts below PLN minimum ────
+    // Stripe requires a minimum of 200 groszy (2.00 PLN). Orders below
+    // this threshold (including 0 zł free/promo orders) are marked as paid
+    // immediately without touching Stripe.
+    if (amountInGroszy < 200) {
+      console.log(`✅ Free order ${order._id} — amount ${order.pricing.total} ${order.pricing.currency}, skipping Stripe`);
+
+      order.status = 'paid';
+      order.payment.stripeFee = 0;
+      await order.save();
+
+      // Update customer stats (mirrors webhook logic)
+      await Customer.findByIdAndUpdate(order.customerId, {
+        $inc: { ordersCount: 1, totalSpent: order.pricing.total },
+      });
+
+      // Reserve ticket stock for digital items
+      for (const item of order.items) {
+        if (item.itemType === 'ticket' && item.ticketMeta?.eventId) {
+          const result = await reserveTickets(
+            item.ticketMeta.eventId,
+            item.quantity,
+            order.tenantId
+          );
+          if (!result.success) {
+            console.error(
+              `❌ Failed to reserve tickets for free order ${order._id}, event ${item.ticketMeta.eventId}: ${result.error}`
+            );
+          } else {
+            console.log(
+              `✅ Reserved ${item.quantity} tickets for event ${item.ticketMeta.eventId} (free order ${order._id})`
+            );
+          }
+        }
+      }
+
+      // Notify tenant about the order (fire-and-forget)
+      require('../../services/notifications/order').notifyNewOrder(order);
+
+      // Create Furgonetka shipment for physical delivery orders
+      if (order.fulfillment?.type !== 'digital') {
+        createFurgonetkaShipment(order, tenant)
+          .catch(err => console.error('Furgonetka shipment creation failed:', err.message));
+      }
+
+      return res.json({ orderId: order._id, freeOrder: true });
+    }
+
+    // ── Normal Stripe payment flow ──────────────────────────────────────
     if (!tenant.payments?.stripeAccountId) {
       return res.status(400).json({ error: 'Restaurant is not connected to Stripe' });
     }
 
-    const amountInGroszy = Math.round(order.pricing.total * 100);
     const applicationFeeGroszy = Math.round(order.pricing.serviceFee * 100);
 
     const paymentIntent = await Stripe.paymentIntents.create({
