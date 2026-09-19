@@ -63,6 +63,15 @@ const shippingSchema = new mongoose.Schema(
   { _id: false }
 );
 
+const buyerContactSchema = new mongoose.Schema(
+  {
+    name: { type: String, default: '' },
+    email: { type: String, default: '' },
+    phone: { type: String, default: '' },
+  },
+  { _id: false }
+);
+
 const platformOrderSchema = new mongoose.Schema(
   {
     tenantId: {
@@ -73,6 +82,10 @@ const platformOrderSchema = new mongoose.Schema(
     tenantName: {
       type: String,
       default: '',
+    },
+    buyerContact: {
+      type: buyerContactSchema,
+      default: () => ({}),
     },
     buyerType: {
       type: String,

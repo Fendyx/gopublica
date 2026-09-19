@@ -61,13 +61,19 @@ async function createPlatformFurgonetkaShipment(platformOrder) {
     const locker = platformOrder.fulfillment.parcelLocker;
     const accessToken = await getPlatformFurgonetkaToken();
 
+    const receiver = platformOrder.buyerContact?.name
+      ? platformOrder.buyerContact
+      : platformOrder.fulfillment?.address?.name
+        ? platformOrder.fulfillment.address
+        : { name: platformOrder.tenantName || 'GoPublica Client', email: 'client@gopublica.com', phone: '' };
+
     const payload = {
       service: locker.network.toLowerCase(),
       point_id: locker.lockerId,
       receiver: {
-        name: platformOrder.tenantName || 'GoPublica Client',
-        email: platformOrder.fulfillment?.address?.email || 'client@gopublica.com',
-        phone: platformOrder.fulfillment?.address?.phone || '',
+        name: receiver.name || 'GoPublica Client',
+        email: receiver.email || 'client@gopublica.com',
+        phone: receiver.phone || '',
       },
     };
 

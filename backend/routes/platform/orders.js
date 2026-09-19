@@ -17,7 +17,7 @@ const DELIVERY_FEES = {
 router.post('/', authTenant, async (req, res) => {
   try {
     const { tenantId } = req;
-    const { items, paymentMethod, buyerType, nip, businessName, fulfillment, notes } = req.body;
+    const { items, paymentMethod, buyerType, nip, businessName, fulfillment, buyerContact, notes } = req.body;
 
     // ── Validate items ──
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -104,6 +104,11 @@ router.post('/', authTenant, async (req, res) => {
     const order = new PlatformOrder({
       tenantId,
       tenantName: tenant?.businessName || '',
+      buyerContact: {
+        name: buyerContact?.name || fulfillment?.address?.name || '',
+        email: buyerContact?.email || fulfillment?.address?.email || '',
+        phone: buyerContact?.phone || fulfillment?.address?.phone || '',
+      },
       buyerType,
       businessName: buyerType === 'business' ? (businessName || '') : '',
       nip: buyerType === 'business' ? (nip || '') : '',
